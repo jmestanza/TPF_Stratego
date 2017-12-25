@@ -4,19 +4,22 @@
 
 PosType::PosType()
 {
+	/// Default create setting
+	x = 'A';
+	y = '1';
 }
 
 PosType PosType::get_token_pos()
 {
 	PosType temp;
-	temp.set_token_pos(this->col, this->row);
+	temp.set_token_pos(this->x, this->y);
 	return temp;
 }
 
-void PosType::set_token_pos(unsigned char new_col, unsigned new_row)
+void PosType::set_token_pos(unsigned char new_x, unsigned new_y)
 {
-	col = new_col;
-	row = new_row;
+	x = new_x;
+	y = new_y;
 }
 
 

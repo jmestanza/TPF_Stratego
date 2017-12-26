@@ -24,6 +24,12 @@
     <ClInclude Include="PosType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BasicToken.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marshal_token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -33,6 +39,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PosType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="marshal_token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

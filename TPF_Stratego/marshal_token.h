@@ -5,8 +5,8 @@ class marshal_token : public BasicToken
 {
 public:
 	marshal_token();
-	bool attack();
 	bool move(PosType dest_pos);
+	int attack();
 	~marshal_token();
 };
 

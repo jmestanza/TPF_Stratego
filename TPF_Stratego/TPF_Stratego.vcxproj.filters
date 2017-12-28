@@ -27,7 +27,10 @@
     <ClInclude Include="BasicToken.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="marshal_token.h">
+    <ClInclude Include="GameBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MarshalToken.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,8 +47,14 @@
     <ClCompile Include="BasicToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="marshal_token.cpp">
+    <ClCompile Include="GameBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MarshalToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

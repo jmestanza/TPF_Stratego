@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "BasicToken.h"
 
-BasicToken::BasicToken(RangeType set_range, bool move_en, PlayerType player)
+BasicToken::BasicToken(RangeType set_range, bool move_en)
 {
 	range = set_range;
 	move_enable = move_en;
-	player_owner = player;
 }
 
 PosType BasicToken::get_token_pos()
@@ -31,12 +30,6 @@ bool BasicToken::is_move_enabled()
 {
 	return move_enable;
 }
-
-PlayerType BasicToken::get_player()
-{
-	return player_owner;
-}
-
 
 BasicToken::~BasicToken()
 {

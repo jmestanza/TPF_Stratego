@@ -148,14 +148,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BasicToken.h" />
-    <ClInclude Include="marshal_token.h" />
+    <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="MarshalToken.h" />
     <ClInclude Include="PosType.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicToken.cpp" />
-    <ClCompile Include="marshal_token.cpp" />
+    <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="MarshalToken.cpp" />
     <ClCompile Include="PosType.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -164,6 +166,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

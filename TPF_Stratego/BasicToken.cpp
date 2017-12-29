@@ -26,6 +26,11 @@ RangeType BasicToken::get_range()
 	return range;
 }
 
+PlayerType BasicToken::get_player()
+{
+	return player_owner;
+}
+
 bool BasicToken::is_move_enabled()
 {
 	return move_enable;

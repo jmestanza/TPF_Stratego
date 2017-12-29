@@ -34,8 +34,9 @@ bool MarshalToken::validate_movement(PosType dst_pos)
 void MarshalToken::move(PosType dst_pos, BasicToken** board_ref)
 {
 	PosType src = this->get_token_pos();
-	board_ref[ADJ_COORD(dst_pos.x)][ADJ_COORD(dst_pos.y)] = board_ref[ADJ_COORD(src.x)][ADJ_COORD(src.y)];
-	delete &(board_ref[ADJ_COORD(src.x)][ADJ_COORD(src.y)]);
+	(&(board_ref[ADJ_COORD(dst_pos.x)]))[ADJ_COORD(dst_pos.y)] = (&(board_ref[ADJ_COORD(src.x)]))[ADJ_COORD(src.y)];
+	///(&(board_ref[ADJ_COORD(src.x)]))[ADJ_COORD(src.y)] = nullptr;
+	(&(board_ref[ADJ_COORD(src.x)]))[ADJ_COORD(src.y)] = nullptr;
 	this->set_token_pos(dst_pos.x, dst_pos.y);
 }
 

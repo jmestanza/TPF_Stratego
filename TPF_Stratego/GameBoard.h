@@ -8,7 +8,7 @@ class GameBoard
 public:
 	GameBoard();
 	BasicToken** get_board();
-	void set_tile(BasicToken* token);
+	void set_tile(PosType token_pos, BasicToken* token);
 	~GameBoard();
 private:
 	BasicToken * board[BOARD_SIZE][BOARD_SIZE];

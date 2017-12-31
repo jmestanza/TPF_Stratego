@@ -15,10 +15,14 @@ BasicToken ** GameBoard::get_board()
 	return &board[0][0];
 }
 
-void GameBoard::set_tile(PosType token_pos, BasicToken * token)
+void GameBoard::set_new_token(PosType pos, RangeType rank)
 {
-	PosType temp = token->get_token_pos();
-	board[ADJ_COORD(token_pos.x)][ADJ_COORD(token_pos.y)] = token;
+	if ((rank == FLAG) || (rank == BOMB)) {
+		board[ADJ_COORD(pos.x)][ADJ_COORD(pos.y)] = new BasicToken(rank, false);
+	}
+	else {
+		board[ADJ_COORD(pos.x)][ADJ_COORD(pos.y)] = new BasicToken(rank, true);
+	}	
 }
 
 GameBoard::~GameBoard()

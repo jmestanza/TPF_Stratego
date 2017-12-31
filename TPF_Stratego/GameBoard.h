@@ -3,12 +3,12 @@
 
 #define BOARD_SIZE 10
 
-class GameBoard
+class GameBoard // Se usa luego como otra parte de Player
 {
 public:
-	GameBoard();
+	GameBoard(); /// Se inicializa vacio
 	BasicToken** get_board();
-	void set_tile(PosType token_pos, BasicToken* token);
+	void set_new_token(PosType pos, RangeType rank);
 	~GameBoard();
 private:
 	BasicToken * board[BOARD_SIZE][BOARD_SIZE];

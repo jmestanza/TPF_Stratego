@@ -15,6 +15,11 @@ BasicToken ** GameBoard::get_board()
 	return &board[0][0];
 }
 
+BasicToken * GameBoard::get_tile(PosType tile)
+{
+	return board[ADJ_COORD(tile.x)][ADJ_COORD(tile.y)];
+}
+
 void GameBoard::set_new_token(PlayerType owner, PosType pos, RangeType rank)
 {
 	if ((rank == FLAG) || (rank == BOMB)) {
@@ -25,15 +30,15 @@ void GameBoard::set_new_token(PlayerType owner, PosType pos, RangeType rank)
 	}	
 }
 
+void GameBoard::clear_tile(PosType tile_pos)
+{
+	board[ADJ_COORD(tile_pos.x)][ADJ_COORD(tile_pos.y)] = nullptr;
+}
+
 void GameBoard::move_token(PosType src_pos, PosType dst_pos)
 {
 	board[ADJ_COORD(dst_pos.x)][ADJ_COORD(dst_pos.y)] = board[ADJ_COORD(src_pos.x)][ADJ_COORD(src_pos.y)];
 	board[ADJ_COORD(src_pos.x)][ADJ_COORD(src_pos.y)] = nullptr;
-}
-
-RangeType GameBoard::get_token_range(PosType token_pos)
-{
-	return board[ADJ_COORD(token_pos.x)][ADJ_COORD(token_pos.y)]->get_range();
 }
 
 GameBoard::~GameBoard()

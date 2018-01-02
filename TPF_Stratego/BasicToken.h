@@ -3,26 +3,26 @@
 
 using namespace std;
 
-enum Ranges {MARSHAL=1, GENERAL, COLONEL, MAJOR, CAPTAIN, LIEUTENANT, SERGEANT, MINER, SCOUT, SPY,
+enum Ranges {ENEMY = 0, MARSHAL, GENERAL, COLONEL, MAJOR, CAPTAIN, LIEUTENANT, SERGEANT, MINER, SCOUT, SPY,
 				BOMB, FLAG};
 
-enum Players {NO_OWNER=0, RED, BLUE};
+enum Players {RED=1, BLUE};
 
 typedef unsigned int RangeType;
 typedef unsigned int PlayerType;
+
 typedef int AttackResult;
-
-#define POS_MASK 0x0F
-#define ADJ_COORD(a) ((a&POS_MASK)-1) /// Ajusta coordenada del tablero a indice de matriz
-
 #define WON 1
 #define NOBODY_WON 0
 #define LOSE -1
 
+#define POS_MASK 0x0F
+#define ADJ_COORD(a) ((a&POS_MASK)-1) /// Ajusta coordenada del tablero a indice de matriz
+
 class BasicToken // Se hereda a cada token particular
 {
 public:
-	BasicToken(RangeType set_range, bool move_en);
+	BasicToken(RangeType set_range, bool move_en, PlayerType player);
 	PosType get_token_pos();
 	void set_token_pos(unsigned char new_x, unsigned new_y);
 	RangeType get_range();

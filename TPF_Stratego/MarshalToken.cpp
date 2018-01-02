@@ -2,7 +2,7 @@
 #include "MarshalToken.h"
 #include <iostream>
 
-MarshalToken::MarshalToken() : BasicToken(MARSHAL, true)
+MarshalToken::MarshalToken(PlayerType owner) : BasicToken(MARSHAL, true, owner)
 {
 }
 

@@ -13,6 +13,7 @@ typedef unsigned int RangeType;
 typedef unsigned int PlayerType;
 
 typedef int AttackResult;
+#define GAME_WON 2
 #define WON 1
 #define NOBODY_WON 0
 #define LOSE -1

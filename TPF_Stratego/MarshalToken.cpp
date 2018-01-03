@@ -33,9 +33,15 @@ bool MarshalToken::validate_movement(PosType dst_pos)
 
 AttackResult MarshalToken::attack(RangeType enemy_range)
 {
-	if (enemy_range == MARSHAL)
+	if (enemy_range == BOMB) {
+		return LOSE;
+	}
+	else if (enemy_range == MARSHAL) {
 		return NOBODY_WON;
-
+	}
+	else if(enemy_range == FLAG) {
+		return GAME_WON;
+	}
 	else {
 		return WON;
 	}

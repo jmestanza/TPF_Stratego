@@ -79,16 +79,15 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 	}
 }
 
-void Player::process_local_attack(PosType src_pos, PosType dst_pos, RangeType attacked_token_range)
+void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range)
 {
 	BasicToken* token = local_board.get_tile(src_pos);
-	RangeType local_range = token->get_range();
 	AttackResult res;
 
-	switch (local_range)
+	switch (token->get_range())
 	{
 	case MARSHAL:
-		res = ((MarshalToken*)token)->attack(attacked_token_range);
+		res = ((MarshalToken*)token)->attack(attack_token_range);
 		break;
 	case GENERAL:
 		break;
@@ -114,16 +113,21 @@ void Player::process_local_attack(PosType src_pos, PosType dst_pos, RangeType at
 		local_board.move_token(src_pos, dst_pos);
 	}
 	else if (res == NOBODY_WON) {
+		tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
 		local_board.clear_tile(src_pos);
 		local_board.clear_tile(dst_pos);
-		tokens_lost.push_back(local_range); /// Añade a fichas perdidas
 	}
 	else if (res == LOSE) {
-		local_board.move_token(dst_pos, src_pos);
-		tokens_lost.push_back(local_range); /// Añade a fichas perdidas
+		tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
+		local_board.clear_tile(src_pos);
 	}
 
-	game_state = ENEMY_MOVE;
+	if (game_state == LOCAL_MOVE) { /// Alternar turnos
+		game_state = ENEMY_MOVE;
+	}
+	else {
+		game_state = LOCAL_MOVE;
+	}
 }
 
 MoveResult Player::move_enemy_token(PosType src_pos, PosType dst_pos)
@@ -152,6 +156,11 @@ MoveResult Player::move_enemy_token(PosType src_pos, PosType dst_pos)
 		game_state = WAIT_FOR_RANGE;
 		return ATTACK_TRY; /// Ataque del enemigo
 	}
+}
+
+State Player::get_game_state()
+{
+	return game_state;
 }
 
 Player::~Player()

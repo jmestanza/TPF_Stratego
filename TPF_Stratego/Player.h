@@ -14,9 +14,9 @@ class Player
 public:
 	Player(PlayerType color);
 	MoveResult move_local_token(PosType src_pos, PosType dst_pos); /// Retorna MoveTypes
-	void process_local_attack(PosType src_pos, PosType dst_pos, RangeType attacked_token_range); /// Recibe el rango atacado y procesa 											
-	MoveResult move_enemy_token(PosType src_pos, PosType dst_pos); /// Retorna MoveTypes
-	void process_enemy_attack(PosType src_pos, PosType dst_pos, RangeType attacked_token_range); /// Recibe el rango que ataca y procesa											
+	void process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range); /// Recibe el rango atacante/atacado y resuelve											
+	MoveResult move_enemy_token(PosType src_pos, PosType dst_pos); /// Retorna MoveTypes		
+	State get_game_state();
 	~Player();
 	GameBoard local_board;
 private:

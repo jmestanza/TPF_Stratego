@@ -5,9 +5,16 @@
 Player::Player(PlayerType color)
 {
 	player = color;
+
+	if (color == RED) {
+		game_state = LOCAL_MOVE;
+	}
+	else {
+		game_state = ENEMY_MOVE;
+	}
 }
 
-LocalMove Player::move_local_token(PosType src_pos, PosType dst_pos)
+MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 {
 	BasicToken* token = local_board.get_tile(src_pos);
 	BasicToken* dst_tile = local_board.get_tile(dst_pos);
@@ -31,24 +38,10 @@ LocalMove Player::move_local_token(PosType src_pos, PosType dst_pos)
 	RangeType temp_range = token->get_range();
 	bool move_valid = false;
 
-	switch (temp_range)
+	switch (temp_range) /// Validacion del movimiento - cada ficha puede moverse distinto
 	{
 	case MARSHAL:
 		move_valid = ((MarshalToken*)token)->validate_movement(dst_pos);
-		if (move_valid) {
-			if (dst_tile == nullptr) {
-				((MarshalToken*)token)->move(dst_pos, local_board.get_board());
-				basic_state = ENEMY_MOVE;
-				return MOVE_VALID; /// Movimiento normal
-			}
-			else {
-				basic_state = WAIT_FOR_RANGE;
-				return ATTACK_TRY; /// Ataque al enemigo
-			}
-		}
-		else {
-			return MOVE_NOT_VALID; /// Movimiento no valido para la ficha elegida
-		}
 		break;
 	case GENERAL:
 		break;
@@ -68,6 +61,21 @@ LocalMove Player::move_local_token(PosType src_pos, PosType dst_pos)
 		break;
 	case SPY:
 		break;
+	}
+
+	if (move_valid) {
+		if (dst_tile == nullptr) {
+			local_board.move_token(src_pos, dst_pos);
+			game_state = ENEMY_MOVE;
+			return MOVE_VALID; /// Movimiento normal
+		}
+		else {
+			game_state = WAIT_FOR_RANGE;
+			return ATTACK_TRY; /// Ataque al enemigo
+		}
+	}
+	else {
+		return MOVE_NOT_VALID; /// Movimiento no valido para la ficha elegida
 	}
 }
 
@@ -108,16 +116,15 @@ void Player::process_local_attack(PosType src_pos, PosType dst_pos, RangeType at
 	else if (res == NOBODY_WON) {
 		local_board.clear_tile(src_pos);
 		local_board.clear_tile(dst_pos);
+		tokens_lost.push_back(temp_range); /// Añade a fichas perdidas
 	}
 	else if (res == LOSE) {
-		/// ???
+		local_board.move_token(dst_pos, src_pos);
+		tokens_lost.push_back(temp_range); /// Añade a fichas perdidas
 	}
-}
 
-//enum Ranges {
-//	ENEMY = 0, MARSHAL, GENERAL, COLONEL, MAJOR, CAPTAIN, LIEUTENANT, SERGEANT, MINER, SCOUT, SPY,
-//	BOMB, FLAG
-//};
+	game_state = ENEMY_MOVE;
+}
 
 Player::~Player()
 {

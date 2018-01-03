@@ -38,6 +38,7 @@ void GameBoard::clear_tile(PosType tile_pos)
 void GameBoard::move_token(PosType src_pos, PosType dst_pos)
 {
 	board[ADJ_COORD(dst_pos.x)][ADJ_COORD(dst_pos.y)] = board[ADJ_COORD(src_pos.x)][ADJ_COORD(src_pos.y)];
+	board[ADJ_COORD(dst_pos.x)][ADJ_COORD(dst_pos.y)]->set_token_pos(dst_pos.x, dst_pos.y);
 	board[ADJ_COORD(src_pos.x)][ADJ_COORD(src_pos.y)] = nullptr;
 }
 

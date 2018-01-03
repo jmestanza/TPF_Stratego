@@ -8,9 +8,11 @@ Player::Player(PlayerType color)
 
 	if (color == RED) {
 		game_state = LOCAL_MOVE;
+		local_board.set_enemy_tokens(BLUE);
 	}
 	else {
 		game_state = ENEMY_MOVE;
+		local_board.set_enemy_tokens(RED);
 	}
 }
 

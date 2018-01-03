@@ -30,6 +30,24 @@ void GameBoard::set_new_token(PlayerType owner, PosType pos, RangeType rank)
 	}	
 }
 
+void GameBoard::set_enemy_tokens(PlayerType enemy_color)
+{
+	if (enemy_color == BLUE) {
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			for (int j = 0; j < 4; j++) {
+				board[i][j] = new BasicToken(ENEMY, false, BLUE);
+			}
+		}
+	}
+	else {
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			for (int j = 6; j < BOARD_SIZE; j++) {
+				board[i][j] = new BasicToken(ENEMY, false, RED);
+			}
+		}
+	}
+}
+
 void GameBoard::clear_tile(PosType tile_pos)
 {
 	board[ADJ_COORD(tile_pos.x)][ADJ_COORD(tile_pos.y)] = nullptr;

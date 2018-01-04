@@ -155,6 +155,7 @@
     <ClInclude Include="LieutenantToken.h" />
     <ClInclude Include="MajorToken.h" />
     <ClInclude Include="MarshalToken.h" />
+    <ClInclude Include="MinerToken.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PosType.h" />
     <ClInclude Include="SergeantToken.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="LieutenantToken.cpp" />
     <ClCompile Include="MajorToken.cpp" />
     <ClCompile Include="MarshalToken.cpp" />
+    <ClCompile Include="MinerToken.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PosType.cpp" />
     <ClCompile Include="SergeantToken.cpp" />

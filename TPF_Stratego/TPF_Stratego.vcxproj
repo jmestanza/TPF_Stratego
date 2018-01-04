@@ -151,6 +151,7 @@
     <ClInclude Include="ColonelToken.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GeneralToken.h" />
+    <ClInclude Include="MajorToken.h" />
     <ClInclude Include="MarshalToken.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PosType.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="ColonelToken.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GeneralToken.cpp" />
+    <ClCompile Include="MajorToken.cpp" />
     <ClCompile Include="MarshalToken.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PosType.cpp" />

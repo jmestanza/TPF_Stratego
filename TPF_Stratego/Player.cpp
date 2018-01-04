@@ -46,22 +46,31 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 		move_valid = ((MarshalToken*)token)->validate_movement(dst_pos);
 		break;
 	case GENERAL:
+		move_valid = ((GeneralToken*)token)->validate_movement(dst_pos);
 		break;
 	case COLONEL:
+		move_valid = ((ColonelToken*)token)->validate_movement(dst_pos);
 		break;
 	case MAJOR:
+		move_valid = ((MajorToken*)token)->validate_movement(dst_pos);
 		break;
 	case CAPTAIN:
+		move_valid = ((CaptainToken*)token)->validate_movement(dst_pos);
 		break;
 	case LIEUTENANT:
+		move_valid = ((LieutenantToken*)token)->validate_movement(dst_pos);
 		break;
 	case SERGEANT:
+		move_valid = ((SergeantToken*)token)->validate_movement(dst_pos);
 		break;
 	case MINER:
+		move_valid = ((MinerToken*)token)->validate_movement(dst_pos);
 		break;
 	case SCOUT:
+		move_valid = ((ScoutToken*)token)->validate_movement(dst_pos, local_board.get_board());
 		break;
 	case SPY:
+		move_valid = ((SpyToken*)token)->validate_movement(dst_pos);
 		break;
 	}
 
@@ -92,22 +101,31 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 		res = ((MarshalToken*)token)->attack(attack_token_range);
 		break;
 	case GENERAL:
+		res = ((GeneralToken*)token)->attack(attack_token_range);
 		break;
 	case COLONEL:
+		res = ((ColonelToken*)token)->attack(attack_token_range);
 		break;
 	case MAJOR:
+		res = ((MajorToken*)token)->attack(attack_token_range);
 		break;
 	case CAPTAIN:
+		res = ((CaptainToken*)token)->attack(attack_token_range);
 		break;
 	case LIEUTENANT:
+		res = ((LieutenantToken*)token)->attack(attack_token_range);
 		break;
 	case SERGEANT:
+		res = ((SergeantToken*)token)->attack(attack_token_range);
 		break;
 	case MINER:
+		res = ((MinerToken*)token)->attack(attack_token_range);
 		break;
 	case SCOUT:
+		res = ((ScoutToken*)token)->attack(attack_token_range);
 		break;
 	case SPY:
+		res = ((SpyToken*)token)->attack(attack_token_range);
 		break;
 	}
 

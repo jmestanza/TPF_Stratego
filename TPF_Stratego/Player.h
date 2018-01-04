@@ -1,5 +1,15 @@
 #pragma once
 #include "MarshalToken.h"
+#include "GeneralToken.h"
+#include "ColonelToken.h"
+#include "MajorToken.h"
+#include "CaptainToken.h"
+#include "LieutenantToken.h"
+#include "SergeantToken.h"
+#include "MinerToken.h"
+#include "ScoutToken.h"
+#include "SpyToken.h"
+
 #include "GameBoard.h"
 #include <vector>
 

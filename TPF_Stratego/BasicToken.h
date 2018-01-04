@@ -26,7 +26,7 @@ class BasicToken // Se hereda a cada token particular
 public:
 	BasicToken(RangeType set_range, bool move_en, PlayerType player);
 	PosType get_token_pos();
-	void set_token_pos(unsigned char new_x, unsigned new_y);
+	void set_token_pos(unsigned char new_x, unsigned char new_y);
 	RangeType get_range();
 	PlayerType get_player();
 	bool is_move_enabled();

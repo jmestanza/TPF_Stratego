@@ -50,7 +50,7 @@ void GameBoard::set_enemy_tokens(PlayerType enemy_color)
 
 void GameBoard::clear_tile(PosType tile_pos)
 {
-	board[ADJ_COORD(tile_pos.x)][ADJ_COORD(tile_pos.y)] = nullptr;
+	delete board[ADJ_COORD(tile_pos.x)][ADJ_COORD(tile_pos.y)];
 }
 
 void GameBoard::move_token(PosType src_pos, PosType dst_pos)

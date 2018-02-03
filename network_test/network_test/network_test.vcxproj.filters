@@ -15,20 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkAgent.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkAgent.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

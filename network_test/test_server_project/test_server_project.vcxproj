@@ -20,10 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{A5F68D1D-D04A-4926-A31C-0B4A7E705CDF}</ProjectGuid>
-    <RootNamespace>networktest</RootNamespace>
+    <ProjectGuid>{D00DF1FD-C2B7-4C8E-AF3C-5F9B90F91AD6}</ProjectGuid>
+    <RootNamespace>testserverproject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>client</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -116,37 +115,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="client.cpp" />
     <ClCompile Include="server.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="server.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="client.h" />
-    <ClInclude Include="server.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\boost.1.66.0.0\build\native\boost.targets" Condition="Exists('..\packages\boost.1.66.0.0\build\native\boost.targets')" />
-    <Import Project="..\packages\boost_thread-vc141.1.66.0.0\build\native\boost_thread-vc141.targets" Condition="Exists('..\packages\boost_thread-vc141.1.66.0.0\build\native\boost_thread-vc141.targets')" />
-    <Import Project="..\packages\boost_date_time-vc140.1.66.0.0\build\native\boost_date_time-vc140.targets" Condition="Exists('..\packages\boost_date_time-vc140.1.66.0.0\build\native\boost_date_time-vc140.targets')" />
-    <Import Project="..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets" Condition="Exists('..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets')" />
     <Import Project="..\packages\boost_system-vc141.1.66.0.0\build\native\boost_system-vc141.targets" Condition="Exists('..\packages\boost_system-vc141.1.66.0.0\build\native\boost_system-vc141.targets')" />
-    <Import Project="..\packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets" Condition="Exists('..\packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets')" />
-    <Import Project="..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets" Condition="Exists('..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets')" />
+    <Import Project="..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets" Condition="Exists('..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\boost.1.66.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.66.0.0\build\native\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_thread-vc141.1.66.0.0\build\native\boost_thread-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc141.1.66.0.0\build\native\boost_thread-vc141.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_date_time-vc140.1.66.0.0\build\native\boost_date_time-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc140.1.66.0.0\build\native\boost_date_time-vc140.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets'))" />
     <Error Condition="!Exists('..\packages\boost_system-vc141.1.66.0.0\build\native\boost_system-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_system-vc141.1.66.0.0\build\native\boost_system-vc141.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc141.1.66.0.0\build\native\boost_date_time-vc141.targets'))" />
   </Target>
 </Project>

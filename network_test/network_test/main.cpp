@@ -4,7 +4,10 @@
 #include <string>
 #include <iostream>
 using namespace boost::asio;
-using namespace std;
+using namespace std;
+
+#include "client.h"
+
 /** un Network Agent es como un corredor de bolsa, uno no puede interactuar en la bolsa sin uno.
 /// La unica forma en de mantener una comunicacion en el programa es mediante un par de NetworkAgent 
 /// que hagan de intermediarios,
@@ -14,6 +17,11 @@ using namespace std;
 
 
 int main() {
-	
+	boost::asio::io_service ioService;
 
+	Client client(&ioService);
+	client.tryConnection("127.0.0.1", 8001);
+	ioService.run();
+
+	system("pause");
 }

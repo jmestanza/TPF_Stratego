@@ -14,11 +14,10 @@ class Client {
 	public:
 		Client(io_service *service);
 		void tryConnection(string host, int port);
-		void setConnection(ip::tcp::acceptor &acceptor);
 		void onRecv(void (*onRecv)());
-		void onConnect(void (*func)(Client*));
+		virtual void onConnect();
 		void connectAction(const boost::system::error_code& error);
-		void(*_onConnect)(Client *myPnt);
+		
 	private:
 		void (*_onRecv)(string msg); // actions when we recive message
 		

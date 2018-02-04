@@ -7,6 +7,10 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <stdlib.h>
+#include <thread>       
+#include <chrono> 
+
 using namespace std;
 using namespace boost::asio;
 
@@ -16,22 +20,17 @@ class ClientTalk {
 public:
 	ClientTalk(io_service *service);
 	void start();
-	void stop();
-	bool started();
-	void onRead();
-	void onLogin();
-	void onPing();
-
+	void send(string msg);
+	virtual void onRecv(string msg);
+	void sentAction(const boost::system::error_code& error,size_t bytes_transferred);
+	void readAction(const boost::system::error_code& error, size_t bytes_transfered);
 	ip::tcp::socket getSocket();
-	string username();
+	string getIP();
 	void setClientsChanged();
 	friend class Server;
 private:
 	ip::tcp::socket mySocket;
-	char readBuffer[maxMsg];
-	char writeBuffer[maxMsg];
-	bool _started;
-	string _username;
+	char readBuffer[maxMsg], writeBuffer[maxMsg];
 	//deadline_timer timer;
 	io_service *service;
 	//boost::posix_time::ptime last_ping;
@@ -48,6 +47,7 @@ public:
 	void recv(void(*func)(string, string));
 	virtual void onNewConnection();
 	void handleConnection(ClientTalk *client, const error_code &err);
+	
 	~Server();
 	
 private:

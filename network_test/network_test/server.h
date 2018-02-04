@@ -15,6 +15,7 @@ class ClientTalk {
 		ClientTalk(io_service *service);
 		void start();
 		void stop();
+		
 		bool started();
 		void onRead();
 		void onLogin();
@@ -43,6 +44,7 @@ class Server {
 		Server(io_service* service);
 		void Listen(int port);
 		void recv(void (*func)(string,string));
+		
 		Client* getClient(string);
 		virtual void onNewConnection();
 		void handleConnection(ClientTalk *client, const error_code &err);

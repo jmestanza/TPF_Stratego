@@ -1,8 +1,8 @@
 #include "server.h"
 
 
-ClientTalk::ClientTalk(io_service *_service) : mySocket(*_service) {
-
+ClientTalk::ClientTalk(io_service *_service) : mySocket(*_service) , timer(*_service) {
+	service = _service;
 }
 void ClientTalk::start() {
 	mySocket.async_read_some(buffer(readBuffer), boost::bind(&ClientTalk::readAction, this, _1, _2));

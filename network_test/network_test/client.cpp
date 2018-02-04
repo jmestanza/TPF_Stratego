@@ -1,7 +1,7 @@
 
 #include "client.h"
 
-Client::Client(io_service* service) : mySocket(*service){
+Client::Client(io_service* service) : mySocket(*service) , timer(*service){
 	
 }
 string Client::GetIP() {

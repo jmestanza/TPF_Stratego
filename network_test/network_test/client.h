@@ -23,15 +23,14 @@ class Client {
 		void connectAction(const boost::system::error_code& error);
 		void readAction(const boost::system::error_code& error, size_t bytes);
 		void sendAction(const boost::system::error_code& error, size_t bytes);
+		void checkPing();
 		string GetIP();
+		
 	private:
 		void (*_onRecv)(string msg); // actions when we recive message
-		
-
 		ip::tcp::socket mySocket;
-		
 		char readBuffer[bufferSize],writeBuffer[bufferSize];
-		
+		deadline_timer timer;
 };
 
 #endif

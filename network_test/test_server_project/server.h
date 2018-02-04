@@ -27,13 +27,15 @@ public:
 	ip::tcp::socket getSocket();
 	string getIP();
 	void setClientsChanged();
+
 	friend class Server;
 private:
 	ip::tcp::socket mySocket;
 	char readBuffer[maxMsg], writeBuffer[maxMsg];
 	//deadline_timer timer;
 	io_service *service;
-	//boost::posix_time::ptime last_ping;
+	boost::posix_time::ptime last_ping;
+	deadline_timer timer;
 	bool clientsChanged;
 
 };

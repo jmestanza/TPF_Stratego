@@ -1,36 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{6570601f-316c-400d-a595-1b7b79bb8876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\network">
+      <UniqueIdentifier>{48f792b7-b351-4fc9-abbb-2bdfc40058ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\network_stratego">
+      <UniqueIdentifier>{20af6711-4f9f-4ee1-b9ed-d4ac1dfd2e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\xml">
+      <UniqueIdentifier>{767d8f53-e94e-47e2-8db2-1190ea7da5a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NetworkManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="NetworkManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="network\NetworkManager.cpp">
+      <Filter>src\network</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="network\NetworkProtocol.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\Package.cpp">
+      <Filter>src\network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="network\NetworkProtocol.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\Package.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\networkManager.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Debug\xml\protocol.xml">
+      <Filter>Resource Files\xml</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

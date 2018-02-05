@@ -1,0 +1,2 @@
+https://akrzemi1.wordpress.com/2011/07/13/parsing-xml-with-boost/
+https://www.quora.com/How-does-one-write-a-custom-exception-class-in-C++

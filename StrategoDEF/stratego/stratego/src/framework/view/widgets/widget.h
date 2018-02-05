@@ -2,7 +2,7 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <framework\view\Viewer.h>
+#include <framework\view\allegro_manager\allegro_manager.h>
 #include <string>
 #include <allegro5\allegro.h>
 using namespace std;

@@ -5,7 +5,7 @@
 #include "Widget.h"
 #include <string>
 #include <allegro5/allegro_image.h>
-#include <framework\view\Viewer.h>
+#include <framework\view\allegro_manager\allegro_manager.h>
 
 using namespace std;
 

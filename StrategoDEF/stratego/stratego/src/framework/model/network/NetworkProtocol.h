@@ -24,10 +24,11 @@ class NetworkProtocol : public NetworkManager{
 		void ParseProtocolXML(ifstream &is); // load protocol from xml file
 		void createNewPackage(Package *pkg);
 		void createPackages(vector <Package*> pkg);
-		virtual void onPackageRecv(string &PkgName,map<string,string> &content) = 0;
 		void sendPackage(string pkgName, map <string,string> &content);
 		void onRecv(string &msg);
 		void setDebugFlag();
+
+		virtual void onPackageRecv(string &PkgName, map<string, string> &content) = 0;
 		~NetworkProtocol();
 	private:
 		map <unsigned char, Package*> pkgByCode; // packages indexed by code

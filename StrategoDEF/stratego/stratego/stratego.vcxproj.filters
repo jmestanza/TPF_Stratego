@@ -11,88 +11,127 @@
     <Filter Include="src\framework">
       <UniqueIdentifier>{9297a626-4969-4245-a60e-a51d3d8b0eb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\framework\network">
-      <UniqueIdentifier>{c5bd5a85-732d-45cb-a6bb-223a167c0d40}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game">
       <UniqueIdentifier>{2e96f108-5d0e-4130-ba66-6305d49ff5b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\framework\utils">
       <UniqueIdentifier>{8a1ed04a-8f4c-43d7-9cad-cdb039ee4d2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\stratego">
-      <UniqueIdentifier>{d06fe27b-a356-4ec9-ad7d-f15a90e3a75f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\view">
-      <UniqueIdentifier>{5e4fa792-1825-46aa-91ac-4279c629a072}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\activity">
-      <UniqueIdentifier>{56b13182-fa92-44e0-9b67-a8d28fec1adc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\widgets">
-      <UniqueIdentifier>{b29b073a-463d-49e9-bf62-5a5c1ebd4de0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\ui">
-      <UniqueIdentifier>{860fa988-d58e-4505-8b8f-ebbdb4586d38}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\sysgame">
       <UniqueIdentifier>{35127e21-0290-4d2b-a9b7-fb8742bc19a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\framework\controller">
+      <UniqueIdentifier>{56b13182-fa92-44e0-9b67-a8d28fec1adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller">
+      <UniqueIdentifier>{860fa988-d58e-4505-8b8f-ebbdb4586d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\menu_1">
+      <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view">
+      <UniqueIdentifier>{eeb0bc56-0a29-41e8-a521-ca3873474f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\gui">
+      <UniqueIdentifier>{12acd012-9aec-4231-914d-38c01e20260c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets">
+      <UniqueIdentifier>{0e3128e4-bed1-4d6c-ad41-8c7553ca0b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\allegro_manager">
+      <UniqueIdentifier>{5e4fa792-1825-46aa-91ac-4279c629a072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model">
+      <UniqueIdentifier>{d06fe27b-a356-4ec9-ad7d-f15a90e3a75f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\sysgame">
+      <UniqueIdentifier>{b5c0f35c-3575-4545-b6d9-375fd3845a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\buttons">
+      <UniqueIdentifier>{bb6d74af-fb42-448d-be59-95159be72794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\buttons\button_test_v1">
+      <UniqueIdentifier>{b746146c-d03e-4a9d-bfbb-fef8f0ca12fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\model">
+      <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\model\network">
+      <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\stratego_engine">
+      <UniqueIdentifier>{cba5c68e-2c8f-4794-b8d4-b410b072c1eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\menu_2">
+      <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\menu_3">
+      <UniqueIdentifier>{89c1fa7d-9a33-4f41-ba75-93f6cff36d2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
       <Filter>src\framework\sysgame</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\activity\activity.cpp">
-      <Filter>src\framework\activity</Filter>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\network\NetworkManager.cpp">
-      <Filter>src\framework\network</Filter>
+    <ClCompile Include="src\framework\controller\controller.cpp">
+      <Filter>src\framework\controller</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\network\NetworkProtocol.cpp">
-      <Filter>src\framework\network</Filter>
+    <ClCompile Include="src\framework\model\network\NetworkManager.cpp">
+      <Filter>src\framework\model\network</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\network\Package.cpp">
-      <Filter>src\framework\network</Filter>
+    <ClCompile Include="src\framework\model\network\NetworkProtocol.cpp">
+      <Filter>src\framework\model\network</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\view\Viewer.cpp">
-      <Filter>src\framework\view</Filter>
+    <ClCompile Include="src\framework\model\network\Package.cpp">
+      <Filter>src\framework\model\network</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\widgets\naive_button.cpp">
-      <Filter>src\framework\widgets</Filter>
+    <ClCompile Include="src\framework\view\allegro_manager\allegro_manager.cpp">
+      <Filter>src\framework\view\allegro_manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\widgets\widget.cpp">
-      <Filter>src\framework\widgets</Filter>
+    <ClCompile Include="src\framework\view\gui\gui.cpp">
+      <Filter>src\framework\view\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\naive_button.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\widget.cpp">
+      <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
       <Filter>src\framework\sysgame</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\activity\activity.h">
-      <Filter>src\framework\activity</Filter>
+    <ClInclude Include="src\framework\controller\controller.h">
+      <Filter>src\framework\controller</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\network\networkManager.h">
-      <Filter>src\framework\network</Filter>
+    <ClInclude Include="src\framework\model\network\networkManager.h">
+      <Filter>src\framework\model\network</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\network\NetworkProtocol.h">
-      <Filter>src\framework\network</Filter>
+    <ClInclude Include="src\framework\model\network\NetworkProtocol.h">
+      <Filter>src\framework\model\network</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\network\Package.h">
-      <Filter>src\framework\network</Filter>
+    <ClInclude Include="src\framework\model\network\Package.h">
+      <Filter>src\framework\model\network</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\view\Viewer.h">
-      <Filter>src\framework\view</Filter>
+    <ClInclude Include="src\framework\view\allegro_manager\allegro_manager.h">
+      <Filter>src\framework\view\allegro_manager</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\widgets\naive_button.h">
-      <Filter>src\framework\widgets</Filter>
+    <ClInclude Include="src\framework\view\gui\gui.h">
+      <Filter>src\framework\view\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\widgets\widget.h">
-      <Filter>src\framework\widgets</Filter>
+    <ClInclude Include="src\framework\view\widgets\naive_button.h">
+      <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\widget.h">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resource\protocol.xml">
@@ -100,6 +139,23 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Image Include="resource\buttons\button_test_v1\g4203.jpg">
+      <Filter>Resource Files\buttons\button_test_v1</Filter>
+    </Image>
+    <Image Include="resource\buttons\button_test_v1\g4203.png">
+      <Filter>Resource Files\buttons\button_test_v1</Filter>
+    </Image>
+    <Image Include="resource\buttons\button_test_v1\g4825.jpg">
+      <Filter>Resource Files\buttons\button_test_v1</Filter>
+    </Image>
+    <Image Include="resource\buttons\button_test_v1\g4825.png">
+      <Filter>Resource Files\buttons\button_test_v1</Filter>
+    </Image>
+    <Image Include="resource\buttons\button_test_v1\g4827.jpg">
+      <Filter>Resource Files\buttons\button_test_v1</Filter>
+    </Image>
+    <Image Include="resource\buttons\button_test_v1\g4827.png">
+      <Filter>Resource Files\buttons\button_test_v1</Filter>
+    </Image>
   </ItemGroup>
 </Project>

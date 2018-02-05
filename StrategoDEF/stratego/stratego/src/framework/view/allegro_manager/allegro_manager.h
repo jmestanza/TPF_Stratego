@@ -9,10 +9,12 @@
 #include <allegro5\allegro_image.h>
 using namespace std;
 
-class ViewerException : logic_error {
+class AllegroHandlerException : public exception {
+	private:
+		string err;
 	public:
-		ViewerException(string err);
-		string what();
+		AllegroHandlerException(string err);
+		virtual const char *what() const throw();
 };
 
 class ShowObject {
@@ -44,6 +46,7 @@ class Viewer {
 		void destroy(string showName); // borrar imagen de la pantalla
 		void draw();
 		void changeShowImg(string showName, string newImageName);
+		void destroyAll(); // empty screen
 		
 		~Viewer();
 };

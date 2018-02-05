@@ -71,6 +71,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\src</IncludePath>
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPhysfs>true</Allegro_AddonPhysfs>
+    <Allegro_AddonDialog>true</Allegro_AddonDialog>
+    <Allegro_AddonMemfile>true</Allegro_AddonMemfile>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Allegro_AddonVideo>true</Allegro_AddonVideo>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -117,31 +128,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\framework\activity\activity.cpp" />
-    <ClCompile Include="src\framework\network\NetworkManager.cpp" />
-    <ClCompile Include="src\framework\network\NetworkProtocol.cpp" />
-    <ClCompile Include="src\framework\network\Package.cpp" />
+    <ClCompile Include="src\framework\controller\controller.cpp" />
+    <ClCompile Include="src\framework\model\network\NetworkManager.cpp" />
+    <ClCompile Include="src\framework\model\network\NetworkProtocol.cpp" />
+    <ClCompile Include="src\framework\model\network\Package.cpp" />
     <ClCompile Include="src\framework\sysgame\sysgame.cpp" />
-    <ClCompile Include="src\framework\view\Viewer.cpp" />
-    <ClCompile Include="src\framework\widgets\naive_button.cpp" />
-    <ClCompile Include="src\framework\widgets\widget.cpp" />
+    <ClCompile Include="src\framework\view\allegro_manager\allegro_manager.cpp" />
+    <ClCompile Include="src\framework\view\gui\gui.cpp" />
+    <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
+    <ClCompile Include="src\framework\view\widgets\widget.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\framework\activity\activity.h" />
-    <ClInclude Include="src\framework\network\networkManager.h" />
-    <ClInclude Include="src\framework\network\NetworkProtocol.h" />
-    <ClInclude Include="src\framework\network\Package.h" />
+    <ClInclude Include="src\framework\controller\controller.h" />
+    <ClInclude Include="src\framework\model\network\networkManager.h" />
+    <ClInclude Include="src\framework\model\network\NetworkProtocol.h" />
+    <ClInclude Include="src\framework\model\network\Package.h" />
     <ClInclude Include="src\framework\sysgame\sysgame.h" />
-    <ClInclude Include="src\framework\view\Viewer.h" />
-    <ClInclude Include="src\framework\widgets\naive_button.h" />
-    <ClInclude Include="src\framework\widgets\widget.h" />
+    <ClInclude Include="src\framework\view\allegro_manager\allegro_manager.h" />
+    <ClInclude Include="src\framework\view\gui\gui.h" />
+    <ClInclude Include="src\framework\view\widgets\naive_button.h" />
+    <ClInclude Include="src\framework\view\widgets\widget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resource\protocol.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Image Include="resource\buttons\button_test_v1\g4203.jpg" />
+    <Image Include="resource\buttons\button_test_v1\g4203.png" />
+    <Image Include="resource\buttons\button_test_v1\g4825.jpg" />
+    <Image Include="resource\buttons\button_test_v1\g4825.png" />
+    <Image Include="resource\buttons\button_test_v1\g4827.jpg" />
+    <Image Include="resource\buttons\button_test_v1\g4827.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

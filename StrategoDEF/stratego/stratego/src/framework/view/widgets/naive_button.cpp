@@ -1,4 +1,4 @@
-#include <framework\view\Viewer.h>
+#include <framework\view\allegro_manager\allegro_manager.h>
 #include "naive_button.h"
 #include "allegro5\allegro.h"
 using namespace std;

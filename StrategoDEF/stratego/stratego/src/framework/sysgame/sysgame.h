@@ -11,6 +11,9 @@ using namespace boost::asio;
 lo comanda sygame a partir de sus atributos, la vista, el controlador, y el modelo.
 ***/
 
+class Sysgame;
+class Controller;
+
 struct NETWORK_EVENT {
 	string msg;
 };

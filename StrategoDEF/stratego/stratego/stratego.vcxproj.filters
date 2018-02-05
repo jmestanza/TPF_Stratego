@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{b4552f08-edad-4708-bc26-4fd5328c0182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework">
+      <UniqueIdentifier>{9297a626-4969-4245-a60e-a51d3d8b0eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\network">
+      <UniqueIdentifier>{c5bd5a85-732d-45cb-a6bb-223a167c0d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game">
+      <UniqueIdentifier>{2e96f108-5d0e-4130-ba66-6305d49ff5b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\utils">
+      <UniqueIdentifier>{8a1ed04a-8f4c-43d7-9cad-cdb039ee4d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\stratego">
+      <UniqueIdentifier>{d06fe27b-a356-4ec9-ad7d-f15a90e3a75f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view">
+      <UniqueIdentifier>{5e4fa792-1825-46aa-91ac-4279c629a072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\activity">
+      <UniqueIdentifier>{56b13182-fa92-44e0-9b67-a8d28fec1adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\widgets">
+      <UniqueIdentifier>{b29b073a-463d-49e9-bf62-5a5c1ebd4de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\ui">
+      <UniqueIdentifier>{860fa988-d58e-4505-8b8f-ebbdb4586d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\sysgame">
+      <UniqueIdentifier>{35127e21-0290-4d2b-a9b7-fb8742bc19a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\sysgame\sysgame.cpp">
+      <Filter>src\framework\sysgame</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\activity\activity.cpp">
+      <Filter>src\framework\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\network\NetworkManager.cpp">
+      <Filter>src\framework\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\network\NetworkProtocol.cpp">
+      <Filter>src\framework\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\network\Package.cpp">
+      <Filter>src\framework\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\Viewer.cpp">
+      <Filter>src\framework\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\widgets\naive_button.cpp">
+      <Filter>src\framework\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\widgets\widget.cpp">
+      <Filter>src\framework\widgets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\framework\sysgame\sysgame.h">
+      <Filter>src\framework\sysgame</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\activity\activity.h">
+      <Filter>src\framework\activity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\network\networkManager.h">
+      <Filter>src\framework\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\network\NetworkProtocol.h">
+      <Filter>src\framework\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\network\Package.h">
+      <Filter>src\framework\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\Viewer.h">
+      <Filter>src\framework\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\widgets\naive_button.h">
+      <Filter>src\framework\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\widgets\widget.h">
+      <Filter>src\framework\widgets</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="resource\protocol.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

@@ -19,8 +19,8 @@ struct NETWORK_EVENT;
 class Controller {
 	public:
 		Controller(Sysgame *mySysgame);
-		// in this function we will widgets actions
-		virtual void onEvent(ALLEGRO_EVENT *ev) = 0;  // handle ALLEGRO events
+		
+		//void onEvent(ALLEGRO_EVENT *ev) = 0;  // handle ALLEGRO events
 		virtual void onNetPack(string &package,map<string,string> &data) = 0;  // handle NETWORK actions
 		virtual void onNetEvent(NETWORK_EVENT *ev) = 0;
 

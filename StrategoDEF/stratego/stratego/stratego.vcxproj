@@ -151,6 +151,7 @@
     <ClCompile Include="src\framework\view\gui\gui.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
+    <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="src\framework\view\gui\gui.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
+    <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

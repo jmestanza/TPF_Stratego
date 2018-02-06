@@ -15,7 +15,7 @@ class NaiveButton : Widget{
 		string myViewName;
 		void(*onClick)();
 	public:
-		NaiveButton(Viewer *view,pair<float,float> position,int centered,string img_a,string img_b);
+		NaiveButton(Sysgame *sys, string name, pair<float, float> _pos, int centered, string _img_a, string _img_b);
 		//void ON
 		void handleEvent(ALLEGRO_EVENT *ev);
 		~NaiveButton();

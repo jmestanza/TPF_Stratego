@@ -7,14 +7,17 @@
 #include <allegro5\allegro.h>
 using namespace std;
 
+class Sysgame;
+
 class Widget {
 	protected:
 		pair<float, float> pos;
 		string name;
 		Viewer* view;
+		Sysgame* mySysgame;
 		int id;
 	public:
-		Widget(Viewer *_view);
+		Widget(Sysgame *sys,string name);
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;
 		~Widget();
 };

@@ -31,6 +31,7 @@ void NetContInt::onSent() {
 	this->mySygame->getController()->onNetEvent(ev);
 	delete ev;
 }
+
 NetContInt::~NetContInt() {
 
 }
@@ -47,7 +48,9 @@ Sysgame::Sysgame(string xmlScreenConfig) : network(&service){
 Controller *Sysgame::getController() {
 	return controller;
 }
-
+UI *Sysgame::getUI() {
+	return &ui;
+}
 Sysgame::~Sysgame() {
 	delete controller;
 }
@@ -63,4 +66,7 @@ void Sysgame::update() {
 	if (view.getNextEvent(&ev)) ui.HandleEvent(&ev);
 	service.poll();
 	
+}
+Viewer* Sysgame::getAllegroHandler() {
+	return &view;
 }

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{b4552f08-edad-4708-bc26-4fd5328c0182}</UniqueIdentifier>
     </Filter>
@@ -47,12 +43,6 @@
     <Filter Include="src\game\sysgame">
       <UniqueIdentifier>{b5c0f35c-3575-4545-b6d9-375fd3845a3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\buttons">
-      <UniqueIdentifier>{bb6d74af-fb42-448d-be59-95159be72794}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\buttons\button_test_v1">
-      <UniqueIdentifier>{b746146c-d03e-4a9d-bfbb-fef8f0ca12fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\model">
       <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
     </Filter>
@@ -67,6 +57,19 @@
     </Filter>
     <Filter Include="src\game\controller\menu_3">
       <UniqueIdentifier>{89c1fa7d-9a33-4f41-ba75-93f6cff36d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="resource\buttons">
+      <UniqueIdentifier>{bb6d74af-fb42-448d-be59-95159be72794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\buttons\button_test_v1">
+      <UniqueIdentifier>{b746146c-d03e-4a9d-bfbb-fef8f0ca12fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\menu_test">
+      <UniqueIdentifier>{0c2c1663-38f5-4f14-9f76-9b34c78e9c7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +103,9 @@
     <ClCompile Include="src\framework\view\widgets\widget.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\controller\menu_test\menu_test.cpp">
+      <Filter>src\game\controller\menu_test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -129,36 +135,39 @@
     <ClInclude Include="src\framework\view\widgets\widget.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\controller\menu_test\menu_test.h">
+      <Filter>src\game\controller\menu_test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resource\protocol.xml">
-      <Filter>Resource Files</Filter>
+      <Filter>resource</Filter>
     </Xml>
     <Xml Include="resource\game_config.xml">
-      <Filter>Resource Files</Filter>
+      <Filter>resource</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\buttons\button_test_v1\g4203.jpg">
-      <Filter>Resource Files\buttons\button_test_v1</Filter>
+      <Filter>resource\buttons\button_test_v1</Filter>
     </Image>
     <Image Include="resource\buttons\button_test_v1\g4203.png">
-      <Filter>Resource Files\buttons\button_test_v1</Filter>
+      <Filter>resource\buttons\button_test_v1</Filter>
     </Image>
     <Image Include="resource\buttons\button_test_v1\g4825.jpg">
-      <Filter>Resource Files\buttons\button_test_v1</Filter>
+      <Filter>resource\buttons\button_test_v1</Filter>
     </Image>
     <Image Include="resource\buttons\button_test_v1\g4825.png">
-      <Filter>Resource Files\buttons\button_test_v1</Filter>
+      <Filter>resource\buttons\button_test_v1</Filter>
     </Image>
     <Image Include="resource\buttons\button_test_v1\g4827.jpg">
-      <Filter>Resource Files\buttons\button_test_v1</Filter>
+      <Filter>resource\buttons\button_test_v1</Filter>
     </Image>
     <Image Include="resource\buttons\button_test_v1\g4827.png">
-      <Filter>Resource Files\buttons\button_test_v1</Filter>
+      <Filter>resource\buttons\button_test_v1</Filter>
     </Image>
   </ItemGroup>
 </Project>

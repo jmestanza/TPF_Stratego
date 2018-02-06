@@ -1,14 +1,14 @@
 #pragma once
 
 
-#ifndef UI_H
-#define UI_H
-
 #include <map>
 #include <framework\view\widgets\widget.h>
 #include "allegro5\allegro.h"
 
 using namespace std;
+
+class Widget;
+class Sysgame;
 
 class UI {
 	private:
@@ -23,6 +23,4 @@ class UI {
 
 		~UI();
 };
-
-#endif
 

@@ -15,6 +15,9 @@ void UI::RemoveWidget(string name) {
 void UI::HandleEvent(ALLEGRO_EVENT *ev) {
 	for (auto it = widgets.begin(); it != widgets.end(); it++) it->second->handleEvent(ev);
 }
+void UI::eraseAll() {
+	widgets.clear();
+}
 UI::~UI() {
 	for (auto it = widgets.begin(); it != widgets.end(); it++) delete it->second;
 }

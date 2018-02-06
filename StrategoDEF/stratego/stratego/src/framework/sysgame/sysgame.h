@@ -7,6 +7,7 @@
 #include <framework\controller\controller.h>
 #include <framework\model\network\NetworkProtocol.h>
 #include <framework\view\gui\gui.h>
+#include <framework\view\allegro_manager\allegro_manager.h>
 
 using namespace boost::asio;
 using namespace std;
@@ -27,7 +28,7 @@ class NetContInt : public NetworkProtocol { //network-controller interface
 	public:
 		NetContInt(io_service *service);
 		~NetContInt();
-		void setController(Controller *controller);
+		//void setController(Controller *controller);
 		void setSysgamePointer(Sysgame *_sysgame);
 
 		void onPackageRecv(string &PkgName, map<string, string> &content);
@@ -45,10 +46,12 @@ class Sysgame {
 	public:
 		
 		Sysgame(string xmlScreenConfig);
-		void startScreen(string xmlFile);
 
+		Viewer *getAllegroHandler();
 		void update(); // handle all neccesary updates
 		void setNewController(Controller *newController);
+		UI *getUI();
+
 		Controller *getController();
 		~Sysgame();
 

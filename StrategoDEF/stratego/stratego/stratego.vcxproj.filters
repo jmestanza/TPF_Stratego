@@ -137,6 +137,9 @@
     <Xml Include="resource\protocol.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="resource\game_config.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\buttons\button_test_v1\g4203.jpg">

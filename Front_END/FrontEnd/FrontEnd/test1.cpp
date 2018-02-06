@@ -19,7 +19,7 @@ int main() {
 		al_register_event_source(q, al_get_display_event_source(display));
 		al_register_event_source(q, al_get_keyboard_event_source());
 		al_register_event_source(q, al_get_mouse_event_source());
-
+		
 		viewer.load("1510172827500.jpg", "cat");
 		viewer.load("ui/buttons/button_test_v1/g4203.png", "simple_button_img1");
 		viewer.load("ui/buttons/button_test_v1/g4825.png", "simple_button_img2");

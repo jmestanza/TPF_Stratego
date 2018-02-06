@@ -23,9 +23,62 @@ void allegro_init(void) {
 	if (!al_install_audio()) throw AllegroHandlerException("could not start allegro audio");
 	if (!al_init_acodec_addon()) throw AllegroHandlerException("could not start allegro acodec addon");
 	if (!al_reserve_samples(1)) throw AllegroHandlerException("could not start allegro reserve samples");
+	if (!al_install_mouse()) throw AllegroHandlerException("could not install mosue");
+	
+
 }
 Viewer::Viewer() {
+}
+void Viewer::start(){
 	allegro_init();
+	q = al_create_event_queue();
+	if (!q) throw AllegroHandlerException("could not create event queue");
+
+	display = al_create_display(screenSize.first, screenSize.second);
+	if (!display) throw AllegroHandlerException("could not create display ");
+
+	al_register_event_source(q, al_get_display_event_source(display));
+	al_register_event_source(q, al_get_keyboard_event_source());
+	al_register_event_source(q, al_get_mouse_event_source());
+
+}
+void Viewer::loadConfFile(string xmlFile) {
+	ifstream is;
+	try {
+		is = ifstream(xmlFile);
+	}catch (ifstream::failure &e) {
+		throw AllegroHandlerException("Error loading allegro handler configuration xml file");
+	}
+	using boost::property_tree::ptree;
+	ptree pt;
+	try {
+		read_xml(is, pt);
+	}catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		throw AllegroHandlerException("Error parsing xml file");
+	}
+	if (pt.count("config") != 1) throw AllegroHandlerException("wrong xml file (config tag invalid)");
+	ptree content = pt.get_child("protocol");
+
+	if (content.count("screen_size") > 1) throw AllegroHandlerException("wrong xml file (screen tag is invalid)");
+	if (content.count("screen_size") == 1) {
+		ptree screen_sz = content.get_child("screen_size").get_child("<xmlattr>");
+		if (screen_sz.count("width") != 1) {
+			throw AllegroHandlerException("wrong xml file (screen size invalid)");
+		}
+		if (screen_sz.count("height") != 1) {
+			throw AllegroHandlerException("wrong xml file (screen size invalid)");
+		}
+		string screen_width  = screen_sz.get<string>("width");
+		string screen_height = screen_sz.get<string>("height");
+		try {
+			screenSize.first = stoi(screen_width);
+			screenSize.second = stoi(screen_height);
+		}catch (invalid_argument &e) {
+			screenSize.first = 800;
+			screenSize.second = 600;
+			throw AllegroHandlerException("wrong xml file (screen size values invalid)");
+		}
+	}
 }
 void Viewer::load(string dir, string name) {
 	ALLEGRO_BITMAP* image = al_load_bitmap(dir.c_str());
@@ -49,6 +102,7 @@ void Viewer::draw() {
 		}
 	}
 	for (int i = eraseList.size() - 1; i >= 0; i--) drawOrder.erase(drawOrder.begin() + eraseList[i]);
+	al_flip_display();
 }
 void Viewer::show(string imageName, string showName, float x, float y) {
 	if (loaded.find(imageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::Show()");
@@ -65,6 +119,11 @@ void Viewer::changeShowImg(string showName, string newImageName) {
 void Viewer::destroyAll() {
 	loaded.clear();
 }
+bool Viewer::getNextEvent(ALLEGRO_EVENT *ev) {	
+	return al_get_next_event(q,ev);
+}
 Viewer::~Viewer() {
 	for (auto it = loaded.begin(); it != loaded.end(); it++) al_destroy_bitmap(it->second);
+	al_destroy_display(display);
+	al_destroy_event_queue(q);
 }

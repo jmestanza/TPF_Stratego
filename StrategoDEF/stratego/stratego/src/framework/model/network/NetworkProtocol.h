@@ -21,7 +21,7 @@ class NetworkProtocolException : public exception {
 class NetworkProtocol : public NetworkManager{
 	public:
 		NetworkProtocol(io_service *service);
-		void ParseProtocolXML(ifstream &is); // load protocol from xml file
+		void ParseProtocolXML(string filename); // load protocol from xml file
 		void createNewPackage(Package *pkg);
 		void createPackages(vector <Package*> pkg);
 		void sendPackage(string pkgName, map <string,string> &content);

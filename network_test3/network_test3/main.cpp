@@ -58,14 +58,15 @@ int main() {
 		io_service service;
 		
 		protocol myProtocol(&service);
-		//myProtocol.setDebugFlag();
+		myProtocol.setDebugFlag();
 		ifstream is("xml/protocol.xml", ifstream::in);
 		myProtocol.ParseProtocolXML(is);
 
 		myProtocol.tryConnection("127.0.0.1", 9999, 2000);
 		//myProtocol.waitForConnection(9999);
-		service.run();
-
+		while (1) {
+			service.poll();
+		}
 	} catch (exception &e) {
 		cout << "error: " << e.what() << '\n';
 	} catch (...) {

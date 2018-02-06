@@ -17,13 +17,13 @@
   <package name="i_am_ready" code="23">
   </package>
   <package name="move" code="30">
-    <msg title="original_col"></msg>
-    <msg title="original_row"></msg>
-    <msg title="destination_col"></msg>
-    <msg title="destination_row"></msg>
+    <msg title="original_col" size ="1"></msg>
+    <msg title="original_row" size="1"></msg>
+    <msg title="destination_col" size="1"></msg>
+    <msg title="destination_row" size="1"></msg>
   </package>
   <package name="attack" code="31">
-    <msg title="token_rank"></msg>
+    <msg title="token_rank" size="1"></msg>
   </package>
   <package name="you_won" code="40">
   </package>

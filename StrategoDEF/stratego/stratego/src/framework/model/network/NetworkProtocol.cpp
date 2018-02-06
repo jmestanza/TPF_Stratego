@@ -13,10 +13,20 @@ NetworkProtocol::NetworkProtocol(io_service* service) : NetworkManager(service){
 void NetworkProtocol::setDebugFlag() {
 	debugFlag = 1;
 }
-void NetworkProtocol::ParseProtocolXML(ifstream &is) {
+void NetworkProtocol::ParseProtocolXML(string filename) {
+	ifstream is;
+	try {
+		is = ifstream(filename);
+	}catch (ifstream::failure &e) {
+		throw NetworkProtocolException("Error loading network protocol xml file");
+	}
 	using boost::property_tree::ptree;
 	ptree pt;
-	read_xml(is, pt);
+	try {
+		read_xml(is, pt);
+	}catch (boost::property_tree::xml_parser::xml_parser_error &e){
+		throw NetworkProtocolException("Error parsing network protocol xml file");
+	}
 	if (pt.count("protocol") != 1) {
 		throw NetworkProtocolException("Invalid protocol xml file, number different 1 of protocol tags");
 	}

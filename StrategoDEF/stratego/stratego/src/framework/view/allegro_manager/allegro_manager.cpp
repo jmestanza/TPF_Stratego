@@ -6,6 +6,7 @@
 #include "allegro5\allegro_acodec.h"
 #include "allegro5\allegro_audio.h"
 #include "allegro5\allegro_image.h"
+
 #include <map>
 #include <iostream>
 using namespace std;
@@ -24,13 +25,23 @@ void allegro_init(void) {
 	if (!al_init_acodec_addon()) throw AllegroHandlerException("could not start allegro acodec addon");
 	if (!al_reserve_samples(1)) throw AllegroHandlerException("could not start allegro reserve samples");
 	if (!al_install_mouse()) throw AllegroHandlerException("could not install mosue");
-	
-
+	if (!al_init_primitives_addon()) throw AllegroHandlerException("could not start primitives addon");
 }
 Viewer::Viewer() {
+	_debug = 0;
+	 // defaults
+	screenSize.first = 800;
+	screenSize.second = 600;
+}
+void Viewer::setDebugFlag() {
+	_debug = 1;
+}
+pair <float, float> Viewer::getScreenSize() {
+	return screenSize;
 }
 void Viewer::start(){
 	allegro_init();
+	
 	q = al_create_event_queue();
 	if (!q) throw AllegroHandlerException("could not create event queue");
 
@@ -41,6 +52,7 @@ void Viewer::start(){
 	al_register_event_source(q, al_get_keyboard_event_source());
 	al_register_event_source(q, al_get_mouse_event_source());
 
+	if (!_debug) cout << "info: allegro started\n";
 }
 void Viewer::loadConfFile(string xmlFile) {
 	ifstream is;
@@ -57,7 +69,7 @@ void Viewer::loadConfFile(string xmlFile) {
 		throw AllegroHandlerException("Error parsing xml file");
 	}
 	if (pt.count("config") != 1) throw AllegroHandlerException("wrong xml file (config tag invalid)");
-	ptree content = pt.get_child("protocol");
+	ptree content = pt.get_child("config");
 
 	if (content.count("screen_size") > 1) throw AllegroHandlerException("wrong xml file (screen tag is invalid)");
 	if (content.count("screen_size") == 1) {
@@ -79,51 +91,76 @@ void Viewer::loadConfFile(string xmlFile) {
 			throw AllegroHandlerException("wrong xml file (screen size values invalid)");
 		}
 	}
+	if (content.count("debug") >= 1) setDebugFlag();
 }
 void Viewer::load(string dir, string name) {
 	ALLEGRO_BITMAP* image = al_load_bitmap(dir.c_str());
-
-	if (image == NULL) throw AllegroHandlerException("unable to load image '"+dir+"'");
+	if (!image) throw AllegroHandlerException("unable to load image '"+dir+"'");
 	
 	loaded[name] = image;
 }
-void Viewer::destroy(string destroyName) {
-	loaded.erase(destroyName);
+void Viewer::stopShow(string destroyName) {
+	if (frontShow.find(destroyName) == frontShow.end()) {
+		throw AllegroHandlerException("trying to stop showing image that is not being shown");
+	}
+	frontShow.erase(destroyName);
 }
 void Viewer::draw() {
+
 	vector <int> eraseList;
 	for (int i = 0; i < drawOrder.size(); i++) {
 		// si se da esta condiccion la imagen fue eliminada, lo agregamos a la lista para la eliminacion definitiva
 		if (frontShow.find(drawOrder[i]) == frontShow.end()) {
 			eraseList.push_back(i);
 		}else {
-			ShowObject &obj = frontShow[drawOrder[i]];
-			al_draw_bitmap(obj.bitmap, obj.pos.first, obj.pos.second, 0);
+			frontShow[drawOrder[i]]->draw();
 		}
 	}
 	for (int i = eraseList.size() - 1; i >= 0; i--) drawOrder.erase(drawOrder.begin() + eraseList[i]);
 	al_flip_display();
 }
 void Viewer::show(string imageName, string showName, float x, float y) {
-	if (loaded.find(imageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::Show()");
-	frontShow[showName] = ShowObject(loaded[imageName],x,y);
+	if (loaded.find(imageName) == loaded.end()) throw AllegroHandlerException("trying to add ShowObject with repeated name");
+	
+	ShowImage *nueva = new ShowImage();
+	nueva->setImage(loaded[imageName]);
+	frontShow[showName] = (ShowObject*)nueva;
+
+	drawOrder.push_back(showName);
+}
+void Viewer::showRectangle(string showName, unsigned char r, unsigned char g, unsigned char b, pair<float, float> pos, pair<float, float> size,bool centered) {
+	
+	ShowRectangle *nuevo = new ShowRectangle();
+	nuevo->setPosition(pos,centered);
+	nuevo->setColor(r,g,b);
+	nuevo->setSize(size);
+	frontShow[showName] = (ShowObject*)nuevo;
 	drawOrder.push_back(showName);
 }
 void Viewer::changeShowImg(string showName, string newImageName) {
-	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg()");
-	if (frontShow.find(showName) == frontShow.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg()");
-
-	float x = frontShow[showName].pos.first, y = frontShow[showName].pos.second;
-	frontShow[showName] = ShowObject(loaded[newImageName], x, y);
+	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 1)");
+	if (frontShow.find(showName) == frontShow.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 2)");
+	try {
+		ShowImage *img = dynamic_cast<ShowImage*>(frontShow[showName]);
+		img->setImage(loaded[newImageName]);
+	} catch (bad_cast &e) {
+		throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (bad cast)");
+	}
+	//float x = frontShow[showName].pos.first, y = frontShow[showName].pos.second;
+	//frontShow[showName] = ShowObject(loaded[newImageName], x, y);
 }
 void Viewer::destroyAll() {
-	loaded.clear();
+	for (auto it = frontShow.begin(); it != frontShow.end(); it++) delete it->second;
+	frontShow.clear();
 }
 bool Viewer::getNextEvent(ALLEGRO_EVENT *ev) {	
 	return al_get_next_event(q,ev);
 }
 Viewer::~Viewer() {
 	for (auto it = loaded.begin(); it != loaded.end(); it++) al_destroy_bitmap(it->second);
+	for (auto it = frontShow.begin();it != frontShow.end();it++) delete it->second;
+
 	al_destroy_display(display);
 	al_destroy_event_queue(q);
+	
 }

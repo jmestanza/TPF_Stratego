@@ -18,5 +18,5 @@ void NaiveButton::handleEvent(ALLEGRO_EVENT *ev) {
 	}
 }
 NaiveButton::~NaiveButton() {
-	view->destroy(myViewName);
+	view->stopShow(myViewName);
 }

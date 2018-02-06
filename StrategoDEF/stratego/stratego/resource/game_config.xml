@@ -5,5 +5,7 @@
   <fullscreen status="off"/>
   <images>
   </images>
+  <debug>
+  </debug>
 </config>
   

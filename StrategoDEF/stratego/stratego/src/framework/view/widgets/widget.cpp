@@ -10,6 +10,8 @@ using namespace std;
 Widget::Widget(Sysgame *sys,string _name) : mySysgame(sys) , name(_name){
 	view = sys->getAllegroHandler();
 }
-
+string Widget::getName() {
+	return name;
+}
 
 Widget::~Widget() {}

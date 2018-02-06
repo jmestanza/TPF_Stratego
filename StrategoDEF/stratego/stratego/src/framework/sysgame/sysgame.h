@@ -51,17 +51,18 @@ class Sysgame {
 		void update(); // handle all neccesary updates
 		void setNewController(Controller *newController);
 		UI *getUI();
+	
+		bool quit();
 
 		Controller *getController();
 		~Sysgame();
-
 	private:
 		io_service service;
 		Controller *controller;
-		UI ui;
-		Viewer view;
+		UI *ui;
+		Viewer *view;
 		NetContInt network;
-		
+		bool _quit;
 
 };
 

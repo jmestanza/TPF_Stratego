@@ -10,6 +10,14 @@ using namespace std;
 class Widget;
 class Sysgame;
 
+class UIException : public exception {
+	private:
+		string err;
+	public:
+		UIException(string err);
+		virtual const char *what() const throw();
+};
+
 class UI {
 	private:
 		map <string, Widget*> widgets;
@@ -17,7 +25,7 @@ class UI {
 		UI();
 		void loadFromXML(string filename);
 		void eraseAll();
-		bool AddWidget(Widget* widget, string WidgetName);
+		void AddWidget(Widget* widget);
 		void HandleEvent(ALLEGRO_EVENT *ev);
 		void RemoveWidget(string WidgetName);
 

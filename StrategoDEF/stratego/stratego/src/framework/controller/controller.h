@@ -24,6 +24,6 @@ class Controller {
 		virtual void onNetPack(string &package,map<string,string> &data) = 0;  // handle NETWORK actions
 		virtual void onNetEvent(NETWORK_EVENT *ev) = 0;
 
-	private:
+	protected:
 		Sysgame* mySysgame;
 };

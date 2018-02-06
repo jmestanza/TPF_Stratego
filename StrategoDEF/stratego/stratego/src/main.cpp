@@ -2,11 +2,13 @@
 #include <game/controller/menu_test/menu_test.h>
 
 int main() {
+
+	cout << "hello world \n";
+
 	Sysgame sys("resource/game_config.xml");
 	
 	sys.setNewController( (Controller*)new menuTest(&sys));
 
-	while (1) {
-		sys.update();
-	}
+	while (!sys.quit()) sys.update();
+	
 }

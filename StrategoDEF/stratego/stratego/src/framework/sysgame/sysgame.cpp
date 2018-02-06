@@ -38,21 +38,28 @@ NetContInt::~NetContInt() {
 Sysgame::Sysgame(string xmlScreenConfig) : network(&service){
 	network.setSysgamePointer(this);
 	controller = nullptr;
-	ui = UI();
-	view = Viewer();
-	view.loadConfFile(xmlScreenConfig);
-	view.start();
-	
+	_quit = 0;
+	ui = new UI();
+	view = new Viewer();
+	try {
+		view->loadConfFile(xmlScreenConfig);
+	} catch (AllegroHandlerException &e) {
+		cout << "warning: coudn't load config file \n";
+	}
+	view->start();
 }
 
 Controller *Sysgame::getController() {
 	return controller;
 }
 UI *Sysgame::getUI() {
-	return &ui;
+	return ui;
 }
 Sysgame::~Sysgame() {
+	//cout << "finish \n";
 	delete controller;
+	delete ui;
+	delete view;
 }
 
 void Sysgame::setNewController(Controller *_contr) {
@@ -63,10 +70,19 @@ void Sysgame::setNewController(Controller *_contr) {
 void Sysgame::update() {
 
 	ALLEGRO_EVENT ev;
-	if (view.getNextEvent(&ev)) ui.HandleEvent(&ev);
+	if (view->getNextEvent(&ev)) {
+		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			_quit = 1;
+		}
+		ui->HandleEvent(&ev);
+	}
+	view->draw();
 	service.poll();
 	
 }
+bool Sysgame::quit() {
+	return _quit;
+}
 Viewer* Sysgame::getAllegroHandler() {
-	return &view;
+	return view;
 }

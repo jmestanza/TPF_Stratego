@@ -71,6 +71,9 @@
     <Filter Include="src\game\controller\menu_test">
       <UniqueIdentifier>{0c2c1663-38f5-4f14-9f76-9b34c78e9c7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\framework\view\allegro_manager\show_objects">
+      <UniqueIdentifier>{6160d20c-bb6e-47e8-bd4d-3bc79296913c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -106,6 +109,18 @@
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp">
       <Filter>src\game\controller\menu_test</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\allegro_manager\show_objects\showImage.cpp">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\background.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -137,6 +152,18 @@
     </ClInclude>
     <ClInclude Include="src\game\controller\menu_test\menu_test.h">
       <Filter>src\game\controller\menu_test</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\allegro_manager\show_objects\showImage.h">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\background.h">
+      <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

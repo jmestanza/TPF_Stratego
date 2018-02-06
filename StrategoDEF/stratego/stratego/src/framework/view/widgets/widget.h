@@ -18,8 +18,9 @@ class Widget {
 		int id;
 	public:
 		Widget(Sysgame *sys,string name);
+		string getName();
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;
-		~Widget();
+		virtual ~Widget();
 };
 
 #endif

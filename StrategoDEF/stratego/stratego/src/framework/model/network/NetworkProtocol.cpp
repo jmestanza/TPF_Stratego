@@ -4,7 +4,7 @@ NetworkProtocolException::NetworkProtocolException(string _err) : err(_err){
 
 }
 const char * NetworkProtocolException::what() const throw(){
-	return err.c_str();
+	return ("NetworkProtocolException:"+err).c_str();
 }
 
 NetworkProtocol::NetworkProtocol(io_service* service) : NetworkManager(service){

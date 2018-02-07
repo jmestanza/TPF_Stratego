@@ -3,6 +3,10 @@
 #include <framework\sysgame\sysgame.h>
 #include <framework\controller\controller.h>
 #include <framework\view\widgets\background.h>
+#include <framework\view\widgets\Table.h>
+#include <framework\view\widgets\TableButton.h>
+
+
 
 class menuTest : public Controller{
 	public:

@@ -9,8 +9,12 @@ menuTest::menuTest(Sysgame *_sys) : Controller(_sys){
 		mySysgame->getAllegroHandler()->getScreenSize(),
 		0
 	);
+	Table * tablero = new Table(mySysgame,"table", "test_blue","test_red",pair<float, float>(200.0, 200.0), pair<float, float>(56, 76));
 
-	mySysgame->getUI()->AddWidget( (Widget*)background );
+
+	mySysgame->getUI()->AddWidget( (Widget*) background );
+	mySysgame->getUI()->AddWidget( (Widget*) tablero );
+
 }
 
 void menuTest::onNetPack(string &package, map<string, string> &data) {

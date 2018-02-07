@@ -192,10 +192,16 @@ void Viewer::draw() {
 	for (int i = eraseList.size() - 1; i >= 0; i--) drawOrder.erase(drawOrder.begin() + eraseList[i]);
 	al_flip_display();
 }
+
+
+
+
 void Viewer::show(string imageName, string showName, float x, float y) {
-	if (loaded.find(imageName) == loaded.end()) throw AllegroHandlerException("trying to add ShowObject with repeated name");
+
+	if ((loaded.find(imageName) == loaded.end())) throw AllegroHandlerException("Trying to show something that is not in memory");
 	
 	ShowImage *nueva = new ShowImage();
+	nueva->setPosition(pair<float, float>(x, y), 0);
 	nueva->setImage(loaded[imageName]);
 	frontShow[showName] = (ShowObject*)nueva;
 

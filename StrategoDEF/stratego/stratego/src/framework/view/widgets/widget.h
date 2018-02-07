@@ -12,6 +12,7 @@ class Sysgame;
 class Widget {
 	protected:
 		pair<float, float> pos;
+		pair<float, float> size;
 		string name;
 		Viewer* view;
 		Sysgame* mySysgame;

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{87CB809B-49B2-4694-A2A7-A2079E4DF7B7}</ProjectGuid>
     <RootNamespace>stratego</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -154,6 +154,8 @@
     <ClCompile Include="src\framework\view\gui\gui.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
+    <ClCompile Include="src\framework\view\widgets\Table.cpp" />
+    <ClCompile Include="src\framework\view\widgets\TableButton.cpp" />
     <ClCompile Include="src\framework\view\widgets\text_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
@@ -172,6 +174,8 @@
     <ClInclude Include="src\framework\view\gui\gui.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
+    <ClInclude Include="src\framework\view\widgets\Table.h" />
+    <ClInclude Include="src\framework\view\widgets\TableButton.h" />
     <ClInclude Include="src\framework\view\widgets\text_button.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />

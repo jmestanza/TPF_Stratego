@@ -43,12 +43,6 @@
     <Filter Include="src\game\sysgame">
       <UniqueIdentifier>{b5c0f35c-3575-4545-b6d9-375fd3845a3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\framework\model">
-      <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\model\network">
-      <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\model\stratego_engine">
       <UniqueIdentifier>{cba5c68e-2c8f-4794-b8d4-b410b072c1eb}</UniqueIdentifier>
     </Filter>
@@ -71,6 +65,12 @@
     <Filter Include="src\framework\view\utils">
       <UniqueIdentifier>{b272ff3b-05a7-4913-af36-462903ffcd6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\framework\controller\model">
+      <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\controller\model\network">
+      <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -83,13 +83,13 @@
       <Filter>src\framework\controller</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\model\network\NetworkManager.cpp">
-      <Filter>src\framework\model\network</Filter>
+      <Filter>src\framework\controller\model\network</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\model\network\NetworkProtocol.cpp">
-      <Filter>src\framework\model\network</Filter>
+      <Filter>src\framework\controller\model\network</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\model\network\Package.cpp">
-      <Filter>src\framework\model\network</Filter>
+      <Filter>src\framework\controller\model\network</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\allegro_manager.cpp">
       <Filter>src\framework\view\allegro_manager</Filter>
@@ -121,6 +121,12 @@
     <ClCompile Include="src\framework\view\widgets\text_button.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\TableButton.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\Table.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -130,13 +136,13 @@
       <Filter>src\framework\controller</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\model\network\networkManager.h">
-      <Filter>src\framework\model\network</Filter>
+      <Filter>src\framework\controller\model\network</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\model\network\NetworkProtocol.h">
-      <Filter>src\framework\model\network</Filter>
+      <Filter>src\framework\controller\model\network</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\model\network\Package.h">
-      <Filter>src\framework\model\network</Filter>
+      <Filter>src\framework\controller\model\network</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\allegro_manager.h">
       <Filter>src\framework\view\allegro_manager</Filter>
@@ -166,6 +172,12 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\text_button.h">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\TableButton.h">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\Table.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
   </ItemGroup>

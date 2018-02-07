@@ -7,6 +7,8 @@
 #include <iostream>
 
 #define TABLE_SLOTS 10
+#define INT_OUT_OF_RANGE 10000
+#define CHAR_OUT_OF_RANGE 'Z'
 
 enum { IDLE, BUTTON_DOWN, BUTTON_UP };
 
@@ -25,7 +27,7 @@ class Table : Widget
 {
 public:
 	//Table(Viewer* _view, pair <float,float> screen_center, pair<float, float>_pieceSize);
-	Table::Table(Sysgame*Sys, string _name,string _img_a,string _img_b, pair<float, float> _screen_center, pair<float, float>_pieceSize);
+	Table(Sysgame*Sys, string _name,string _img_a,string _img_b, pair<float, float> _screen_center, pair<float, float>_pieceSize);
 	int status;
 	string img_a;
 	string img_b;

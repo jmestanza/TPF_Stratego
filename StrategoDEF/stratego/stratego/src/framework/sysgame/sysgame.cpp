@@ -35,18 +35,20 @@ void NetContInt::onSent() {
 NetContInt::~NetContInt() {
 
 }
-Sysgame::Sysgame(string xmlScreenConfig) : network(&service){
+Sysgame::Sysgame() : network(&service){
 	network.setSysgamePointer(this);
 	controller = nullptr;
 	_quit = 0;
 	ui = new UI();
 	view = new Viewer();
 	try {
-		view->loadConfFile(xmlScreenConfig);
+		view->loadConfFile("resource/game_config.xml");
 	} catch (AllegroHandlerException &e) {
 		cout << "warning: coudn't load config file \n";
 	}
 	view->start();
+	view->loadImgFile("resource/images.xml");
+	view->loadFontFile("resource/fonts.xml");
 }
 
 Controller *Sysgame::getController() {

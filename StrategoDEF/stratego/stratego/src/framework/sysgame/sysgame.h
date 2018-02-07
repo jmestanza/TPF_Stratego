@@ -45,7 +45,7 @@ class NetContInt : public NetworkProtocol { //network-controller interface
 class Sysgame {
 	public:
 		
-		Sysgame(string xmlScreenConfig);
+		Sysgame();
 
 		Viewer *getAllegroHandler();
 		void update(); // handle all neccesary updates

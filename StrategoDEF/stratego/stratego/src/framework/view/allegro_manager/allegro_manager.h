@@ -7,6 +7,7 @@
 #include <string>
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_image.h>
+#include <allegro5\allegro_font.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 
@@ -33,8 +34,10 @@ class Viewer {
 		ALLEGRO_DISPLAY * display;
 		pair <float, float> screenSize;
 
-		map <string, ALLEGRO_BITMAP*> loaded; // imagenes CARGADAS
+		map <string,ALLEGRO_BITMAP*> loaded; // imagenes CARGADAS
 		map <string,ShowObject*> frontShow; // imagenes MOSTRADAS en pantalla
+		map <string,ALLEGRO_FONT*> fonts;
+
 		vector <string> drawOrder; // orden de muestra en pantalla
 		bool _exit;
 		ALLEGRO_EVENT_QUEUE *q;
@@ -44,8 +47,16 @@ class Viewer {
 		pair<float,float> getScreenSize();
 		void setDebugFlag();
 		void loadConfFile(string xmlFile);
+		void loadImgFile(string xmlFile);
+		void loadFontFile(string xmlFile);
+
 		void start();
 		void load(string dir, string name); // directorio: de donde cargo la imagen name: nombre asignado de acceso
+		void loadFont(string dir,string name,int size);
+
+		ALLEGRO_BITMAP *getImg(string imgName);
+		ALLEGRO_FONT* getFont(string name);
+
 		void show(string imageName,string showName, float x, float y); // informar que se dibujara una imagen precargada efectivamente en la pantalla
 		void showRectangle(string showName,unsigned char r,unsigned char g,unsigned char b,pair<float,float> pos,pair<float,float> size,bool centered);
 		void stopShow(string showName); // borrar imagen de la pantalla

@@ -10,11 +10,27 @@
 #include <map>
 #include <iostream>
 using namespace std;
+using boost::property_tree::ptree;
 
-AllegroHandlerException::AllegroHandlerException(string _err) : err(_err) {
+void get_xml_content(ptree &tree,string dir) {
+	ifstream is;
+	try {
+		is = ifstream(dir);
+	} catch (ifstream::failure &e) {
+		throw AllegroHandlerException("could not open '" + dir + "'");
+	}
+	try {
+		read_xml(is, tree);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		throw AllegroHandlerException("Error parsing xml file '" + dir + "'");
+	}
+}
+
+AllegroHandlerException::AllegroHandlerException(string _err) : err("AllegroHandlerException: "+_err) {
 
 }
 const char * AllegroHandlerException::what() const throw() {
+	//string ans =  + err;
 	return err.c_str();
 }
 void allegro_init(void) {
@@ -55,19 +71,8 @@ void Viewer::start(){
 	if (!_debug) cout << "info: allegro started\n";
 }
 void Viewer::loadConfFile(string xmlFile) {
-	ifstream is;
-	try {
-		is = ifstream(xmlFile);
-	}catch (ifstream::failure &e) {
-		throw AllegroHandlerException("Error loading allegro handler configuration xml file");
-	}
-	using boost::property_tree::ptree;
 	ptree pt;
-	try {
-		read_xml(is, pt);
-	}catch (boost::property_tree::xml_parser::xml_parser_error &e) {
-		throw AllegroHandlerException("Error parsing xml file");
-	}
+	get_xml_content(pt,xmlFile);
 	if (pt.count("config") != 1) throw AllegroHandlerException("wrong xml file (config tag invalid)");
 	ptree content = pt.get_child("config");
 
@@ -93,11 +98,79 @@ void Viewer::loadConfFile(string xmlFile) {
 	}
 	if (content.count("debug") >= 1) setDebugFlag();
 }
+void Viewer::loadImgFile(string xmlFile) {
+	ptree pt;
+	get_xml_content(pt,xmlFile);
+	if (pt.count("images") != 1) {
+		throw AllegroHandlerException("Error in xml file, wrong amount of images tag in '"+xmlFile+"'");
+	}
+	ptree content = pt.get_child("images");
+	for (auto it = content.begin(); it != content.end(); ++it) {
+		if (it->first == "image") {
+			if (it->second.get_child("<xmlattr>").count("name") != 1) {
+				throw AllegroHandlerException("Invalid protocol xml file, invalid count 'name'");
+			} else if (it->second.get_child("<xmlattr>").count("dir") != 1) {
+				throw AllegroHandlerException("Invalid protocol xml file, invalid count 'dir'");
+			}
+			string name = it->second.get<string>("<xmlattr>.name");
+			string dir = it->second.get<string>("<xmlattr>.dir");
+
+			this->load("resource/images/"+dir,name);
+		}
+	}
+}
+void Viewer::loadFontFile(string xmlFile) {
+	ptree pt;
+	get_xml_content(pt,xmlFile);
+	if (pt.count("fonts") != 1) {
+		throw AllegroHandlerException("Error in xml file, wrong amount of fonts tag in '"+xmlFile+"'");
+	}
+	ptree content = pt.get_child("fonts");
+	for (auto it = content.begin();it != content.end(); ++it) {
+		if (it->first == "font") {
+			bool err1 = it->second.get_child("<xmlattr>").count("name") != 1;
+			bool err2 = it->second.get_child("<xmlattr>").count("size") != 1;
+			bool err3 = it->second.get_child("<xmlattr>").count("dir") != 1;
+			if (err1 || err2 || err3) {
+				throw AllegroHandlerException("Invalid font xml file, invalid name-size-dir count");
+			}
+			string name = it->second.get<string>("<xmlattr>.name");
+			string dir = it->second.get<string>("<xmlattr>.size");
+			string sSize = it->second.get<string>("<xmlattr>.size");
+			int size;
+			try {
+				size = stoi(sSize);
+			} catch (invalid_argument &e) {
+				throw AllegroHandlerException("Invalid font size\n");
+			}
+			this->loadFont(dir,name,size);
+		}
+	}
+		
+}
 void Viewer::load(string dir, string name) {
 	ALLEGRO_BITMAP* image = al_load_bitmap(dir.c_str());
 	if (!image) throw AllegroHandlerException("unable to load image '"+dir+"'");
 	
 	loaded[name] = image;
+}
+void Viewer::loadFont(string dir, string name,int size) {
+	if (fonts.find(name) != fonts.end()) {
+		throw AllegroHandlerException("font name '"+name+"' repeated");
+	}
+	fonts[name] = al_load_font(dir.c_str(),size,0);
+}
+ALLEGRO_FONT* Viewer::getFont(string name) {
+	if (fonts.find(name) == fonts.end()) {
+		throw AllegroHandlerException("font name '"+name+" not found'");
+	}
+	return fonts[name];
+}
+ALLEGRO_BITMAP * Viewer::getImg(string loadedName) {
+	if (loaded.find(loadedName) == loaded.end()) {
+		throw AllegroHandlerException("Trying to get image that was not loaded '"+loadedName+"'");
+	}
+	return loaded[loadedName];
 }
 void Viewer::stopShow(string destroyName) {
 	if (frontShow.find(destroyName) == frontShow.end()) {

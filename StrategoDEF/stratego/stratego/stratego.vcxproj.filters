@@ -62,17 +62,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="resource\buttons">
-      <UniqueIdentifier>{bb6d74af-fb42-448d-be59-95159be72794}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource\buttons\button_test_v1">
-      <UniqueIdentifier>{b746146c-d03e-4a9d-bfbb-fef8f0ca12fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\controller\menu_test">
       <UniqueIdentifier>{0c2c1663-38f5-4f14-9f76-9b34c78e9c7a}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\framework\view\allegro_manager\show_objects">
       <UniqueIdentifier>{6160d20c-bb6e-47e8-bd4d-3bc79296913c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\utils">
+      <UniqueIdentifier>{b272ff3b-05a7-4913-af36-462903ffcd6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +118,9 @@
     <ClCompile Include="src\framework\view\widgets\background.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\utils\button_generator.cpp">
+      <Filter>src\framework\view\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -165,6 +165,9 @@
     <ClInclude Include="src\framework\view\widgets\background.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
+    <ClInclude Include="src\framework\view\utils\button_generator.h">
+      <Filter>src\framework\view\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -176,25 +179,11 @@
     <Xml Include="resource\game_config.xml">
       <Filter>resource</Filter>
     </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resource\buttons\button_test_v1\g4203.jpg">
-      <Filter>resource\buttons\button_test_v1</Filter>
-    </Image>
-    <Image Include="resource\buttons\button_test_v1\g4203.png">
-      <Filter>resource\buttons\button_test_v1</Filter>
-    </Image>
-    <Image Include="resource\buttons\button_test_v1\g4825.jpg">
-      <Filter>resource\buttons\button_test_v1</Filter>
-    </Image>
-    <Image Include="resource\buttons\button_test_v1\g4825.png">
-      <Filter>resource\buttons\button_test_v1</Filter>
-    </Image>
-    <Image Include="resource\buttons\button_test_v1\g4827.jpg">
-      <Filter>resource\buttons\button_test_v1</Filter>
-    </Image>
-    <Image Include="resource\buttons\button_test_v1\g4827.png">
-      <Filter>resource\buttons\button_test_v1</Filter>
-    </Image>
+    <Xml Include="fonts.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="resource\images.xml">
+      <Filter>resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

@@ -152,6 +152,7 @@
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp" />
     <ClCompile Include="src\framework\view\gui\gui.cpp" />
+    <ClCompile Include="src\framework\view\utils\button_generator.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h" />
     <ClInclude Include="src\framework\view\gui\gui.h" />
+    <ClInclude Include="src\framework\view\utils\button_generator.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
@@ -178,16 +180,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="fonts.xml" />
     <Xml Include="resource\game_config.xml" />
+    <Xml Include="resource\images.xml" />
     <Xml Include="resource\protocol.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resource\buttons\button_test_v1\g4203.jpg" />
-    <Image Include="resource\buttons\button_test_v1\g4203.png" />
-    <Image Include="resource\buttons\button_test_v1\g4825.jpg" />
-    <Image Include="resource\buttons\button_test_v1\g4825.png" />
-    <Image Include="resource\buttons\button_test_v1\g4827.jpg" />
-    <Image Include="resource\buttons\button_test_v1\g4827.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

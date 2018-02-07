@@ -3,8 +3,11 @@
 #include "allegro5\allegro.h"
 using namespace std;
 
-NaiveButton::NaiveButton(Sysgame *sys,string name, pair<float, float> _pos, int centered, string _img_a, string _img_b) : Widget(sys,name){
-	img_a = _img_a, img_b = _img_b;
+NaiveButton::NaiveButton(Sysgame *sys, string name) : Widget(sys,name){
+}
+
+void NaiveButton::start(pair<float, float> _pos, int centered, string _img_a, string _img_b,string _img_c){
+	img_a = _img_a, img_b = _img_b ,_img_c = img_c;
 	myViewName = "button_" + name;
 	view->show(img_a, myViewName,_pos.first, _pos.second);
 	pos = _pos;

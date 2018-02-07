@@ -152,9 +152,9 @@
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp" />
     <ClCompile Include="src\framework\view\gui\gui.cpp" />
-    <ClCompile Include="src\framework\view\utils\button_generator.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
+    <ClCompile Include="src\framework\view\widgets\text_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -170,9 +170,9 @@
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h" />
     <ClInclude Include="src\framework\view\gui\gui.h" />
-    <ClInclude Include="src\framework\view\utils\button_generator.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
+    <ClInclude Include="src\framework\view\widgets\text_button.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
   </ItemGroup>

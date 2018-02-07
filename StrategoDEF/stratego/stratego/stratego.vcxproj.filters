@@ -118,8 +118,8 @@
     <ClCompile Include="src\framework\view\widgets\background.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\view\utils\button_generator.cpp">
-      <Filter>src\framework\view\utils</Filter>
+    <ClCompile Include="src\framework\view\widgets\text_button.cpp">
+      <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,8 +165,8 @@
     <ClInclude Include="src\framework\view\widgets\background.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\view\utils\button_generator.h">
-      <Filter>src\framework\view\utils</Filter>
+    <ClInclude Include="src\framework\view\widgets\text_button.h">
+      <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

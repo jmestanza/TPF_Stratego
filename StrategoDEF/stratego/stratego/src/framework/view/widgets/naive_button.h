@@ -9,16 +9,17 @@
 
 using namespace std;
 
-class NaiveButton : Widget{
+class NaiveButton : public Widget{
 	private:
-		string img_a,img_b;
+		string img_a,img_b,img_c;
 		string myViewName;
 		void(*onClick)();
 	public:
-		NaiveButton(Sysgame *sys, string name, pair<float, float> _pos, int centered, string _img_a, string _img_b);
+		NaiveButton(Sysgame *sys, string name);
+		void start(pair<float, float> _pos, int centered, string _img_a, string _img_b, string _img_c);
 		//void ON
 		void handleEvent(ALLEGRO_EVENT *ev);
-		~NaiveButton();
+		virtual ~NaiveButton();
 };
 
 #endif

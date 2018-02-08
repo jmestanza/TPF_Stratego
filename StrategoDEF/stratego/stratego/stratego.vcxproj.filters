@@ -49,9 +49,6 @@
     <Filter Include="src\game\controller\menu_2">
       <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\controller\menu_3">
-      <UniqueIdentifier>{89c1fa7d-9a33-4f41-ba75-93f6cff36d2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="resource">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -73,6 +70,15 @@
     </Filter>
     <Filter Include="resource\fonts">
       <UniqueIdentifier>{2bc66cce-762d-465b-a7de-358c7ee49def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\about">
+      <UniqueIdentifier>{89c1fa7d-9a33-4f41-ba75-93f6cff36d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\defaultMenu">
+      <UniqueIdentifier>{6b6d900d-ec65-46b3-98b4-63cccc34bda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\NewFilter1">
+      <UniqueIdentifier>{0df18463-7b4f-4438-8d70-a89aab129311}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -118,9 +124,6 @@
     <ClCompile Include="src\framework\view\widgets\background.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\view\widgets\text_button.cpp">
-      <Filter>src\framework\view\widgets</Filter>
-    </ClCompile>
     <ClCompile Include="src\framework\view\widgets\TableButton.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
@@ -129,6 +132,24 @@
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp">
       <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\screen_text.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\utils\random_number.cpp">
+      <Filter>src\framework\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\text_button.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\controller\aboutWindow\aboutWindow.cpp">
+      <Filter>src\game\controller\about</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\controller\defaultMenu\defaultMenu.cpp">
+      <Filter>src\game\controller\defaultMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\utils\good_buttons.cpp">
+      <Filter>src\framework\view\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +203,21 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h">
       <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\screen_text.h">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\utils\random_number.h">
+      <Filter>src\framework\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\aboutWindow\aboutWindow.h">
+      <Filter>src\game\controller\about</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\defaultMenu\defaultMenu.h">
+      <Filter>src\game\controller\defaultMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\utils\good_buttons.h">
+      <Filter>src\framework\view\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,18 +2,20 @@
 #include <cmath>
 
 #include <framework\view\widgets\text_button.h>
+#include <framework\view\widgets\screen_text.h>
+#include <framework\view\utils\good_buttons.h>
+#include <game\controller\aboutWindow\aboutWindow.h>
+
 using namespace std;
 
-imgGroup g_blue() {
-	return imgGroup("button_blue_a","button_blue_b","button_grey");
-}
-imgGroup g_green() {
-	return imgGroup("button_green_a","button_green_b","button_grey");
-}
-menuTest::menuTest(Sysgame *_sys) : Controller(_sys){
+
+
+menuTest::menuTest(Sysgame *_sys) : Controller(_sys) {}
+void menuTest::onCreate(){
 	value = 2;
-	Background* background = new Background(mySysgame,
-		"background1", tuple<uc, uc, uc>(0,200,255),
+	Background* background = new Background(mySysgame,"background1");
+	background->configure(
+		al_map_rgb(109,189,214),
 		pair<float, float>(0,0), 
 		mySysgame->getAllegroHandler()->getScreenSize(),
 		0
@@ -23,34 +25,26 @@ menuTest::menuTest(Sysgame *_sys) : Controller(_sys){
 	float width = size.first , height = size.second;
 	
 	textButton *myButton = new textButton(mySysgame,"button_1");
-	myButton->generate("PRESS",g_blue(),pair<float,float>(width/2,height*3/4),1);
+	myButton->generate("JUGAR",g_blue(),pair<float,float>(width/4,height*3/4),1);
+
+	textButton *myButton2 = new textButton(mySysgame,"button_2");
+	myButton2->generate("ACERCA DE",g_blue(),pair<float,float>(width / 4 * 3,height * 3 / 4),1);
+
+	screenText *gameTitle = new screenText(mySysgame,"game_title");
+	gameTitle->configure("STRATEGO","Fredoka",al_map_rgb(0,0,0),pair<float,float>(width/2,height/4),1);
 
 	myButton->onClick([](Sysgame *sys) {
-		
 		sys->getAllegroHandler()->playonce("sonic");
-		
-		
-		/*((menuTest*)sys->getController())->value ++;
-		textButton *myButtonB = new textButton(sys,"button_"+to_string(  ((menuTest*)sys->getController())->value ));
-
-		pair<float,float> size = sys->getAllegroHandler()->getScreenSize();
-		int width = size.first,height = size.second;
-
-		mt19937 g1(std::chrono::system_clock::now().time_since_epoch().count());
-		float px = abs(int(g1())) % width;
-		float py = abs(int(g1())) % height;
-		myButtonB->generate("WOWOWOW! ",g_green(),pair<float,float>(px,py),1);
-		myButtonB->onClick([](Sysgame *sys) {
-			cout << "hello world \n";
-		});
-
-		sys->getUI()->AddWidget( (Widget*)myButtonB);*/
-
+	});
+	myButton2->onClick([](Sysgame *sys) {
+		sys->setNewController((Controller*)new AboutWindow(sys));
 	});
 
 	mySysgame->getUI()->AddWidget( (Widget*) background );
-	//mySysgame->getUI()->AddWidget( (Widget*) tablero );
 	mySysgame->getUI()->AddWidget( (Widget*) myButton);
+	mySysgame->getUI()->AddWidget( (Widget*) myButton2 );
+	mySysgame->getUI()->AddWidget( (Widget*) gameTitle );
+
 }
 
 void menuTest::onNetPack(string &package, map<string, string> &data) {

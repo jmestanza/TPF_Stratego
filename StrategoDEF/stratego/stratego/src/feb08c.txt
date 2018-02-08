@@ -1,0 +1,52 @@
+      44 text files.
+classified 44 files      44 unique files.                              
+      19 files ignored.
+
+http://cloc.sourceforge.net v 1.64  T=0.06 s (647.8 files/s, 45300.2 lines/s)
+-------------------------------------------------------------------------------------------------------------------
+File                                                                            blank        comment           code
+-------------------------------------------------------------------------------------------------------------------
+.\framework\view\allegro_manager\allegro_manager_BACKUP_2960.cpp                   28              8            275
+.\framework\view\allegro_manager\allegro_manager.cpp                               28              8            270
+.\framework\view\allegro_manager\allegro_manager_REMOTE_2960.cpp                   30              5            256
+.\framework\view\allegro_manager\allegro_manager_LOCAL_2960.cpp                    23              8            229
+.\framework\view\allegro_manager\allegro_manager_BASE_2960.cpp                     25              5            215
+.\framework\model\network\NetworkProtocol.cpp                                       5              2            117
+.\framework\model\network\NetworkManager.cpp                                        4              2             86
+.\framework\sysgame\sysgame.cpp                                                     8              1             84
+.\framework\view\widgets\Table.cpp                                                 19              5             72
+.\framework\view\allegro_manager\allegro_manager.h                                 12              4             65
+.\framework\model\network\Package.cpp                                               5              0             61
+.\framework\sysgame\sysgame.h                                                      18              4             48
+.\framework\view\widgets\text_button.cpp                                           21              0             48
+.\framework\view\widgets\naive_button.cpp                                           3              0             47
+.\game\controller\menu_test\menu_test.cpp                                          17              3             46
+.\framework\model\network\networkManager.h                                          8              3             44
+.\framework\view\gui\gui.cpp                                                        6              2             39
+.\framework\view\widgets\Table.h                                                    9              1             34
+.\framework\model\network\NetworkProtocol.h                                         5              0             33
+.\framework\model\network\Package.h                                                 6              2             30
+.\framework\view\widgets\widget.h                                                   5              0             29
+.\framework\view\gui\gui.h                                                          8              0             29
+.\framework\view\widgets\widget.cpp                                                 4              1             24
+.\framework\view\widgets\naive_button.h                                             5              1             24
+.\framework\view\widgets\text_button.h                                              3              0             21
+.\framework\controller\controller.h                                                 6              7             18
+.\framework\view\allegro_manager\show_objects\ShowObject.h                          7              2             17
+.\framework\view\allegro_manager\show_objects\showRectangle.h                       4              0             16
+.\framework\view\allegro_manager\show_objects\ShowObject.cpp                        3              0             16
+.\main.cpp                                                                          4              1             15
+.\framework\view\widgets\TableButton.cpp                                            4              1             15
+.\game\controller\menu_test\menu_test.h                                             6              0             14
+.\framework\view\allegro_manager\show_objects\showImage.h                           4              0             13
+.\framework\view\allegro_manager\show_objects\showRectangle.cpp                     4              1             12
+.\framework\view\widgets\background.cpp                                             5              0             12
+.\framework\view\widgets\background.h                                               3              0             11
+.\framework\view\widgets\TableButton.h                                              3              0             11
+.\framework\view\allegro_manager\show_objects\showImage.cpp                         5              0             10
+.\framework\view\utils\button_generator.h                                           1              0              8
+.\framework\view\utils\button_generator.cpp                                         2              1              4
+.\framework\controller\controller.cpp                                               1              0              4
+-------------------------------------------------------------------------------------------------------------------
+SUM:                                                                              367             78           2422
+-------------------------------------------------------------------------------------------------------------------

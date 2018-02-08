@@ -20,6 +20,7 @@ void UI::AddWidget(Widget *widget) {
 void UI::RemoveWidget(string name) {
 	if (widgets.find(name) != widgets.end()) {
 		widgets[name]->killMe();
+		widgets[name]->stopDrawing();
 		deadWidgets.push_back(name);
 	}
 }
@@ -39,9 +40,9 @@ void UI::HandleEvent(ALLEGRO_EVENT *ev) {
 	for (auto it = widgets.begin(); it != widgets.end(); it++) it->second->handleEvent(ev);
 }
 void UI::eraseAll() {
-	for (auto it = widgets.begin(); it != widgets.end(); it++) delete it->second;
-	widgets.clear();
+	for (auto it = widgets.begin(); it != widgets.end(); it++) RemoveWidget(it->first);
 }
 UI::~UI() {
-	for (auto it = widgets.begin(); it != widgets.end(); it++) delete it->second;
+	eraseAll();
+	refreshDead();
 }

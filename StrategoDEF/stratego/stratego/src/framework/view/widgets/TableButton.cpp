@@ -15,6 +15,9 @@ void TableButton::handleEvent(ALLEGRO_EVENT *ev) {
 void TableButton::startDrawing() {
 
 }
+void TableButton::stopDrawing() {
+
+}
 TableButton::~TableButton()
 {
 }

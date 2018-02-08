@@ -45,6 +45,9 @@ void NaiveButton::handleEvent(ALLEGRO_EVENT *ev) {
 void NaiveButton::onClick(void(*func)(Sysgame *)) {
 	onClickFunction = func;
 }
-NaiveButton::~NaiveButton() {
+void NaiveButton::stopDrawing() {
 	view->stopShow(myViewName);
+}
+NaiveButton::~NaiveButton() {
+	
 }

@@ -24,6 +24,7 @@ class NaiveButton : public Widget{
 
 		void handleEvent(ALLEGRO_EVENT *ev);
 		void startDrawing();
+		void stopDrawing();
 		virtual ~NaiveButton();
 };
 

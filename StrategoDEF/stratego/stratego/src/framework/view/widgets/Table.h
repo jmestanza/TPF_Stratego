@@ -39,6 +39,7 @@ public:
 	pair<int, char> WhoIsInRange(pair<float, float> _mousepos);
 	void handleEvent(ALLEGRO_EVENT *ev);
 	void startDrawing();
+	void stopDrawing();
 	~Table();
 };
 

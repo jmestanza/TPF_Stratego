@@ -81,6 +81,9 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		}
 	}
 }
+void Table::stopDrawing() {
+
+}
 Table::~Table()
 {
 

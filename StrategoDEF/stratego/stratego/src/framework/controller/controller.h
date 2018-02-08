@@ -9,6 +9,7 @@ en que lugares se van a encontrar los diferentes objetos graficos
 #include <map>
 #include <string>
 #include <framework\sysgame\sysgame.h>
+#include <framework\view\widgets\widget.h>
 #include <framework\view\allegro_manager\allegro_manager.h>
 #include <allegro5\allegro.h>
 
@@ -22,8 +23,11 @@ class Controller {
 		Controller(Sysgame *mySysgame);
 		
 		//void onEvent(ALLEGRO_EVENT *ev) = 0;  // handle ALLEGRO events
+		virtual void onCreate() = 0;
 		virtual void onNetPack(string &package,map<string,string> &data) = 0;  // handle NETWORK actions
 		virtual void onNetEvent(NETWORK_EVENT *ev) = 0;
+		virtual ~Controller();
+		void addWidget(Widget *w);
 
 	protected:
 		Sysgame* mySysgame;

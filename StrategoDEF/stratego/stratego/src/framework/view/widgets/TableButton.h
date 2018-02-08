@@ -9,6 +9,7 @@ public:
 	string default_img;
 	void handleEvent(ALLEGRO_EVENT *ev);
 	void startDrawing();
+	void stopDrawing();
 	~TableButton();
 };
 

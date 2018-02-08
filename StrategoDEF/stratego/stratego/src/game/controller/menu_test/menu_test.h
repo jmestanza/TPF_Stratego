@@ -12,6 +12,7 @@ class menuTest : public Controller{
 	public:
 		int value;
 		menuTest(Sysgame *sys);
+		void onCreate();
 		void onNetPack(string &package, map<string, string> &data);  // handle NETWORK actions
 		void onNetEvent(NETWORK_EVENT *ev);
 

@@ -1,3 +1,4 @@
+#include <framework\utils\random_number.h>
 #include "sysgame.h"
 
 NETWORK_EVENT::NETWORK_EVENT(string _msg) : msg(_msg){}
@@ -35,7 +36,7 @@ void NetContInt::onSent() {
 NetContInt::~NetContInt() {
 
 }
-Sysgame::Sysgame() : network(&service){
+Sysgame::Sysgame() : network(&service) {
 	network.setSysgamePointer(this);
 	controller = nullptr;
 	_quit = 0;
@@ -45,11 +46,17 @@ Sysgame::Sysgame() : network(&service){
 		view->loadConfFile("resource/game_config.xml");
 	} catch (AllegroHandlerException &e) {
 		cout << "warning: coudn't load config file \n";
+		cout << "info:" << e.what() << '\n';
 	}
 	view->start();
-	view->loadImgFile("resource/images.xml");
-	view->loadFontFile("resource/fonts.xml");
-	view->loadAudioFile("resource/audios.xml");
+	try {
+		view->loadImgFile("resource/images.xml");
+		view->loadFontFile("resource/fonts.xml");
+		view->loadAudioFile("resource/audios.xml");
+	} catch (AllegroHandlerException &e) {
+		cout << "could't load data files \n";
+		cout << "info: " << e.what() << '\n';
+	}
 }
 void Sysgame::Quit() {
 	_quit = 1;
@@ -69,7 +76,9 @@ Sysgame::~Sysgame() {
 
 void Sysgame::setNewController(Controller *_contr) {
 	delete controller;
+	ui->eraseAll();
 	controller = _contr;
+	controller->onCreate();
 }
 
 void Sysgame::update() {

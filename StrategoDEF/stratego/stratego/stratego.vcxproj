@@ -147,17 +147,22 @@
     <ClCompile Include="src\framework\model\network\NetworkProtocol.cpp" />
     <ClCompile Include="src\framework\model\network\Package.cpp" />
     <ClCompile Include="src\framework\sysgame\sysgame.cpp" />
+    <ClCompile Include="src\framework\utils\random_number.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\allegro_manager.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showImage.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp" />
     <ClCompile Include="src\framework\view\gui\gui.cpp" />
+    <ClCompile Include="src\framework\view\utils\good_buttons.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
+    <ClCompile Include="src\framework\view\widgets\screen_text.cpp" />
     <ClCompile Include="src\framework\view\widgets\Table.cpp" />
     <ClCompile Include="src\framework\view\widgets\TableButton.cpp" />
     <ClCompile Include="src\framework\view\widgets\text_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
+    <ClCompile Include="src\game\controller\aboutWindow\aboutWindow.cpp" />
+    <ClCompile Include="src\game\controller\defaultMenu\defaultMenu.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -167,17 +172,22 @@
     <ClInclude Include="src\framework\model\network\NetworkProtocol.h" />
     <ClInclude Include="src\framework\model\network\Package.h" />
     <ClInclude Include="src\framework\sysgame\sysgame.h" />
+    <ClInclude Include="src\framework\utils\random_number.h" />
     <ClInclude Include="src\framework\view\allegro_manager\allegro_manager.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showImage.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h" />
     <ClInclude Include="src\framework\view\gui\gui.h" />
+    <ClInclude Include="src\framework\view\utils\good_buttons.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
+    <ClInclude Include="src\framework\view\widgets\screen_text.h" />
     <ClInclude Include="src\framework\view\widgets\Table.h" />
     <ClInclude Include="src\framework\view\widgets\TableButton.h" />
     <ClInclude Include="src\framework\view\widgets\text_button.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
+    <ClInclude Include="src\game\controller\aboutWindow\aboutWindow.h" />
+    <ClInclude Include="src\game\controller\defaultMenu\defaultMenu.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
   </ItemGroup>
   <ItemGroup>

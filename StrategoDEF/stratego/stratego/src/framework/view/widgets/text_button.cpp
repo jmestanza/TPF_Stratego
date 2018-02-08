@@ -2,15 +2,15 @@
 #include "text_button.h"
 
 #include <allegro5\allegro_primitives.h>
+#include <framework\utils\random_number.h>
 
 imgGroup::imgGroup(string _a,string _b,string _c) : img_a(_a),img_b(_b),img_c(_c) {
 
 }
 textButton::textButton(Sysgame* sys,string name) : NaiveButton(sys,name) {
-	mt19937 g1(std::chrono::system_clock::now().time_since_epoch().count());
-	n1 = g1();
-	n2 = g1();
-	n3 = g1();
+	n1 = randomNumber();
+	n2 = randomNumber();
+	n3 = randomNumber();
 }
 
 void blitCentered(ALLEGRO_FONT *font,string msg,ALLEGRO_COLOR color,ALLEGRO_BITMAP *bitmap) {
@@ -50,7 +50,8 @@ void textButton::generate(string msg, imgGroup img , pair<float,float> pos,int c
 	blitCentered(getViewer()->getFont("roboto_v1"),msg,al_map_rgb(255,255,255),a);
 	blitCentered(getViewer()->getFont("roboto_v1"),msg,al_map_rgb(255,255,255),b);
 	blitCentered(getViewer()->getFont("roboto_v1"),msg,al_map_rgb(255,255,255),c);
-	
+	//cout << n1 << ' ' << n2 << ' ' << n3 << '\n';
+
 	string a_code = "text_button_" + to_string(n1);
 	string b_code = "text_button_" + to_string(n2);
 	string c_code = "text_button_" + to_string(n3);

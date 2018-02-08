@@ -26,6 +26,7 @@ class Widget {
 		string getName();
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;
 		virtual void startDrawing() = 0;
+		virtual void stopDrawing() = 0;
 		virtual ~Widget();
 		Viewer *getViewer();
 		Sysgame *getSysgame();

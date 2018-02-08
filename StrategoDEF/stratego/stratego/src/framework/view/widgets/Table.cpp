@@ -53,7 +53,9 @@ pair<int, char> Table::WhoIsInRange(pair<float, float> _mousepos)
 	}
 
 }
+void Table::startDrawing() {
 
+}
 void Table::handleEvent(ALLEGRO_EVENT *ev) {
 
 	if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {

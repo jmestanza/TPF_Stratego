@@ -1,7 +1,7 @@
 #include "ShowObject.h"
 
 
-ShowObject::ShowObject(){
+ShowObject::ShowObject(Viewer *_view) : view(_view){
 	sizeSet = 0;
 }
 void ShowObject::setPosition(pair<float, float> position,bool centered) {

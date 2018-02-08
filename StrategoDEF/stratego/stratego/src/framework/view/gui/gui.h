@@ -21,10 +21,12 @@ class UIException : public exception {
 class UI {
 	private:
 		map <string, Widget*> widgets;
+		vector <string> deadWidgets;
 	public:
 		UI();
 		void loadFromXML(string filename);
 		void eraseAll();
+		void refreshDead();
 		void AddWidget(Widget* widget);
 		void HandleEvent(ALLEGRO_EVENT *ev);
 		void RemoveWidget(string WidgetName);

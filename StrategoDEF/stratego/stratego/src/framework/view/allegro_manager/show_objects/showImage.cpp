@@ -2,7 +2,7 @@
 
 
 
-ShowImage::ShowImage() {}
+ShowImage::ShowImage(Viewer *_view) : ShowObject(_view) {}
 
 void ShowImage::setImage(ALLEGRO_BITMAP *img) {
 	image = img;

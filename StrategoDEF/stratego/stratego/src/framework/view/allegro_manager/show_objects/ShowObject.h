@@ -2,7 +2,11 @@
 
 #include <vector>
 #include <allegro5/allegro.h>
+
 using namespace std;
+
+class Viewer;
+
 
 class ShowObject {
 /**ShowObject:
@@ -10,9 +14,12 @@ class ShowObject {
 	protected:
 		bool sizeSet;
 		pair<float, float> pos,size;
+		Viewer *view;
+
 	public:
-		ShowObject();
+		ShowObject(Viewer *_view);
 		~ShowObject();
+		
 		void setSize(pair<float, float> size);
 		void setPosition(pair<float, float> pos,bool centered);
 		virtual void draw() = 0;

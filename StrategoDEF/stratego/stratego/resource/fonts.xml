@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fonts>
   <font name="Fredoka" dir ="Fredoka Fonts\Fredoka dingbats.ttf" size="20"></font>
+  <font name="roboto_v1" dir="roboto\robotottf\Roboto-Regular.ttf" size="20"></font>
 </fonts>

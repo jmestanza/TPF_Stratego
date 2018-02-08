@@ -10,15 +10,19 @@
 using namespace std;
 
 class NaiveButton : public Widget{
-	private:
+	protected:
 		string img_a,img_b,img_c;
 		string myViewName;
-		void(*onClick)();
+		int mx,my;
+		void(*onClickFunction)(Sysgame *);
 	public:
 		NaiveButton(Sysgame *sys, string name);
 		void start(pair<float, float> _pos, int centered, string _img_a, string _img_b, string _img_c);
 		//void ON
+		void onClick(void(*func)(Sysgame *));
+
 		void handleEvent(ALLEGRO_EVENT *ev);
+		void startDrawing();
 		virtual ~NaiveButton();
 };
 

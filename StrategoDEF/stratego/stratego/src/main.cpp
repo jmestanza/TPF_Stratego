@@ -13,8 +13,8 @@ int main() {
 
 		while (!sys.quit()) sys.update();
 	} catch (exception &e) {
-		cout << "A fatal error occurred and the program needed to stop \n";
-		cout << "Reason: " << e.what() << '\n';
+		cerr << "A fatal error occurred and the program needed to stop \n";
+		cerr << "Reason: " << e.what() << '\n';
 		getchar();
 	}
 }

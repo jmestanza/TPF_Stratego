@@ -50,7 +50,9 @@ Sysgame::Sysgame() : network(&service){
 	view->loadImgFile("resource/images.xml");
 	view->loadFontFile("resource/fonts.xml");
 }
-
+void Sysgame::Quit() {
+	_quit = 1;
+}
 Controller *Sysgame::getController() {
 	return controller;
 }
@@ -78,9 +80,9 @@ void Sysgame::update() {
 		}
 		ui->HandleEvent(&ev);
 	}
+	ui->refreshDead();
 	view->draw();
 	service.poll();
-	
 }
 bool Sysgame::quit() {
 	return _quit;

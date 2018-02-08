@@ -9,6 +9,9 @@ Background::Background(Sysgame *sysgame,string name,tuple<uc,uc,uc> color,pair<f
 void Background::handleEvent(ALLEGRO_EVENT *ev) {
 
 }
+void Background::startDrawing() {
+
+}
 Background::~Background() {
 	mySysgame->getAllegroHandler()->stopShow(name);
 }

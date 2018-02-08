@@ -9,6 +9,7 @@ en que lugares se van a encontrar los diferentes objetos graficos
 #include <map>
 #include <string>
 #include <framework\sysgame\sysgame.h>
+#include <framework\view\allegro_manager\allegro_manager.h>
 #include <allegro5\allegro.h>
 
 using namespace std;
@@ -26,4 +27,5 @@ class Controller {
 
 	protected:
 		Sysgame* mySysgame;
+		Viewer* view;
 };

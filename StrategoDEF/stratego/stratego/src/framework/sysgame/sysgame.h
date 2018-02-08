@@ -50,6 +50,8 @@ class Sysgame {
 		Viewer *getAllegroHandler();
 		void update(); // handle all neccesary updates
 		void setNewController(Controller *newController);
+		void Quit();
+
 		UI *getUI();
 	
 		bool quit();

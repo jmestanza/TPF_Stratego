@@ -17,11 +17,18 @@ class Widget {
 		Viewer* view;
 		Sysgame* mySysgame;
 		int id;
+		bool _killMe;
 	public:
 		Widget(Sysgame *sys,string name);
+		bool getKillMe();
+		void killMe();
+
 		string getName();
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;
+		virtual void startDrawing() = 0;
 		virtual ~Widget();
+		Viewer *getViewer();
+		Sysgame *getSysgame();
 };
 
 #endif

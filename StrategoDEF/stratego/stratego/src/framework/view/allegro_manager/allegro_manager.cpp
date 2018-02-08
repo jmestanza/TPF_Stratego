@@ -6,6 +6,7 @@
 #include "allegro5\allegro_acodec.h"
 #include "allegro5\allegro_audio.h"
 #include "allegro5\allegro_image.h"
+#include "allegro5\allegro_ttf.h"
 
 #include <map>
 #include <iostream>
@@ -40,8 +41,10 @@ void allegro_init(void) {
 	if (!al_install_audio()) throw AllegroHandlerException("could not start allegro audio");
 	if (!al_init_acodec_addon()) throw AllegroHandlerException("could not start allegro acodec addon");
 	if (!al_reserve_samples(1)) throw AllegroHandlerException("could not start allegro reserve samples");
-	if (!al_install_mouse()) throw AllegroHandlerException("could not install mosue");
+	if (!al_install_mouse()) throw AllegroHandlerException("could not install mouse");
 	if (!al_init_primitives_addon()) throw AllegroHandlerException("could not start primitives addon");
+	if (!al_init_font_addon()) throw AllegroHandlerException("could not start font addon");
+	if (!al_init_ttf_addon()) throw AllegroHandlerException("could not start ttf addon");
 }
 Viewer::Viewer() {
 	_debug = 0;
@@ -135,7 +138,7 @@ void Viewer::loadFontFile(string xmlFile) {
 				throw AllegroHandlerException("Invalid font xml file, invalid name-size-dir count");
 			}
 			string name = it->second.get<string>("<xmlattr>.name");
-			string dir = it->second.get<string>("<xmlattr>.size");
+			string dir = it->second.get<string>("<xmlattr>.dir");
 			string sSize = it->second.get<string>("<xmlattr>.size");
 			int size;
 			try {
@@ -143,7 +146,7 @@ void Viewer::loadFontFile(string xmlFile) {
 			} catch (invalid_argument &e) {
 				throw AllegroHandlerException("Invalid font size\n");
 			}
-			this->loadFont(dir,name,size);
+			this->loadFont("resource/fonts/"+dir,name,size);
 		}
 	}
 		
@@ -154,15 +157,27 @@ void Viewer::load(string dir, string name) {
 	
 	loaded[name] = image;
 }
+void Viewer::loadFromBitmap(ALLEGRO_BITMAP *b,string name) {
+	if (loaded.find(name) != loaded.end()) {
+		throw AllegroHandlerException("tring to load image with repeated name! , '"+name+"'");
+	}
+	loaded[name] = b;
+}
+
 void Viewer::loadFont(string dir, string name,int size) {
 	if (fonts.find(name) != fonts.end()) {
 		throw AllegroHandlerException("font name '"+name+"' repeated");
 	}
-	fonts[name] = al_load_font(dir.c_str(),size,0);
+	ALLEGRO_FONT* font_test = al_load_ttf_font(dir.c_str(),size,0);
+	if (!font_test) throw AllegroHandlerException("could not load font '"+dir+"'");
+	fonts[name] = font_test;
 }
 ALLEGRO_FONT* Viewer::getFont(string name) {
+	/*for (auto it = fonts.begin();it != fonts.end();it++) {
+		cout << "font = " << it->first << '\n';
+	}*/
 	if (fonts.find(name) == fonts.end()) {
-		throw AllegroHandlerException("font name '"+name+" not found'");
+		throw AllegroHandlerException("font name '"+name+"' not found'");
 	}
 	return fonts[name];
 }
@@ -193,14 +208,11 @@ void Viewer::draw() {
 	al_flip_display();
 }
 
-
-
-
 void Viewer::show(string imageName, string showName, float x, float y) {
 
 	if ((loaded.find(imageName) == loaded.end())) throw AllegroHandlerException("Trying to show something that is not in memory");
 	
-	ShowImage *nueva = new ShowImage();
+	ShowImage *nueva = new ShowImage(this);
 	nueva->setPosition(pair<float, float>(x, y), 0);
 	nueva->setImage(loaded[imageName]);
 	frontShow[showName] = (ShowObject*)nueva;
@@ -209,7 +221,7 @@ void Viewer::show(string imageName, string showName, float x, float y) {
 }
 void Viewer::showRectangle(string showName, unsigned char r, unsigned char g, unsigned char b, pair<float, float> pos, pair<float, float> size,bool centered) {
 	
-	ShowRectangle *nuevo = new ShowRectangle();
+	ShowRectangle *nuevo = new ShowRectangle(this);
 	nuevo->setPosition(pos,centered);
 	nuevo->setColor(r,g,b);
 	nuevo->setSize(size);
@@ -234,6 +246,9 @@ void Viewer::destroyAll() {
 }
 bool Viewer::getNextEvent(ALLEGRO_EVENT *ev) {	
 	return al_get_next_event(q,ev);
+}
+ALLEGRO_DISPLAY *Viewer::getScreen() {
+	return display;
 }
 Viewer::~Viewer() {
 	for (auto it = loaded.begin(); it != loaded.end(); it++) al_destroy_bitmap(it->second);

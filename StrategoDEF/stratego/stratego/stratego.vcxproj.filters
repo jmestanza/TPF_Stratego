@@ -71,6 +71,9 @@
     <Filter Include="src\framework\controller\model\network">
       <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resource\fonts">
+      <UniqueIdentifier>{2bc66cce-762d-465b-a7de-358c7ee49def}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -112,9 +115,6 @@
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp">
       <Filter>src\framework\view\allegro_manager\show_objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
-    </ClCompile>
     <ClCompile Include="src\framework\view\widgets\background.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
@@ -126,6 +126,9 @@
     </ClCompile>
     <ClCompile Include="src\framework\view\widgets\Table.cpp">
       <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +168,6 @@
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h">
       <Filter>src\framework\view\allegro_manager\show_objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
-    </ClInclude>
     <ClInclude Include="src\framework\view\widgets\background.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
@@ -180,6 +180,9 @@
     <ClInclude Include="src\framework\view\widgets\Table.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
+    <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h">
+      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -191,11 +194,25 @@
     <Xml Include="resource\game_config.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="fonts.xml">
-      <Filter>resource</Filter>
-    </Xml>
     <Xml Include="resource\images.xml">
       <Filter>resource</Filter>
     </Xml>
+    <Xml Include="resource\fonts.xml">
+      <Filter>resource</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf">
+      <Filter>resource\fonts</Filter>
+    </Font>
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Bold.ttf">
+      <Filter>resource\fonts</Filter>
+    </Font>
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Light.ttf">
+      <Filter>resource\fonts</Filter>
+    </Font>
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Regular.ttf">
+      <Filter>resource\fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

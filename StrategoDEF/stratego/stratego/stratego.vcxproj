@@ -184,10 +184,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="fonts.xml" />
+    <Xml Include="resource\fonts.xml" />
     <Xml Include="resource\game_config.xml" />
     <Xml Include="resource\images.xml" />
     <Xml Include="resource\protocol.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf" />
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Bold.ttf" />
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Light.ttf" />
+    <Font Include="resource\fonts\roboto\robotottf\Roboto-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

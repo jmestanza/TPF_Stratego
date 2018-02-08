@@ -12,7 +12,9 @@ TableButton::TableButton(string _def_img, pair<float, float> _pos, pair<float, f
 void TableButton::handleEvent(ALLEGRO_EVENT *ev) {
 
 }
+void TableButton::startDrawing() {
 
+}
 TableButton::~TableButton()
 {
 }

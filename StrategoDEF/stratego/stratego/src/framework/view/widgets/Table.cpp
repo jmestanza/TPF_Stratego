@@ -1,14 +1,5 @@
 #include "Table.h"
 
-ostream& operator<< (ostream& os, map<string, string>&content) {
-	cout << "{";
-	for (auto it = content.begin(); it != content.end(); it++) {
-		cout << it->first << ":" << it->second;
-		if (it != prev(content.end())) cout << ",";
-	}
-	cout << "}";
-	return os;
-}
 Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,float> _screen_center,pair<float,float>_pieceSize):Widget(Sys, _name)
 {
 /*
@@ -32,7 +23,6 @@ if (1) {  throw TableException("hubo un error");	}
 			string aux_name = "button" + to_string(i) + char( 'A'+j );
 			t_table.push_back(TableButton(_img_a, aux_pos, size, Sys , aux_name));
 			ind_table[pair<int, char>(i, 'A' + j)] = t_table.size()-1;
-			cout << "AUXPOS:" <<  aux_pos.first << " " << aux_pos.second << endl;
 			view->show(_img_a,aux_name, aux_pos.first, aux_pos.second);
 		}
 	}
@@ -49,7 +39,7 @@ pair<int, char> Table::WhoIsInRange(pair<float, float> _mousepos)
 		return pair<int, char>(hor, vert);
 	}
 	else {
-		return pair<int, char>(10000, 'Z'); // no esta en el mapa
+		return pair<int, char>(INT_OUT_OF_RANGE,CHAR_OUT_OF_RANGE); // no esta en el mapa
 	}
 
 }
@@ -74,15 +64,21 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 	}
 	else if (status == BUTTON_DOWN) {
 		pair<int, char> TheChosenOne = WhoIsInRange(pair<float, float>(pos_x, pos_y));
-		cout << "INT: " << TheChosenOne.first << "CHAR: " << TheChosenOne.second << endl;
 		string aux_Chosen = "button" + to_string(TheChosenOne.first) + TheChosenOne.second ;
+		
 		try {
+			if(TheChosenOne != pair<int,char>(INT_OUT_OF_RANGE,CHAR_OUT_OF_RANGE))
 			view->changeShowImg(aux_Chosen, img_b);
 		}
 		catch (exception &e) {
 			cout << e.what() << endl;
 		}
 
+		try {
+			view->playonce("sonic");
+		} catch (exception &e) {
+			cout << e.what() << endl;
+		}
 	}
 }
 Table::~Table()

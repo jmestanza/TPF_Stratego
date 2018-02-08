@@ -184,7 +184,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Xml Include="resource\fonts.xml" />
+=======
+    <Xml Include="audios.xml" />
+    <Xml Include="fonts.xml" />
+>>>>>>> joaco
     <Xml Include="resource\game_config.xml" />
     <Xml Include="resource\images.xml" />
     <Xml Include="resource\protocol.xml" />

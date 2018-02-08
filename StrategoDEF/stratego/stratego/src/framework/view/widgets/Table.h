@@ -7,6 +7,8 @@
 #include <iostream>
 
 #define TABLE_SLOTS 10
+#define INT_OUT_OF_RANGE 10000
+#define CHAR_OUT_OF_RANGE 'Z'
 
 enum { IDLE, BUTTON_DOWN, BUTTON_UP };
 

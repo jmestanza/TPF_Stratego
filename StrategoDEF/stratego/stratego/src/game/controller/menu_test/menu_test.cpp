@@ -26,7 +26,11 @@ menuTest::menuTest(Sysgame *_sys) : Controller(_sys){
 	myButton->generate("PRESS",g_blue(),pair<float,float>(width/2,height*3/4),1);
 
 	myButton->onClick([](Sysgame *sys) {
-		((menuTest*)sys->getController())->value ++;
+		
+		sys->getAllegroHandler()->playonce("sonic");
+		
+		
+		/*((menuTest*)sys->getController())->value ++;
 		textButton *myButtonB = new textButton(sys,"button_"+to_string(  ((menuTest*)sys->getController())->value ));
 
 		pair<float,float> size = sys->getAllegroHandler()->getScreenSize();
@@ -40,7 +44,7 @@ menuTest::menuTest(Sysgame *_sys) : Controller(_sys){
 			cout << "hello world \n";
 		});
 
-		sys->getUI()->AddWidget( (Widget*)myButtonB);
+		sys->getUI()->AddWidget( (Widget*)myButtonB);*/
 
 	});
 

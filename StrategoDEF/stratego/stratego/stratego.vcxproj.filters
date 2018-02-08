@@ -200,9 +200,6 @@
     <Xml Include="resource\fonts.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="audios.xml">
-      <Filter>resource</Filter>
-    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf">

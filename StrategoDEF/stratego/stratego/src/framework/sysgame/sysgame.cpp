@@ -49,6 +49,7 @@ Sysgame::Sysgame() : network(&service){
 	view->start();
 	view->loadImgFile("resource/images.xml");
 	view->loadFontFile("resource/fonts.xml");
+	view->loadAudioFile("resource/audios.xml");
 }
 
 Controller *Sysgame::getController() {

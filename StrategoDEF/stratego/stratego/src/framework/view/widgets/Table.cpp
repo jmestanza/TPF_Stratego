@@ -72,6 +72,11 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 			cout << e.what() << endl;
 		}
 
+		try {
+			view->playonce("sonic");
+		} catch (exception &e) {
+			cout << e.what() << endl;
+		}
 	}
 }
 Table::~Table()

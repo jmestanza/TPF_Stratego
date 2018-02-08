@@ -197,5 +197,8 @@
     <Xml Include="resource\images.xml">
       <Filter>resource</Filter>
     </Xml>
+    <Xml Include="audios.xml">
+      <Filter>resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

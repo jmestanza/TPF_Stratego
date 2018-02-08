@@ -39,7 +39,7 @@ void allegro_init(void) {
 	if (!al_init_image_addon()) throw AllegroHandlerException("could not start allegro image");
 	if (!al_install_audio()) throw AllegroHandlerException("could not start allegro audio");
 	if (!al_init_acodec_addon()) throw AllegroHandlerException("could not start allegro acodec addon");
-	if (!al_reserve_samples(1)) throw AllegroHandlerException("could not start allegro reserve samples");
+	if (!al_reserve_samples(2)) throw AllegroHandlerException("could not start allegro reserve samples");
 	if (!al_install_mouse()) throw AllegroHandlerException("could not install mosue");
 	if (!al_init_primitives_addon()) throw AllegroHandlerException("could not start primitives addon");
 }
@@ -119,6 +119,31 @@ void Viewer::loadImgFile(string xmlFile) {
 		}
 	}
 }
+void Viewer::loadAudioFile(string xmlFile) {
+	cout << xmlFile << endl;
+	ptree pt;
+	get_xml_content(pt,xmlFile);
+	cout << pt.count("audios") << endl;
+	if (pt.count("audios") != 1) {
+		throw AllegroHandlerException("Error in xml file, wrong amount of audio tag in '" + xmlFile + "'");
+	}
+	ptree content = pt.get_child("audios");
+	for (auto it = content.begin(); it != content.end(); ++it) {
+		if (it->first == "audio") {
+			if (it->second.get_child("<xmlattr>").count("name") != 1) {
+				throw AllegroHandlerException("Invalid protocol xml file, invalid count 'name'");
+			} else if (it->second.get_child("<xmlattr>").count("dir") != 1) {
+				throw AllegroHandlerException("Invalid protocol xml file, invalid count 'dir'");
+			}
+			string name = it->second.get<string>("<xmlattr>.name");
+			string dir = it->second.get<string>("<xmlattr>.dir");
+
+			this->loadAudio("resource/audio/" + dir,name);
+			
+		}
+	}
+
+}
 void Viewer::loadFontFile(string xmlFile) {
 	ptree pt;
 	get_xml_content(pt,xmlFile);
@@ -148,10 +173,18 @@ void Viewer::loadFontFile(string xmlFile) {
 	}
 		
 }
+void Viewer::loadAudio(string dir,string name){
+	ALLEGRO_SAMPLE* sample = al_load_sample(dir.c_str());
+	if (!sample) throw AllegroHandlerException("unable to load audio '" + dir + "'");
+	loadedAudio[name] = sample;
+	ALLEGRO_SAMPLE_INSTANCE *instance = al_create_sample_instance(sample);
+	if(!instance) throw AllegroHandlerException("unable to create sample instance");
+	AudioInstances[name] = instance;
+	al_attach_sample_instance_to_mixer(AudioInstances[name],al_get_default_mixer());
+}
 void Viewer::load(string dir, string name) {
 	ALLEGRO_BITMAP* image = al_load_bitmap(dir.c_str());
 	if (!image) throw AllegroHandlerException("unable to load image '"+dir+"'");
-	
 	loaded[name] = image;
 }
 void Viewer::loadFont(string dir, string name,int size) {
@@ -216,6 +249,19 @@ void Viewer::showRectangle(string showName, unsigned char r, unsigned char g, un
 	frontShow[showName] = (ShowObject*)nuevo;
 	drawOrder.push_back(showName);
 }
+void Viewer::playloop(string song) {	
+	if ((AudioInstances.find(song) == AudioInstances.end())) throw AllegroHandlerException("Trying to play something that is not in memory");
+	al_set_sample_instance_playmode(AudioInstances[song],ALLEGRO_PLAYMODE_LOOP);
+	al_play_sample_instance(AudioInstances[song]);
+}
+
+void Viewer::playonce(string song) {
+	if ((AudioInstances.find(song) == AudioInstances.end())) throw AllegroHandlerException("Trying to play something that is not in memory");
+	al_set_sample_instance_playmode(AudioInstances[song],ALLEGRO_PLAYMODE_ONCE);
+	al_play_sample_instance(AudioInstances[song]);
+}
+
+
 void Viewer::changeShowImg(string showName, string newImageName) {
 	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 1)");
 	if (frontShow.find(showName) == frontShow.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 2)");

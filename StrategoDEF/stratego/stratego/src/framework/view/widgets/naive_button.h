@@ -15,6 +15,7 @@ class NaiveButton : public Widget{
 		string myViewName;
 		int mx,my;
 		void(*onClickFunction)(Sysgame *);
+		int _clicked;
 	public:
 		NaiveButton(Sysgame *sys, string name);
 		void start(pair<float, float> _pos, int centered, string _img_a, string _img_b, string _img_c);

@@ -18,7 +18,7 @@ class textButton : public NaiveButton {
 		int n1,n2,n3;
 	public:
 		textButton(Sysgame* sys, string name);
-		void generate(string msg,imgGroup img,pair<float,float> pos);
+		void generate(string msg,imgGroup img,pair<float,float> pos,int centered);
 		virtual ~textButton();
 };
 

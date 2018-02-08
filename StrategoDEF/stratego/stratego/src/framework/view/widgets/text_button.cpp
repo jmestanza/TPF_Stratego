@@ -27,7 +27,7 @@ void blitCentered(ALLEGRO_FONT *font,string msg,ALLEGRO_COLOR color,ALLEGRO_BITM
 		al_map_rgb(255,255,255), int(width / 2.0),int(height / 2.0- (bbh+bby)/2.0-2.0) ,ALLEGRO_ALIGN_CENTRE,
 		msg.c_str());
 }
-void textButton::generate(string msg, imgGroup img , pair<float,float> pos) {
+void textButton::generate(string msg, imgGroup img , pair<float,float> pos,int centered) {
 
 
 	float width = al_get_bitmap_width(getSysgame()->getAllegroHandler()->getImg(img.img_a));
@@ -61,7 +61,7 @@ void textButton::generate(string msg, imgGroup img , pair<float,float> pos) {
 	getViewer()->loadFromBitmap(c,c_code);
 	
 
-	this->start(pos,1,a_code,b_code,c_code);
+	this->start(pos,centered,a_code,b_code,c_code);
 	al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
 }
 

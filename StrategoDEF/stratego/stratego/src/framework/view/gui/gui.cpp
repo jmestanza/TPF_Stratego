@@ -12,8 +12,10 @@ UI::UI() {}
 
 void UI::AddWidget(Widget *widget) {
 	if (widgets.find(widget->getName()) != widgets.end()) throw UIException("trying to add to widgets with the same name");
-	widgets[widget->getName()] = widget;
-	widget->startDrawing();
+	addWidgets.push_back(widget);
+	
+	//widgets[widget->getName()] = widget;
+	//widget->startDrawing();
 }
 void UI::RemoveWidget(string name) {
 	if (widgets.find(name) != widgets.end()) {
@@ -22,6 +24,11 @@ void UI::RemoveWidget(string name) {
 	}
 }
 void UI::refreshDead() {
+	for (int i = 0;i < addWidgets.size();i++) {
+		widgets[addWidgets[i]->getName()] = addWidgets[i];
+		widgets[addWidgets[i]->getName()]->startDrawing();
+	}
+	addWidgets.clear();
 	for (int i = 0;i < deadWidgets.size();i++) {
 		delete widgets[deadWidgets[i]];
 		widgets.erase(deadWidgets[i]);

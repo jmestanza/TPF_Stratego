@@ -22,6 +22,7 @@ class UI {
 	private:
 		map <string, Widget*> widgets;
 		vector <string> deadWidgets;
+		vector <Widget*> addWidgets;
 	public:
 		UI();
 		void loadFromXML(string filename);

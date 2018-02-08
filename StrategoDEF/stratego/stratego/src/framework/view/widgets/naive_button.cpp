@@ -6,6 +6,7 @@
 using namespace std;
 
 NaiveButton::NaiveButton(Sysgame *sys, string name) : Widget(sys,name){
+	onClickFunction = nullptr;
 }
 
 void NaiveButton::start(pair<float, float> _pos, int centered, string _img_a, string _img_b,string _img_c){
@@ -13,11 +14,11 @@ void NaiveButton::start(pair<float, float> _pos, int centered, string _img_a, st
 	myViewName = "button_" + name;
 	ALLEGRO_BITMAP* myBitMap = view->getImg(img_a);
 	this->size = pair<float,float>( al_get_bitmap_width(myBitMap) , al_get_bitmap_height(myBitMap) );
+	pos = _pos;
 	if (centered) {
 		pos.first -= this->size.first/2;
 		pos.second -= this->size.second/2;
 	}
-	pos = _pos;
 }
 void NaiveButton::startDrawing() {
 	view->show(img_a,myViewName,pos.first,pos.second);
@@ -27,11 +28,15 @@ void NaiveButton::handleEvent(ALLEGRO_EVENT *ev) {
 		if (mx >= this->pos.first && mx <= this->pos.first + this->size.first) {
 			if (my >= this->pos.second && my <= this->pos.second + this->size.second) {
 				view->changeShowImg(myViewName,img_b);
+				_clicked = 1;
 			}
 		}
 	}else if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
 		view->changeShowImg(myViewName, img_a);
-		onClickFunction(this->mySysgame);
+		if (_clicked) {
+			if (onClickFunction) onClickFunction(this->mySysgame);
+			_clicked = 0;
+		}
 	} else if (ev->type == ALLEGRO_EVENT_MOUSE_AXES) {
 		mx = ev->mouse.x;
 		my = ev->mouse.y;

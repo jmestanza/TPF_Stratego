@@ -25,13 +25,14 @@ void blitCentered(ALLEGRO_FONT *font,string msg,ALLEGRO_COLOR color,ALLEGRO_BITM
 		&bbx,&bby,&bbw,&bbh);
 
 	int px = (width / 2 - (bbx + bbw) / 2);
-	int py = (height / 2 - (bby + bbh) / 2);
+	int py = (height / 2 - (bby + bbh) / 2) - 2;
 	//px = px / 5 * 5;
 	//py = py / 5 * 5;
 	//cout << px << ' ' << py << '\n';
 	al_draw_text(font,
 		al_map_rgb(255, 255, 255),width/2,py,ALLEGRO_ALIGN_CENTER,
 		msg.c_str());
+
 }
 void setAntialias() {
 	al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);

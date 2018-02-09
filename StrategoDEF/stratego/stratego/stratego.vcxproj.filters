@@ -157,6 +157,12 @@
     <ClCompile Include="src\framework\view\widgets\TextInput.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\utils\copyBitmap.cpp">
+      <Filter>src\framework\view\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\utils\getKey.cpp">
+      <Filter>src\framework\view\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -230,6 +236,12 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\TextInput.h">
       <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\utils\copyBitmap.h">
+      <Filter>src\framework\view\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\utils\getKey.h">
+      <Filter>src\framework\view\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

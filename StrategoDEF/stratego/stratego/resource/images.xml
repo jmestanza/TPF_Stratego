@@ -13,4 +13,5 @@
   <image name="button_big_green_b" dir="buttons/bigger_buttons/green/green_b.png"></image>
   <image name="text_input"     dir="textInput/textInput.png"></image>
   <image name="icon_worldwide" dir="icons/worldwide.png"></image>
+  <image name="icon_networking" dir="icons/networking.png"></image>
 </images>

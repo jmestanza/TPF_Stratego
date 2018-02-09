@@ -21,11 +21,12 @@ void ConnectMenu::onCreate() {
 
 	screenText *text = new screenText(mySysgame, "text_connect");
 	text->configure(
-		"Juego en red", "Akrobat", view->getColor("black"), pair<float, float>(10, 10), 0);
+		"JUEGO EN RED", "roboto_v1", view->getColor("black"), pair<float, float>(10, 10), 0);
 	
 	TextInput *input = new TextInput(mySysgame, "input");
 	input->configure(pair<float, float>(screenSize.first / 8 * 3, screenSize.second / 2),1);
 	input->addIcon("icon_worldwide");
+	input->addSmallText("Enter IP Adress");
 
 	TextButton *connectButton = new TextButton(mySysgame, "connect_button");
 	connectButton->generate(

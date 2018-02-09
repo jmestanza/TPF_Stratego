@@ -1,4 +1,6 @@
 #include <framework\utils\random_number.h>
+#include <framework\view\utils\getKey.h>
+#include <framework\view\utils\good_buttons.h>
 #include "sysgame.h"
 
 NETWORK_EVENT::NETWORK_EVENT(string _msg) : msg(_msg){}
@@ -37,6 +39,7 @@ NetContInt::~NetContInt() {
 
 }
 Sysgame::Sysgame() : network(&service) {
+	getKeyInit();
 	network.setSysgamePointer(this);
 	controller = nullptr;
 	_quit = 0;
@@ -58,6 +61,7 @@ Sysgame::Sysgame() : network(&service) {
 		cout << "could't load data files \n";
 		cout << "info: " << e.what() << '\n';
 	}
+	generateButtons(view);
 }
 void Sysgame::Quit() {
 	_quit = 1;
@@ -85,14 +89,19 @@ void Sysgame::setNewController(Controller *_contr) {
 void Sysgame::update() {
 
 	ALLEGRO_EVENT ev;
-	if (view->getNextEvent(&ev)) {
+	while (view->getNextEvent(&ev)) {
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			_quit = 1;
 		}
 		ui->HandleEvent(&ev);
 	}
-	ui->refreshDead();
-	view->draw();
+	try {
+		ui->refreshDead();
+		view->draw();
+	} catch (AllegroHandlerException &e) {
+		cerr << e.what() << '\n';
+	}
+	
 	service.poll();
 }
 bool Sysgame::quit() {

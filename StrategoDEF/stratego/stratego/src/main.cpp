@@ -10,8 +10,9 @@ int main() {
 	try{
 		Sysgame sys;
 		sys.setNewController( (Controller*)new MenuTest(&sys));
-
+		
 		while (!sys.quit()) sys.update();
+		
 	} catch (exception &e) {
 		cerr << "A fatal error occurred and the program needed to stop \n";
 		cerr << "Reason: " << e.what() << '\n';

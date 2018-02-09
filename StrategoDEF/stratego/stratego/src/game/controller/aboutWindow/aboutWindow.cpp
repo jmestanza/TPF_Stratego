@@ -15,12 +15,12 @@ void AboutWindow::onCreate() {
 
 
 	screenText *title = new screenText(mySysgame,"title");
-	title->configure("Algoritmos y estructura de datos: TP final","Akrobat",al_map_rgb(0,0,0),
+	title->configure("Algoritmos y estructura de datos: TP final","roboto_v1",al_map_rgb(0,0,0),
 		pair<float,float>(width / 2,height / 8),
 		1);
 
 	screenText *info = new screenText(mySysgame,"info");
-	info->configure("Acerca de Stratego","Akrobat",al_map_rgb(0,0,0),pair<float,float>(10,10),0);
+	info->configure("Acerca de Stratego","roboto_v1",al_map_rgb(0,0,0),pair<float,float>(10,10),0);
 
 	Background *background = new Background(mySysgame,"background");
 	background->configure(
@@ -37,7 +37,7 @@ void AboutWindow::onCreate() {
 	vector <screenText*> uText(people.size());
 	for (int i = 0;i < people.size();i++) {
 		uText[i] = new screenText(mySysgame,people[i]);
-		uText[i]->configure(people[i],"Akrobat",
+		uText[i]->configure(people[i],"roboto_v1",
 			al_map_rgb(0,0,0),
 			pair<float,float>(width/2,height/4 + i * 50),1);
 	}

@@ -34,7 +34,6 @@ mostrados en pantalla en pantalla
 */
 class Viewer {
 	private:
-		ALLEGRO_DISPLAY * display;
 		pair <float, float> screenSize;
 
 		map <string,ALLEGRO_BITMAP*> loaded; // imagenes CARGADAS
@@ -47,7 +46,11 @@ class Viewer {
 
 		vector <string> drawOrder; // orden de muestra en pantalla
 		bool _exit;
+		ALLEGRO_DISPLAY * display;
 		ALLEGRO_EVENT_QUEUE *q;
+		ALLEGRO_TIMER *timer;
+		int TimerFreq;
+
 		bool _debug;
 	public:
 		Viewer();
@@ -64,6 +67,7 @@ class Viewer {
 		void loadAudio(string dir,string name);
 		void loadFont(string dir,string name,int size);
 		void loadColor(string code, string name);
+		void eraseLoaded(string loadedName);
 
 		ALLEGRO_BITMAP *getImg(string imgName);
 		ALLEGRO_FONT* getFont(string name);

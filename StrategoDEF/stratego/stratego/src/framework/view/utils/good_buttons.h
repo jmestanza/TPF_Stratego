@@ -5,3 +5,5 @@
 imgGroup g_blue();
 imgGroup g_green();
 imgGroup g_connectButton();
+
+void generateButtons(Viewer *view);

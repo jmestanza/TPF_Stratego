@@ -1,4 +1,6 @@
 #include "gui.h"
+#include <iostream>
+using namespace std;
 
 UIException::UIException(string _err) : err(_err) {
 

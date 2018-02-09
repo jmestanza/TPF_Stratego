@@ -48,6 +48,7 @@ void allegro_init(void) {
 }
 Viewer::Viewer() {
 	_debug = 0;
+	TimerFreq = 10;
 	 // defaults
 	screenSize.first = 800;
 	screenSize.second = 600;
@@ -70,11 +71,15 @@ void Viewer::start(){
 
 	display = al_create_display(screenSize.first, screenSize.second);
 	if (!display) throw AllegroHandlerException("could not create display ");
+	timer = al_create_timer(1.0 / TimerFreq);
+	if (!timer) throw AllegroHandlerException("could not create timer");
 
 	al_register_event_source(q, al_get_display_event_source(display));
 	al_register_event_source(q, al_get_keyboard_event_source());
 	al_register_event_source(q, al_get_mouse_event_source());
+	al_register_event_source(q, al_get_timer_event_source(timer));
 
+	al_start_timer(timer);
 	if (!_debug) cout << "info: allegro started\n";
 }
 void Viewer::loadConfFile(string xmlFile) {
@@ -300,6 +305,12 @@ ALLEGRO_BITMAP * Viewer::getImg(string loadedName) {
 	}
 	return loaded[loadedName];
 }
+void Viewer::eraseLoaded(string loadedName) {
+	if (loaded.find(loadedName) == loaded.end()) {
+		throw AllegroHandlerException("Trying to erase image that was not loaded, '"+loadedName+"'");
+	}
+	loaded.erase(loadedName);
+}
 void Viewer::stopShow(string destroyName) {
 	if (frontShow.find(destroyName) == frontShow.end()) {
 		throw AllegroHandlerException("trying to stop showing image that is not being shown");
@@ -377,10 +388,11 @@ ALLEGRO_DISPLAY *Viewer::getScreen() {
 	return display;
 }
 Viewer::~Viewer() {
-	for (auto it = loaded.begin(); it != loaded.end(); it++) al_destroy_bitmap(it->second);
-	for (auto it = frontShow.begin();it != frontShow.end();it++) delete it->second;
+	
+	for (auto it = loaded.begin(); it != loaded.end(); ++it) al_destroy_bitmap(it->second);
+	for (auto it = frontShow.begin();it != frontShow.end();++it) delete it->second;
 
 	al_destroy_display(display);
 	al_destroy_event_queue(q);
-	
+	al_destroy_timer(timer);
 }

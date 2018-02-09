@@ -153,6 +153,8 @@
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp" />
     <ClCompile Include="src\framework\view\gui\gui.cpp" />
+    <ClCompile Include="src\framework\view\utils\copyBitmap.cpp" />
+    <ClCompile Include="src\framework\view\utils\getKey.cpp" />
     <ClCompile Include="src\framework\view\utils\good_buttons.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h" />
     <ClInclude Include="src\framework\view\gui\gui.h" />
+    <ClInclude Include="src\framework\view\utils\copyBitmap.h" />
+    <ClInclude Include="src\framework\view\utils\getKey.h" />
     <ClInclude Include="src\framework\view\utils\good_buttons.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />

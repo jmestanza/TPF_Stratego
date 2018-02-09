@@ -17,6 +17,7 @@
 #include "show_objects\showImage.h"
 #include "show_objects\showRectangle.h"
 
+
 using namespace std;
 
 class AllegroHandlerException : public exception {
@@ -42,6 +43,7 @@ class Viewer {
 		map<string,ALLEGRO_SAMPLE*> loadedAudio;
 		map<string, ALLEGRO_SAMPLE_INSTANCE*> AudioInstances;
 		map <string,ALLEGRO_FONT*> fonts;
+		map <string, ALLEGRO_COLOR> colors;
 
 		vector <string> drawOrder; // orden de muestra en pantalla
 		bool _exit;
@@ -55,15 +57,20 @@ class Viewer {
 		void loadImgFile(string xmlFile);
 		void loadAudioFile(string xmlFile);
 		void loadFontFile(string xmlFile);
+		void loadColorsFile(string xmlFile);
 		void start();
 		void load(string dir, string name); // directorio: de donde cargo la imagen name: nombre asignado de acceso
 		void loadFromBitmap(ALLEGRO_BITMAP *b,string name);
 		void loadAudio(string dir,string name);
 		void loadFont(string dir,string name,int size);
+		void loadColor(string code, string name);
 
 		ALLEGRO_BITMAP *getImg(string imgName);
 		ALLEGRO_FONT* getFont(string name);
+		ALLEGRO_COLOR getColor(string color);
+
 		ALLEGRO_DISPLAY *getScreen();
+		
 		void show(string imageName,string showName, float x, float y); // informar que se dibujara una imagen precargada efectivamente en la pantalla
 		void showRectangle(string showName,unsigned char r,unsigned char g,unsigned char b,pair<float,float> pos,pair<float,float> size,bool centered);
 		void playloop(string song);

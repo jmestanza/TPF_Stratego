@@ -8,3 +8,6 @@ imgGroup g_blue() {
 imgGroup g_green() {
 	return imgGroup("button_green_a","button_green_b","button_grey");
 }
+imgGroup g_connectButton() {
+	return imgGroup("button_big_green_a", "button_big_green_b", "button_grey");
+}

@@ -12,7 +12,7 @@ class Background : public Widget{
 	public:
 		Background(Sysgame *sysgame, string name);
 		void handleEvent(ALLEGRO_EVENT *ev);
-		void configure(ALLEGRO_COLOR color,pair<float,float> pos,pair<float,float> size,bool _centered);
+		void configure(string color,pair<float,float> pos,pair<float,float> size,bool _centered);
 		void startDrawing();
 		void stopDrawing();
 		~Background();

@@ -24,7 +24,7 @@ void AboutWindow::onCreate() {
 
 	Background *background = new Background(mySysgame,"background");
 	background->configure(
-		al_map_rgb(193,225,166),
+		"light_orange",
 		pair<float,float>(0,0),
 		mySysgame->getAllegroHandler()->getScreenSize(),
 		0
@@ -42,11 +42,11 @@ void AboutWindow::onCreate() {
 			pair<float,float>(width/2,height/4 + i * 50),1);
 	}
 
-	textButton *button = new textButton(mySysgame,"return_button");
+	TextButton *button = new TextButton(mySysgame,"return_button");
 	button->generate("VOLVER",g_blue(),pair<float,float>(width / 2,height * 3 / 4),1);
 
 	button->onClick([](Sysgame *sys){
-		sys->setNewController(new menuTest(sys));
+		sys->setNewController(new MenuTest(sys));
 	});
 
 	addWidget((Widget*)background);

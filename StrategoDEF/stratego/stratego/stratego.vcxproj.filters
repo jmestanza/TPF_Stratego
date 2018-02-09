@@ -22,9 +22,6 @@
     <Filter Include="src\game\controller">
       <UniqueIdentifier>{860fa988-d58e-4505-8b8f-ebbdb4586d38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\controller\menu_1">
-      <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\view">
       <UniqueIdentifier>{eeb0bc56-0a29-41e8-a521-ca3873474f9a}</UniqueIdentifier>
     </Filter>
@@ -79,6 +76,9 @@
     </Filter>
     <Filter Include="src\game\NewFilter1">
       <UniqueIdentifier>{0df18463-7b4f-4438-8d70-a89aab129311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\connectMenu">
+      <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +151,12 @@
     <ClCompile Include="src\framework\view\utils\good_buttons.cpp">
       <Filter>src\framework\view\utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\controller\connectMenu\connect_menu.cpp">
+      <Filter>src\game\controller\connectMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\TextInput.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -219,6 +225,12 @@
     <ClInclude Include="src\framework\view\utils\good_buttons.h">
       <Filter>src\framework\view\utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\controller\connectMenu\connect_menu.h">
+      <Filter>src\game\controller\connectMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\TextInput.h">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -234,6 +246,9 @@
       <Filter>resource</Filter>
     </Xml>
     <Xml Include="resource\fonts.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="resource\colors.xml">
       <Filter>resource</Filter>
     </Xml>
   </ItemGroup>

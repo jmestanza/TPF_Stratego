@@ -5,9 +5,9 @@
 Background::Background(Sysgame *sysgame,string name) : Widget(sysgame,name){
 	code = to_string(randomNumber());
 }
-void Background::configure(ALLEGRO_COLOR _color,pair<float,float> pos,pair<float,float> size,bool _centered) {
-	color = _color;
-	
+void Background::configure(string _color,pair<float,float> pos,pair<float,float> size,bool _centered) {
+	color = view->getColor(_color);
+	//cout << color.r << ' ' << color.g << ' ' << color.b << '\n';
 	ALLEGRO_BITMAP* surface = al_create_bitmap(size.first,size.second);
 	al_set_target_bitmap(surface);
 	al_draw_filled_rectangle(0,0,size.first,size.second,color);

@@ -53,6 +53,7 @@ Sysgame::Sysgame() : network(&service) {
 		view->loadImgFile("resource/images.xml");
 		view->loadFontFile("resource/fonts.xml");
 		view->loadAudioFile("resource/audios.xml");
+		view->loadColorsFile("resource/colors.xml");
 	} catch (AllegroHandlerException &e) {
 		cout << "could't load data files \n";
 		cout << "info: " << e.what() << '\n';

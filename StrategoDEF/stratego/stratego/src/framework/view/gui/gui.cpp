@@ -20,7 +20,7 @@ void UI::AddWidget(Widget *widget) {
 void UI::RemoveWidget(string name) {
 	if (widgets.find(name) != widgets.end()) {
 		widgets[name]->killMe();
-		widgets[name]->stopDrawing();
+		
 		deadWidgets.push_back(name);
 	}
 }
@@ -31,6 +31,7 @@ void UI::refreshDead() {
 	}
 	addWidgets.clear();
 	for (int i = 0;i < deadWidgets.size();i++) {
+		widgets[deadWidgets[i]]->stopDrawing();
 		delete widgets[deadWidgets[i]];
 		widgets.erase(deadWidgets[i]);
 	}

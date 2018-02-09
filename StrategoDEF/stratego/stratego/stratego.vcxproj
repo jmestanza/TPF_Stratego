@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{87CB809B-49B2-4694-A2A7-A2079E4DF7B7}</ProjectGuid>
     <RootNamespace>stratego</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -159,9 +159,11 @@
     <ClCompile Include="src\framework\view\widgets\screen_text.cpp" />
     <ClCompile Include="src\framework\view\widgets\Table.cpp" />
     <ClCompile Include="src\framework\view\widgets\TableButton.cpp" />
+    <ClCompile Include="src\framework\view\widgets\TextInput.cpp" />
     <ClCompile Include="src\framework\view\widgets\text_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
     <ClCompile Include="src\game\controller\aboutWindow\aboutWindow.cpp" />
+    <ClCompile Include="src\game\controller\connectMenu\connect_menu.cpp" />
     <ClCompile Include="src\game\controller\defaultMenu\defaultMenu.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -184,9 +186,11 @@
     <ClInclude Include="src\framework\view\widgets\screen_text.h" />
     <ClInclude Include="src\framework\view\widgets\Table.h" />
     <ClInclude Include="src\framework\view\widgets\TableButton.h" />
+    <ClInclude Include="src\framework\view\widgets\TextInput.h" />
     <ClInclude Include="src\framework\view\widgets\text_button.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
     <ClInclude Include="src\game\controller\aboutWindow\aboutWindow.h" />
+    <ClInclude Include="src\game\controller\connectMenu\connect_menu.h" />
     <ClInclude Include="src\game\controller\defaultMenu\defaultMenu.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
   </ItemGroup>
@@ -194,6 +198,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="resource\colors.xml" />
     <Xml Include="resource\fonts.xml" />
     <Xml Include="resource\game_config.xml" />
     <Xml Include="resource\images.xml" />

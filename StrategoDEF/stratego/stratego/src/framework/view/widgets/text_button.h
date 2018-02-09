@@ -13,12 +13,12 @@ class imgGroup {
 		string img_a,img_b,img_c;
 };
 
-class textButton : public NaiveButton {
+class TextButton : public NaiveButton {
 	private:
 		int n1,n2,n3;
 	public:
-		textButton(Sysgame* sys, string name);
+		TextButton(Sysgame* sys, string name);
 		void generate(string msg,imgGroup img,pair<float,float> pos,int centered);
-		virtual ~textButton();
+		virtual ~TextButton();
 };
 

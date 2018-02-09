@@ -59,6 +59,10 @@ pair <float, float> Viewer::getScreenSize() {
 	return screenSize;
 }
 void Viewer::start(){
+	// enable anti alias
+	//al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
+	//al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
+
 	allegro_init();
 	
 	q = al_create_event_queue();
@@ -176,6 +180,27 @@ void Viewer::loadFontFile(string xmlFile) {
 	}
 		
 }
+void Viewer::loadColorsFile(string xmlFile) {
+	ptree pt;
+	get_xml_content(pt, xmlFile);
+	if (pt.count("colors") != 1) {
+		throw AllegroHandlerException("Error in xml file, wrong amount of colors tag in '" + xmlFile + "'");
+	}
+	ptree content = pt.get_child("colors");
+	for (auto it = content.begin(); it != content.end(); ++it) {
+		if (it->first == "color") {
+			bool err1 = it->second.get_child("<xmlattr>").count("code") != 1;
+			bool err2 = it->second.get_child("<xmlattr>").count("name") != 1;
+			if (err1 || err2) {
+				throw AllegroHandlerException("Error in xml, code or name attr are in wrong amount in '" + xmlFile + "'");
+			}
+			string code = it->second.get<string>("<xmlattr>.code");
+			string name = it->second.get<string>("<xmlattr>.name");
+
+			this->loadColor(code, name);
+		}
+	}
+}
 void Viewer::loadAudio(string dir,string name){
 	ALLEGRO_SAMPLE* sample = al_load_sample(dir.c_str());
 	if (!sample) throw AllegroHandlerException("unable to load audio '" + dir + "'");
@@ -196,7 +221,6 @@ void Viewer::loadFromBitmap(ALLEGRO_BITMAP *b,string name) {
 	}
 	loaded[name] = b;
 }
-
 void Viewer::loadFont(string dir, string name,int size) {
 	if (fonts.find(name) != fonts.end()) {
 		throw AllegroHandlerException("font name '"+name+"' repeated");
@@ -204,6 +228,62 @@ void Viewer::loadFont(string dir, string name,int size) {
 	ALLEGRO_FONT* font_test = al_load_ttf_font(dir.c_str(),size,0);
 	if (!font_test) throw AllegroHandlerException("could not load font '"+dir+"'");
 	fonts[name] = font_test;
+}
+void Viewer::loadColor(string code,string name) {
+	if (colors.find(name) != colors.end()) {
+		throw AllegroHandlerException("trying to add two colors with the same name '" + name + "'");
+	}
+	if (code.size() == 0) throw AllegroHandlerException("invalid color code (err 1)");
+	ALLEGRO_COLOR color;
+	if (code[0] == '#') {
+		if (code.size() != 7) throw AllegroHandlerException("invalid color code (err 2)");
+		string colorCode = code.substr(1, 6);
+		unsigned int value;
+		stringstream ss;
+		ss << std::hex << colorCode;
+		ss >> value;
+		unsigned char r = (value >> 16) & 0xFF;
+		unsigned char g  = (value >> 8) & 0xFF;
+		unsigned char b = (value) & 0xFF;
+		color = al_map_rgb(r, g, b);
+	}else{
+		int pnt = 0;
+		vector <string> colorsList;
+		string current = "";
+		while (pnt < code.size()) {
+			if (code[pnt] == '(' || code[pnt] == ')') {
+				
+			}else if (code[pnt] != ',') {
+				current += code[pnt];
+			}else {
+				colorsList.push_back(current);
+				current = "";
+			}
+			pnt++;
+		}
+		colorsList.push_back(current);
+		
+		if (colorsList.size() != 3) throw AllegroHandlerException("invalid color code (err 3)");
+		vector <unsigned char> ans;
+		for (int i = 0; i < colorsList.size(); i++) {
+			if (colorsList[i] == "") throw AllegroHandlerException("invalid color code (err 4)");
+			try {
+				ans.push_back(stoi(colorsList[i]));
+			}catch (invalid_argument &e) {
+				throw AllegroHandlerException("invalid color code (parse number failed) ");
+			}
+		}
+		color = al_map_rgb(ans[0], ans[1], ans[2]);
+	}
+	/// now add to list
+	//cout << "colors[" << name << "] = " << color.r << ',' << color.g << ',' << color.b << '\n';
+	colors[name] = color;
+}
+ALLEGRO_COLOR Viewer::getColor(string code) {
+	if (colors.find(code) == colors.end()) {
+		throw AllegroHandlerException("Unable to find color '" + code + "'");
+	}
+	return colors[code];
 }
 ALLEGRO_FONT* Viewer::getFont(string name) {
 	/*for (auto it = fonts.begin();it != fonts.end();it++) {

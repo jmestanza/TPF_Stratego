@@ -9,7 +9,7 @@ int main() {
 
 	try{
 		Sysgame sys;
-		sys.setNewController( (Controller*)new menuTest(&sys));
+		sys.setNewController( (Controller*)new MenuTest(&sys));
 
 		while (!sys.quit()) sys.update();
 	} catch (exception &e) {

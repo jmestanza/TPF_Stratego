@@ -6,7 +6,7 @@ ScoutToken::ScoutToken(PlayerType owner) : BasicToken(SCOUT, true, owner)
 {
 }
 
-bool ScoutToken::validate_movement(PosType dst_pos, BasicToken ** board_ref)
+bool ScoutToken::validate_movement(PosType dst_pos, tablero_t& board_ref)
 {
 	PosType src_pos = this->get_token_pos();
 	int delta_x;
@@ -17,15 +17,15 @@ bool ScoutToken::validate_movement(PosType dst_pos, BasicToken ** board_ref)
 
 	if (src_pos.x == dst_pos.x) {
 		if (dst_pos.y > src_pos.y) {
-			for (int j = (ADJ_COORD(src_pos.y) + 1); j < (ADJ_COORD(dst_pos.y) - 1); j++) {
-				if ((&board_ref[ADJ_COORD(src_pos.x)])[j] != nullptr) {
+			for (int j = ((src_pos.y) + 1); j < ((dst_pos.y) - 1); j++) {
+				if (board_ref[(src_pos.x)][j] != nullptr) {
 					tile_empty = false;
 				}
 			}
 		}
 		else if (dst_pos.y < src_pos.y) {
-			for (int j = (ADJ_COORD(dst_pos.y) + 1); j < (ADJ_COORD(src_pos.y) - 1); j++) {
-				if ((&board_ref[ADJ_COORD(src_pos.x)])[j] != nullptr) {
+			for (int j = ((dst_pos.y) + 1); j < ((src_pos.y) - 1); j++) {
+				if (board_ref[(src_pos.x)][j] != nullptr) {
 					tile_empty = false;
 				}
 			}
@@ -35,7 +35,7 @@ bool ScoutToken::validate_movement(PosType dst_pos, BasicToken ** board_ref)
 			return false; /// Movimiento invalido - NO se puede saltar sobre fichas
 		}
 		else {
-			if (((&board_ref[ADJ_COORD(dst_pos.x)])[dst_pos.y] != nullptr) && (delta_y > 1)) {
+			if ((board_ref[(dst_pos.x)][dst_pos.y] != nullptr) && (delta_y > 1)) {
 				return false; /// Movimiento invalido - SOLO se puede atacar si estan en casilleros contiguos
 			}
 			else {
@@ -45,15 +45,15 @@ bool ScoutToken::validate_movement(PosType dst_pos, BasicToken ** board_ref)
 	}
 	else if (src_pos.y == dst_pos.y) {
 		if (dst_pos.x > src_pos.x) {
-			for (int i = (ADJ_COORD(src_pos.x) + 1); i < (ADJ_COORD(dst_pos.x) - 1); i++) {
-				if ((&board_ref[i])[ADJ_COORD(src_pos.y)] != nullptr) {
+			for (int i = ((src_pos.x) + 1); i < ((dst_pos.x) - 1); i++) {
+				if (board_ref[i][(src_pos.y)] != nullptr) {
 					tile_empty = false;
 				}
 			}
 		}
 		else if (dst_pos.x < src_pos.x) {
-			for (int i = (ADJ_COORD(dst_pos.x) + 1); i < (ADJ_COORD(src_pos.x) - 1); i++) {
-				if ((&board_ref[i])[ADJ_COORD(src_pos.y)] != nullptr) {
+			for (int i = ((dst_pos.x) + 1); i < ((src_pos.x) - 1); i++) {
+				if (board_ref[i][(src_pos.y)] != nullptr) {
 					tile_empty = false;
 				}
 			}
@@ -63,7 +63,7 @@ bool ScoutToken::validate_movement(PosType dst_pos, BasicToken ** board_ref)
 			return false; /// Movimiento invalido - NO se puede saltar sobre fichas
 		}
 		else {
-			if (((&board_ref[ADJ_COORD(dst_pos.x)])[dst_pos.y] != nullptr) && (delta_x > 1)) {
+			if ((board_ref[(dst_pos.x)][dst_pos.y] != nullptr) && (delta_x > 1)) {
 				return false; /// Movimiento invalido - SOLO se puede atacar si estan en casilleros contiguos
 			}
 			else {

@@ -1,6 +1,6 @@
 #pragma once
 #include "PosType.h"
-
+#include <vector>
 using namespace std;
 
 enum Ranges {ENEMY = 0, MARSHAL, GENERAL, COLONEL, MAJOR, CAPTAIN, LIEUTENANT, SERGEANT, MINER, SCOUT, 
@@ -19,7 +19,7 @@ typedef int AttackResult;
 #define LOSE -1
 
 #define POS_MASK 0x0F
-#define ADJ_COORD(a) ((a&POS_MASK)-1) /// Ajusta coordenada del tablero a indice de matriz
+//#define (a) ((a&POS_MASK)-1) /// Ajusta coordenada del tablero a indice de matriz
 
 class BasicToken // Se hereda a cada token particular
 {

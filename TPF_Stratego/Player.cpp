@@ -28,7 +28,9 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 	if (token->get_player() != player) {
 		return MOVE_NOT_VALID; /// No es una ficha propia
 	}
-
+	
+	// si pasa todo esto es porque es valido -> debe ser null el destiny
+	if(dst_tile != nullptr)
 	if (dst_tile->get_player() == player) {
 		return RESELECT; /// El tile de destino es otra ficha propia
 	}
@@ -163,24 +165,28 @@ MoveResult Player::move_enemy_token(PosType src_pos, PosType dst_pos)
 		return ERROR; /// El dato NO es valido - Error de comunicaion
 	}
 
+	if (dst_title == nullptr) {
+		local_board.move_token(src_pos,dst_pos);
+		game_state = LOCAL_MOVE;
+		return MOVE_VALID; /// Movimiento normal
+	} else {
+		game_state = WAIT_FOR_RANGE;
+		return ATTACK_TRY; /// Ataque del enemigo
+	}
+
 	if (dst_title->get_player() != player) {
 		return ERROR; /// El dato NO es valido - Error de comunicaion
 	}
 
-	if (dst_title == nullptr) {
-		local_board.move_token(src_pos, dst_pos);
-		game_state = LOCAL_MOVE;
-		return MOVE_VALID; /// Movimiento normal
-	}
-	else {
-		game_state = WAIT_FOR_RANGE;
-		return ATTACK_TRY; /// Ataque del enemigo
-	}
 }
 
 State Player::get_game_state()
 {
 	return game_state;
+}
+
+void Player::set_game_state(State st) {
+	game_state = st;
 }
 
 Player::~Player()

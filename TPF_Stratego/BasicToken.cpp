@@ -16,7 +16,7 @@ PosType BasicToken::get_token_pos()
 	return temp;
 }
 
-void BasicToken::set_token_pos(unsigned char new_x, unsigned new_y)
+void BasicToken::set_token_pos(unsigned char new_x, unsigned char new_y)
 {
 	this->curr_pos.x = new_x;
 	this->curr_pos.y = new_y;

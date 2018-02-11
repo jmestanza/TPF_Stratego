@@ -15,7 +15,8 @@ class Background : public Widget{
 		Background(Sysgame *sysgame, string name);
 		void handleEvent(ALLEGRO_EVENT *ev);
 		void configure(string color,pair<float,float> pos,pair<float,float> size,bool _centered);
-		void configureImg(string _color,pair<float,float> pos,bool _centered);
+		void configureImg(string _name,pair<float,float> pos,bool _centered);
+		void configureImg(string _name);
 		void startDrawing();
 		void stopDrawing();
 		~Background();

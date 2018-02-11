@@ -34,6 +34,12 @@ void Background::configureImg(string img,pair<float,float> _pos,bool _centered) 
 		this->pos.second -= this->size.second/2;
 	}
 }
+void Background::configureImg(string img) {
+	ALLEGRO_BITMAP *surface = view->getImg(img);
+
+	this->size = pair<float,float>(al_get_bitmap_width(surface),al_get_bitmap_height(surface));
+	loadImg = img;
+}
 void Background::handleEvent(ALLEGRO_EVENT *ev) {
 	
 }

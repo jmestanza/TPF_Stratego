@@ -28,7 +28,7 @@ class Controller {
 		virtual void onNetEvent(NETWORK_EVENT *ev) = 0;
 		virtual ~Controller();
 		void addWidget(Widget *w);
-
+		void eraseWidget(string name);
 	protected:
 		Sysgame* mySysgame;
 		Viewer* view;

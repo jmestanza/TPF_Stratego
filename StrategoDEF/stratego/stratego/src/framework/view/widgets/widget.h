@@ -11,13 +11,14 @@ class Sysgame;
 
 class Widget {
 	protected:
-		pair<float, float> pos;
-		pair<float, float> size;
+		pair<int,int> pos;
+		pair<int,int> size;
 		string name;
 		Viewer* view;
 		Sysgame* mySysgame;
 		int id;
 		bool _killMe;
+		bool _beingDrawn;
 	public:
 		Widget(Sysgame *sys,string name);
 		bool getKillMe();
@@ -28,6 +29,15 @@ class Widget {
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;
 		virtual void startDrawing() = 0;
 		virtual void stopDrawing() = 0;
+		void callStartDrawing();
+		void callStopDrawing();
+
+		void setPosSize(pair<int,int> _pos,pair <int,int> _size,bool centered);
+		void setPos(pair<int,int> _pos,bool centered); // set pos when size is already set
+		void hide();
+		void show();
+		bool isHidden();
+
 		virtual ~Widget();
 		Viewer *getViewer();
 		Sysgame *getSysgame();

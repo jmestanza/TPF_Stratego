@@ -18,6 +18,7 @@ class Animation : Widget{
 		virtual void handleEvent(ALLEGRO_EVENT *ev);
 		virtual void startDrawing();
 		virtual void stopDrawing();
+		void configure(vector <string> _images);
 		void updateDrawing();
 		~Animation();
 };

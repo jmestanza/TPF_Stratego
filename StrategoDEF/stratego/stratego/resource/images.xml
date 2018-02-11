@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <images>
   <image name="background1"      dir="background/6057b6656dca8b2.png"></image>
-  
+
+  <!-- Buttons  -->
   <image name="test_blue"      dir="buttons/table_test/test.jpg"></image>
   <image name="test_red"       dir="buttons/table_test/test2.jpg"></image>
   <image name="button_blue_a"  dir="buttons/naive_buttons/blue/blue_a.png"></image>
@@ -10,25 +11,26 @@
   <image name="button_green_b" dir="buttons/naive_buttons/green/green_b.png"></image>
   <image name="button_green_long_a" dir="buttons/naive_buttons/green_longer/green_a.png"></image>
   <image name="button_green_long_b" dir="buttons/naive_buttons/green_longer/green_b.png"></image>
-  
-  
   <image name="button_red_a"   dir="buttons/naive_buttons/red/red_a.png"></image>
   <image name="button_red_b"   dir="buttons/naive_buttons/red/red_b.png"></image>
   <image name="button_grey"    dir="buttons/naive_buttons/grey/grey.png"></image>
   <image name="button_grey_long" dir="buttons/naive_buttons/grey/grey_long.png"></image>
-
-  
   <image name="button_big_green_a" dir="buttons/bigger_buttons/green/green_a.png"></image>
   <image name="button_big_green_b" dir="buttons/bigger_buttons/green/green_b.png"></image>
+
+  <!-- Text input  -->
   <image name="text_input"     dir="textInput/textInput.png"></image>
- 
+
+  <!-- Icons  -->
   <image name="icon_worldwide" dir="icons/worldwide.png"></image>
   <image name="icon_networking" dir="icons/networking.png"></image>
   <image name="icon_play"      dir="icons/player.png"></image>
   <image name="icon_left"      dir="icons/left-arrow.png"></image>
   <image name="icon_cancel"    dir="icons/cancel.png"></image>
-  
-  
+  <image name="icon_warning"    dir="icons/warning.png"></image>
+
+
+  <!-- animation  -->
   <image name="icon_loading_0" dir="icons\loading\loading\img0.png"></image>
   <image name="icon_loading_1" dir="icons\loading\loading\img1.png"></image>
   <image name="icon_loading_2" dir="icons\loading\loading\img2.png"></image>

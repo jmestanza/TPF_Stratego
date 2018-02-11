@@ -11,6 +11,17 @@ class ConnectMenu : Controller{
 		TextButton *connectButton;
 		TextInput *input;
 		int waitTime;
+
+		vector <string> connectContent;
+
+		string status;
+		string connectIP;
+
+		pair<float,float> infoPositionA; /// info message and icon places
+		pair<float,float> infoPositionB;
+		Widget* infoObjectA;
+		Widget* infoObjectB;
+
 	public:
 		ConnectMenu(Sysgame *sys);
 		void onCreate();
@@ -21,6 +32,16 @@ class ConnectMenu : Controller{
 		void setConnectionFailed();
 		void createConnectButton();
 		void setNotConnecting();
+		void setConnectionWaitTimeout();
+		void eraseConnectContent();
+		void setInfoObjects(Widget* A,Widget* B);
+		void eraseInfoObjects();
+
+		string getConnectIP();
+		vector<string> &getConnectContent();
+
+		//void setMsgWithIcon(string msg,string color,string icon);
+
 		~ConnectMenu();
 };
 

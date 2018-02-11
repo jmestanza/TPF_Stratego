@@ -1,6 +1,8 @@
 #include "Animation.h"
 
 #include <framework\utils\random_number.h>
+#include <iostream>
+using namespace std;
 
 Animation::Animation(Sysgame *sys,string name) : Widget(sys,name) {
 	myNameCode = "animation_"+to_string(randomNumber());
@@ -18,19 +20,31 @@ void Animation::configure(vector <string> _images,pair<float,float> _pos,int cen
 		pos.second -= size.second / 2;
 	}
 }
+void Animation::configure(vector <string> _images) {
+	cout << "called\n";
+	images = _images;
+	ALLEGRO_BITMAP *img = view->getImg(images[0]);
+	size = pair<int,int>(al_get_bitmap_width(img),al_get_bitmap_height(img));
+}
 void Animation::startDrawing() {
+
+	cout << "start!" << '\n';
 	_started = 1;
 	view->show(images[_efDrawing] , myNameCode ,this->pos.first,this->pos.second );
 }
 void Animation::updateDrawing(){
-	if (!_started) {
-		startDrawing();
-	} else {
-		view->changeShowImg(myNameCode,images[_efDrawing]);
+	if (_beingDrawn) {
+		if (!_started) {
+			startDrawing();
+		} else {
+			view->changeShowImg(myNameCode,images[_efDrawing]);
+		}
 	}
 }
 void Animation::stopDrawing() {
+	cout << "stop!"<<'\n';
 	view->stopShow(myNameCode);
+	_started = 0;
 }
 void Animation::handleEvent(ALLEGRO_EVENT *ev) {
 	if (ev->type == ALLEGRO_EVENT_TIMER) {

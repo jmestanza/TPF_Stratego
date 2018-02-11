@@ -20,6 +20,7 @@ class TextInput : public Widget{
 		int smallTextX,smallTextY;
 	public:
 		TextInput(Sysgame *sys, string name);
+		string getText();
 		void handleEvent(ALLEGRO_EVENT *ev);
 		void configure(pair<float, float> pos,bool centered);
 		void addIcon(string imgCode);

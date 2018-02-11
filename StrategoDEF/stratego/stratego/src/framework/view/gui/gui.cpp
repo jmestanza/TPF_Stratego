@@ -45,6 +45,12 @@ void UI::HandleEvent(ALLEGRO_EVENT *ev) {
 void UI::eraseAll() {
 	for (auto it = widgets.begin(); it != widgets.end(); it++) RemoveWidget(it->first);
 }
+Widget* UI::getWidget(string name) {
+	if (widgets.find(name) == widgets.end()) {
+		throw UIException("Trying to access to widget '"+name+"' that don't exist");
+	}
+	return widgets[name];
+}
 UI::~UI() {
 	eraseAll();
 	refreshDead();

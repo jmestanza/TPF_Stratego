@@ -7,8 +7,14 @@ imgGroup g_blue() {
 imgGroup g_green() {
 	return imgGroup("button_green_a","button_green_b","button_grey");
 }
+imgGroup g_red() {
+	return imgGroup("button_red_a","button_red_b","button_grey");
+}
 imgGroup g_connectButton() {
 	return imgGroup("button_big_green_a_V2", "button_big_green_b_V2", "button_grey");
+}
+imgGroup g_connectButtonLong() {
+	return imgGroup("button_green_long_a","button_green_long_b","button_grey_long");
 }
 
 
@@ -38,4 +44,15 @@ void generateButtons(Viewer *view) {
 	al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
 
 	view->loadFromBitmap(modified2,"button_big_green_b_V2");
+
+	////// Adding ICON to play game button
+	
+
+	//ALLEGRO_BITMAP *icon2 = 
+
+
+}
+
+void getLoadingAImgs(vector <string> &ans) {
+	for (int i = 0;i < 30;i++) ans.push_back("icon_loading_"+to_string(i));
 }

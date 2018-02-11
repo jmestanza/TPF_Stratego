@@ -43,27 +43,15 @@
     <Filter Include="src\game\model\stratego_engine">
       <UniqueIdentifier>{cba5c68e-2c8f-4794-b8d4-b410b072c1eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\controller\menu_2">
-      <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="resource">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="src\game\controller\menu_test">
-      <UniqueIdentifier>{0c2c1663-38f5-4f14-9f76-9b34c78e9c7a}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\framework\view\allegro_manager\show_objects">
       <UniqueIdentifier>{6160d20c-bb6e-47e8-bd4d-3bc79296913c}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\framework\view\utils">
       <UniqueIdentifier>{b272ff3b-05a7-4913-af36-462903ffcd6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\controller\model">
-      <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\controller\model\network">
-      <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
     </Filter>
     <Filter Include="resource\fonts">
       <UniqueIdentifier>{2bc66cce-762d-465b-a7de-358c7ee49def}</UniqueIdentifier>
@@ -80,6 +68,33 @@
     <Filter Include="src\game\controller\connectMenu">
       <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\layouts">
+      <UniqueIdentifier>{09447e31-35aa-4d80-8573-f97af3ca8ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\layouts\menu_test">
+      <UniqueIdentifier>{ae53f2ba-587e-4297-a8f5-8d8bbf1c6af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\menuTest">
+      <UniqueIdentifier>{eab09361-5716-4a0e-b660-e4a1e8a97c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\model">
+      <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\model\network">
+      <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\showClocks">
+      <UniqueIdentifier>{6e2ee14b-fb04-4771-8d8d-31d2f4fa38db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\buttons">
+      <UniqueIdentifier>{2ed1a2d0-6cb6-49d4-ac9c-6a426eede625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\others">
+      <UniqueIdentifier>{08921220-a0b4-4fd8-89ed-ef49860ef8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\showTimeTest">
+      <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -92,13 +107,13 @@
       <Filter>src\framework\controller</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\model\network\NetworkManager.cpp">
-      <Filter>src\framework\controller\model\network</Filter>
+      <Filter>src\framework\model\network</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\model\network\NetworkProtocol.cpp">
-      <Filter>src\framework\controller\model\network</Filter>
+      <Filter>src\framework\model\network</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\model\network\Package.cpp">
-      <Filter>src\framework\controller\model\network</Filter>
+      <Filter>src\framework\model\network</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\allegro_manager.cpp">
       <Filter>src\framework\view\allegro_manager</Filter>
@@ -111,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="src\framework\view\widgets\widget.cpp">
       <Filter>src\framework\view\widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\controller\menu_test\menu_test.cpp">
-      <Filter>src\game\controller\menu_test</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showImage.cpp">
       <Filter>src\framework\view\allegro_manager\show_objects</Filter>
@@ -163,6 +175,24 @@
     <ClCompile Include="src\framework\view\utils\getKey.cpp">
       <Filter>src\framework\view\utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\Animation.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\controller\menu_test\menu_test.cpp">
+      <Filter>src\game\controller\menuTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\utils\getXMLFile.cpp">
+      <Filter>src\framework\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\showClocks\showTime.cpp">
+      <Filter>src\framework\view\widgets\showClocks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\utils\getMillisFromEpoch.cpp">
+      <Filter>src\framework\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp">
+      <Filter>src\game\controller\showTimeTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -172,13 +202,13 @@
       <Filter>src\framework\controller</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\model\network\networkManager.h">
-      <Filter>src\framework\controller\model\network</Filter>
+      <Filter>src\framework\model\network</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\model\network\NetworkProtocol.h">
-      <Filter>src\framework\controller\model\network</Filter>
+      <Filter>src\framework\model\network</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\model\network\Package.h">
-      <Filter>src\framework\controller\model\network</Filter>
+      <Filter>src\framework\model\network</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\allegro_manager.h">
       <Filter>src\framework\view\allegro_manager</Filter>
@@ -191,9 +221,6 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\widget.h">
       <Filter>src\framework\view\widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\controller\menu_test\menu_test.h">
-      <Filter>src\game\controller\menu_test</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showImage.h">
       <Filter>src\framework\view\allegro_manager\show_objects</Filter>
@@ -242,6 +269,24 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\utils\getKey.h">
       <Filter>src\framework\view\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\Animation.h">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\menu_test\menu_test.h">
+      <Filter>src\game\controller\menuTest</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\utils\getXMLFile.h">
+      <Filter>src\framework\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\showClocks\showTime.h">
+      <Filter>src\framework\view\widgets\showClocks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\utils\getMillisFromEpoch.h">
+      <Filter>src\framework\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h">
+      <Filter>src\game\controller\showTimeTest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

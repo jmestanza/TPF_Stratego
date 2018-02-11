@@ -13,21 +13,27 @@ using namespace std;
 
 MenuTest::MenuTest(Sysgame *_sys) : Controller(_sys) {}
 void MenuTest::onCreate(){
+	pair<float,float> size = view->getScreenSize();
+	float width = size.first,height = size.second;
+
 	value = 2;
 	Background* background = new Background(mySysgame,"background1");
-	background->configure(
+	background->configureImg(
+		"background1",
+		pair<float, float>(width/2,height/2),
+		1);
+	Background* background2 = new Background(mySysgame,"background2");
+	background2->configure(
 		"light_blue",
-		pair<float, float>(0,0), 
-		mySysgame->getAllegroHandler()->getScreenSize(),
-		0
-	);
+		pair<float,float>(0,0),
+		pair<float,float>(width,height),
+		0);
+
 	//Table * tablero = new Table(mySysgame,"table", "test_blue","test_red",pair<float, float>(200.0, 200.0), pair<float, float>(56, 76));
-	pair<float,float> size = view->getScreenSize();
-	float width = size.first , height = size.second;
 	
 	TextButton *myButton = new TextButton(mySysgame,"button_1");
 	myButton->generate("JUGAR",g_blue(),pair<float,float>(width/4,height*3/4),1);
-
+	myButton->addIcon("icon_play");
 	TextButton *myButton2 = new TextButton(mySysgame,"button_2");
 	myButton2->generate("ACERCA DE",g_blue(),pair<float,float>(width / 4 * 3,height * 3 / 4),1);
 
@@ -42,6 +48,7 @@ void MenuTest::onCreate(){
 		sys->setNewController((Controller*)new AboutWindow(sys));
 	});
 
+	mySysgame->getUI()->AddWidget((Widget*) background2);
 	mySysgame->getUI()->AddWidget( (Widget*) background );
 	mySysgame->getUI()->AddWidget( (Widget*) myButton);
 	mySysgame->getUI()->AddWidget( (Widget*) myButton2 );

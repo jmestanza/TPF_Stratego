@@ -45,8 +45,8 @@ void TextInput::handleEvent(ALLEGRO_EVENT *ev){
 		auxCount ++;
 
 		int lastShowTile = _showTile;
-		_showTile = auxCount < 5;
-		auxCount = auxCount >= 10 ? 0 : auxCount;
+		_showTile = auxCount < 20;
+		auxCount = auxCount >= 40 ? 0 : auxCount;
 		if (_showTile != lastShowTile) updateDrawing();
 	}
 }
@@ -149,6 +149,8 @@ void TextInput::stopDrawing(){
 		view->eraseLoaded(smallTextName);
 	}
 }
-
+string TextInput::getText() {
+	return shownText;
+}
 TextInput::~TextInput(){
 }

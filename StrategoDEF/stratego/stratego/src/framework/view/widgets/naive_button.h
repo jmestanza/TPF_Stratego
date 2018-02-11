@@ -16,12 +16,18 @@ class NaiveButton : public Widget{
 		int mx,my;
 		void(*onClickFunction)(Sysgame *);
 		int _clicked;
+		int _iconMode;
+		int _enabled;
 	public:
 		NaiveButton(Sysgame *sys, string name);
 		void start(pair<float, float> _pos, int centered, string _img_a, string _img_b, string _img_c);
 		//void ON
 		void onClick(void(*func)(Sysgame *));
 
+		int enabled();
+		void enable();
+		void disable();
+		void addIcon(string img);
 		void handleEvent(ALLEGRO_EVENT *ev);
 		void startDrawing();
 		void stopDrawing();

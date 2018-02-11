@@ -147,6 +147,8 @@
     <ClCompile Include="src\framework\model\network\NetworkProtocol.cpp" />
     <ClCompile Include="src\framework\model\network\Package.cpp" />
     <ClCompile Include="src\framework\sysgame\sysgame.cpp" />
+    <ClCompile Include="src\framework\utils\getMillisFromEpoch.cpp" />
+    <ClCompile Include="src\framework\utils\getXMLFile.cpp" />
     <ClCompile Include="src\framework\utils\random_number.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\allegro_manager.cpp" />
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showImage.cpp" />
@@ -156,9 +158,11 @@
     <ClCompile Include="src\framework\view\utils\copyBitmap.cpp" />
     <ClCompile Include="src\framework\view\utils\getKey.cpp" />
     <ClCompile Include="src\framework\view\utils\good_buttons.cpp" />
+    <ClCompile Include="src\framework\view\widgets\Animation.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\screen_text.cpp" />
+    <ClCompile Include="src\framework\view\widgets\showClocks\showTime.cpp" />
     <ClCompile Include="src\framework\view\widgets\Table.cpp" />
     <ClCompile Include="src\framework\view\widgets\TableButton.cpp" />
     <ClCompile Include="src\framework\view\widgets\TextInput.cpp" />
@@ -168,6 +172,7 @@
     <ClCompile Include="src\game\controller\connectMenu\connect_menu.cpp" />
     <ClCompile Include="src\game\controller\defaultMenu\defaultMenu.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
+    <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +181,8 @@
     <ClInclude Include="src\framework\model\network\NetworkProtocol.h" />
     <ClInclude Include="src\framework\model\network\Package.h" />
     <ClInclude Include="src\framework\sysgame\sysgame.h" />
+    <ClInclude Include="src\framework\utils\getMillisFromEpoch.h" />
+    <ClInclude Include="src\framework\utils\getXMLFile.h" />
     <ClInclude Include="src\framework\utils\random_number.h" />
     <ClInclude Include="src\framework\view\allegro_manager\allegro_manager.h" />
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showImage.h" />
@@ -185,9 +192,11 @@
     <ClInclude Include="src\framework\view\utils\copyBitmap.h" />
     <ClInclude Include="src\framework\view\utils\getKey.h" />
     <ClInclude Include="src\framework\view\utils\good_buttons.h" />
+    <ClInclude Include="src\framework\view\widgets\Animation.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
     <ClInclude Include="src\framework\view\widgets\screen_text.h" />
+    <ClInclude Include="src\framework\view\widgets\showClocks\showTime.h" />
     <ClInclude Include="src\framework\view\widgets\Table.h" />
     <ClInclude Include="src\framework\view\widgets\TableButton.h" />
     <ClInclude Include="src\framework\view\widgets\TextInput.h" />
@@ -197,6 +206,7 @@
     <ClInclude Include="src\game\controller\connectMenu\connect_menu.h" />
     <ClInclude Include="src\game\controller\defaultMenu\defaultMenu.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
+    <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -222,6 +232,7 @@
     <Import Project="..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets" Condition="Exists('..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets')" />
     <Import Project="..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets" Condition="Exists('..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets')" />
     <Import Project="..\packages\Allegro.5.2.3.1\build\native\Allegro.targets" Condition="Exists('..\packages\Allegro.5.2.3.1\build\native\Allegro.targets')" />
+    <Import Project="packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets" Condition="Exists('packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -233,5 +244,6 @@
     <Error Condition="!Exists('..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc141.1.66.0.0\build\native\boost_regex-vc141.targets'))" />
     <Error Condition="!Exists('..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets'))" />
     <Error Condition="!Exists('..\packages\Allegro.5.2.3.1\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Allegro.5.2.3.1\build\native\Allegro.targets'))" />
+    <Error Condition="!Exists('packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_chrono-vc141.1.66.0.0\build\native\boost_chrono-vc141.targets'))" />
   </Target>
 </Project>

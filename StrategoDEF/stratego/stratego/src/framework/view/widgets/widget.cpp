@@ -16,6 +16,9 @@ void Widget::killMe() {
 bool Widget::getKillMe() {
 	return _killMe;
 }
+pair <float,float> Widget::getSize() {
+	return size;
+}
 Sysgame* Widget::getSysgame() {
 	return mySysgame;
 }

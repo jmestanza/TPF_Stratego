@@ -7,25 +7,14 @@
 #include "allegro5\allegro_audio.h"
 #include "allegro5\allegro_image.h"
 #include "allegro5\allegro_ttf.h"
+#include <framework\utils\getXMLFile.h>
 
 #include <map>
 #include <iostream>
 using namespace std;
 using boost::property_tree::ptree;
 
-void get_xml_content(ptree &tree,string dir) {
-	ifstream is;
-	try {
-		is = ifstream(dir);
-	} catch (ifstream::failure &e) {
-		throw AllegroHandlerException("could not open '" + dir + "'");
-	}
-	try {
-		read_xml(is, tree);
-	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
-		throw AllegroHandlerException("Error parsing xml file '" + dir + "'");
-	}
-}
+
 
 AllegroHandlerException::AllegroHandlerException(string _err) : err("AllegroHandlerException: "+_err) {
 
@@ -34,6 +23,7 @@ const char * AllegroHandlerException::what() const throw() {
 	//string ans =  + err;
 	return err.c_str();
 }
+
 void allegro_init(void) {
 	if (!al_init())	throw AllegroHandlerException("could not start allegro");
 	if (!al_install_keyboard()) throw AllegroHandlerException("could not start allegro keyboard");
@@ -48,7 +38,7 @@ void allegro_init(void) {
 }
 Viewer::Viewer() {
 	_debug = 0;
-	TimerFreq = 10;
+	TimerFreq = 40;
 	 // defaults
 	screenSize.first = 800;
 	screenSize.second = 600;
@@ -58,6 +48,9 @@ void Viewer::setDebugFlag() {
 }
 pair <float, float> Viewer::getScreenSize() {
 	return screenSize;
+}
+void Viewer::setScreenSize(pair<float,float> _size) {
+	screenSize = _size;
 }
 void Viewer::start(){
 	// enable anti alias
@@ -84,7 +77,7 @@ void Viewer::start(){
 }
 void Viewer::loadConfFile(string xmlFile) {
 	ptree pt;
-	get_xml_content(pt,xmlFile);
+	getXMLFile(pt,xmlFile);
 	if (pt.count("config") != 1) throw AllegroHandlerException("wrong xml file (config tag invalid)");
 	ptree content = pt.get_child("config");
 
@@ -112,7 +105,7 @@ void Viewer::loadConfFile(string xmlFile) {
 }
 void Viewer::loadImgFile(string xmlFile) {
 	ptree pt;
-	get_xml_content(pt,xmlFile);
+	getXMLFile(pt,xmlFile);
 	if (pt.count("images") != 1) {
 		throw AllegroHandlerException("Error in xml file, wrong amount of images tag in '"+xmlFile+"'");
 	}
@@ -134,7 +127,7 @@ void Viewer::loadImgFile(string xmlFile) {
 void Viewer::loadAudioFile(string xmlFile) {
 	cout << xmlFile << endl;
 	ptree pt;
-	get_xml_content(pt,xmlFile);
+	getXMLFile(pt,xmlFile);
 	cout << pt.count("audios") << endl;
 	if (pt.count("audios") != 1) {
 		throw AllegroHandlerException("Error in xml file, wrong amount of audio tag in '" + xmlFile + "'");
@@ -158,7 +151,7 @@ void Viewer::loadAudioFile(string xmlFile) {
 }
 void Viewer::loadFontFile(string xmlFile) {
 	ptree pt;
-	get_xml_content(pt,xmlFile);
+	getXMLFile(pt,xmlFile);
 	if (pt.count("fonts") != 1) {
 		throw AllegroHandlerException("Error in xml file, wrong amount of fonts tag in '"+xmlFile+"'");
 	}
@@ -187,7 +180,7 @@ void Viewer::loadFontFile(string xmlFile) {
 }
 void Viewer::loadColorsFile(string xmlFile) {
 	ptree pt;
-	get_xml_content(pt, xmlFile);
+	getXMLFile(pt, xmlFile);
 	if (pt.count("colors") != 1) {
 		throw AllegroHandlerException("Error in xml file, wrong amount of colors tag in '" + xmlFile + "'");
 	}
@@ -307,7 +300,7 @@ ALLEGRO_BITMAP * Viewer::getImg(string loadedName) {
 }
 void Viewer::eraseLoaded(string loadedName) {
 	if (loaded.find(loadedName) == loaded.end()) {
-		throw AllegroHandlerException("Trying to erase image that was not loaded, '"+loadedName+"'");
+		return; // esta situacion puede suceder y es normal. A veces el recolector de basura elimina el objeto antes de tiempo
 	}
 	loaded.erase(loadedName);
 }
@@ -367,12 +360,15 @@ void Viewer::playonce(string song) {
 
 void Viewer::changeShowImg(string showName, string newImageName) {
 	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 1)");
-	if (frontShow.find(showName) == frontShow.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 2)");
-	try {
-		ShowImage *img = dynamic_cast<ShowImage*>(frontShow[showName]);
-		img->setImage(loaded[newImageName]);
-	} catch (bad_cast &e) {
-		throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (bad cast)");
+	if (frontShow.find(showName) == frontShow.end()) {
+		throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 2)");
+	}else{
+		try {
+			ShowImage *img = dynamic_cast<ShowImage*>(frontShow[showName]);
+			img->setImage(loaded[newImageName]);
+		} catch (bad_cast &e) {
+			throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (bad cast)");
+		}
 	}
 	//float x = frontShow[showName].pos.first, y = frontShow[showName].pos.second;
 	//frontShow[showName] = ShowObject(loaded[newImageName], x, y);

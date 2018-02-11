@@ -17,15 +17,19 @@ void NetworkManager::tryConnection(string host, int port, int timeout) {
 	if (this->connected) {
 		throw NetworkManagerException("Network error trying connect when we are already connected \n");
 	}
-	mySocket.reset(new boost::asio::ip::tcp::socket(*ioService));
-	failure = 0;
-	ip::tcp::endpoint myEndPoint(ip::address::from_string(host), port);
-	mySocket->async_connect(myEndPoint, boost::bind(&NetworkManager::handleConnect, this, _1));
-	//mt19937 g1(std::chrono::system_clock::now().time_since_epoch().count());
-	//timer.cancel();
-	timerOn = 1;
-	timer.expires_from_now(boost::posix_time::millisec(timeout));
-	timer.async_wait(boost::bind(&NetworkManager::handleTimeout, this));
+	try {
+		mySocket.reset(new boost::asio::ip::tcp::socket(*ioService));
+		failure = 0;
+		ip::tcp::endpoint myEndPoint(ip::address::from_string(host),port);
+		mySocket->async_connect(myEndPoint,boost::bind(&NetworkManager::handleConnect,this,_1));
+		//mt19937 g1(std::chrono::system_clock::now().time_since_epoch().count());
+		//timer.cancel();
+		timerOn = 1;
+		timer.expires_from_now(boost::posix_time::millisec(timeout));
+		timer.async_wait(boost::bind(&NetworkManager::handleTimeout,this));
+	}catch(boost::exception &e) {
+		throw NetworkManagerException("Boost error!");
+	}
 }
 void NetworkManager::waitForConnection(int port) {
 	if (this->connected) {

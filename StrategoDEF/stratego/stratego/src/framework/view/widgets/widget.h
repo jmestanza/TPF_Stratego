@@ -22,6 +22,7 @@ class Widget {
 		Widget(Sysgame *sys,string name);
 		bool getKillMe();
 		void killMe();
+		pair <float,float> getSize();
 
 		string getName();
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;

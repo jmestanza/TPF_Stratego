@@ -55,6 +55,7 @@ class Viewer {
 	public:
 		Viewer();
 		pair<float,float> getScreenSize();
+		void setScreenSize(pair<float,float> size);
 		void setDebugFlag();
 		void loadConfFile(string xmlFile);
 		void loadImgFile(string xmlFile);

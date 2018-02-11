@@ -81,11 +81,12 @@ void TextButton::generate(string msg, imgGroup img , pair<float,float> pos,int c
 	getViewer()->loadFromBitmap(a,a_code);
 	getViewer()->loadFromBitmap(b,b_code);
 	getViewer()->loadFromBitmap(c,c_code);
-	
 
 	this->start(pos,centered,a_code,b_code,c_code);
 	al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
 }
 
 
-TextButton::~TextButton() {}
+TextButton::~TextButton() {
+	
+}

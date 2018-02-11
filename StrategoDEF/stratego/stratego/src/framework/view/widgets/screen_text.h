@@ -3,7 +3,7 @@
 #include "widget.h"
 
 
-class screenText : Widget{
+class screenText : public Widget{
 	private:
 		string code;
 	public:

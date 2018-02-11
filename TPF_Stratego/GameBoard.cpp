@@ -16,33 +16,33 @@ tablero_t& GameBoard::get_board()
 
 BasicToken * GameBoard::get_tile(PosType tile)
 {
-	return board[(tile.x)][(tile.y)];
+	return board[(tile.i)][(tile.j)];
 }
 
 void GameBoard::set_new_token(PlayerType owner, PosType pos, RangeType rank)
 {	
 	//if(this->board)
 	if ((rank == FLAG) || (rank == BOMB)) {
-		board[pos.x][pos.y] = new BasicToken(rank, false, owner);
+		board[pos.i][pos.j] = new BasicToken(rank, false, owner);
 	}
 	else {
-		board[pos.x][pos.y] = new BasicToken(rank, true, owner);
+		board[pos.i][pos.j] = new BasicToken(rank, true, owner);
 	}	
 }
 
 void GameBoard::set_enemy_tokens(PlayerType enemy_color)
 {
-	if (enemy_color != BLUE) {
+	if (enemy_color == RED) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < BOARD_SIZE; j++) {
-				board[i][j] = new BasicToken(ENEMY, false, BLUE);
+				board[i][j] = new BasicToken(ENEMY, false, RED);
 			}
 		}
 	}
 	else {
 		for (int i = 6; i < BOARD_SIZE; i++) {
 			for (int j = 0; j < BOARD_SIZE; j++) {
-				board[i][j] = new BasicToken(ENEMY, false, RED);
+				board[i][j] = new BasicToken(ENEMY, false, BLUE);
 			}
 		}
 	}
@@ -50,14 +50,16 @@ void GameBoard::set_enemy_tokens(PlayerType enemy_color)
 
 void GameBoard::clear_tile(PosType tile_pos)
 {
-	delete board[(tile_pos.x)][(tile_pos.y)];
+	if(board[tile_pos.i][tile_pos.j] != nullptr)
+	delete board[tile_pos.i][tile_pos.j];
+	//revisar si no hay memory leak
 }
 
 void GameBoard::move_token(PosType src_pos, PosType dst_pos)
 {
-	board[(dst_pos.x)][(dst_pos.y)] = board[(src_pos.x)][(src_pos.y)];
-	board[(dst_pos.x)][(dst_pos.y)]->set_token_pos(dst_pos.x, dst_pos.y);
-	board[(src_pos.x)][(src_pos.y)] = nullptr;
+	board[dst_pos.i][dst_pos.j] = board[src_pos.i][src_pos.j];
+	board[dst_pos.i][dst_pos.j]->set_token_pos(dst_pos.i, dst_pos.j);
+	board[src_pos.i][src_pos.j] = nullptr;
 }
 
 GameBoard::~GameBoard()

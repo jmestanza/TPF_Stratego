@@ -11,15 +11,15 @@ BasicToken::BasicToken(RangeType set_range, bool move_en, PlayerType player)
 PosType BasicToken::get_token_pos()
 {
 	PosType temp;
-	temp.x = this->curr_pos.x;
-	temp.y = this->curr_pos.y;
+	temp.i = this->curr_pos.i;
+	temp.j = this->curr_pos.j;
 	return temp;
 }
 
 void BasicToken::set_token_pos(unsigned char new_x, unsigned char new_y)
 {
-	this->curr_pos.x = new_x;
-	this->curr_pos.y = new_y;
+	this->curr_pos.i = new_x;
+	this->curr_pos.j = new_y;
 }
 
 RangeType BasicToken::get_range()

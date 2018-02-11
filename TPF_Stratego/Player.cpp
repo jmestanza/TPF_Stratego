@@ -45,34 +45,34 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 	switch (local_range) /// Validacion del movimiento - cada ficha puede moverse distinto
 	{
 	case MARSHAL:
-		move_valid = ((MarshalToken*)token)->validate_movement(dst_pos);
+		move_valid = ((MarshalToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case GENERAL:
-		move_valid = ((GeneralToken*)token)->validate_movement(dst_pos);
+		move_valid = ((GeneralToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case COLONEL:
-		move_valid = ((ColonelToken*)token)->validate_movement(dst_pos);
+		move_valid = ((ColonelToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case MAJOR:
-		move_valid = ((MajorToken*)token)->validate_movement(dst_pos);
+		move_valid = ((MajorToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case CAPTAIN:
-		move_valid = ((CaptainToken*)token)->validate_movement(dst_pos);
+		move_valid = ((CaptainToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case LIEUTENANT:
-		move_valid = ((LieutenantToken*)token)->validate_movement(dst_pos);
+		move_valid = ((LieutenantToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case SERGEANT:
-		move_valid = ((SergeantToken*)token)->validate_movement(dst_pos);
+		move_valid = ((SergeantToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case MINER:
-		move_valid = ((MinerToken*)token)->validate_movement(dst_pos);
+		move_valid = ((MinerToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	case SCOUT:
-		move_valid = ((ScoutToken*)token)->validate_movement(dst_pos, local_board.get_board());
+		move_valid = ((ScoutToken*)token)->validate_movement(src_pos,dst_pos, local_board.get_board());
 		break;
 	case SPY:
-		move_valid = ((SpyToken*)token)->validate_movement(dst_pos);
+		move_valid = ((SpyToken*)token)->validate_movement(src_pos,dst_pos);
 		break;
 	}
 
@@ -185,8 +185,12 @@ State Player::get_game_state()
 	return game_state;
 }
 
+PlayerType Player::get_player() {
+	return player;
+}
+
 void Player::set_game_state(State st) {
-	game_state = st;
+	this->game_state = st;
 }
 
 Player::~Player()

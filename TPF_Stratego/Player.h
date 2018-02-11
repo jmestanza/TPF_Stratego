@@ -49,6 +49,7 @@ public:
 	void process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range); /// Recibe el rango atacante/atacado y resuelve											
 	MoveResult move_enemy_token(PosType src_pos, PosType dst_pos); /// Retorna MoveTypes		
 	State get_game_state(); /// Retorna estado actual segun BasicStates
+	PlayerType get_player();
 	void set_game_state(State st);
 	~Player();
 	GameBoard local_board; 

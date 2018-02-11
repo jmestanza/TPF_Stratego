@@ -5,8 +5,8 @@
 PosType::PosType()
 {
 	/// Default create setting
-	x = 'A';
-	y = '1';
+	i = 100;
+	j = 100;
 }
 
 PosType::~PosType()

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Framework/sysgame/sysgame.h>
 #include <game/controller/menu_test/menu_test.h>
+#include <game/controller/showTimeTest/showTimeTest.h>
+
 using namespace std;
 
 int main() {
@@ -9,9 +11,10 @@ int main() {
 
 	try{
 		Sysgame sys;
-		sys.setNewController( (Controller*)new menuTest(&sys));
-
+		sys.setNewController( (Controller*)new MenuTest(&sys));
+		
 		while (!sys.quit()) sys.update();
+		
 	} catch (exception &e) {
 		cerr << "A fatal error occurred and the program needed to stop \n";
 		cerr << "Reason: " << e.what() << '\n';

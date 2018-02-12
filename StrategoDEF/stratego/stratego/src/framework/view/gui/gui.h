@@ -31,6 +31,7 @@ class UI {
 		void AddWidget(Widget* widget);
 		void HandleEvent(ALLEGRO_EVENT *ev);
 		void RemoveWidget(string WidgetName);
+		Widget *getWidget(string name);
 
 		~UI();
 };

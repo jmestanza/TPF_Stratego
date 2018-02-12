@@ -8,14 +8,14 @@
 
 
 
-class menuTest : public Controller{
+class MenuTest : public Controller{
 	public:
 		int value;
-		menuTest(Sysgame *sys);
+		MenuTest(Sysgame *sys);
 		void onCreate();
 		void onNetPack(string &package, map<string, string> &data);  // handle NETWORK actions
 		void onNetEvent(NETWORK_EVENT *ev);
 
-		~menuTest();
+		~MenuTest();
 };
 

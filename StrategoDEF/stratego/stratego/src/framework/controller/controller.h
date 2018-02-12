@@ -28,8 +28,16 @@ class Controller {
 		virtual void onNetEvent(NETWORK_EVENT *ev) = 0;
 		virtual ~Controller();
 		void addWidget(Widget *w);
-
+		void eraseWidget(string name);
+		void callIn(int miliseconds,void(*func)(Sysgame *));
+		void disableFlagTimer();
+		void addBackgroundImg(string img);
+		string getTimerName();
+		void callTimerFunc();
 	protected:
+		int flagTimer;
+		string timerName;
 		Sysgame* mySysgame;
 		Viewer* view;
+		void(*timerFunc)(Sysgame *);
 };

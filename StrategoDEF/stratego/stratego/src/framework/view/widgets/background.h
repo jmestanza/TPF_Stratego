@@ -9,10 +9,14 @@ class Background : public Widget{
 		ALLEGRO_COLOR color;
 		int centered;
 		string code;
+		string myImg;
+		string loadImg;
 	public:
 		Background(Sysgame *sysgame, string name);
 		void handleEvent(ALLEGRO_EVENT *ev);
-		void configure(ALLEGRO_COLOR color,pair<float,float> pos,pair<float,float> size,bool _centered);
+		void configure(string color,pair<float,float> pos,pair<float,float> size,bool _centered);
+		void configureImg(string _name,pair<float,float> pos,bool _centered);
+		void configureImg(string _name);
 		void startDrawing();
 		void stopDrawing();
 		~Background();

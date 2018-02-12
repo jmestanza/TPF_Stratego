@@ -5,3 +5,4 @@ using namespace std;
 
 
 int randomNumber();
+int randrange(int a,int b);

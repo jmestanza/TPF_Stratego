@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<fonts>
-  <font name="Fredoka" dir ="Fredoka Fonts\FredokaOne-Regular.ttf" size="100"></font>
-  <font name="Fredoka_small" dir ="Fredoka Fonts\FredokaOne-Regular.ttf" size="30"></font>
-  <font name="roboto_v1" dir="roboto\robotottf\Roboto-Regular.ttf" size="20"></font>
-  <font name="roboto_v30" dir="roboto\robotottf\Roboto-Regular.ttf" size="30"></font>
-  <font name="Akrobat" dir ="akrobat\Akrobat-SemiBold.ttf" size="30"></font>
-</fonts>

@@ -1,0 +1,80 @@
+      75 text files.
+classified 75 files      75 unique files.                              
+      30 files ignored.
+
+http://cloc.sourceforge.net v 1.58  T=0.5 s (138.0 files/s, 7620.0 lines/s)
+------------------------------------------------------------------------------------------------------------------
+File                                                                           blank        comment           code
+------------------------------------------------------------------------------------------------------------------
+.\game\controller\connectMenu\connect_menu.cpp                                   105             14            447
+.\framework\view\allegro_manager\allegro_manager.cpp                              33             13            348
+.\framework\sysgame\sysgame.cpp                                                   18              2            169
+.\framework\view\widgets\showClocks\showTime.cpp                                  16             10            124
+.\framework\view\widgets\TextInput.cpp                                            28              7            121
+.\framework\model\network\NetworkProtocol.cpp                                      5              2            117
+.\framework\view\widgets\naive_button.cpp                                         11              3             95
+.\framework\model\network\NetworkManager.cpp                                       4              2             93
+.\framework\view\widgets\Table.cpp                                                20              5             74
+.\framework\view\allegro_manager\allegro_manager.h                                16              4             73
+.\game\controller\connectMenu\connect_menu.h                                      11              1             64
+.\framework\model\network\Package.cpp                                              5              0             61
+.\framework\sysgame\sysgame.h                                                     20              4             59
+.\framework\view\widgets\text_button.cpp                                          27              7             58
+.\framework\view\widgets\widget.cpp                                                4              1             57
+.\framework\view\utils\getKey.cpp                                                  5              0             55
+.\framework\view\gui\gui.cpp                                                       7              3             53
+.\game\controller\aboutWindow\aboutWindow.cpp                                     13              0             53
+.\framework\view\widgets\Animation.cpp                                             5              0             53
+.\game\controller\menu_test\menu_test.cpp                                         17              3             49
+.\framework\model\network\networkManager.h                                         7              3             45
+.\framework\view\widgets\background.cpp                                            8              1             45
+.\framework\view\widgets\screen_text.cpp                                           8              1             43
+.\framework\view\utils\good_buttons.cpp                                           16              2             40
+.\framework\view\widgets\widget.h                                                  7              0             39
+.\framework\view\widgets\Table.h                                                   9              1             35
+.\framework\model\network\NetworkProtocol.h                                        5              0             33
+.\framework\view\widgets\naive_button.h                                            5              1             31
+.\framework\view\widgets\showClocks\showTime.h                                     4              0             30
+.\framework\view\gui\gui.h                                                         8              0             30
+.\framework\model\network\Package.h                                                6              2             30
+.\framework\view\widgets\TextInput.h                                               5              0             29
+.\framework\controller\controller.h                                                5              7             23
+.\game\controller\showTimeTest\showTimeTest.cpp                                    9              0             22
+.\framework\view\widgets\Animation.h                                               4              0             21
+.\framework\view\widgets\background.h                                              3              0             21
+.\framework\view\widgets\text_button.h                                             3              0             21
+.\framework\utils\getXMLFile.cpp                                                   4              1             19
+.\framework\view\utils\copyBitmap.cpp                                              2              0             17
+.\framework\view\widgets\TableButton.cpp                                           5              1             17
+.\framework\view\allegro_manager\show_objects\ShowObject.h                         7              2             17
+.\framework\view\allegro_manager\show_objects\ShowObject.cpp                       3              0             16
+.\main.cpp                                                                         6              1             16
+.\framework\view\allegro_manager\show_objects\showRectangle.h                      4              0             16
+.\game\controller\menu_test\menu_test.h                                            6              0             15
+.\framework\view\widgets\screen_text.h                                             5              0             15
+.\framework\utils\getXMLFile.h                                                     4              0             14
+.\framework\view\allegro_manager\show_objects\showImage.h                          4              0             13
+.\framework\controller\controller.cpp                                              2              0             12
+.\framework\view\allegro_manager\show_objects\showRectangle.cpp                    4              1             12
+.\framework\view\widgets\TableButton.h                                             3              0             12
+.\game\controller\defaultMenu\defaultMenu.h                                        3              0             11
+.\game\controller\showTimeTest\showTimeTest.h                                      4              0             10
+.\framework\view\allegro_manager\show_objects\showImage.cpp                        5              0             10
+.\game\controller\aboutWindow\aboutWindow.h                                        3              0             10
+.\framework\view\utils\good_buttons.h                                              3              0              9
+.\framework\utils\random_number.cpp                                                3              0              9
+.\framework\view\utils\getKey.h                                                    5              0              9
+.\game\controller\defaultMenu\defaultMenu.cpp                                      6              0              8
+.\framework\view\utils\button_generator.h                                          1              0              8
+.\game\controller\menu_test\menuTestView.h                                         4              0              8
+.\game\controller\menu_test\menuTestView.cpp                                       5              0              7
+.\framework\utils\random_number.h                                                  2              0              6
+.\game\layouts\menu_test\menu_test.cpp                                             3              4              6
+.\framework\utils\getMillisFromEpoch.cpp                                           1              0              5
+.\framework\view\utils\button_generator.cpp                                        2              1              4
+.\framework\view\utils\copyBitmap.h                                                2              0              4
+.\framework\utils\getMillisFromEpoch.h                                             1              0              3
+.\game\layouts\menu_test\menu_test.h                                               2              3              2
+------------------------------------------------------------------------------------------------------------------
+SUM:                                                                             596            113           3101
+------------------------------------------------------------------------------------------------------------------

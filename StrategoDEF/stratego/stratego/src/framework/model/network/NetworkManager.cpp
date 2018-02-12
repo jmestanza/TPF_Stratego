@@ -64,24 +64,33 @@ void NetworkManager::handleConnect(const boost::system::error_code& error) {
 		return;
 	}
 	connected = 1;
+
 	onConnect();
 	mySocket->async_read_some(buffer(readBuffer), boost::bind(&NetworkManager::handleRecv, this, _1, _2));
 }
 void NetworkManager::handleRecv(const boost::system::error_code& error, size_t bytes) {
-	if (error) { mySocket->close(); onLostConnection(error.message()); return; }
+	if (error) {
+		connected = 0;
+		mySocket->close(); onLostConnection(error.message()); return; 
+	}
 	flagWaiting = 0;
 	string ans(readBuffer, bytes);
 	onRecv(ans);
 	mySocket->async_read_some(buffer(readBuffer), boost::bind(&NetworkManager::handleRecv, this, _1, _2));
 }
 void NetworkManager::handleSent(const boost::system::error_code& error, size_t bytes) {
-	if (error) { onLostConnection(error.message()); return; }
+	if (error) { 
+		connected = 0;
+		mySocket->close();
+		onLostConnection(error.message()); return; 
+	}
 	onSent();
 }
 void NetworkManager::handleTimeout() {
 	if (connected || !timerOn) return;
 	timerOn = 0;
 	failure = 1;
+	connected = 0;
 	mySocket->close();
 	onConnFailed("timeout waiting for a server");
 }
@@ -89,7 +98,15 @@ void NetworkManager::handleRecvTimeout(const boost::system::error_code& error) {
 	if (!flagWaiting || !timerOn) return;
 	timerOn = 0;
 	mySocket->close();
+	flagWaiting = 0;
+	connected = 0;
 	onLostConnection("timout waiting for answer");
+	
+}
+void NetworkManager::closeConnection() {
+	cout << "Close conection!";
+	mySocket->close();
+	timerOn = 0;
 	flagWaiting = 0;
 	connected = 0;
 }

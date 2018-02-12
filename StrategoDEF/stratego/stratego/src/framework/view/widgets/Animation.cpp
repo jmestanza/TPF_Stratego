@@ -21,14 +21,14 @@ void Animation::configure(vector <string> _images,pair<float,float> _pos,int cen
 	}
 }
 void Animation::configure(vector <string> _images) {
-	cout << "called\n";
+	
 	images = _images;
 	ALLEGRO_BITMAP *img = view->getImg(images[0]);
 	size = pair<int,int>(al_get_bitmap_width(img),al_get_bitmap_height(img));
 }
 void Animation::startDrawing() {
 
-	cout << "start!" << '\n';
+	//cout << "start!" << '\n';
 	_started = 1;
 	view->show(images[_efDrawing] , myNameCode ,this->pos.first,this->pos.second );
 }
@@ -42,7 +42,7 @@ void Animation::updateDrawing(){
 	}
 }
 void Animation::stopDrawing() {
-	cout << "stop!"<<'\n';
+	//cout << "stop!"<<'\n';
 	view->stopShow(myNameCode);
 	_started = 0;
 }

@@ -16,6 +16,9 @@ TextInput::TextInput(Sysgame *sys, string name) : Widget(sys,name){
 	myDefaultFont = "roboto_v1";
 	_smallTextAdded = 0;
 }
+void TextInput::setText(string text) {
+	shownText = text;
+}
 void TextInput::configure(pair<float, float> _pos,bool centered) {
 	pos = _pos;
 	ALLEGRO_BITMAP *a = view->getImg("text_input");

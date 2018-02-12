@@ -17,7 +17,6 @@ ShowTime::ShowTime(Sysgame *sys,string name) : Widget(sys,name) {
 }
 
 void ShowTime::configure(string font,string color,pair<float,float> _pos,int centered) {
-
 	ALLEGRO_FONT* currentFont = view->getFont(font);
 	ALLEGRO_COLOR currentColor = view->getColor(color);
 
@@ -93,6 +92,7 @@ void ShowTime::handleEvent(ALLEGRO_EVENT *ev) {
 	}
 }
 int ShowTime::timeDone() {
+	//cout << targetTime - getMillisFromEpoch() << '\n';
 	return (long long)(targetTime - getMillisFromEpoch()) <= 0;
 }
 void ShowTime::startDrawing() {

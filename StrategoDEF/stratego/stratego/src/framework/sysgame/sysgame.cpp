@@ -55,8 +55,15 @@ NetContInt::~NetContInt() {
 
 }
 Sysgame::Sysgame() : network(&service) {
+	nextController = nullptr;
 	getKeyInit();
 	network.setSysgamePointer(this);
+	try {
+		network.ParseProtocolXML("resource/protocol.xml");
+	} catch (NetworkProtocolException &e) {
+		cout << "couldn't load network protocol: " << e.what() << '\n';
+		throw SysgameException("Fatal sysgame exception! ");
+	}
 	controller = nullptr;
 	_quit = 0;
 	ui = new UI();
@@ -154,10 +161,9 @@ Sysgame::~Sysgame() {
 }
 
 void Sysgame::setNewController(Controller *_contr) {
-	delete controller;
-	ui->eraseAll();
-	controller = _contr;
-	controller->onCreate();
+	nextController = _contr;
+
+	
 }
 
 void Sysgame::update() {
@@ -177,6 +183,16 @@ void Sysgame::update() {
 	} 
 	
 	service.poll();
+
+	if (nextController != nullptr) {
+		ui->eraseAll();
+		ui->refreshDead();
+		delete controller;
+		controller = nextController;
+		controller->onCreate();
+
+		nextController = nullptr;
+	}
 }
 bool Sysgame::quit() {
 	return _quit;

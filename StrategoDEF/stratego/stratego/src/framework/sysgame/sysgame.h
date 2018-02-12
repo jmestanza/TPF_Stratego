@@ -74,6 +74,7 @@ class Sysgame {
 		map<string,string> configurationData;
 		io_service service;
 		Controller *controller;
+		Controller *nextController;
 		UI *ui;
 		Viewer *view;
 		NetContInt network;

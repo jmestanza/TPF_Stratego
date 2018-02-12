@@ -28,6 +28,7 @@ class TextInput : public Widget{
 		void updateDrawing();
 		void startDrawing();
 		void stopDrawing();
+		void setText(string text);
 
 		~TextInput();
 };

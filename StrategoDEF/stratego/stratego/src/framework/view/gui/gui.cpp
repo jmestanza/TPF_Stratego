@@ -45,7 +45,9 @@ void UI::refreshDead() {
 	deadWidgets.clear();
 }
 void UI::HandleEvent(ALLEGRO_EVENT *ev) {
-	for (auto it = widgets.begin(); it != widgets.end(); it++) it->second->handleEvent(ev);
+	for (auto it = widgets.begin(); it != widgets.end(); it++) {
+		it->second->handleEvent(ev);
+	}
 }
 void UI::eraseAll() {
 	for (auto it = widgets.begin(); it != widgets.end(); it++) RemoveWidget(it->first);

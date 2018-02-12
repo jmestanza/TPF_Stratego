@@ -1,10 +1,10 @@
 #include "NetworkProtocol.h"
 
-NetworkProtocolException::NetworkProtocolException(string _err) : err(_err){
+NetworkProtocolException::NetworkProtocolException(string _err) : err("NetworkProtocolException:"+_err){
 
 }
 const char * NetworkProtocolException::what() const throw(){
-	return ("NetworkProtocolException:"+err).c_str();
+	return (err).c_str();
 }
 
 NetworkProtocol::NetworkProtocol(io_service* service) : NetworkManager(service){
@@ -88,7 +88,8 @@ void NetworkProtocol::createPackages(vector <Package*> pkgList) {
 void NetworkProtocol::sendPackage(string pkgName, map <string, string> &content) {
 	/// Frist we verify package is in a correct format
 	if (pkgByName.find(pkgName) == pkgByName.end()) {
-		throw NetworkProtocolException("Fatal error: trying to send invalid package, invalid head");
+	
+		throw NetworkProtocolException("Fatal error: trying to send invalid package, invalid head '"+pkgName+"'");
 	}
 	Package *package = pkgByName[pkgName];
 	/// check each pacakge field is present
@@ -96,7 +97,8 @@ void NetworkProtocol::sendPackage(string pkgName, map <string, string> &content)
 	try {
 		package->encode(content, val);
 	} catch (PackageException &e) {
-		throw NetworkProtocolException("Fatal error: trying to send invalid package");
+		string err(e.what());
+		throw NetworkProtocolException("Fatal error: trying to send invalid package: "+ err);
 	}
 	this->send(val);
 }

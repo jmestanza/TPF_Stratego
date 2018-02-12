@@ -95,6 +95,12 @@
     <Filter Include="src\game\controller\showTimeTest">
       <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\controller\connectionLostMenu">
+      <UniqueIdentifier>{e343f5f6-c84e-46f4-84d7-fedd3bd351db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\controller\gameArea">
+      <UniqueIdentifier>{ce09cc5a-5ed3-4a18-9f40-4e9babb59083}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -193,6 +199,12 @@
     <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp">
       <Filter>src\game\controller\showTimeTest</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\controller\connectionLostMenu\connectionLostMenu.cpp">
+      <Filter>src\game\controller\connectionLostMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\controller\gameArea\gameArea.cpp">
+      <Filter>src\game\controller\gameArea</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -288,26 +300,15 @@
     <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h">
       <Filter>src\game\controller\showTimeTest</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\controller\connectionLostMenu\connectionLostMenu.h">
+      <Filter>src\game\controller\connectionLostMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\gameArea\gameArea.h">
+      <Filter>src\game\controller\gameArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="resource\protocol.xml">
-      <Filter>resource</Filter>
-    </Xml>
-    <Xml Include="resource\game_config.xml">
-      <Filter>resource</Filter>
-    </Xml>
-    <Xml Include="resource\images.xml">
-      <Filter>resource</Filter>
-    </Xml>
-    <Xml Include="resource\fonts.xml">
-      <Filter>resource</Filter>
-    </Xml>
-    <Xml Include="resource\colors.xml">
-      <Filter>resource</Filter>
-    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf">
@@ -322,5 +323,25 @@
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Regular.ttf">
       <Filter>resource\fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Debug\resource\audios.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="..\Debug\resource\colors.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="..\Debug\resource\fonts.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="..\Debug\resource\game_config.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="..\Debug\resource\images.xml">
+      <Filter>resource</Filter>
+    </Xml>
+    <Xml Include="..\Debug\resource\protocol.xml">
+      <Filter>resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

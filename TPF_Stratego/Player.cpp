@@ -147,7 +147,7 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 	if (game_state == LOCAL_MOVE) { /// Alternar turnos
 		game_state = ENEMY_MOVE;
 	}
-	else {
+	if(game_state == ENEMY_MOVE) {
 		game_state = LOCAL_MOVE;
 	}
 }

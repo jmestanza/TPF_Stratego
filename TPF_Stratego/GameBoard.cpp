@@ -50,9 +50,12 @@ void GameBoard::set_enemy_tokens(PlayerType enemy_color)
 
 void GameBoard::clear_tile(PosType tile_pos)
 {
-	if(board[tile_pos.i][tile_pos.j] != nullptr)
-	delete board[tile_pos.i][tile_pos.j];
-	//revisar si no hay memory leak
+	if(board[tile_pos.i][tile_pos.j] != nullptr){
+		delete board[tile_pos.i][tile_pos.j];
+		board[tile_pos.i][tile_pos.j] = nullptr;
+	}else{
+		printf("could not clear tile");
+	}
 }
 
 void GameBoard::move_token(PosType src_pos, PosType dst_pos)

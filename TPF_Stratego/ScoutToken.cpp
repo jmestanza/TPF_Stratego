@@ -8,10 +8,6 @@ ScoutToken::ScoutToken(PlayerType owner) : BasicToken(SCOUT, true, owner)
 
 bool ScoutToken::validate_movement(PosType src_pos,PosType dst_pos, tablero_t& board_ref)
 {
-	int delta_x;
-	((dst_pos.i - src_pos.i) > 0) ? delta_x = dst_pos.i - src_pos.i : delta_x = src_pos.i - dst_pos.i;
-	int delta_y;
-	((dst_pos.j - src_pos.j) > 0) ? delta_y = dst_pos.j - src_pos.j : delta_y = src_pos.j - dst_pos.j;
 	bool tile_empty = true;
 
 	if (src_pos.i == dst_pos.i) {
@@ -30,17 +26,9 @@ bool ScoutToken::validate_movement(PosType src_pos,PosType dst_pos, tablero_t& b
 			}
 		}
 
-	//	if (!tile_empty) {
-	//		return false; /// Movimiento invalido - NO se puede saltar sobre fichas
-	//	}
-	//	else {
-			if ((board_ref[(dst_pos.i)][dst_pos.j] != nullptr) && (delta_y > 1)) {
-				return false; /// Movimiento invalido - SOLO se puede atacar si estan en casilleros contiguos
-			}
-			else {
-				return true;
-			}
-	//	}
+		if (!tile_empty) {
+			return false; /// Movimiento invalido - NO se puede saltar sobre fichas
+		}
 	}
 	else if (src_pos.j == dst_pos.j) {
 		if (dst_pos.i > src_pos.i) {
@@ -58,21 +46,15 @@ bool ScoutToken::validate_movement(PosType src_pos,PosType dst_pos, tablero_t& b
 			}
 		}
 
-	//	if (!tile_empty) {
-	//		return false; /// Movimiento invalido - NO se puede saltar sobre fichas
-	//	}
-	//	else {
-			if ((board_ref[(dst_pos.i)][dst_pos.j] != nullptr) && (delta_x > 1)) {
-				return false; /// Movimiento invalido - SOLO se puede atacar si estan en casilleros contiguos
-			}
-			else {
-				return true;
-			}
-	//	}
+		if (!tile_empty) {
+			return false; /// Movimiento invalido - NO se puede saltar sobre fichas
+		}
 	}
 	else {
 		return false; /// Movimiento invalido
 	}
+
+	return true;
 }
 
 

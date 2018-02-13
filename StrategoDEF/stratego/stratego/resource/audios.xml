@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<audios>
+<audio name="sonic"  dir="sonic_ring.wav"></audio>
+<audio name="simpsons"  dir="simpsons.wav"></audio>
+</audios>

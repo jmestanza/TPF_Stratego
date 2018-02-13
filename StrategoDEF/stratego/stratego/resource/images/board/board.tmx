@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="30" tileheight="30" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../../../../../../Desktop/watergrass.tsx"/>
+ <tileset firstgid="19" source="../../../../../../../../../Desktop/sandwater.tsx"/>
+ <tileset firstgid="27" source="../../../../../../../../../Desktop/grass.tsx"/>
+ <layer name="Tile Layer 1" width="10" height="10">
+  <data encoding="csv">
+43,43,43,43,43,43,43,43,43,43,
+43,43,43,43,43,43,43,43,43,43,
+43,43,43,43,43,43,43,43,43,43,
+43,43,43,43,43,43,43,43,43,43,
+37,37,7,9,37,37,7,9,37,37,
+37,37,13,15,37,37,13,15,37,37,
+43,43,43,43,43,43,43,43,43,43,
+43,43,43,43,43,43,43,43,43,43,
+43,43,43,43,43,43,43,43,43,43,
+43,43,43,43,43,43,43,43,43,43
+</data>
+ </layer>
+</map>

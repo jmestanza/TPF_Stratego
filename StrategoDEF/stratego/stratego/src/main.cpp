@@ -11,7 +11,7 @@ int main() {
 
 	try{
 		Sysgame sys;
-		sys.setNewController( (Controller*)new MenuTest(&sys));
+		sys.setNewController( (Controller*)new showTimeTest(&sys));
 		
 		while (!sys.quit()) sys.update();
 		

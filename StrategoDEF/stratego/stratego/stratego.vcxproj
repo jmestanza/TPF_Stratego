@@ -175,6 +175,7 @@
     <ClCompile Include="src\game\controller\gameArea\gameArea.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp" />
+    <ClCompile Include="src\game\utils\genTokenImages.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +212,7 @@
     <ClInclude Include="src\game\controller\gameArea\gameArea.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
     <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h" />
+    <ClInclude Include="src\game\utils\genTokenImages.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -103,6 +103,9 @@ void Viewer::loadConfFile(string xmlFile) {
 	}
 	if (content.count("debug") >= 1) setDebugFlag();
 }
+bool Viewer::hasLoadedImg(string name) {
+	return loaded.find(name) != loaded.end();
+}
 void Viewer::loadImgFile(string xmlFile) {
 	ptree pt;
 	getXMLFile(pt,xmlFile);

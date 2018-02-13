@@ -85,6 +85,7 @@ class Viewer {
 		void changeShowImg(string showName, string newImageName);
 		void destroyAll(); // empty screen
 		bool getNextEvent(ALLEGRO_EVENT *ev);
+		bool hasLoadedImg(string name);
 
 		~Viewer();
 };

@@ -89,6 +89,9 @@
     <Filter Include="src\game\controller\gameArea">
       <UniqueIdentifier>{ce09cc5a-5ed3-4a18-9f40-4e9babb59083}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\utils">
+      <UniqueIdentifier>{726e46ac-9340-4cc4-9237-8f2300040f3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -193,6 +196,9 @@
     <ClCompile Include="src\game\controller\gameArea\gameArea.cpp">
       <Filter>src\game\controller\gameArea</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\utils\genTokenImages.cpp">
+      <Filter>src\game\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -293,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="src\game\controller\gameArea\gameArea.h">
       <Filter>src\game\controller\gameArea</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\utils\genTokenImages.h">
+      <Filter>src\game\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

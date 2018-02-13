@@ -37,6 +37,7 @@ class NetworkManager {
 
 	private:
 		boost::scoped_ptr<boost::asio::ip::tcp::socket> mySocket;
+		//boost::asio::ip::tcp::socket mySocket;
 		ip::tcp::acceptor myAcceptor;
 		io_service *ioService;
 		char readBuffer[bufferSize], writeBuffer[bufferSize];
@@ -46,6 +47,7 @@ class NetworkManager {
 		deadline_timer timer;
 		int timeoutRecv, flagWaiting , failure;
 		int timerOn;
+		bool acceptorOn;
 		/*** Internal functions ***/
 		void handleConnect(const boost::system::error_code& error);
 		void handleRecv(const boost::system::error_code& error, size_t bytes);

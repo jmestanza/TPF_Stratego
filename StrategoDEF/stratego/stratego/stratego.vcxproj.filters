@@ -37,9 +37,6 @@
     <Filter Include="src\game\model">
       <UniqueIdentifier>{d06fe27b-a356-4ec9-ad7d-f15a90e3a75f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\sysgame">
-      <UniqueIdentifier>{b5c0f35c-3575-4545-b6d9-375fd3845a3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\model\stratego_engine">
       <UniqueIdentifier>{cba5c68e-2c8f-4794-b8d4-b410b072c1eb}</UniqueIdentifier>
     </Filter>
@@ -62,17 +59,8 @@
     <Filter Include="src\game\controller\defaultMenu">
       <UniqueIdentifier>{6b6d900d-ec65-46b3-98b4-63cccc34bda2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\NewFilter1">
-      <UniqueIdentifier>{0df18463-7b4f-4438-8d70-a89aab129311}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\controller\connectMenu">
       <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\layouts">
-      <UniqueIdentifier>{09447e31-35aa-4d80-8573-f97af3ca8ff9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\layouts\menu_test">
-      <UniqueIdentifier>{ae53f2ba-587e-4297-a8f5-8d8bbf1c6af5}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\game\controller\menuTest">
       <UniqueIdentifier>{eab09361-5716-4a0e-b660-e4a1e8a97c7f}</UniqueIdentifier>

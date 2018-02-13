@@ -46,7 +46,7 @@ void ConnectMenu::onCreate() {
 	input->configure(pair<float, float>(screenSize.first / 8 * 3, screenSize.second / 2),1);
 	input->addIcon("icon_worldwide");
 	input->addSmallText("Direccion IP");
-	input->setText("127.0.0.1");
+	input->setText("192.168.86.75");
 	
 
 	TextButton *button = new TextButton(mySysgame,"return_button");
@@ -99,11 +99,13 @@ void ConnectMenu::startToConnect() {
 		"Intentando conectar como cliente","roboto_v30",view->getColor("black"));
 	addWidget((Widget*)text);
 
-	TextButton *buttonCancel = new TextButton(mySysgame,"button_cancel");
+	addCancelButtonCenter();
+		
+		/*new TextButton(mySysgame,"button_cancel");
 	buttonCancel->generate(
 		"CANCELAR",g_red(),pair<float,float>(screenSize.first/2,screenSize.second*7/8),1);
 	addWidget((Widget*)buttonCancel);
-	buttonCancel->addIcon("icon_left");
+	buttonCancel->addIcon("icon_left");*/
 
 	connectContent.push_back("text_connecting");
 	connectContent.push_back("connecting_animation");
@@ -385,6 +387,11 @@ void ConnectMenu::waitForConnection() {
 		"CANCELAR",g_red(),pair<float,float>(screenSize.first / 2,screenSize.second * 7 / 8),1);
 	mySysgame->getController()->addWidget((Widget*)buttonCancel);
 	buttonCancel->addIcon("icon_left");
+	buttonCancel->onClick([](Sysgame *sys){
+		sys->getNetwork()->closeConnection();
+		sys->setNewController(new ConnectMenu(sys));
+	});
+
 
 	Animation *anim = generateAnimationWidget("connecting_animation");
 	screenText *text = generateScreenText("Esperando un cliente","roboto_v30","waiting_for_client_msg");
@@ -551,7 +558,7 @@ void ConnectMenu::makeDraw() {
 		}
 	});
 
-	TextButton* textButton = addCancelButtonCenter();
+	 addCancelButtonCenter();
 	
 }
 void ConnectMenu::sendNameRequest() {

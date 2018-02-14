@@ -46,12 +46,15 @@ void NaiveButton::handleEvent(ALLEGRO_EVENT *ev) {
 				if (my >= this->pos.second && my <= this->pos.second + this->size.second) {
 					view->changeShowImg(myViewName,img_b);
 					_clicked = 1;
+					onHardClickToOverride();
 				}
 			}
 		} else if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 			view->changeShowImg(myViewName,img_a);
 			if (_clicked) {
 				if (onClickFunction) onClickFunction(this->mySysgame);
+				onClickToOverride();
+				onReleaseToOverride();
 				_clicked = 0;
 			}
 		} else if (ev->type == ALLEGRO_EVENT_MOUSE_AXES) {
@@ -59,6 +62,15 @@ void NaiveButton::handleEvent(ALLEGRO_EVENT *ev) {
 			my = ev->mouse.y;
 		}
 	}
+}
+void NaiveButton::onClickToOverride() {
+	//cout << "hi!\n";
+}
+void NaiveButton::onReleaseToOverride() {
+
+}
+void NaiveButton::onHardClickToOverride() {
+
 }
 void NaiveButton::addIcon(string img) {
 	if (_iconMode) return;

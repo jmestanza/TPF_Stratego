@@ -1,7 +1,8 @@
 #include <iostream>
-#include <Framework/sysgame/sysgame.h>
+#include <framework/sysgame/sysgame.h>
 #include <game/controller/menu_test/menu_test.h>
 #include <game/controller/showTimeTest/showTimeTest.h>
+#include <game/controller/gameArea/gameArea.h>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ int main() {
 
 	try{
 		Sysgame sys;
-		sys.setNewController( (Controller*)new showTimeTest(&sys));
+		sys.setNewController( (Controller*)new gameArea(&sys,"ariel","joaquin",1));
 		
 		while (!sys.quit()) sys.update();
 		

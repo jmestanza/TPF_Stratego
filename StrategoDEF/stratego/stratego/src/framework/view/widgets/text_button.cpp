@@ -13,6 +13,7 @@ TextButton::TextButton(Sysgame* sys,string name) : NaiveButton(sys,name) {
 	n1 = randomNumber();
 	n2 = randomNumber();
 	n3 = randomNumber();
+	//cout << n1 << ' ' << n2 << ' ' << n3 << '\n';
 }
 
 void blitCentered(ALLEGRO_FONT *font,string msg,ALLEGRO_COLOR color,ALLEGRO_BITMAP *bitmap) {

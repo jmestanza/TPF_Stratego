@@ -6,6 +6,9 @@
 
 Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,float>_pieceSize,int _mode) :Widget(Sys,_name) {
 
+	gameStatus = "choosing_pieces";
+	selectedPiece = "";
+
 	Viewer* _view = mySysgame->getAllegroHandler();
 
 	img_a = _img_a; // set image for buttons at the beginning
@@ -20,6 +23,9 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 
 	mode = _mode;
 	this->size = pair<float,float>(_pieceSize.first * 10,_pieceSize.second * 10);
+	
+	this->pieceSize = _pieceSize;
+
 
 	myCode = "table_" + to_string(randomNumber());
 
@@ -91,16 +97,54 @@ void Table::startDrawing() {
 	/*	}
 	}*/
 
-	drawToken("1B",pair<int,int>(4,4));
-	drawToken("2B",pair<int,int>(4,5));
-	drawToken("3B",pair<int,int>(4,6));
+	/*putToken("1B",pair<int,int>(4,4));
+	putToken("2B",pair<int,int>(4,5));
+	putToken("3B",pair<int,int>(4,6));*/
 }
 void Table::handleEvent(ALLEGRO_EVENT *ev) {
 
 	if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 		status = BUTTON_DOWN;
+		int rx,ry;
+		rx = mx - this->pos.first;
+		ry = my - this->pos.second;
+		if (insideMe(rx,ry)) {
+
+			rx /= this->pieceSize.first;
+			ry /= this->pieceSize.second;
+
+			if (onMousePressFunction != nullptr) {
+				this->onMousePressFunction(mySysgame,this,pair<int,int>(rx,ry));
+			}
+		}
 	} else if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 		status = BUTTON_UP;
+
+		//if (this->gameStatus == "choosing_pieces") {
+		int rx,ry;
+		rx = mx - this->pos.first;
+		ry = my - this->pos.second;
+		if (insideMe(rx,ry)) {
+				
+			rx /= this->pieceSize.first;
+			ry /= this->pieceSize.second;
+				
+			if (onMouseReleasedFunction != nullptr) {
+				this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(rx,ry));
+			}
+				/*if (ry >= 6) { /// only upside is allowed
+					if (this->selectedPiece != "") {
+						this->putToken(this->selectedPiece,pair<int,int>(rx,ry));
+
+						this->selectedPiece = "";
+					}
+				}*/
+			//}
+		}
+
+	} else if (ev->type == ALLEGRO_EVENT_MOUSE_AXES) {
+		mx = ev->mouse.x;
+		my = ev->mouse.y;
 	}
 
 	float pos_x = ev->mouse.x;
@@ -129,7 +173,22 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		}
 	}
 }
-void Table::drawToken(string code,pair<int,int> position) {
+string Table::getPiece(pair<int,int> pos) {
+	return shownTokens[pos.first][pos.second];
+}
+void Table::freePosition(pair<int,int> pos) {
+	if (shownTokens[pos.first][pos.second] != "empty") {
+		view->stopShow(getPosCode(pos));
+	}
+	shownTokens[pos.first][pos.second] = "empty";
+}
+void Table::putToken(string code,pair<int,int> position) {
+	if (shownTokens[position.first][position.second] != "empty") {
+		view->stopShow(getPosCode(position));
+	}
+
+	shownTokens[position.first][position.second] = code;
+
 	pair<int,int> realPosition(position);
 	realPosition.first *= 60;
 	realPosition.second *= 60;
@@ -142,8 +201,10 @@ void Table::drawToken(string code,pair<int,int> position) {
 string Table::getPosCode(pair<int,int> position) {
 	return "piece_" + to_string(position.first) + "_" + to_string(position.second);
 }
-void Table::eraseToken(pair<int,int> position) {
-
+void Table::takeOutToken(pair<int,int> position) {
+	if (shownTokens[position.first][position.second] != "") {
+		view->stopShow(getPosCode(position));
+	}
 }
 void Table::moveToken(pair<int,int> posA,pair<int,int> posB) {
 
@@ -152,10 +213,22 @@ void Table::moveToken(pair<int,int> posA,pair<int,int> posB) {
 void Table::stopDrawing() {
 
 }
+
+void Table::informSelected(string _sel) {
+	selectedPiece = _sel;
+}
 Table::~Table() {
 
 }
-
+void Table::setTokenContainer(TokenContainer *tok) {
+	refContainer = tok;
+}
+void Table::onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>)) {
+	onMouseReleasedFunction = func;
+}
+void Table::onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>)) {
+	onMousePressFunction = func;
+}
 TableException::TableException(string er) :err(er) {
 
 }

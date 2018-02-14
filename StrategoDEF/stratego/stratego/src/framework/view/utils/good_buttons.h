@@ -7,6 +7,7 @@ imgGroup g_green();
 imgGroup g_red();
 imgGroup g_connectButton();
 imgGroup g_connectButtonLong();
+imgGroup g_greenSmall();
 
 void generateButtons(Viewer *view);
 void getLoadingAImgs(vector <string> &ans);

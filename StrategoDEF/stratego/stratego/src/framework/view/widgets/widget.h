@@ -24,6 +24,7 @@ class Widget {
 		bool getKillMe();
 		void killMe();
 		pair <float,float> getSize();
+		pair <float,float> getPos();
 
 		string getName();
 		virtual void handleEvent(ALLEGRO_EVENT *ev) = 0;
@@ -37,7 +38,7 @@ class Widget {
 		void hide();
 		void show();
 		bool isHidden();
-
+		bool insideMe(int x,int y);
 		virtual ~Widget();
 		Viewer *getViewer();
 		Sysgame *getSysgame();

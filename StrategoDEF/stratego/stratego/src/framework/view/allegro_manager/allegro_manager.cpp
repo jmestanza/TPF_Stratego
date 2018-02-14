@@ -220,6 +220,9 @@ void Viewer::loadFromBitmap(ALLEGRO_BITMAP *b,string name) {
 	if (loaded.find(name) != loaded.end()) {
 		throw AllegroHandlerException("tring to load image with repeated name! , '"+name+"'");
 	}
+	/*if (loaded.find(name) != loaded.end()) {
+		al_destroy_bitmap(loaded[name]);
+	}*/
 	loaded[name] = b;
 }
 void Viewer::loadFont(string dir, string name,int size) {
@@ -328,6 +331,7 @@ void Viewer::draw() {
 	al_flip_display();
 }
 
+
 void Viewer::show(string imageName, string showName, float x, float y) {
 
 	if ((loaded.find(imageName) == loaded.end())) throw AllegroHandlerException("Trying to show something that is not in memory");
@@ -375,6 +379,20 @@ void Viewer::changeShowImg(string showName, string newImageName) {
 	}
 	//float x = frontShow[showName].pos.first, y = frontShow[showName].pos.second;
 	//frontShow[showName] = ShowObject(loaded[newImageName], x, y);
+}
+void Viewer::changeShowImgPos(string showName,float x,float y,int centered) {
+	if (frontShow.find(showName) == frontShow.end()) {
+		throw AllegroHandlerException("invalid usage of Viwer::changeShowImgPos() (err 2: changing image that don't exist)");
+	} else {
+		/*try {
+			ShowImage *img = dynamic_cast<ShowImage*>(frontShow[showName]);
+			img->setImage(loaded[newImageName]);
+		} catch (bad_cast &e) {
+			throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (bad cast)");
+		}*/
+		ShowObject *img = (ShowObject*)frontShow[showName];
+		img->setPosition(pair<float,float>(x,y),centered);
+	}
 }
 void Viewer::destroyAll() {
 	for (auto it = frontShow.begin(); it != frontShow.end(); it++) delete it->second;

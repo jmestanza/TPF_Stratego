@@ -16,7 +16,9 @@ imgGroup g_connectButton() {
 imgGroup g_connectButtonLong() {
 	return imgGroup("button_green_long_a","button_green_long_b","button_grey_long");
 }
-
+imgGroup g_greenSmall() {
+	return imgGroup("button_green_small_a","button_green_small_b","button_grey_small");
+}
 
 
 void generateButtons(Viewer *view) {

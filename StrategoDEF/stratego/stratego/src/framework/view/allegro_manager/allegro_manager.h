@@ -83,6 +83,7 @@ class Viewer {
 		void stopShow(string showName); // borrar imagen de la pantalla
 		void draw();
 		void changeShowImg(string showName, string newImageName);
+		void changeShowImgPos(string showName,float x,float y,int centered);
 		void destroyAll(); // empty screen
 		bool getNextEvent(ALLEGRO_EVENT *ev);
 		bool hasLoadedImg(string name);

@@ -14,6 +14,9 @@ Widget::Widget(Sysgame *sys,string _name) : mySysgame(sys) , name(_name){
 void Widget::killMe() {
 	_killMe = 1;
 }
+pair <float,float> Widget::getPos() {
+	return pos;
+}
 void Widget::setPosSize(pair<int,int> _pos,pair <int,int> _size,bool centered) {
 	pos = _pos;
 	size = _size;
@@ -21,6 +24,9 @@ void Widget::setPosSize(pair<int,int> _pos,pair <int,int> _size,bool centered) {
 		pos.first -= size.first / 2;
 		pos.second -= size.second / 2;
 	}
+}
+bool Widget::insideMe(int x,int y){
+	return x >= pos.first && x <= pos.first + size.first && y >= pos.second && y <= pos.second + size.second;
 }
 void Widget::setPos(pair<int,int> _pos,bool centered) {
 	setPosSize(_pos,size,centered);

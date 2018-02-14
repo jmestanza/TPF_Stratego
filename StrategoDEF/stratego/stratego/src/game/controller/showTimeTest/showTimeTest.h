@@ -3,7 +3,14 @@
 #include <framework\controller\controller.h>
 
 class showTimeTest : public Controller{
+	private:
+		string selectedItem;
+		bool inScreen;
 	public:
+		
+		string getSelectedItem();
+		void setSelectedItem(string value);
+
 		showTimeTest(Sysgame *sys);
 		void onCreate();
 		void onNetPack(string &package,map<string,string> &data);  // handle NETWORK actions

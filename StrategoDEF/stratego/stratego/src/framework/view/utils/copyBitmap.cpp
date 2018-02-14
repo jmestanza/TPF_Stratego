@@ -38,3 +38,14 @@ void blitTextCentered(Viewer* view,ALLEGRO_BITMAP *dst,string text,string font,s
 
 	al_set_target_bitmap(old);
 }
+void blitText(Viewer* view,ALLEGRO_BITMAP *dst,string text,string font,string color,int x,int y) {
+	ALLEGRO_BITMAP  *old = al_get_target_bitmap();
+	ALLEGRO_FONT* fontAl = view->getFont(font);
+	ALLEGRO_COLOR colorAl = view->getColor(color);
+
+	al_set_target_bitmap(dst);
+
+	al_draw_text(fontAl,colorAl,x,y,0,text.c_str());
+
+	al_set_target_bitmap(old);
+}

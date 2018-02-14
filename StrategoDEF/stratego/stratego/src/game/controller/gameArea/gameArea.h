@@ -8,6 +8,8 @@ class gameArea : Controller{
 		string name,opponentName;
 		int localStart;
 		Widget *infoAreaA,*infoAreaB;
+		string selectedItem;
+		string status;
 	public:
 		gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart);
 		void onCreate();
@@ -16,6 +18,8 @@ class gameArea : Controller{
 
 		void setInfoAreaWidgets(Widget *a,Widget *b);
 		void eraseInfoAreaWidgets();
+		void setSelectedItem(string value);
+		string getSelectedItem();
 
 		~gameArea();
 };

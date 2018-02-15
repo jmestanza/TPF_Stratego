@@ -28,9 +28,6 @@
     <Filter Include="src\framework\view\gui">
       <UniqueIdentifier>{12acd012-9aec-4231-914d-38c01e20260c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\framework\view\widgets">
-      <UniqueIdentifier>{0e3128e4-bed1-4d6c-ad41-8c7553ca0b30}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\view\allegro_manager">
       <UniqueIdentifier>{5e4fa792-1825-46aa-91ac-4279c629a072}</UniqueIdentifier>
     </Filter>
@@ -71,15 +68,6 @@
     <Filter Include="src\framework\model\network">
       <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\framework\view\widgets\showClocks">
-      <UniqueIdentifier>{6e2ee14b-fb04-4771-8d8d-31d2f4fa38db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\view\widgets\buttons">
-      <UniqueIdentifier>{2ed1a2d0-6cb6-49d4-ac9c-6a426eede625}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\view\widgets\others">
-      <UniqueIdentifier>{08921220-a0b4-4fd8-89ed-ef49860ef8b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\controller\showTimeTest">
       <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
     </Filter>
@@ -91,6 +79,21 @@
     </Filter>
     <Filter Include="src\game\utils">
       <UniqueIdentifier>{726e46ac-9340-4cc4-9237-8f2300040f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets">
+      <UniqueIdentifier>{0e3128e4-bed1-4d6c-ad41-8c7553ca0b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\showClocks">
+      <UniqueIdentifier>{6e2ee14b-fb04-4771-8d8d-31d2f4fa38db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\buttons">
+      <UniqueIdentifier>{2ed1a2d0-6cb6-49d4-ac9c-6a426eede625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\others">
+      <UniqueIdentifier>{08921220-a0b4-4fd8-89ed-ef49860ef8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\tokenContainer">
+      <UniqueIdentifier>{6462bb26-6b4e-4f3b-9915-af0fe93d1f25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +202,60 @@
     <ClCompile Include="src\game\utils\genTokenImages.cpp">
       <Filter>src\game\utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\TokenContainer\TokenContainer.cpp">
+      <Filter>src\framework\view\widgets\tokenContainer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\TokenContainer\MouseFollower.cpp">
+      <Filter>src\framework\view\widgets\tokenContainer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\BasicToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\BombToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\CaptainToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\ColonelToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\FlagToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\GameBoard.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\GeneralToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\LieutenantToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\MajorToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\MarshalToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\MinerToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\Player.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\PosType.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\ScoutToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\SergeantToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\stratego_engine\SpyToken.cpp">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -303,9 +360,66 @@
     <ClInclude Include="src\game\utils\genTokenImages.h">
       <Filter>src\game\utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\TokenContainer\TokenContainer.h">
+      <Filter>src\framework\view\widgets\tokenContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\TokenContainer\MouseFollower.h">
+      <Filter>src\framework\view\widgets\tokenContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\BasicToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\BombToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\CaptainToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\ColonelToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\FlagToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\GameBoard.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\GeneralToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\LieutenantToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\MajorToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\MarshalToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\MinerToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\Player.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\PosType.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\ScoutToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\SergeantToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\stratego_engine\SpyToken.h">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\game\model\stratego_engine\ClassDiagram.cd">
+      <Filter>src\game\model\stratego_engine</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf">

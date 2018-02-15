@@ -4,6 +4,7 @@ class PosType // Utilizado solo por objetos tipo "Token"
 {
 public:
 	PosType();
+	PosType(int _i,int j);
 
 	bool operator== (PosType p1) {
 		if ((p1.i == this->i) && (p1.j == this->j)) {

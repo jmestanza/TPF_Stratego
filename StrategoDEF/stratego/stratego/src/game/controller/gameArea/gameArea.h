@@ -27,7 +27,12 @@ class gameArea : Controller{
 
 		Player *gameEngine;
 
+		PosType current_src,current_dst;
 	public:
+		void setCurrentMov(PosType src,PosType dst);
+		PosType getCurrentSrc();
+		PosType getCurrentDst();
+
 		gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart,string mode);
 		void onCreate();
 		void onNetPack(string &package,map<string,string> &data) ;  // handle NETWORK actions

@@ -19,8 +19,7 @@ BasicToken * GameBoard::get_tile(PosType tile)
 	return board[(tile.i)][(tile.j)];
 }
 
-void GameBoard::set_new_token(PlayerType owner, PosType pos, RangeType rank)
-{	
+void GameBoard::set_new_token(PlayerType owner, PosType pos, RangeType rank){	
 	//if(this->board)
 	if ((rank == FLAG) || (rank == BOMB)) {
 		board[pos.i][pos.j] = new BasicToken(rank, false, owner);
@@ -38,8 +37,7 @@ void GameBoard::set_enemy_tokens(PlayerType enemy_color)
 				board[i][j] = new BasicToken(ENEMY, false, RED);
 			}
 		}
-	}
-	else {
+	}else {
 		for (int i = 6; i < BOARD_SIZE; i++) {
 			for (int j = 0; j < BOARD_SIZE; j++) {
 				board[i][j] = new BasicToken(ENEMY, false, BLUE);

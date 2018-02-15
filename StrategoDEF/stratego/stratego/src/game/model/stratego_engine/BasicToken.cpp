@@ -16,6 +16,20 @@ int stringToRank(string code) {
 	if (code == "B") return BOMB;
 	if (code == "F") return FLAG;
 }
+string rankToString(int rank) {
+	if (rank == MARSHAL) return "1";
+	if (rank == GENERAL) return "2";
+	if (rank == COLONEL) return "3";
+	if (rank == MAJOR) return "4";
+	if (rank == CAPTAIN) return "5";
+	if (rank == LIEUTENANT) return "6";
+	if (rank == SERGEANT) return "7";
+	if (rank == MINER) return "8";
+	if (rank == SCOUT) return "9";
+	if (rank == SPY) return "S";
+	if (rank == BOMB) return "B";
+	if (rank == FLAG) return "F";
+}
 
 BasicToken::BasicToken(RangeType set_range, bool move_en, PlayerType player)
 {

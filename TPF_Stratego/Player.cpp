@@ -2,8 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(PlayerType color)
-{
+Player::Player(PlayerType color){
 	player = color;
 
 	if (color == RED) {
@@ -81,8 +80,7 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 			local_board.move_token(src_pos, dst_pos);
 			game_state = ENEMY_MOVE;
 			return MOVE_VALID; /// Movimiento normal
-		}
-		else {
+		}	else {
 			game_state = WAIT_FOR_RANGE;
 			return ATTACK_TRY; /// Ataque al enemigo
 		}
@@ -92,13 +90,11 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 	}
 }
 
-void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range)
-{
+void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range){
 	BasicToken* token = local_board.get_tile(src_pos);
 	AttackResult res;
 
-	switch (token->get_range())
-	{
+	switch (token->get_range()){
 	case MARSHAL:
 		res = ((MarshalToken*)token)->attack(attack_token_range);
 		break;

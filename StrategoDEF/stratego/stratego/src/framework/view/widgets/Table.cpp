@@ -135,7 +135,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 
 			if (onMousePressFunction != nullptr) {
 
-				this->onMousePressFunction(mySysgame,this,pair<int,int>(rx,ry));
+				this->onMousePressFunction(mySysgame,this,pair<int,int>(ry,rx));
 			}
 			
 		}
@@ -152,16 +152,16 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 			ry /= this->pieceSize.second;
 				
 			if (onMouseReleasedFunction != nullptr) {
-				this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(rx,ry));
+				this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(ry,rx));
 			}
 			if (!isSelected) {
-				selectedPosition = pair<int,int>(rx,ry);
+				selectedPosition = pair<int,int>(ry,rx);
 				isSelected = 1;
 				cout << "selected => ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n"; 
 			} else {
 				cout << "action " << "("<<selectedPosition.first<<","<<selectedPosition.second<<") -> ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n";
 				if (onActionMoveFunction != nullptr) {
-					onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(rx,ry));
+					onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(ry,rx));
 				}
 				isSelected = 0;
 			}
@@ -225,10 +225,10 @@ void Table::putToken(string code,pair<int,int> position) {
 	pair<int,int> realPosition(position);
 	realPosition.first *= 60;
 	realPosition.second *= 60;
-	realPosition.first += pos.first;
-	realPosition.second += pos.second;
+	realPosition.first += pos.second;
+	realPosition.second += pos.first;
 
-	view->show("token_" + code + "_r",getPosCode(position),realPosition.first,realPosition.second);
+	view->show("token_" + code + "_r",getPosCode(position),realPosition.second,realPosition.first);
 
 }
 string Table::getPosCode(pair<int,int> position) {

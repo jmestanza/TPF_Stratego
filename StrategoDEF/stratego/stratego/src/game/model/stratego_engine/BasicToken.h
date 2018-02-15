@@ -24,7 +24,7 @@ typedef int AttackResult;
 
 
 int stringToRank(string code);
-
+string rankToString(int rank);
 
 class BasicToken // Se hereda a cada token particular
 {

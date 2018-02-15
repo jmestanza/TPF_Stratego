@@ -17,7 +17,16 @@
   <image name="button_grey_long"    dir="buttons/naive_buttons/grey/grey_long.png"></image>
   <image name="button_big_green_a"  dir="buttons/bigger_buttons/green/green_a.png"></image>
   <image name="button_big_green_b"  dir="buttons/bigger_buttons/green/green_b.png"></image>
-
+  <image name="button_green_small_a" dir="buttons/naive_buttons/green_small/green_a.png"></image>
+  <image name="button_green_small_b" dir="buttons/naive_buttons/green_small/green_b.png"></image>
+  <image name="button_grey_small"   dir="buttons/naive_buttons/green_small/green_disabled.png"></image>
+  
+  <!-- medium Size buttons -->
+  <image name="button_green_medium_a"   dir="buttons/naive_buttons/green_medium/green_a.png"></image>
+  <image name="button_green_medium_b"   dir="buttons/naive_buttons/green_medium/green_b.png"></image>
+  <image name="button_red_medium_a"   dir="buttons/naive_buttons/red_medium/red_a.png"></image>
+  <image name="button_red_medium_b"   dir="buttons/naive_buttons/red_medium/red_b.png"></image>
+  
   <!-- Text input  -->
   <image name="text_input"     dir="textInput/textInput.png"></image>
 
@@ -33,6 +42,10 @@
   <image name="icon_sharing"    dir="icons/sharing.png"></image>
   <image name="icon_info"       dir="icons/info.png"></image>
   <image name="icon_token"      dir="icons/poker-pieces.png"></image>
+  <image name="icon_left_dir"   dir="icons/left_arrow.png"></image>
+  <image name="icon_right_dir"  dir="icons/right_arrow.png"></image>
+  <image name="icon_success_small"  dir="icons/checked_small.png"></image>
+  <image name="icon_random"     dir="icons/shuffle.png"></image>
   
   <!-- animation  -->
   <image name="icon_loading_0" dir="icons\loading\loading\img0.png"></image>
@@ -71,10 +84,11 @@
   <image name="table" dir="board/board.png"></image>
   <image name="blue_field" dir="board/blue_player_field.png"></image>
   <image name="red_field" dir="board/red_player_field.png"></image>
+  <image name="token_field" dir="board/token_field.png"></image>
   
   <!-- token  -->
-  <image name="red_field" dir="board/red_player_field.png"></image>
-  <image name="red_field" dir="board/red_player_field.png"></image>
+  <image name="token_0B" dir="board/blue_player_field.png"></image>
+  <image name="token_0R" dir="board/red_player_field.png"></image>
 
   <image name="token_1B" dir="Token_IMG/[1]Marshal_Blue.jpg"></image>
   <image name="token_2B" dir="Token_IMG/[2]General_Blue.jpg"></image>

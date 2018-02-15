@@ -140,7 +140,7 @@ void gameArea::onCreate() {
 	});
 
 	tablero->onMousePress([](Sysgame *sys,Table *table,pair<int,int> pos) {
-		if (pos.second <= 5) return;
+		if (pos.first <= 5) return;
 		TokenContainer *tk = (TokenContainer*)sys->getUI()->getWidget("token_container");
 		gameArea *controller = (gameArea*)sys->getController();
 
@@ -259,10 +259,16 @@ void gameArea::tokenReady() {
 		pair<int,int> source = myself->convertPosToGeneralType(org_src);
 		pair<int,int> dst = myself->convertPosToGeneralType(org_dst);
 
+		
+
 		if (myself->getStatus() == "waiting_for_move") {
 			Player* engine = myself->getGameEngine();
 			int ans = engine->move_local_token(PosType(source),PosType(dst));
+
+
+			cout << "sending move " << source.first << "," << source.second << " => " << dst.first << "," << dst.second << '\n';
 			if (ans == MOVE_VALID || ans == ATTACK_TRY) {
+			
 				//// we've got a movement!
 				map <string,string> content;
 				content["original_col"] = string(1,'a' + source.second );
@@ -272,9 +278,16 @@ void gameArea::tokenReady() {
 				sys->getNetwork()->sendPackage("move",content);
 			}
 			if (ans == ATTACK_TRY) {
-				myself->setStatus("waiting_for_attack_result");
+				cout << "the move is an attack try! ";
+				myself->setStatus("waiting_for_attack");
+				myself->setCurrentMov(PosType(source),PosType(dst));
 			} else if (ans == MOVE_VALID) {
+				cout << "the move is normal! ";
 				table->moveToken(org_src,org_dst);
+
+				myself->setStatus("waiting_for_opp_move");
+			} else {
+				cout << "invalid move! \n";
 			}
 		}
 		
@@ -283,6 +296,16 @@ void gameArea::tokenReady() {
 }
 Player *gameArea::getGameEngine() {
 	return gameEngine;
+}
+void gameArea::setCurrentMov(PosType src,PosType dst) {
+	current_src = src;
+	current_dst = dst;
+}
+PosType gameArea::getCurrentSrc() {
+	return current_src;
+}
+PosType gameArea::getCurrentDst() {
+	return current_dst;
 }
 void gameArea::loadEngineContent(vector <vector <string>> &content) {
 	cout << "[gameArea] loading engine content! \n";
@@ -378,7 +401,7 @@ void gameArea::setRandomPieces() {
 	Table *tbl = (Table*)mySysgame->getUI()->getWidget("table");
 	for (int i = 6;i < TABLE_SLOTS;i++) {
 		for (int j = 0;j < TABLE_SLOTS;j++) {
-			pair<int,int> pos(j,i);
+			pair<int,int> pos(i,j);
 			if (tbl->getPiece(pos) == "empty") {
 				string next = tk->getRandomTokenAndPop();
 				tbl->putToken(next,pos);
@@ -491,15 +514,29 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		PosType src( data["original_row"][0]-'a', stoi(data["original_col"]) );
 		PosType dst( data["destination_row"][0]-'a',stoi(data["original_row"]));
 		int ans = this->gameEngine->move_enemy_token(src,dst);
-		if (ans == ATTACK_TRY) {
+		if (gameEngine->get_game_state() == WAIT_FOR_RANGE) {
 			/// Oh!!! he attacked a token
 			map<string,string> dataAns;
-
+			//this->gameEngine->process_attack(src,dst,);
+			dataAns["token_rank"] = rankToString(gameEngine->local_board.get_tile(dst)->get_range());
+			mySysgame->getNetwork()->sendPackage("attack",dataAns);
+			this->status = "waiting_for_attack_then_play";
 		} else if (ans != MOVE_VALID){
 			cout << "unexcepected situation! invalid move !!";
+		} else {
+			this->status = "waiting_for_move";
 		}
 	} else if (this->status == "waiting_for_attack_result" && package == "attack") {
-		
+		cout << "we were waiting for attack result and we've got it!\n";
+		string piece = data["token_rank"];
+		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
+		gameEngine->set_game_state(ENEMY_MOVE);
+		//if (gameEngine->get_game_state() == )
+	} else if (this->status == "waiting_For_attack_then_play" && package == "atack") {
+		cout << "we were waiting attack result and then play. We've got the attack\n";
+		string piece = data["token_rank"];
+		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
+		gameEngine->set_game_state(LOCAL_MOVE);
 	}
 } // handle NETWORK actions
 void gameArea::onNetEvent(NETWORK_EVENT *ev) {

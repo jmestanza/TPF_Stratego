@@ -167,6 +167,8 @@
     <ClCompile Include="src\framework\view\widgets\TableButton.cpp" />
     <ClCompile Include="src\framework\view\widgets\TextInput.cpp" />
     <ClCompile Include="src\framework\view\widgets\text_button.cpp" />
+    <ClCompile Include="src\framework\view\widgets\TokenContainer\MouseFollower.cpp" />
+    <ClCompile Include="src\framework\view\widgets\TokenContainer\TokenContainer.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
     <ClCompile Include="src\game\controller\aboutWindow\aboutWindow.cpp" />
     <ClCompile Include="src\game\controller\connectionLostMenu\connectionLostMenu.cpp" />
@@ -175,6 +177,22 @@
     <ClCompile Include="src\game\controller\gameArea\gameArea.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\BasicToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\BombToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\CaptainToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\ColonelToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\FlagToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\GameBoard.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\GeneralToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\LieutenantToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\MajorToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\MarshalToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\MinerToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\Player.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\PosType.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\ScoutToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\SergeantToken.cpp" />
+    <ClCompile Include="src\game\model\stratego_engine\SpyToken.cpp" />
     <ClCompile Include="src\game\utils\genTokenImages.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -204,6 +222,8 @@
     <ClInclude Include="src\framework\view\widgets\TableButton.h" />
     <ClInclude Include="src\framework\view\widgets\TextInput.h" />
     <ClInclude Include="src\framework\view\widgets\text_button.h" />
+    <ClInclude Include="src\framework\view\widgets\TokenContainer\MouseFollower.h" />
+    <ClInclude Include="src\framework\view\widgets\TokenContainer\TokenContainer.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
     <ClInclude Include="src\game\controller\aboutWindow\aboutWindow.h" />
     <ClInclude Include="src\game\controller\connectionLostMenu\connectionLostMenu.h" />
@@ -212,10 +232,27 @@
     <ClInclude Include="src\game\controller\gameArea\gameArea.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
     <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h" />
+    <ClInclude Include="src\game\model\stratego_engine\BasicToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\BombToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\CaptainToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\ColonelToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\FlagToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\GameBoard.h" />
+    <ClInclude Include="src\game\model\stratego_engine\GeneralToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\LieutenantToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\MajorToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\MarshalToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\MinerToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\Player.h" />
+    <ClInclude Include="src\game\model\stratego_engine\PosType.h" />
+    <ClInclude Include="src\game\model\stratego_engine\ScoutToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\SergeantToken.h" />
+    <ClInclude Include="src\game\model\stratego_engine\SpyToken.h" />
     <ClInclude Include="src\game\utils\genTokenImages.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\game\model\stratego_engine\ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf" />

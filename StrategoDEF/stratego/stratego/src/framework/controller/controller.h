@@ -34,6 +34,7 @@ class Controller {
 		void addBackgroundImg(string img);
 		string getTimerName();
 		void callTimerFunc();
+		Widget *getWidget(string name);
 	protected:
 		int flagTimer;
 		string timerName;

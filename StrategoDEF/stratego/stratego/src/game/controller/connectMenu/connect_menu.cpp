@@ -587,15 +587,20 @@ void ConnectMenu::readyToStart(int _localStart) {
 	connectContent.push_back("info_icon");
 	connectContent.push_back("draw_result");
 
-	TextButton *buttonStartGame = new TextButton(mySysgame,"start_game_button");
-	pair<float,float> buttonPos(screenSize.first/2,screenSize.second*7/8);
-	buttonStartGame->generate("COLOCAR PIEZAS",g_connectButtonLong(),buttonPos,1);
-	buttonStartGame->addIcon("icon_token");
-	connectContent.push_back("start_game_button");
+	//TextButton *buttonStartGame = new TextButton(mySysgame,"start_game_button");
+	//pair<float,float> buttonPos(screenSize.first/2,screenSize.second*7/8);
+	//buttonStartGame->generate("COLOCAR PIEZAS",g_connectButtonLong(),buttonPos,1);
+	//buttonStartGame->addIcon("icon_token");
+	//connectContent.push_back("start_game_button");
 
-	addWidget( (Widget*)buttonStartGame);
+	//addWidget( (Widget*)buttonStartGame);
 
-	buttonStartGame->onClick([](Sysgame *sys) {
+	/*buttonStartGame->onClick([](Sysgame *sys) {
+		ConnectMenu* connectMenu = (ConnectMenu*)sys->getController();
+		connectMenu->goToGame();
+	});*/
+
+	callIn(2000,[](Sysgame *sys) {
 		ConnectMenu* connectMenu = (ConnectMenu*)sys->getController();
 		connectMenu->goToGame();
 	});
@@ -608,7 +613,7 @@ void ConnectMenu::readyToStart(int _localStart) {
 	showTime->configure("roboto_v30","black",outScreen,0);*/
 }
 void ConnectMenu::goToGame() {
-	mySysgame->setNewController((Controller*)new gameArea(mySysgame,getName(),getOpponentName(),localStart));
+	mySysgame->setNewController((Controller*)new gameArea(mySysgame,getName(),getOpponentName(),localStart,this->mode));
 }
 TextButton* ConnectMenu::addCancelButtonCenter() {
 	pair<float,float> screenSize = view->getScreenSize();

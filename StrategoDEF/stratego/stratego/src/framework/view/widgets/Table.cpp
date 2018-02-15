@@ -31,6 +31,9 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 
 	for (int i = 0;i < TABLE_SLOTS;i++) shownTokens.push_back(vector<string>(TABLE_SLOTS,"empty"));
 
+	onMouseReleasedFunction = nullptr;
+	onMousePressFunction = nullptr;
+	onActionMoveFunction = nullptr;
 }
 
 pair<int,char> Table::WhoIsInRange(pair<float,float> _mousepos) {
@@ -49,6 +52,9 @@ pair<int,char> Table::WhoIsInRange(pair<float,float> _mousepos) {
 void Table::setPlayersName(string _upPlayer,string _downPlayer) {
 	upPlayer = _upPlayer;
 	downPlayer = _downPlayer;
+}
+void Table::setStatus(string _status) {
+	gameStatus = _status;
 }
 void Table::startDrawing() {
 
@@ -101,6 +107,20 @@ void Table::startDrawing() {
 	putToken("2B",pair<int,int>(4,5));
 	putToken("3B",pair<int,int>(4,6));*/
 }
+void Table::fillOpponentField(string color) {
+	for (int i = 0;i <= 3;i++) {
+		for (int j = 0;j < TABLE_SLOTS;j++) {
+			putToken("0"+color,pair<int,int>(i,j));
+		}
+	}
+}
+void Table::clearToken() {
+	for (int i = 0;i < TABLE_SLOTS;i++) {
+		for (int j = 0;j < TABLE_SLOTS;j++) {
+			freePosition(pair<float,float>(i,j));
+		}
+	}
+}
 void Table::handleEvent(ALLEGRO_EVENT *ev) {
 
 	if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
@@ -114,8 +134,10 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 			ry /= this->pieceSize.second;
 
 			if (onMousePressFunction != nullptr) {
+
 				this->onMousePressFunction(mySysgame,this,pair<int,int>(rx,ry));
 			}
+			
 		}
 	} else if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 		status = BUTTON_UP;
@@ -131,6 +153,17 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				
 			if (onMouseReleasedFunction != nullptr) {
 				this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(rx,ry));
+			}
+			if (!isSelected) {
+				selectedPosition = pair<int,int>(rx,ry);
+				isSelected = 1;
+				cout << "selected => ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n"; 
+			} else {
+				cout << "action " << "("<<selectedPosition.first<<","<<selectedPosition.second<<") -> ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n";
+				if (onActionMoveFunction != nullptr) {
+					onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(rx,ry));
+				}
+				isSelected = 0;
 			}
 				/*if (ry >= 6) { /// only upside is allowed
 					if (this->selectedPiece != "") {
@@ -174,20 +207,20 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 	}
 }
 string Table::getPiece(pair<int,int> pos) {
-	return shownTokens[pos.first][pos.second];
+	return shownTokens[pos.second][pos.first];
 }
 void Table::freePosition(pair<int,int> pos) {
-	if (shownTokens[pos.first][pos.second] != "empty") {
+	if (shownTokens[pos.second][pos.first] != "empty") {
 		view->stopShow(getPosCode(pos));
 	}
-	shownTokens[pos.first][pos.second] = "empty";
+	shownTokens[pos.second][pos.first] = "empty";
 }
 void Table::putToken(string code,pair<int,int> position) {
-	if (shownTokens[position.first][position.second] != "empty") {
+	if (shownTokens[position.second][position.first] != "empty") {
 		view->stopShow(getPosCode(position));
 	}
 
-	shownTokens[position.first][position.second] = code;
+	shownTokens[position.second][position.first] = code;
 
 	pair<int,int> realPosition(position);
 	realPosition.first *= 60;
@@ -199,15 +232,18 @@ void Table::putToken(string code,pair<int,int> position) {
 
 }
 string Table::getPosCode(pair<int,int> position) {
-	return "piece_" + to_string(position.first) + "_" + to_string(position.second);
+	return "piece_" + to_string(position.second) + "_" + to_string(position.first);
 }
 void Table::takeOutToken(pair<int,int> position) {
-	if (shownTokens[position.first][position.second] != "") {
+	if (shownTokens[position.second][position.first] != "") {
 		view->stopShow(getPosCode(position));
 	}
 }
 void Table::moveToken(pair<int,int> posA,pair<int,int> posB) {
-
+	//underAnimation = 1;
+	if (shownTokens[posA.second][posA.first] == "empty") return;
+	shownTokens[posB.second][posB.first] = shownTokens[posA.second][posA.first];
+	shownTokens[posA.second][posA.first] = "empty";
 }
 
 void Table::stopDrawing() {
@@ -216,6 +252,9 @@ void Table::stopDrawing() {
 
 void Table::informSelected(string _sel) {
 	selectedPiece = _sel;
+}
+void Table::onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>)) {
+	onActionMoveFunction = func;
 }
 Table::~Table() {
 
@@ -228,6 +267,9 @@ void Table::onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>)) {
 }
 void Table::onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>)) {
 	onMousePressFunction = func;
+}
+vector <vector<string>>& Table::getContent() {
+	return shownTokens;
 }
 TableException::TableException(string er) :err(er) {
 

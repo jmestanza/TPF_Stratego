@@ -7,8 +7,14 @@ imgGroup g_blue() {
 imgGroup g_green() {
 	return imgGroup("button_green_a","button_green_b","button_grey");
 }
+imgGroup g_greenMedium() {
+	return imgGroup("button_green_medium_a","button_green_medium_b","button_grey");
+}
 imgGroup g_red() {
 	return imgGroup("button_red_a","button_red_b","button_grey");
+}
+imgGroup g_redMedium() {
+	return imgGroup("button_red_medium_a","button_red_medium_b","button_grey");
 }
 imgGroup g_connectButton() {
 	return imgGroup("button_big_green_a_V2", "button_big_green_b_V2", "button_grey");
@@ -19,6 +25,7 @@ imgGroup g_connectButtonLong() {
 imgGroup g_greenSmall() {
 	return imgGroup("button_green_small_a","button_green_small_b","button_grey_small");
 }
+
 
 
 void generateButtons(Viewer *view) {

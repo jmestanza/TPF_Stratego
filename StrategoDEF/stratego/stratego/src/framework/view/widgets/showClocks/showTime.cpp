@@ -92,7 +92,8 @@ void ShowTime::handleEvent(ALLEGRO_EVENT *ev) {
 	}
 }
 int ShowTime::timeDone() {
-	//cout << targetTime - getMillisFromEpoch() << '\n';
+	//cout << targetTime - getMillisFromEpoch() << 
+	;
 	return (long long)(targetTime - getMillisFromEpoch()) <= 0;
 }
 void ShowTime::startDrawing() {

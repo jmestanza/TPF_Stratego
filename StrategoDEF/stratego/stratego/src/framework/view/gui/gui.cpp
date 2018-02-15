@@ -14,7 +14,8 @@ UI::UI() {}
 
 void UI::AddWidget(Widget *widget) {
 	if (widgets.find(widget->getName()) != widgets.end()) {
-		throw UIException("trying to add to widgets with the same name, '" + widget->getName() + "' ");
+		if (!widgets[widget->getName()]->getKillMe())
+			throw UIException("trying to add to widgets with the same name, '" + widget->getName() + "' ");
 	}
 	addWidgets.push_back(widget);
 	
@@ -31,11 +32,7 @@ void UI::RemoveWidget(string name) {
 	}
 }
 void UI::refreshDead() {
-	for (int i = 0;i < addWidgets.size();i++) {
-		widgets[addWidgets[i]->getName()] = addWidgets[i];
-		widgets[addWidgets[i]->getName()]->callStartDrawing();
-	}
-	addWidgets.clear();
+	
 	for (int i = 0;i < deadWidgets.size();i++) {
 		if (widgets.find(deadWidgets[i]) == widgets.end()) continue; // can happen because syncronization
 		widgets[deadWidgets[i]]->callStopDrawing();
@@ -43,6 +40,11 @@ void UI::refreshDead() {
 		widgets.erase(deadWidgets[i]);
 	}
 	deadWidgets.clear();
+	for (int i = 0;i < addWidgets.size();i++) {
+		widgets[addWidgets[i]->getName()] = addWidgets[i];
+		widgets[addWidgets[i]->getName()]->callStartDrawing();
+	}
+	addWidgets.clear();
 }
 void UI::HandleEvent(ALLEGRO_EVENT *ev) {
 	for (auto it = widgets.begin(); it != widgets.end(); it++) {

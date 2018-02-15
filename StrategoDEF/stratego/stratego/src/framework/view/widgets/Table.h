@@ -49,6 +49,11 @@ class Table : public Widget {
 		map<pair<int,char>,int> ind_table;
 		pair <int,int> pieceSize;
 		pair<int,char> WhoIsInRange(pair<float,float> _mousepos);
+		pair<int,int> selectedPosition;
+		int isSelected;
+		
+		int underAnimation;
+		string animatedBitmap;
 
 		vector < vector <string> > shownTokens; /// shown tokens per position
 		//vector < vector <string> > allowedModify;
@@ -70,11 +75,20 @@ class Table : public Widget {
 		void setTokenContainer(TokenContainer *tok);
 
 		~Table();
+		void setStatus(string _status);
+		void fillOpponentField(string color);
 
 		void onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>));
 		void onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>));
+		void onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>));
+
+		void clearToken();
+		vector <vector<string>>& getContent();
+
 	private:
 		void (*onMouseReleasedFunction)(Sysgame *,Table *,pair<int,int>);
 		void (*onMousePressFunction)(Sysgame *,Table *,pair<int,int>);
+		void (*onActionMoveFunction)(Sysgame*,Table*,pair<int,int>,pair<int,int>);
+		
 };
 

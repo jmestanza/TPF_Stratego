@@ -3,6 +3,7 @@
 #include <framework\utils\random_number.h>
 #include <framework\view\utils\copyBitmap.h>
 #include <framework\view\widgets\TokenContainer\MouseFollower.h>
+#include <framework\utils\random_number.h>
 
 
 TokenContainer::TokenContainer(Sysgame *sys,string name) : Widget(sys,name) {
@@ -17,20 +18,49 @@ TokenContainer::TokenContainer(Sysgame *sys,string name) : Widget(sys,name) {
 	tokenGenerated = 0;
 	rel_X = 0;
 
-	addContent("1B",1);
-	addContent("2B",2);
-	addContent("3B",3);
-	addContent("4B",4);
-	addContent("5B",5);
-	addContent("6B",6);
-	addContent("7B",7);
-
+	//addContent("FB",1);
+	//addContent("BB",1);
+	//addContent
 	borderSize = 69;
 
 	maxPosition = 30 * 10 * content.size() + 10 - this->size.first - 138;
 
 	cnt = 0;
 	onTokenSelectFunction = nullptr;
+}
+void TokenContainer::addAllBlueContent() {
+	addContent("FB",1);
+	addContent("BB",6);
+	addContent("SB",1);
+	addContent("1B",8);
+	addContent("2B",5);
+	addContent("3B",4);
+	addContent("4B",4);
+	addContent("5B",4);
+	addContent("6B",3);
+	addContent("7B",2);
+	addContent("8B",1);
+	addContent("9B",1);
+}
+void TokenContainer::addAllRedContent() {
+	addContent("FR",1);
+	addContent("BR",6);
+	addContent("SR",1);
+	addContent("1R",8);
+	addContent("2R",5);
+	addContent("3R",4);
+	addContent("4R",4);
+	addContent("5R",4);
+	addContent("6R",3);
+	addContent("7R",2);
+	addContent("8R",1);
+	addContent("9R",1);
+}
+void TokenContainer::clear() {
+	for (auto it = content.begin();it != content.end();it++) {
+		it->second.cnt = 0;
+	}
+	generateTokenContentImage();
 }
 void TokenContainer::configure(pair<int,int> _pos) {
 	pos = _pos;
@@ -143,7 +173,7 @@ void TokenContainer::startDrawing() {
 	buttonLeft->callStartDrawing();
 	buttonRight->callStartDrawing();
 	if (!tokenGenerated) generateTokenContentImage();
-	cout << "Showing " << myCode << '\n';
+	//cout << "Showing " << myCode << '\n';
 	view->show(myCode,myCode+"_b",pos.first+69,pos.second);
 }
 void TokenContainer::stopDrawing() {
@@ -194,8 +224,25 @@ void TokenContainer::generateTokenContentImage() {
 	al_destroy_bitmap(bitmapContent);
 
 }
+string TokenContainer::getRandomTokenAndPop() {
+	/// O(n) 
+	vector <string> cand;
+	for (auto it = content.begin();it != content.end();it++) {
+		int qty = it->second.cnt;
+		while (qty--) cand.push_back(it->first);
+	}
+	if (cand.size() == 0) {
+		return "empty";
+	}
+	string val = cand[randrange(0,cand.size())];
+	content[val].cnt --;
+	return val;
+}
+
 void TokenContainer::addContent(string tokenCode,int qty) {
-	contentOrder.push_back(tokenCode);
+	if (content.find(tokenCode) == content.end()) {
+		contentOrder.push_back(tokenCode);
+	}
 	content[tokenCode] = Element(qty,0,0);
 }
 void TokenContainer::removeContent(string tokenCode) {
@@ -206,6 +253,7 @@ void TokenContainer::incContent(string tokenCode) {
 	content[tokenCode].cnt ++;
 	generateTokenContentImage();
 }
+
 TokenContainer::~TokenContainer() {
 	delete buttonLeft;
 	delete buttonRight;

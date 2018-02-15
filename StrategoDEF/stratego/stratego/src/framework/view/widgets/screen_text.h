@@ -13,6 +13,7 @@ class screenText : public Widget{
 		string myFont;
 		ALLEGRO_COLOR myColor;
 		int flagDraw;
+		int cnt;
 	public:
 		screenText(Sysgame *sys,string name);
 		void handleEvent(ALLEGRO_EVENT *ev);

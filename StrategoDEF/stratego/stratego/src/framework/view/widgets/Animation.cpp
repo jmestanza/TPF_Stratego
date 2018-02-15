@@ -28,7 +28,8 @@ void Animation::configure(vector <string> _images) {
 }
 void Animation::startDrawing() {
 
-	//cout << "start!" << '\n';
+	//cout << "start!" << 
+	;
 	_started = 1;
 	view->show(images[_efDrawing] , myNameCode ,this->pos.first,this->pos.second );
 }

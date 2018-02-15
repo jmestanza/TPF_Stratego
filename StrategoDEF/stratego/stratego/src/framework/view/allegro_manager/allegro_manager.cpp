@@ -280,7 +280,8 @@ void Viewer::loadColor(string code,string name) {
 		color = al_map_rgb(ans[0], ans[1], ans[2]);
 	}
 	/// now add to list
-	//cout << "colors[" << name << "] = " << color.r << ',' << color.g << ',' << color.b << '\n';
+	//cout << "colors[" << name << "] = " << color.r << ',' << color.g << ',' << color.b << 
+	;
 	colors[name] = color;
 }
 ALLEGRO_COLOR Viewer::getColor(string code) {
@@ -412,4 +413,14 @@ Viewer::~Viewer() {
 	al_destroy_display(display);
 	al_destroy_event_queue(q);
 	al_destroy_timer(timer);
+}
+void Viewer::showBitmaps() {
+	cout << "Loaded bitmaps => \n";
+	for (auto it = loaded.begin(); it != loaded.end();it++) {
+		cout << "["<<it->first << "]\n";		
+	}
+	cout << "Shown bitmaps => \n";
+	for (auto it = frontShow.begin(); it != frontShow.end();it++) {
+		cout << "[" << it->first << ","<< it->second <<"]\n";
+	}
 }

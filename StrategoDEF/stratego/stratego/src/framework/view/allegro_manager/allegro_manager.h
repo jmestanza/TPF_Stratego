@@ -69,6 +69,7 @@ class Viewer {
 		void loadFont(string dir,string name,int size);
 		void loadColor(string code, string name);
 		void eraseLoaded(string loadedName);
+		void showBitmaps();
 
 		ALLEGRO_BITMAP *getImg(string imgName);
 		ALLEGRO_FONT* getFont(string name);

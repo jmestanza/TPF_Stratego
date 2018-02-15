@@ -28,6 +28,7 @@ void showTimeTest::onCreate() {
 
 	cont->configure( posToken );
 
+
 	cont->onTokenSelect([](Sysgame *sys,string selected) {
 		showTimeTest* myself = (showTimeTest*)sys->getController();
 		myself->setSelectedItem(selected);

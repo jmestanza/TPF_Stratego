@@ -1,20 +1,37 @@
 #include "gameArea.h"
 
+#include <string>
+#include <game\model\stratego_engine\Player.h>
 #include <framework\view\widgets\screen_text.h>
 #include <framework\view\widgets\text_button.h>
 #include <framework\view\utils\good_buttons.h>
 #include <framework\view\widgets\TokenContainer\TokenContainer.h>
 #include <framework\view\widgets\TokenContainer\MouseFollower.h>
+#include <framework\view\widgets\Animation.h>
+
 #include <game\controller\menu_test\menu_test.h>
 #include <game\controller\connectionLostMenu\connectionLostMenu.h>
 
-gameArea::gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart) : Controller(sys) {
+using namespace std;
+
+gameArea::gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart,string _mode) : Controller(sys) {
+
+	gameEngine = new Player(_localStart ? RED : BLUE);
+	
+
 	name = _name;
 	opponentName = _opponentName;
 	localStart = _localStart;
 	status = "select_token";
+	mode = _mode;
 
-	
+	tokensToPlace = 40;
+	startButtonPresent = 0;
+	optionButtonPresent = 0;
+	animationAdded = 0;
+	hasOk = 0;
+
+
 }
 void gameArea::onCreate() {
 	addBackgroundImg("background1");
@@ -48,7 +65,9 @@ void gameArea::onCreate() {
 
 	/*** CONTENEDOR DE PIEZAS ***/
 	TokenContainer *cont = new TokenContainer(mySysgame,"token_container");
-	int halfPoint = (tablero->getPos().first + tablero->getSize().first + screenSize.first) / 2;
+	halfPoint = (tablero->getPos().first + tablero->getSize().first + screenSize.first) / 2;
+	quarterPoint = (screenSize.first - (tablero->getPos().first + tablero->getSize().first))/4 + tablero->getPos().first + tablero->getSize().first;
+	threeQuartersPoint = (screenSize.first - (tablero->getPos().first + tablero->getSize().first)) / 4*3 + tablero->getPos().first + tablero->getSize().first;
 	pair <float,float> posToken(halfPoint - cont->getSize().first / 2,screenSize.second - cont->getSize().second - 70);
 
 	cont->configure(posToken);
@@ -61,7 +80,7 @@ void gameArea::onCreate() {
 
 	/*** AREA DE MENSAJES ***/
 
-	pair <float,float> infoPosition((20 + tablero->getSize().first + screenSize.first)/2,screenSize.second/2) ;
+	pair <float,float> infoPosition(cont->getPos().first+10,cont->getPos().second-20) ;
 	pair <float,float> iconPosition(screenSize.first - 40,screenSize.second / 2);
 
 	screenText *msg = new screenText(mySysgame,"info_msg");
@@ -69,9 +88,20 @@ void gameArea::onCreate() {
 
 	//pair <float,float>
 
-	msg->configure("Coloca las fichas","roboto_v1",view->getColor("black"),infoPosition,1);
+	msg->configure("Faltan 40 fichas","roboto_small",view->getColor("black"),infoPosition,0);
 
 	addWidget((Widget*)msg);
+
+	addOptionsButtons();
+
+	if (localStart) {
+		cont->addAllRedContent();
+	} else {
+		cont->addAllBlueContent();
+	}
+
+
+
 
 	/**** ACCIONES CONJUNTAS DEL TABLERO Y EL CONTENEDOR DE PIEZAS ***/
 
@@ -87,27 +117,36 @@ void gameArea::onCreate() {
 	});
 
 	tablero->onMouseRelease([](Sysgame *sys,Table *table,pair<int,int> pos) {
+		if (pos.second <= 5) return;
 		TokenContainer *tk = (TokenContainer*)sys->getUI()->getWidget("token_container");
 
 		gameArea *controller = (gameArea*)sys->getController();
 
 		if (controller->getSelectedItem() != "") {
+			int delta = 0;
+			//cout << table->getPiece(pos) << '\n';
 			if (table->getPiece(pos) != "empty") {
 				tk->incContent(table->getPiece(pos));
-
+				delta ++;
 			}
 			table->putToken(controller->getSelectedItem(),pos);
 			tk->removeContent(controller->getSelectedItem());
 			controller->setSelectedItem("");
+			delta --;
+			//cout << "Delta = " << delta << '\n';
+			if (delta == -1) controller->decTokens();
+			
 		}
 	});
 
 	tablero->onMousePress([](Sysgame *sys,Table *table,pair<int,int> pos) {
+		if (pos.second <= 5) return;
 		TokenContainer *tk = (TokenContainer*)sys->getUI()->getWidget("token_container");
 		gameArea *controller = (gameArea*)sys->getController();
 
 		if (table->getPiece(pos) != "empty") {
 			tk->incContent(table->getPiece(pos));
+			controller->incTokens();
 			MouseFollower *follow = (MouseFollower*)sys->getUI()->getWidget("mouse_selected");
 			follow->setImg("token_" + table->getPiece(pos) + "_r");
 
@@ -118,6 +157,293 @@ void gameArea::onCreate() {
 	});
 
 }
+void gameArea::decTokens() {
+	tokensToPlace --;
+	updateTokenMsg();
+}
+void gameArea::incTokens() {
+	tokensToPlace ++;
+	updateTokenMsg();
+}
+void gameArea::addStartButton() {
+	if (startButtonPresent) return;
+
+	pair<float,float> screenSize = view->getScreenSize();
+
+	TextButton *startButton = new TextButton(mySysgame,"start_button");
+	startButton->generate("COMENZAR",g_connectButtonLong(),pair<float,float>(halfPoint,screenSize.second - 40),1);
+	startButton->addIcon("icon_success_small");
+	startButton->onClick([](Sysgame *sys) {
+		gameArea *myself = (gameArea*)sys->getController();
+		myself->tokenReady();
+	});
+
+	addWidget((Widget*)startButton);
+	startButtonPresent = 1;
+}
+void gameArea::tokenReady() {
+
+	removeStartButton();
+	removeOptionsButtons();
+
+	Table* table = (Table*)getWidget("table");
+
+	table->fillOpponentField(localStart ? "B" : "R");
+	table->setStatus("locked");
+	table->onMousePress(nullptr);
+	table->onMouseRelease(nullptr);
+
+	/*table->onAction([](Sysgame *sys,pair<int,int> source,pair<int,int> dst)) {
+
+	}*/
+
+	if (this->mode == "server") {
+		
+		cout << "coloacmos las fichas, somos servidor \n";
+
+		map <string,string> data;
+		mySysgame->getNetwork()->sendPackage("r_u_ready",data);
+		
+		cout << "Enviamos el r_u_ready \n";
+
+		if (localStart) {
+			this->status = "waiting_for_ok";
+			cout << "Esepramos el ok \n";
+		} else {
+			this->status = "waiting_for_opp_move";
+			cout << "esperamos el primer movimiento del rival\n";
+		}
+		removeWaitingMsg();
+		addWaitingMsg("Esperando al oponente");
+		addAnimation();
+
+	} else if (this->mode == "client") {
+		cout << "colocamos las fichas, somos cliente \n";
+
+		if (this->status == "r_u_ready_recv") {
+			if (localStart) {
+				this->status = "waiting_for_move";
+				removeWaitingMsg();
+				addWaitingMsg("Es tu turno");
+				cout << "ya recibimos el r_u_ready, y empezamos nosotros, \n";
+				cout << "status = " << this->status << '\n';
+			} else {
+				this->status = "waiting_for_opp_move";
+				map<string,string> data;
+				mySysgame->getNetwork()->sendPackage("i_am_ready",data);
+				removeWaitingMsg();
+				addWaitingMsg("Esperando al oponente");
+				addAnimation();
+				cout << "ya recibimos el r_u_ready, empeiza el rival, le mandamos el i_am_ready y esperamos su primer movimiento \n";
+				cout << "status = " << this->status << '\n';
+
+			}
+		} else if (this->status == "select_token") {
+			cout << "No recibimos el r_u_ready, esperamos a que el rival lo envie \n";
+			this->status = "waiting_r_u_ready";
+
+			cout << "status = " << this->status << '\n';
+			removeWaitingMsg();
+			addWaitingMsg("Esperando al oponente");
+			addAnimation();
+		}
+	}
+
+	loadEngineContent(table->getContent());
+
+	//// Acciones de juego
+	table->onActionMove([](Sysgame *sys,Table* tbl,pair<int,int> org_src,pair<int,int> org_dst) {
+
+		gameArea *myself = (gameArea*)sys->getController();
+		Table *table = (Table*)sys->getUI()->getWidget("table");
+		pair<int,int> source = myself->convertPosToGeneralType(org_src);
+		pair<int,int> dst = myself->convertPosToGeneralType(org_dst);
+
+		if (myself->getStatus() == "waiting_for_move") {
+			Player* engine = myself->getGameEngine();
+			int ans = engine->move_local_token(PosType(source),PosType(dst));
+			if (ans == MOVE_VALID || ans == ATTACK_TRY) {
+				//// we've got a movement!
+				map <string,string> content;
+				content["original_col"] = string(1,'a' + source.second );
+				content["original_row"] = string(1,'a' + source.first);
+				content["destination_col"] = string(1,(char)dst.second);
+				content["destination_row"] = string(1,(char)dst.first);
+				sys->getNetwork()->sendPackage("move",content);
+			}
+			if (ans == ATTACK_TRY) {
+				myself->setStatus("waiting_for_attack_result");
+			} else if (ans == MOVE_VALID) {
+				table->moveToken(org_src,org_dst);
+			}
+		}
+		
+	});
+
+}
+Player *gameArea::getGameEngine() {
+	return gameEngine;
+}
+void gameArea::loadEngineContent(vector <vector <string>> &content) {
+	cout << "[gameArea] loading engine content! \n";
+	gameEngine->set_game_state(localStart ? LOCAL_MOVE : ENEMY_MOVE);
+	for (int i = 0;i < TABLE_SLOTS;i++) {
+		for (int j = 0;j < TABLE_SLOTS;j++) {
+			
+			if (content[i][j] != "empty") {
+				if (content[i][j].substr(0,1) == "0") {
+					//
+				} else {
+					PosType pos(convertPosToGeneralType(pair<int,int>(i,j)));
+					gameEngine->local_board.set_new_token(content[i][j].substr(1,2) == "R" ? RED : BLUE,pos,stringToRank(content[i][j].substr(0,1)));
+				}
+			}
+		}
+	}
+	gameEngine->local_board.set_enemy_tokens(localStart ? BLUE : RED);
+	
+}
+pair<int,int> gameArea::convertPosToGeneralType(pair<int,int> original) {
+	if (localStart) {
+		return pair<int,int>(TABLE_SLOTS-original.first-1,TABLE_SLOTS-original.second-1);
+	}
+	return original;
+}
+void gameArea::addWaitingMsg(string msg) {
+	if (waitingMsgAdded) return;
+	screenText *text = new screenText(mySysgame,"info_text");
+	pair<float,float> screenSize = view->getScreenSize();
+	text->configure(msg,"roboto_v30",view->getColor("black"),pair<float,float>(halfPoint,screenSize.second / 2),1);
+	addWidget((Widget*)text);
+
+	waitingMsgAdded = 1;
+}
+void gameArea::removeWaitingMsg() {
+	if (!waitingMsgAdded) return;
+
+	eraseWidget("info_text");
+
+	waitingMsgAdded = 0;
+}
+string gameArea::getStatus() {
+	return status;
+}
+void gameArea::setStatus(string _status) {
+	status = _status;
+}
+void gameArea::addOptionsButtons() {
+
+	if (optionButtonPresent) return;
+	optionButtonPresent = 1;
+
+	pair<float,float> screenSize = view->getScreenSize();
+
+	TextButton* randomButton = new TextButton(mySysgame,"random_button");
+	randomButton->generate("AL AZAR",g_greenMedium(),pair<float,float>(threeQuartersPoint-25,screenSize.second - 220),1);
+	randomButton->addIcon("icon_random");
+	addWidget((TextButton*)randomButton);
+
+	TextButton* cancelButton = new TextButton(mySysgame,"cancel_token_button");
+	cancelButton->generate("VACIAR",g_redMedium(),pair<float,float>(quarterPoint+25,screenSize.second - 220),1);
+	cancelButton->addIcon("icon_left");
+	
+	/*** ACCIONES DE LOS BOTONES CANCELAR Y RANDOM **/
+	
+	randomButton->onClick([](Sysgame *sys) {
+		gameArea *myself = (gameArea*)sys->getController();
+		myself->setRandomPieces();
+
+	});
+	
+	
+	cancelButton->onClick([](Sysgame *sys) {
+		Table* table = (Table*)sys->getUI()->getWidget("table");
+		table->clearToken();
+
+		gameArea *myself = (gameArea*)sys->getController();
+
+		TokenContainer *cont = (TokenContainer*)sys->getUI()->getWidget("token_container");
+		if (myself->getIStart()) {
+			cont->addAllRedContent();
+		} else {
+			cont->addAllBlueContent();
+		}
+		cont->generateTokenContentImage();
+		myself->setTokenLeft(40);
+	});
+	addWidget((Widget*)cancelButton);
+}
+void gameArea::setRandomPieces() {
+	TokenContainer *tk = (TokenContainer*)mySysgame->getUI()->getWidget("token_container");
+	Table *tbl = (Table*)mySysgame->getUI()->getWidget("table");
+	for (int i = 6;i < TABLE_SLOTS;i++) {
+		for (int j = 0;j < TABLE_SLOTS;j++) {
+			pair<int,int> pos(j,i);
+			if (tbl->getPiece(pos) == "empty") {
+				string next = tk->getRandomTokenAndPop();
+				tbl->putToken(next,pos);
+			}
+
+		}
+	}
+	tk->generateTokenContentImage();
+	tokensToPlace = 0;
+	updateTokenMsg();
+
+}
+void gameArea::setTokenLeft(int value) {
+	tokensToPlace = value;
+	updateTokenMsg();
+}
+bool gameArea::getIStart() {
+	return localStart;
+}
+void gameArea::removeOptionsButtons() {
+	if (!optionButtonPresent) return;
+
+	eraseWidget("random_button");
+	eraseWidget("cancel_token_button");
+	optionButtonPresent = 0;
+}
+void gameArea::removeStartButton() {
+	if (!startButtonPresent) return;
+	
+	eraseWidget("start_button");
+	 
+	startButtonPresent = 0;
+
+}
+void gameArea::updateTokenMsg() {
+	if (tokensToPlace == 0) {
+		((screenText*)mySysgame->getUI()->getWidget("info_msg"))->changeMsg("Listo para jugar");
+		addStartButton();
+	} else {
+		removeStartButton();
+		((screenText*)mySysgame->getUI()->getWidget("info_msg"))->changeMsg("Faltan " + to_string(tokensToPlace) + " piezas");
+	}
+
+}
+void gameArea::addAnimation() {
+	if (animationAdded) return;
+
+	pair<float,float> screenSize = view->getScreenSize();
+
+	Animation *anim = new Animation(mySysgame,"animation");
+	vector <string> data;
+	getLoadingAImgs(data);
+	anim->configure(data,pair<float,float>(halfPoint,screenSize.second/2-50),1);
+
+	addWidget((Widget*)anim);
+	animationAdded = 1;
+}
+void gameArea::removeAnimation() {
+	if (!animationAdded) return;
+
+	eraseWidget("animation");
+
+	animationAdded = 0;
+}
+
 string gameArea::getSelectedItem() {
 	return selectedItem;
 }
@@ -125,13 +451,63 @@ void gameArea::setSelectedItem(string value) {
 	 selectedItem = value;
 }
 void gameArea::onNetPack(string &package,map<string,string> &data) {
+	cout << this->mode << ' ' << package << ' ' << this->status << '\n';
+	if (this->mode == "client" && package == "r_u_ready" && this->status == "select_token") {
+		this->status = "r_u_ready_recv";
+		cout << "Somos clients y recibimos el r_u_ready \n";
+		cout << "El juagdor no selecciono aun sus fichas, esperamos a que lo haga\n";
+		cout << "status = " << this->status << '\n';
+	} else if (this->mode == "client" && package == "r_u_ready" && this->status == "waiting_r_u_ready") {
+		map<string,string> data;
+		mySysgame->getNetwork()->sendPackage("i_am_ready",data);
 
-}// handle NETWORK actions
+		cout << "somos clientes y ya colocamos las fichas. Nos llego el r_u_ready \n!";
+		if (localStart) {
+			this->status = "waiting_for_move";
+			removeAnimation();
+			removeWaitingMsg();
+			addWaitingMsg("Es tu turno");
+			cout << "Como el turno inicial es mio, yo saco \n";
+			cout << "status = " << this->status << '\n';
+		} else {
+			this->status = "waiting_for_opp_move";
+			map<string,string> data;
+			mySysgame->getNetwork()->sendPackage("i_am_ready",data);
+			removeWaitingMsg();
+			addWaitingMsg("Esperando al oponente");
+			addAnimation();
+			cout << "Como el turno inicial es del rival, esperamos a que juegue el oponente \n";
+			cout << "Enviamos el i_am_ready \n";
+			cout << "status = " << this->status << '\n';
+		}
+	} else if (this->mode == "server" && package == "i_am_ready" && this->status == "waiting_for_ok") {
+		this->status = "waiting_for_move";
+		removeAnimation();
+		removeWaitingMsg();
+		addWaitingMsg("Es tu turno");
+		cout << "Somos servidores y recibimos el i_am_ready, y estabamos esperandolo, por lo tanto \n";
+		cout << "status = " << this->status << '\n';
+	}else if (this->status == "waiting_for_opp_move" && package == "move") {
+		PosType src( data["original_row"][0]-'a', stoi(data["original_col"]) );
+		PosType dst( data["destination_row"][0]-'a',stoi(data["original_row"]));
+		int ans = this->gameEngine->move_enemy_token(src,dst);
+		if (ans == ATTACK_TRY) {
+			/// Oh!!! he attacked a token
+			map<string,string> dataAns;
+
+		} else if (ans != MOVE_VALID){
+			cout << "unexcepected situation! invalid move !!";
+		}
+	} else if (this->status == "waiting_for_attack_result" && package == "attack") {
+		
+	}
+} // handle NETWORK actions
 void gameArea::onNetEvent(NETWORK_EVENT *ev) {
 	if (ev->msg == "connlost") {
 		mySysgame->setNewController(new connectionLostMenu(mySysgame));
 	}
 }
 
-
-gameArea::~gameArea() {}
+gameArea::~gameArea() {
+	delete gameEngine;
+}

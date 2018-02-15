@@ -107,6 +107,7 @@ void NetworkManager::handleRecv(const boost::system::error_code& error, size_t b
 }
 void NetworkManager::handleSent(const boost::system::error_code& error, size_t bytes) {
 	cout << "[Network Manager]Mensaje enviado \n";
+	
 	if (error) { 
 		connected = 0;
 		boost::system::error_code error;

@@ -70,6 +70,7 @@ class TokenContainer : public Widget{
 		int tokenWidth;
 		void (*onTokenSelectFunction)(Sysgame *,string);
 
+
 	public:
 		TokenContainer(Sysgame *sys,string name);
 		~TokenContainer();
@@ -90,5 +91,12 @@ class TokenContainer : public Widget{
 		void onTokenSelect(void (*func)(Sysgame*,string) );
 		void incContent(string tokenCode);
 		void setTableRef(Table *tbl);
+		void addAllBlueContent();
+		void addAllRedContent();
+		void clear();
+		string getRandomTokenAndPop();
+	
+
+
 };
 

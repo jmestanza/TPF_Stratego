@@ -86,6 +86,7 @@ void NetworkProtocol::createPackages(vector <Package*> pkgList) {
 	for (int i = 0; i < pkgList.size(); i++) createNewPackage(pkgList[i]);
 }
 void NetworkProtocol::sendPackage(string pkgName, map <string, string> &content) {
+	cout << "[Network Protocol] send " << pkgName << '\n';
 	/// Frist we verify package is in a correct format
 	if (pkgByName.find(pkgName) == pkgByName.end()) {
 	
@@ -119,6 +120,7 @@ void NetworkProtocol::onRecv(string &msg) {
 		throw NetworkProtocolException("Fatal error: can not decode package");
 	}
 	string packageName = package->getName();
+	cout << "[Network Protocol] recv " << packageName << '\n';
 	this->onPackageRecv(packageName, content);
 }
 NetworkProtocol::~NetworkProtocol() {

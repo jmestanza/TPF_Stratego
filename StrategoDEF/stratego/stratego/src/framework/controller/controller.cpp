@@ -35,6 +35,8 @@ void Controller::callIn(int miliseconds,void(*func)(Sysgame *)) {
 	addWidget((Widget*)showTime);
 }
 void Controller::callTimerFunc() {
+	flagTimer = 0;
+	eraseWidget(timerName);
 	timerFunc(mySysgame);
 }
 void Controller::disableFlagTimer() {
@@ -48,6 +50,9 @@ void Controller::addBackgroundImg(string img) {
 		pair<float,float>(screenSize.first / 2,screenSize.second / 2),
 		1);
 	addWidget((Widget*)background);
+}
+Widget * Controller::getWidget(string name) {
+	return mySysgame->getUI()->getWidget(name);
 }
 string Controller::getTimerName() {
 	return timerName;

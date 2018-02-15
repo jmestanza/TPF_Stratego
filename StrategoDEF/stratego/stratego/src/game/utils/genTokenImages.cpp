@@ -1,6 +1,6 @@
 #include "genTokenImages.h"
 
-string let = "123456789BFS";
+string let = "0123456789BFS";
 
 void gen(Viewer *view, string type) {
 	for (int i = 0;i < let.size();i++) {

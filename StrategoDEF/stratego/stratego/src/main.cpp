@@ -3,6 +3,7 @@
 #include <game/controller/menu_test/menu_test.h>
 #include <game/controller/showTimeTest/showTimeTest.h>
 #include <game/controller/gameArea/gameArea.h>
+#include <game/controller/connectMenu/connect_menu.h>
 
 using namespace std;
 
@@ -12,8 +13,8 @@ int main() {
 
 	try{
 		Sysgame sys;
-		sys.setNewController( (Controller*)new gameArea(&sys,"ariel","joaquin",1));
-		
+		sys.setNewController((Controller*)(new ConnectMenu((Sysgame*)&sys)));
+
 		while (!sys.quit()) sys.update();
 		
 	} catch (exception &e) {

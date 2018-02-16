@@ -291,6 +291,8 @@ void gameArea::tokenReady() {
 				table->moveToken(org_src,org_dst);
 
 				myself->setStatus("waiting_for_opp_move");
+				myself->addAnimation();
+				myself->addWaitingMsg("Esperando al rival");
 			} else {
 				cout << "invalid move! \n";
 			}
@@ -542,6 +544,8 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 				convertPosToGeneralType(pair<int,int>(dst.i,dst.j))
 			);
 			this->status = "waiting_for_move";
+			removeAnimation();
+			addWaitingMsg("Es tu turno");
 		}
 	} else if (this->status == "waiting_for_attack_result" && package == "attack") {
 		cout << "we were waiting for attack result and we've got it!\n";

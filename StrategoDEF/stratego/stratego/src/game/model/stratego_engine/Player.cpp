@@ -110,7 +110,7 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 
 void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range)
 {
-	BasicToken* token = local_board.get_tile(src_pos);
+	BasicToken* token = local_board.get_tile(src_pos)->get_range()==0;
 	AttackResult res;
 
 	switch (token->get_range())
@@ -166,6 +166,12 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 	if(game_state == ENEMY_MOVE) {
 		game_state = LOCAL_MOVE;
 	}
+}
+
+void Player::receive_attack(PosType src_pos,PosType dst_pos,RangeType attacker) {
+	// src es enemy
+	src_pos
+
 }
 
 MoveResult Player::move_enemy_token(PosType src_pos, PosType dst_pos)

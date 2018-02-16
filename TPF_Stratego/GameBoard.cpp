@@ -15,6 +15,7 @@ tablero_t& GameBoard::get_board()
 
 
 BasicToken * GameBoard::get_tile(PosType tile)
+
 {
 	return board[(tile.i)][(tile.j)];
 }

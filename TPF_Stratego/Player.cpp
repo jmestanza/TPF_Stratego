@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
+#include <iostream>
 
+using namespace std;
 
 Player::Player(PlayerType color){
 	player = color;
@@ -91,7 +93,18 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 }
 
 void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range){
-	BasicToken* token = local_board.get_tile(src_pos);
+	BasicToken* token=nullptr;
+	int tokenAttacks;
+
+	if (local_board.get_tile(src_pos)->get_range() == 0) {
+		token = local_board.get_tile(dst_pos);
+		tokenAttacks = 0;
+	} else if (local_board.get_tile(dst_pos)->get_range() == 0) {
+		token = local_board.get_tile(src_pos); 
+		tokenAttacks = 1;
+	} else {
+		cout << "super crazy my friend\n";
+	}
 	AttackResult res;
 
 	switch (token->get_range()){
@@ -126,7 +139,13 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 		res = ((SpyToken*)token)->attack(attack_token_range);
 		break;
 	}
-
+	if (!tokenAttacks) {
+		if (res == WON) {
+			res = LOSE;
+		} else if (res == LOSE) {
+			res = WON;
+		}
+	}
 	if (res == WON) {
 		local_board.move_token(src_pos, dst_pos);
 	}

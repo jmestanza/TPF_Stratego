@@ -275,6 +275,8 @@ void gameArea::tokenReady() {
 				content["original_row"] = string(1,(char)source.first);
 				content["destination_col"] = string(1,'a' +dst.second);
 				content["destination_row"] = string(1,(char)dst.first);
+				cout << (int)(content["original_row"][0] - 'a') << ' ' << (int)content["original_col"][0] << '\n';
+				cout << (int)(content["destination_row"][0] - 'a') << ' ' << (int)content["destination_col"][0] << '\n';
 
 				cout << content["original_col"] << ' ' << content["original_row"] << ' ' << content["destination_col"] << ' ' << content["destination_row"] << '\n';
 
@@ -517,7 +519,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 	}else if (this->status == "waiting_for_opp_move" && package == "move") {
 		cout << "opponent move! \n";
 		cout << (int)(data["original_row"][0]-'a') << ' ' << (int)data["original_col"][0] << '\n';
-		cout << (int)(data["destination_row"][0]-'a') << ' ' << (int)data["destination_row"][0] << '\n';
+		cout << (int)(data["destination_row"][0]-'a') << ' ' << (int)data["destination_col"][0] << '\n';
 
 		PosType src( data["original_row"][0]-'a', (int)data["original_col"][0] );
 		PosType dst( data["destination_row"][0]-'a',(int)data["destination_col"][0] );

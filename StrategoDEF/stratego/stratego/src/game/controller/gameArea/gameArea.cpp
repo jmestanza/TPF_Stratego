@@ -570,11 +570,13 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "( " << current_src.i << ',' << current_src.j << ") (" << current_dst.i << ',' << current_dst.j << ")\n";
 		cout << "token: " << stringToRank(piece) << '\n';
 
-		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
+		int res = gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(ENEMY_MOVE);
 		
 		removeWaitingMsg();
 		addAnimation();
+
+
 		addWaitingMsg("Esperando al rival");
 
 
@@ -582,12 +584,14 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		tbl->takeOutToken(convertPosToGeneralType(pair<int, int>(current_src.i, current_src.j)));
 		tbl->takeOutToken(convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)));
 
-		tbl->putToken(
-			rankToString(
+		if (res != NOBODY_WON) {
+			tbl->putToken(
+				rankToString(
 				gameEngine->local_board.get_tile(current_dst)->get_range())
-			+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
-			convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)
+				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
+				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
+		}
 
 		//if (gameEngine->get_game_state() == )
 	} else if (this->status == "waiting_for_attack_then_play" && package == "attack") {
@@ -599,7 +603,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "( " << current_src.i << ',' << current_src.j << ") (" << current_dst.i << ',' << current_dst.j << ")\n";
 		cout << "token: " << stringToRank(piece) << '\n';
 
-		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
+		int res = gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(LOCAL_MOVE);
 
 
@@ -607,17 +611,21 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		tbl->takeOutToken(convertPosToGeneralType(pair<int,int>(current_src.i,current_src.j )));
 		tbl->takeOutToken(convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j )));
 
-		tbl->putToken(
-			rankToString(
+		if (res != NOBODY_WON) {
+			tbl->putToken(
+				rankToString(
 				gameEngine->local_board.get_tile(current_dst)->get_range())
-			+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
-			convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)
+				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
+				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
+		}
 
 		removeWaitingMsg();
 		removeAnimation();
 		addWaitingMsg("Es tu turno");
 
+	} else {
+		cout << "unexpected package! \n";
 	}
 } // handle NETWORK actions
 void gameArea::onNetEvent(NETWORK_EVENT *ev) {

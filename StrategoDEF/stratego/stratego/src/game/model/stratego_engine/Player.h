@@ -48,7 +48,7 @@ class Player
 public:
 	Player(PlayerType color); /// Recibe color asignado y define quien comienza
 	MoveResult move_local_token(PosType src_pos, PosType dst_pos); /// Retorna MoveTypes
-	void process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range); /// Recibe el rango atacante/atacado y resuelve
+	int process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range); /// Recibe el rango atacante/atacado y resuelve
 	MoveResult move_enemy_token(PosType src_pos, PosType dst_pos); /// Retorna MoveTypes		
 	State get_game_state(); /// Retorna estado actual segun BasicStates
 	PlayerType get_player();

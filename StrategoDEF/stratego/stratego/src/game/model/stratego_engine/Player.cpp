@@ -108,7 +108,7 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 	}
 }
 
-void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range)
+int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range)
 {
 	BasicToken* token = nullptr;
 	int tokenAttacks;
@@ -180,6 +180,7 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 	if (game_state == ENEMY_MOVE) {
 		game_state = LOCAL_MOVE;
 	}
+	return res;
 }
 
 MoveResult Player::move_enemy_token(PosType src_pos, PosType dst_pos)

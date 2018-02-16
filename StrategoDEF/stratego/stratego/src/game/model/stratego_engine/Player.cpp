@@ -110,11 +110,21 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 
 void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_token_range)
 {
-	BasicToken* token = local_board.get_tile(src_pos)->get_range()==0;
+	BasicToken* token = nullptr;
+	int tokenAttacks;
+
+	if (local_board.get_tile(src_pos)->get_range() == 0) {
+		token = local_board.get_tile(dst_pos);
+		tokenAttacks = 0;
+	} else if (local_board.get_tile(dst_pos)->get_range() == 0) {
+		token = local_board.get_tile(src_pos);
+		tokenAttacks = 1;
+	} else {
+		cout << "super crazy my friend\n";
+	}
 	AttackResult res;
 
-	switch (token->get_range())
-	{
+	switch (token->get_range()) {
 	case MARSHAL:
 		res = ((MarshalToken*)token)->attack(attack_token_range);
 		break;
@@ -146,16 +156,20 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 		res = ((SpyToken*)token)->attack(attack_token_range);
 		break;
 	}
-
-	if (res == WON) {
-		local_board.move_token(src_pos, dst_pos);
+	if (!tokenAttacks) {
+		if (res == WON) {
+			res = LOSE;
+		} else if (res == LOSE) {
+			res = WON;
+		}
 	}
-	else if (res == NOBODY_WON) {
+	if (res == WON) {
+		local_board.move_token(src_pos,dst_pos);
+	} else if (res == NOBODY_WON) {
 		tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
 		local_board.clear_tile(src_pos);
 		local_board.clear_tile(dst_pos);
-	}
-	else if (res == LOSE) {
+	} else if (res == LOSE) {
 		tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
 		local_board.clear_tile(src_pos);
 	}
@@ -163,15 +177,9 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 	if (game_state == LOCAL_MOVE) { /// Alternar turnos
 		game_state = ENEMY_MOVE;
 	}
-	if(game_state == ENEMY_MOVE) {
+	if (game_state == ENEMY_MOVE) {
 		game_state = LOCAL_MOVE;
 	}
-}
-
-void Player::receive_attack(PosType src_pos,PosType dst_pos,RangeType attacker) {
-	// src es enemy
-	src_pos
-
 }
 
 MoveResult Player::move_enemy_token(PosType src_pos, PosType dst_pos)

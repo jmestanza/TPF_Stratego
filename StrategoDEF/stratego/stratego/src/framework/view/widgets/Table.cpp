@@ -242,8 +242,14 @@ void Table::takeOutToken(pair<int,int> position) {
 void Table::moveToken(pair<int,int> posA,pair<int,int> posB) {
 	//underAnimation = 1;
 	if (shownTokens[posA.first][posA.second] == "empty") return;
-	shownTokens[posB.first][posB.second] = shownTokens[posA.first][posA.second];
-	shownTokens[posA.first][posA.second] = "empty";
+
+	putToken(shownTokens[posA.first][posA.second], posB);
+	takeOutToken(posA);
+
+	//shownTokens[posB.first][posB.second] = shownTokens[posA.first][posA.second];
+	//shownTokens[posA.first][posA.second] = "empty";
+
+
 }
 
 void Table::stopDrawing() {

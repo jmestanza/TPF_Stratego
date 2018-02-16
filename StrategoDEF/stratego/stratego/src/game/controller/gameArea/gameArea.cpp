@@ -536,6 +536,11 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		} else if (ans != MOVE_VALID){
 			cout << "unexcepected situation! invalid move !!";
 		} else {
+			Table *tbl = (Table*)getWidget("tablero");
+			tbl->moveToken(
+				convertPosToGeneralType(pair<int,int>(src.i,src.j)), 
+				convertPosToGeneralType(pair<int,int>(dst.i,dst.j))
+			);
 			this->status = "waiting_for_move";
 		}
 	} else if (this->status == "waiting_for_attack_result" && package == "attack") {

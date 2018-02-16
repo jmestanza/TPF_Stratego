@@ -329,7 +329,7 @@ void gameArea::loadEngineContent(vector <vector <string>> &content) {
 }
 pair<int,int> gameArea::convertPosToGeneralType(pair<int,int> original) {
 	if (localStart) {
-		return pair<int,int>(TABLE_SLOTS-original.second-1,TABLE_SLOTS-original.first-1);
+		return pair<int,int>(TABLE_SLOTS-original.first-1,TABLE_SLOTS-original.second-1);
 	}
 	return original;
 }

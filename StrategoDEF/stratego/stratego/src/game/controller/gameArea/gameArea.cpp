@@ -553,8 +553,16 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 	} else if (this->status == "waiting_for_attack" && package == "attack") {
 		cout << "we were waiting for attack result and we've got it!\n";
 		string piece = data["token_rank"];
+		cout << "the piece is " << data["token_rank"] << '\n';
+
+		map <string, string> sendData;
+		sendData["token_rank"] = rankToString(gameEngine->local_board.get_board()[current_src.i][current_src.j]->get_range());
+		mySysgame->getNetwork()->sendPackage("attack", sendData);
+		cout << "sending token : " << sendData["token_rank"] << '\n';
+
 		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(ENEMY_MOVE);
+
 		//if (gameEngine->get_game_state() == )
 	} else if (this->status == "waiting_for_attack_then_play" && package == "atack") {
 		cout << "we were waiting attack result and then play. We've got the attack\n";

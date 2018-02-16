@@ -512,8 +512,12 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "Somos servidores y recibimos el i_am_ready, y estabamos esperandolo, por lo tanto \n";
 		cout << "status = " << this->status << '\n';
 	}else if (this->status == "waiting_for_opp_move" && package == "move") {
-		PosType src( data["original_row"][0]-'a', stoi(data["original_col"]) );
-		PosType dst( data["destination_row"][0]-'a',stoi(data["original_row"]));
+		cout << "opponent move! \n";
+		cout << data["original_row"][0] << ' ' << data["original_col"][0] << '\n';
+		cout << data["destination_row"][0] << ' ' << data["destination_row"][0] << '\n';
+
+		PosType src( data["original_row"][0]-'a', data["original_col"][0] -'0' );
+		PosType dst( data["destination_row"][0]-'a',data["destination_row"][0] - '0');
 		int ans = this->gameEngine->move_enemy_token(src,dst);
 		if (gameEngine->get_game_state() == WAIT_FOR_RANGE) {
 			/// Oh!!! he attacked a token

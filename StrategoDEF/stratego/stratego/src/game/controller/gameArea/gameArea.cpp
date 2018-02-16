@@ -516,8 +516,8 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "status = " << this->status << '\n';
 	}else if (this->status == "waiting_for_opp_move" && package == "move") {
 		cout << "opponent move! \n";
-		cout << data["original_row"][0] << ' ' << data["original_col"][0] << '\n';
-		cout << data["destination_row"][0] << ' ' << data["destination_row"][0] << '\n';
+		cout << (int)(data["original_row"][0]-'a') << ' ' << (int)data["original_col"][0] << '\n';
+		cout << (int)(data["destination_row"][0]-'a') << ' ' << (int)data["destination_row"][0] << '\n';
 
 		PosType src( data["original_row"][0]-'a', (int)data["original_col"][0] );
 		PosType dst( data["destination_row"][0]-'a',(int)data["destination_col"][0] );

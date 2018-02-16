@@ -571,8 +571,14 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 	} else if (this->status == "waiting_for_attack_then_play" && package == "attack") {
 		cout << "we were waiting attack result and then play. We've got the attack\n";
 		string piece = data["token_rank"];
+		cout << "calling process attack. \n";
+		cout << "parameters: \n";
+		cout << "( " << current_src.i << ',' << current_src.j << ") (" << current_dst.i << ',' << current_dst.j << ")\n";
+		cout << "token: " << stringToRank(piece) << '\n';
+
 		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(LOCAL_MOVE);
+
 	}
 } // handle NETWORK actions
 void gameArea::onNetEvent(NETWORK_EVENT *ev) {

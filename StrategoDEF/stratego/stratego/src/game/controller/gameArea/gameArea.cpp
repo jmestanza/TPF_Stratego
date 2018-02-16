@@ -582,7 +582,9 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		tbl->takeOutToken(convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)));
 
 		tbl->putToken(
-			rankToString(gameEngine->local_board.get_tile(current_dst)->get_range()),
+			rankToString(
+				gameEngine->local_board.get_tile(current_dst)->get_range())
+			+ gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B",
 			convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)
 			));
 
@@ -604,7 +606,9 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		tbl->takeOutToken(convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j )));
 
 		tbl->putToken(
-			rankToString(gameEngine->local_board.get_tile(current_dst)->get_range()), 
+			rankToString(
+				gameEngine->local_board.get_tile(current_dst)->get_range())
+			+gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B", 
 				convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)
 				));
 

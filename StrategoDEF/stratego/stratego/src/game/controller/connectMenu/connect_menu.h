@@ -54,6 +54,7 @@ class ConnectMenu : Controller{
 		string getConnectIP();
 		vector<string> &getConnectContent();
 		void setStatus(string status);
+		string getStatus();
 		pair<float,float> getInfoPositionA();
 		//void setMsgWithIcon(string msg,string color,string icon);
 		void setName(string name);

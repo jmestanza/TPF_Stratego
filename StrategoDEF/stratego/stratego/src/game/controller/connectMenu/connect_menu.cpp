@@ -114,8 +114,10 @@ void ConnectMenu::startToConnect() {
 	setInfoObjects((Widget*)text,(Widget*)animation);
 
 	callIn(1000, [](Sysgame *sys) {
+	
 		ConnectMenu *myself = (ConnectMenu*)sys->getController();
-		myself->setConnectionFailed();
+		if (myself->getStatus() == "trying_to_connect")
+			myself->setConnectionFailed();
 	});
 }
 void ConnectMenu::createConnectButton() {
@@ -299,6 +301,9 @@ pair<float,float> ConnectMenu::getInfoPositionA() {
 }
 void ConnectMenu::setStatus(string _status) {
 	status = _status;
+}
+string ConnectMenu::getStatus() {
+	return status;
 }
 
 

@@ -554,7 +554,7 @@ void ConnectMenu::makeDraw() {
 
 	connectContent.push_back("clock_draw");
 	callIn(1000,[](Sysgame *sys) {
-		int randomValue = randrange(0,2);
+		int randomValue = 1;//randrange(0,2);
 		ConnectMenu *connectMenu = (ConnectMenu*)sys->getController();
 		connectMenu->readyToStart(randomValue);
 

@@ -555,6 +555,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			addWaitingMsg("Es tu turno");
 		}
 	} else if (this->status == "waiting_for_attack" && package == "attack") {
+		this->status = "waiting_for_opp_move";
 		cout << "we were waiting for attack result and we've got it!\n";
 		string piece = data["token_rank"];
 		cout << "the token is " << data["token_rank"] << '\n';
@@ -590,6 +591,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 
 		//if (gameEngine->get_game_state() == )
 	} else if (this->status == "waiting_for_attack_then_play" && package == "attack") {
+		this->status = "waiting_for_move";
 		cout << "we were waiting attack result and then play. We've got the attack\n";
 		string piece = data["token_rank"];
 		cout << "calling process attack. \n";

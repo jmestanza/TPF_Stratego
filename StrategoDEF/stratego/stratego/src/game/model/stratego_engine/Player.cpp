@@ -1,7 +1,22 @@
 #include <stdio.h>
 #include <tchar.h>
 #include "Player.h"
+#include <iostream>
+using namespace std;
 
+void printTable(tablero_t& tablero) {
+	for (int i = 0; i < BOARD_SIZE; i++) {
+		for (int j = 0; j < BOARD_SIZE; j++) {
+			if (tablero[i][j] == nullptr) {
+				cout << "N";
+			}
+			else {
+				cout << tablero[i][j]->get_range();
+				//cout << tablero[i][j]->get_player();
+			}
+		}	cout << endl;
+	}
+}
 
 Player::Player(PlayerType color)
 {

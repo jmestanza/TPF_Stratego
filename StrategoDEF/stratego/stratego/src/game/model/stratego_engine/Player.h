@@ -35,6 +35,8 @@
 ///    son valores X e Y del tablero real, es decir de tipos char de A a J y de 1 a 10,
 ///    para evitar confusiones. La traduccion a indices de matriz se realiza internamente.
 
+void printTable(tablero_t& tablero);
+
 typedef int MoveResult;
 enum MoveTypes {MOVE_VALID = 1, MOVE_NOT_VALID, RESELECT, ATTACK_TRY, ERRORV};
 

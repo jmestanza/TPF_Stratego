@@ -159,7 +159,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				isSelected = 1;
 				cout << "selected => ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n"; 
 			} else {
-				cout << "action " << "("<<selectedPosition.first<<","<<selectedPosition.second<<") -> ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n";
+				cout << "action " << "("<<selectedPosition.first<<","<<selectedPosition.second<<") -> ("<<ry<<","<<rx<<")\n";
 				if (onActionMoveFunction != nullptr) {
 					onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(ry,rx));
 				}

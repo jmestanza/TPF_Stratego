@@ -259,8 +259,8 @@ void gameArea::tokenReady() {
 		pair<int,int> source = myself->convertPosToGeneralType(org_src);
 		pair<int,int> dst = myself->convertPosToGeneralType(org_dst);
 
+		printTable(myself->getGameEngine()->local_board.get_board());
 		
-
 		if (myself->getStatus() == "waiting_for_move") {
 			Player* engine = myself->getGameEngine();
 			int ans = engine->move_local_token(PosType(source),PosType(dst));
@@ -290,6 +290,7 @@ void gameArea::tokenReady() {
 				cout << "invalid move! \n";
 			}
 		}
+		printTable(myself->getGameEngine()->local_board.get_board());
 		
 	});
 

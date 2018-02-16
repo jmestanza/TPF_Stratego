@@ -313,7 +313,7 @@ void Viewer::eraseLoaded(string loadedName) {
 }
 void Viewer::stopShow(string destroyName) {
 	if (frontShow.find(destroyName) == frontShow.end()) {
-		throw AllegroHandlerException("trying to stop showing image that is not being shown");
+		throw AllegroHandlerException("trying to stop showing image that is not being shown '"+destroyName+"'");
 	}
 	frontShow.erase(destroyName);
 }
@@ -335,8 +335,9 @@ void Viewer::draw() {
 
 void Viewer::show(string imageName, string showName, float x, float y) {
 
-	if ((loaded.find(imageName) == loaded.end())) throw AllegroHandlerException("Trying to show something that is not in memory");
-	
+	if ((loaded.find(imageName) == loaded.end())) {
+		throw AllegroHandlerException("Trying to show something that is not in memory ");
+	}
 	ShowImage *nueva = new ShowImage(this);
 	nueva->setPosition(pair<float, float>(x, y), 0);
 	nueva->setImage(loaded[imageName]);

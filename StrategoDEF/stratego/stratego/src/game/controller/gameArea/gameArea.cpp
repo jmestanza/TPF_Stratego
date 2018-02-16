@@ -272,9 +272,12 @@ void gameArea::tokenReady() {
 				//// we've got a movement!
 				map <string,string> content;
 				content["original_col"] = string(1,'a' + source.second );
-				content["original_row"] = string(1,'a' + source.first);
-				content["destination_col"] = string(1,(char)dst.second);
+				content["original_row"] = string(1,(char)source.first);
+				content["destination_col"] = string(1,'a' +dst.second);
 				content["destination_row"] = string(1,(char)dst.first);
+
+				cout << content["original_col"] << ' ' << content["original_row"] << ' ' << content["destination_col"] << ' ' << content["destination_row"] << '\n';
+
 				sys->getNetwork()->sendPackage("move",content);
 			}
 			if (ans == ATTACK_TRY) {

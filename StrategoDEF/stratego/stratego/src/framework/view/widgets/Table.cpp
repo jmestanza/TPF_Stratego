@@ -237,6 +237,7 @@ string Table::getPosCode(pair<int,int> position) {
 void Table::takeOutToken(pair<int,int> position) {
 	if (shownTokens[position.first][position.second] != "empty") {
 		view->stopShow(getPosCode(position));
+		shownTokens[position.first][position.second] = "empty";
 	}
 }
 void Table::moveToken(pair<int,int> posA,pair<int,int> posB) {

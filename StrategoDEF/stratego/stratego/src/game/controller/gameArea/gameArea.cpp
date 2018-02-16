@@ -530,6 +530,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		PosType dst( data["destination_row"][0],(int)(data["destination_col"][0]-'a') );
 		int ans = this->gameEngine->move_enemy_token(src,dst);
 		if (gameEngine->get_game_state() == WAIT_FOR_RANGE) {
+			cout << "the enemy is attacking me!!!!!!! oh noooooooo!\n";
 			/// Oh!!! he attacked a token
 			map<string,string> dataAns;
 			//this->gameEngine->process_attack(src,dst,);
@@ -549,13 +550,13 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			removeWaitingMsg();
 			addWaitingMsg("Es tu turno");
 		}
-	} else if (this->status == "waiting_for_attack_result" && package == "attack") {
+	} else if (this->status == "waiting_for_attack" && package == "attack") {
 		cout << "we were waiting for attack result and we've got it!\n";
 		string piece = data["token_rank"];
 		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(ENEMY_MOVE);
 		//if (gameEngine->get_game_state() == )
-	} else if (this->status == "waiting_For_attack_then_play" && package == "atack") {
+	} else if (this->status == "waiting_for_attack_then_play" && package == "atack") {
 		cout << "we were waiting attack result and then play. We've got the attack\n";
 		string piece = data["token_rank"];
 		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));

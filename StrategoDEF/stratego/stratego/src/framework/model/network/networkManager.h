@@ -28,6 +28,7 @@ class NetworkManager {
 		void send(string msg);
 		void setRecvTimeout(int timeout); // max time to wait for message
 		void closeConnection();
+		int getConnected();
 		/*** Override functions ***/
 		virtual void onConnect() = 0;
 		virtual void onConnFailed(string err) = 0;

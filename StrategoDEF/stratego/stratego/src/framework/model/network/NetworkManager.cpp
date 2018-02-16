@@ -161,4 +161,7 @@ void NetworkManager::closeConnection() {
 		}
 	}
 }
+int NetworkManager::getConnected() {
+	return connected;
+}
 NetworkManager::~NetworkManager() {}

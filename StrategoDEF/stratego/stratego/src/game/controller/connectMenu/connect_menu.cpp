@@ -113,12 +113,14 @@ void ConnectMenu::startToConnect() {
 
 	setInfoObjects((Widget*)text,(Widget*)animation);
 
-	//callIn(1000, [](Sysgame *sys) {
+	callIn(1000, [](Sysgame *sys) {
 	
-		//ConnectMenu *myself = (ConnectMenu*)sys->getController();
-		//if (myself->getStatus() == "trying_to_connect")
-		//	myself->setConnectionFailed();
-	//});
+		ConnectMenu *myself = (ConnectMenu*)sys->getController();
+		if (!sys->getNetwork()->getConnected()) {
+			sys->getNetwork()->closeConnection();
+			myself->setConnectionFailed();
+		}
+	});
 }
 void ConnectMenu::createConnectButton() {
 

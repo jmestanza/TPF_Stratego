@@ -564,6 +564,11 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		mySysgame->getNetwork()->sendPackage("attack", sendData);
 		cout << "sending token : " << sendData["token_rank"] << '\n';
 
+		cout << "calling process attack. \n";
+		cout << "parameters: \n";
+		cout << "( " << current_src.i << ',' << current_src.j << ") (" << current_dst.i << ',' << current_dst.j << ")\n";
+		cout << "token: " << stringToRank(piece) << '\n';
+
 		gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(ENEMY_MOVE);
 

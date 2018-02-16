@@ -528,6 +528,10 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 
 		PosType src( data["original_row"][0], (int)(data["original_col"][0]-'a') );
 		PosType dst( data["destination_row"][0],(int)(data["destination_col"][0]-'a') );
+
+		current_src = src;
+		current_dst = dst;
+
 		int ans = this->gameEngine->move_enemy_token(src,dst);
 		if (gameEngine->get_game_state() == WAIT_FOR_RANGE) {
 			cout << "the enemy is attacking me!!!!!!! oh noooooooo!\n";

@@ -520,11 +520,11 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "opponent move! \n";
 		//cout << (int)(data["original_row"][0]-'a') << ' ' << (int)data["original_col"][0] << '\n';
 		//cout << (int)(data["destination_row"][0]-'a') << ' ' << (int)data["destination_col"][0] << '\n';
-		cout << (int)(data["original_row"][0]) << ' ' << (int)(data["original_col"][0] - 'a') << '\n';
-		cout << (int)(data["destination_row"][0]) << ' ' << (int)(data["destination_col"][0] - 'a') << '\n';
+		cout << (int)(data["original_row"][0] ) << ' ' << (int)(data["original_col"][0] - 'a') << '\n';
+		cout << (int)(data["destination_row"][0] ) << ' ' << (int)(data["destination_col"][0] - 'a') << '\n';
 
-		PosType src( data["original_row"][0], (int)data["original_col"][0]-'a' );
-		PosType dst( data["destination_row"][0],(int)data["destination_col"][0]-'a' );
+		PosType src( data["original_row"][0], (int)(data["original_col"][0]-'a') );
+		PosType dst( data["destination_row"][0],(int)(data["destination_col"][0]-'a') );
 		int ans = this->gameEngine->move_enemy_token(src,dst);
 		if (gameEngine->get_game_state() == WAIT_FOR_RANGE) {
 			/// Oh!!! he attacked a token

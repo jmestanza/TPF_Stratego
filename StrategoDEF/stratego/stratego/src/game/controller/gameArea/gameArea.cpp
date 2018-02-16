@@ -292,6 +292,7 @@ void gameArea::tokenReady() {
 
 				myself->setStatus("waiting_for_opp_move");
 				myself->addAnimation();
+				myself->removeWaitingMsg();
 				myself->addWaitingMsg("Esperando al rival");
 			} else {
 				cout << "invalid move! \n";
@@ -545,6 +546,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			);
 			this->status = "waiting_for_move";
 			removeAnimation();
+			removeWaitingMsg();
 			addWaitingMsg("Es tu turno");
 		}
 	} else if (this->status == "waiting_for_attack_result" && package == "attack") {

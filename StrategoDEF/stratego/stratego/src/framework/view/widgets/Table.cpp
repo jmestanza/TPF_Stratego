@@ -152,7 +152,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 			ry /= this->pieceSize.second;
 				
 			if (onMouseReleasedFunction != nullptr) {
-				this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(ry,rx));
+				this->onMouseReleasedFunction(mySysgame, this, pair<int, int>(ry, rx));
 			}
 			if (!isSelected) {
 				selectedPosition = pair<int,int>(ry,rx);
@@ -207,20 +207,20 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 	}
 }
 string Table::getPiece(pair<int,int> pos) {
-	return shownTokens[pos.second][pos.first];
+	return shownTokens[pos.first][pos.second];
 }
 void Table::freePosition(pair<int,int> pos) {
-	if (shownTokens[pos.second][pos.first] != "empty") {
+	if (shownTokens[pos.first][pos.second] != "empty") {
 		view->stopShow(getPosCode(pos));
 	}
-	shownTokens[pos.second][pos.first] = "empty";
+	shownTokens[pos.first][pos.second] = "empty";
 }
 void Table::putToken(string code,pair<int,int> position) {
-	if (shownTokens[position.second][position.first] != "empty") {
+	if (shownTokens[position.first][position.second] != "empty") {
 		view->stopShow(getPosCode(position));
 	}
 
-	shownTokens[position.second][position.first] = code;
+	shownTokens[position.first][position.second] = code;
 
 	pair<int,int> realPosition(position);
 	realPosition.first *= 60;
@@ -235,15 +235,15 @@ string Table::getPosCode(pair<int,int> position) {
 	return "piece_" + to_string(position.second) + "_" + to_string(position.first);
 }
 void Table::takeOutToken(pair<int,int> position) {
-	if (shownTokens[position.second][position.first] != "") {
+	if (shownTokens[position.first][position.second] != "") {
 		view->stopShow(getPosCode(position));
 	}
 }
 void Table::moveToken(pair<int,int> posA,pair<int,int> posB) {
 	//underAnimation = 1;
-	if (shownTokens[posA.second][posA.first] == "empty") return;
-	shownTokens[posB.second][posB.first] = shownTokens[posA.second][posA.first];
-	shownTokens[posA.second][posA.first] = "empty";
+	if (shownTokens[posA.first][posA.second] == "empty") return;
+	shownTokens[posB.first][posB.second] = shownTokens[posA.first][posA.second];
+	shownTokens[posA.first][posA.second] = "empty";
 }
 
 void Table::stopDrawing() {

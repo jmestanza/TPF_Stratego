@@ -112,6 +112,11 @@ void ConnectMenu::startToConnect() {
 	connectContent.push_back("button_cancel");
 
 	setInfoObjects((Widget*)text,(Widget*)animation);
+
+	callIn(1000, [](Sysgame *sys) {
+		ConnectMenu *myself = (ConnectMenu*)sys->getController();
+		myself->setConnectionFailed();
+	});
 }
 void ConnectMenu::createConnectButton() {
 

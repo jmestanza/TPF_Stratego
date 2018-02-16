@@ -15,8 +15,10 @@ int stringToRank(string code) {
 	if (code == "S") return SPY;
 	if (code == "B") return BOMB;
 	if (code == "F") return FLAG;
+	if (code == "0") return 0;
 }
 string rankToString(int rank) {
+	if (rank == 0) return "0";
 	if (rank == MARSHAL) return "1";
 	if (rank == GENERAL) return "2";
 	if (rank == COLONEL) return "3";

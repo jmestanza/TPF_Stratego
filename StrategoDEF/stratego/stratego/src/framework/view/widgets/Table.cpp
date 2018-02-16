@@ -235,7 +235,7 @@ string Table::getPosCode(pair<int,int> position) {
 	return "piece_" + to_string(position.second) + "_" + to_string(position.first);
 }
 void Table::takeOutToken(pair<int,int> position) {
-	if (shownTokens[position.first][position.second] != "") {
+	if (shownTokens[position.first][position.second] != "empty") {
 		view->stopShow(getPosCode(position));
 	}
 }

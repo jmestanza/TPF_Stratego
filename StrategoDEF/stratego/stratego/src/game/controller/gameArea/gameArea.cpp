@@ -519,8 +519,8 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << data["original_row"][0] << ' ' << data["original_col"][0] << '\n';
 		cout << data["destination_row"][0] << ' ' << data["destination_row"][0] << '\n';
 
-		PosType src( data["original_row"][0]-'a', data["original_col"][0] -'0' );
-		PosType dst( data["destination_row"][0]-'a',data["destination_row"][0] - '0');
+		PosType src( data["original_row"][0]-'a', (int)data["original_col"][0] );
+		PosType dst( data["destination_row"][0]-'a',(int)data["destination_col"][0] );
 		int ans = this->gameEngine->move_enemy_token(src,dst);
 		if (gameEngine->get_game_state() == WAIT_FOR_RANGE) {
 			/// Oh!!! he attacked a token

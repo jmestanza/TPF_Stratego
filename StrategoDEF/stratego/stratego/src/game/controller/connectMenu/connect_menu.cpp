@@ -15,6 +15,8 @@ tanto como cliente (buscando el servidor), como servidor (esperando un cliente)
 #include <framework\view\widgets\Animation.h>
 #include <framework\view\widgets\showClocks\showTime.h>
 #include <framework\view\utils\good_buttons.h>
+#include <framework\view\widgets\checkbox\checkbox.h>
+
 #include <framework\utils\random_number.h>
 #include <game\controller\connectionLostMenu\connectionLostMenu.h>
 #include <game\controller\menu_test\menu_test.h>
@@ -22,7 +24,8 @@ tanto como cliente (buscando el servidor), como servidor (esperando un cliente)
 
 ConnectMenu::ConnectMenu(Sysgame *sys) : Controller(sys){
 	_startedToConnect = 0;
-	
+	InfoMessageAdded = 0;
+	InfoIconAdded = 0;
 }
 void ConnectMenu::onCreate() {
 	pair<float, float> screenSize = view->getScreenSize();
@@ -48,6 +51,20 @@ void ConnectMenu::onCreate() {
 	input->addSmallText("Direccion IP");
 	input->setText("192.168.86.75");
 	
+	pair<int,int> posBox(input->getPos().first+10,input->getPos().second+input->getSize().second+10);
+	Checkbox *box = new Checkbox(mySysgame,"checkbox");
+	box->configure("icon_check_box0","icon_check_box1",posBox,0);
+	box->onTick([](Sysgame *sys,int status) {
+		if (!status) {
+			((TextInput*)sys->getUI()->getWidget("input"))->enable();
+		} else {
+			((TextInput*)sys->getUI()->getWidget("input"))->disable();
+		}
+	});
+	int bx = posBox.first , by = posBox.second;
+	screenText *textCheckBox = new screenText(mySysgame,"text_checkbox");
+	textCheckBox->configure("Esperar cliente","roboto_small",view->getColor("black"));
+	textCheckBox->setPos( pair<int,int>( bx + box->getSize().first + 10 , by + 10 ) , 0);
 
 	TextButton *button = new TextButton(mySysgame,"return_button");
 	button->generate(
@@ -62,10 +79,14 @@ void ConnectMenu::onCreate() {
 	});
 	
 
+	
+
 	addWidget((Widget*)background);
 	addWidget((Widget*)text);
 	addWidget((Widget*)input);
 	addWidget((Widget*)button);
+	addWidget((Widget*)box);
+	addWidget((Widget*)textCheckBox);
 
 	createConnectButton();
 	
@@ -88,16 +109,19 @@ void ConnectMenu::startToConnect() {
 	connectButton->disable();
 	_startedToConnect = 1;
 	pair<float,float> screenSize = mySysgame->getAllegroHandler()->getScreenSize();
-	Animation *animation = new Animation(mySysgame,"connecting_animation");
-	vector <string> data;
+	//Animation *animation = new Animation(mySysgame,"connecting_animation");
+	/*vector <string> data;
 	getLoadingAImgs(data);
 	animation->configure(data);
-	addWidget((Widget*)animation);
+	addWidget((Widget*)animation);*/
 
-	screenText *text = new screenText(mySysgame,"text_connecting");
+	/*screenText *text = new screenText(mySysgame,"text_connecting");
 	text->configure(
 		"Intentando conectar como cliente","roboto_v30",view->getColor("black"));
-	addWidget((Widget*)text);
+	addWidget((Widget*)text);*/
+
+	addInfoAnim();
+	addInfoMessage("Intentando conectar como cliente","black");
 
 	addCancelButtonCenter();
 		
@@ -107,22 +131,23 @@ void ConnectMenu::startToConnect() {
 	addWidget((Widget*)buttonCancel);
 	buttonCancel->addIcon("icon_left");*/
 
-	connectContent.push_back("text_connecting");
-	connectContent.push_back("connecting_animation");
-	connectContent.push_back("button_cancel");
+	//connectContent.push_back("text_connecting");
+	//connectContent.push_back("connecting_animation");
+	//connectContent.push_back("button_cancel");
 
-	setInfoObjects((Widget*)text,(Widget*)animation);
+	//setInfoObjects((Widget*)text,(Widget*)animation);
 
-	callIn(1000, [](Sysgame *sys) {
+	/*callIn(1000, [](Sysgame *sys) {
 	
 		ConnectMenu *myself = (ConnectMenu*)sys->getController();
 		if (!sys->getNetwork()->getConnected()) {
 			sys->getNetwork()->closeConnection();
 			myself->setConnectionFailed();
 		}
-	});
+	});*/
 }
 void ConnectMenu::createConnectButton() {
+	
 
 	pair<float,float> screenSize = view->getScreenSize();
 	connectButton = new TextButton(mySysgame,"connect_button");
@@ -131,8 +156,14 @@ void ConnectMenu::createConnectButton() {
 		pair<float,float>(screenSize.first / 4 * 3,screenSize.second / 2),1);
 	connectButton->onClick([](Sysgame *sys) {
 		ConnectMenu* connectMenu = (ConnectMenu*)(sys->getController());
-
-		if (!connectMenu->startedToConnect()) connectMenu->startToConnect();
+		cout << ((Checkbox*)sys->getUI()->getWidget("checkbox"))->getStatus() << '\n';
+		if (((Checkbox*)sys->getUI()->getWidget("checkbox"))->getStatus()) {
+			((TextButton*)sys->getUI()->getWidget("connect_button"))->disable();
+			connectMenu->waitForConnection();
+			connectMenu->eraseWidget("checkbox");
+		} else {
+			if (!connectMenu->startedToConnect()) connectMenu->startToConnect();
+		}
 	});
 
 	addWidget((Widget*)connectButton);
@@ -227,6 +258,11 @@ void ConnectMenu::onNetEvent(NETWORK_EVENT *ev) {
 	}
 }
 void ConnectMenu::setConnectionWaitTimeout() {
+	//// Borrar icono y mensaje
+	removeInfoMessage();
+	removeInfoThing();
+
+
 	status = "trying_to_connect_2";
 	
 	pair<float,float> screenSize = mySysgame->getAllegroHandler()->getScreenSize();
@@ -235,21 +271,20 @@ void ConnectMenu::setConnectionWaitTimeout() {
 
 	ConnectMenu* connectMenu = (ConnectMenu*)mySysgame->getController();
 
-	eraseWidget("text_connecting");
-
-	TextButton *buttonCancel = new TextButton(mySysgame,"button_cancel_b");
+	/*TextButton *buttonCancel = new TextButton(mySysgame,"button_cancel_b");
 	buttonCancel->generate(
 		"CANCELAR",g_red(),pair<float,float>(screenSize.first / 2,screenSize.second * 7 / 8),1);
 	
-	buttonCancel->addIcon("icon_left");
-	connectContent.push_back("button_cancel_b");
-
+	buttonCancel->addIcon("icon_left");*/
+	//connectContent.push_back("button_cancel_b");
+	addCancelButtonCenter();
 	
-	screenText *waitTextA = new screenText(mySysgame,"wait_text_a");
-	waitTextA->configure("Reintentando en ","roboto_v30",view->getColor("black"));
+	//screenText *waitTextA = new screenText(mySysgame,"wait_text_a");
+	//waitTextA->configure("Reintentando en ","roboto_v30",view->getColor("black"));
 	
-	connectContent.push_back("wait_text_a");
-	
+	//connectContent.push_back("wait_text_a");
+	addInfoMessage("Reintentando en ","black");
+	screenText *waitTextA = (screenText*)getWidget("text_msg");
 	int pos_x = this->infoPositionA.first + waitTextA->getSize().first/2 + 20;
 	int pos_y = this->infoPositionA.second - waitTextA->getSize().second/2 + 2;
 
@@ -259,39 +294,55 @@ void ConnectMenu::setConnectionWaitTimeout() {
 	showTime->setTarget(waitTime);
 	showTime->showMillis();
 
-	connectContent.push_back("show_time");
+	//connectContent.push_back("show_time");
 
-	mySysgame->getUI()->getWidget("connecting_animation")->hide();
+	//mySysgame->getUI()->getWidget("connecting_animation")->hide();
 
 	int iconPosX = pos_x + showTime->getSize().first + 250;
-	Background *iconError = new Background(mySysgame,"icon_error_b");
+	/*Background *iconError = new Background(mySysgame,"icon_error_b");
 	iconError->configureImg("icon_warning");
-	connectContent.push_back("icon_error_b");
+	connectContent.push_back("icon_error_b");*/
 
-	setInfoObjects((Widget*)waitTextA,(Widget*)iconError);
+	addInfoIcon("icon_warning");
 
-	addWidget((Widget*)buttonCancel);
-	addWidget((Widget*)waitTextA);
+	//setInfoObjects((Widget*)waitTextA,(Widget*)iconError);
+
+	//addWidget((Widget*)buttonCancel);
+	//addWidget((Widget*)waitTextA);
 	addWidget((Widget*)showTime);
-	addWidget((Widget*)iconError);
+	//addWidget((Widget*)iconError);
 
 	showTime->onTime([](Sysgame *sys) {
+		ConnectMenu* connectMenu = (ConnectMenu*)sys->getController();
+
+		connectMenu->eraseWidget("show_time");
+
+		cout << "on time \n";
 		pair<float,float> screenSize = sys->getAllegroHandler()->getScreenSize();
 
-		ConnectMenu* connectMenu = (ConnectMenu*)sys->getController();
+		
 		connectMenu->setStatus("trying_to_connect_3");
 		sys->getNetwork()->tryConnection(connectMenu->getConnectIP(),stoi(sys->getConfigurationData()["port"]),1000);
-		connectMenu->eraseWidget("show_time");
-		connectMenu->eraseWidget("wait_text_a");
-		connectMenu->eraseWidget("icon_error_b");
+		
+		connectMenu->removeInfoMessage();
+		connectMenu->removeInfoThing();
+		
+		connectMenu->addInfoMessage("Intentando conectar como cliente","black");
+		connectMenu->addInfoAnim();
 
-		screenText *text = new screenText(sys,"connect_text_2");
+		//connectMenu->eraseWidget("show_time");
+		//connectMenu->eraseWidget("wait_text_a");
+		//connectMenu->eraseWidget("icon_error_b");
+
+		/*screenText *text = new screenText(sys,"connect_text_2");
 		text->configure("Intentando conectar como cliente","roboto_v30",sys->getAllegroHandler()->getColor("black"));
-		text->setPos(connectMenu->getInfoPositionA(),1);
+		text->setPos(connectMenu->getInfoPositionA(),1);*/
 
-		sys->getUI()->getWidget("connecting_animation")->show();
+		/*sys->getUI()->getWidget("connecting_animation")->show();
 		connectMenu->addWidget((Widget*)text);
-		connectMenu->getConnectContent().push_back("connect_text_2");
+		connectMenu->getConnectContent().push_back("connect_text_2");*/
+
+
 	
 		
 	});
@@ -323,28 +374,33 @@ void ConnectMenu::setConnectionFailed() {
 	pair<float,float> screenSize = mySysgame->getAllegroHandler()->getScreenSize();
 
 	
-	ConnectMenu* connectMenu = (ConnectMenu*)mySysgame->getController();
-	connectMenu->eraseConnectContent();
+	/*ConnectMenu* connectMenu = (ConnectMenu*)mySysgame->getController();
+	connectMenu->eraseConnectContent();*/
 
-	screenText *text = new screenText(mySysgame,"text_failure");
+	removeCancelButton();
+	removeInfoMessage();
+	removeInfoThing();
+
+
+	/*screenText *text = new screenText(mySysgame,"text_failure");
 	text->configure(
 		"Fallo en el intento de conexion","roboto_v30",view->getColor("red"));
 	
-	connectContent.push_back("text_failure");
+	connectContent.push_back("text_failure");*/
 
-	Background *background = new Background(mySysgame,"icon_error");
+	/*Background *background = new Background(mySysgame,"icon_error");
 	background->configureImg("icon_cancel");
-	connectContent.push_back("icon_error");
+	connectContent.push_back("icon_error");*/
 
-	setInfoObjects((Widget*)text,(Widget*)background);
+	//setInfoObjects((Widget*)text,(Widget*)background);
 
 	TextButton *buttonCancel = new TextButton(mySysgame,"button_again");
 	buttonCancel->generate(
 		"INTENTAR DENUEVO",g_red(),pair<float,float>(screenSize.first / 4,screenSize.second * 7 / 8),1);
 	addWidget((Widget*)buttonCancel);
 	buttonCancel->addIcon("icon_left");
-	connectContent.push_back("button_again");
-
+	//connectContent.push_back("button_again");
+	//
 	TextButton *buttonWait = new TextButton(mySysgame,"button_wait");
 	buttonWait->generate(
 		"ESPERAR CONEXION",g_connectButtonLong(),pair<float,float>(screenSize.first * 3 / 4,screenSize.second * 7 / 8),1);
@@ -353,9 +409,14 @@ void ConnectMenu::setConnectionFailed() {
 
 	buttonCancel->onClick([](Sysgame *sys) {
 		ConnectMenu * connectMenu = (ConnectMenu*)sys->getController();
-		connectMenu->setNotConnecting();
-		connectMenu->eraseConnectContent();
+		
+		connectMenu->eraseWidget("button_again");
+		connectMenu->eraseWidget("button_wait");
+		connectMenu->removeInfoMessage();
+		connectMenu->removeInfoThing();
 
+		connectMenu->setNotConnecting();
+		//connectMenu->eraseConnectContent();
 
  		TextButton* connectButton = (TextButton*)sys->getUI()->getWidget("connect_button");
 		connectButton->enable();
@@ -364,12 +425,15 @@ void ConnectMenu::setConnectionFailed() {
 
 	buttonWait->onClick([](Sysgame *sys) {
 		ConnectMenu * connectMenu = (ConnectMenu*)sys->getController();
-		connectMenu->eraseConnectContent();
+		//connectMenu->eraseConnectContent();
+		connectMenu->eraseWidget("button_again");
+		connectMenu->eraseWidget("button_wait");
+
 		connectMenu->waitForConnection();
 	});
 
-	addWidget((Widget*)text);
-	addWidget((Widget*)background);
+	//addWidget((Widget*)text);
+	//addWidget((Widget*)background);
 	addWidget((Widget*)buttonCancel);
 	addWidget((Widget*)buttonWait);
 }
@@ -390,49 +454,65 @@ screenText* ConnectMenu::generateScreenText(string msg,string font,string name) 
 }
 void ConnectMenu::waitForConnection() {
 	this->setStatus("wait_for_connection");
+	removeInfoMessage();
+	removeInfoThing();
+
 	mySysgame->getNetwork()->waitForConnection(stoi(mySysgame->getConfigurationData()["port"]));
 
 	pair<float,float> screenSize = mySysgame->getAllegroHandler()->getScreenSize();
 
-	TextButton *buttonCancel = new TextButton(mySysgame,"button_cancel");
+	addCancelButtonCenter();
+		
+		/*new TextButton(mySysgame,"button_cancel");
 	buttonCancel->generate(
 		"CANCELAR",g_red(),pair<float,float>(screenSize.first / 2,screenSize.second * 7 / 8),1);
-	mySysgame->getController()->addWidget((Widget*)buttonCancel);
-	buttonCancel->addIcon("icon_left");
+	mySysgame->getController()->addWidget((Widget*)buttonCancel);*/
+	
+	
+	/*buttonCancel->addIcon("icon_left");
 	buttonCancel->onClick([](Sysgame *sys){
 		sys->getNetwork()->closeConnection();
 		sys->setNewController(new ConnectMenu(sys));
-	});
+	});*/
 
 
-	Animation *anim = generateAnimationWidget("connecting_animation");
-	screenText *text = generateScreenText("Esperando un cliente","roboto_v30","waiting_for_client_msg");
+	//Animation *anim = generateAnimationWidget("connecting_animation");
+	/*screenText *text = generateScreenText("Esperando un cliente","roboto_v30","waiting_for_client_msg");
 	setInfoObjects((Widget*)text,(Widget*)anim);
 	addWidget((Widget*)anim);
-	addWidget((Widget*)text);
+	addWidget((Widget*)text);*/
 
-	connectContent.push_back("button_cancel");
+	/*connectContent.push_back("button_cancel");
 	connectContent.push_back("connecting_animation");
-	connectContent.push_back("waiting_for_client_msg");
+	connectContent.push_back("waiting_for_client_msg");*/
+
+	addInfoMessage("Esperando un cliente","black");
+	addInfoAnim();
 }
 void ConnectMenu::setConnectionSuccess() {
-	this->eraseConnectContent();
+	//this->eraseConnectContent();
 
-	screenText *text = new screenText(mySysgame,"success_text");
+	/*screenText *text = new screenText(mySysgame,"success_text");
 	text->configure("Conexion establecida","roboto_v30",view->getColor("green"));
 	Background* background = new Background(mySysgame,"ok_icon");
 	background->configureImg("icon_success");
-	setInfoObjects(text,background);
+	setInfoObjects(text,background);*/
 
 	this->eraseWidget("input");
 	this->eraseWidget("connect_button");
-
-	addWidget((Widget*)text);
-	addWidget((Widget*)background);
 	this->generateNameInput();
 
-	connectContent.push_back("success_text");
-	connectContent.push_back("ok_icon");
+	/*addWidget((Widget*)text);
+	addWidget((Widget*)background);*/
+
+	//removeInfoMessage();
+
+	addInfoMessage("Conexion establecida","black");
+	addInfoIcon("icon_success");
+
+
+	//connectContent.push_back("success_text");
+	//connectContent.push_back("ok_icon");
 }
 void ConnectMenu::generateNameInput() {
 	pair<float,float> screenSize = view->getScreenSize();
@@ -467,14 +547,17 @@ void ConnectMenu::setPlayerName(string name) {
 	eraseConnectContent();
 
 	setName(name);
-	Animation *anim = generateAnimationWidget("connecting_animation");
+	/*Animation *anim = generateAnimationWidget("connecting_animation");
 	screenText *text = generateScreenText("Esperando nombre del oponente","roboto_v30","waiting_for_client_name");
 	setInfoObjects((Widget*)text,(Widget*)anim);
 	addWidget((Widget*)anim);
-	addWidget((Widget*)text);
+	addWidget((Widget*)text);*/
 
-	connectContent.push_back("connecting_animation");
-	connectContent.push_back("waiting_for_client_name");
+	//connectContent.push_back("connecting_animation");
+	//connectContent.push_back("waiting_for_client_name");
+
+	addInfoMessage("Esperando nombre del oponente","black");
+	addInfoAnim();
 
 	if (status == "wait_for_name_input") {
 		sendName(name);
@@ -540,21 +623,23 @@ void ConnectMenu::sendAck() {
 void ConnectMenu::makeDraw() {
 	this->eraseConnectContent();
 
-	Animation *anim = generateAnimationWidget("connecting_animation_b");
+	/*Animation *anim = generateAnimationWidget("connecting_animation_b");
 	screenText *text = generateScreenText("Realizando sorteo","roboto_v30","draw_message");
 	setInfoObjects((Widget*)text,(Widget*)anim);
 	addWidget((Widget*)anim);
-	addWidget((Widget*)text); 
+	addWidget((Widget*)text); */
+	addInfoMessage("Realizando sorteo","black");
+	addInfoAnim();
 
-	connectContent.push_back("connecting_animation_b");
-	connectContent.push_back("draw_message");
+	//connectContent.push_back("connecting_animation_b");
+	//connectContent.push_back("draw_message");
 
 	pair <float,float> screenSize = view->getScreenSize();
 	pair <float,float> outScreen = pair<float,float>(screenSize.first+10,screenSize.second+10);
 
 	
 
-	connectContent.push_back("clock_draw");
+	//connectContent.push_back("clock_draw");
 	callIn(1000,[](Sysgame *sys) {
 		int randomValue = 1;//randrange(0,2);
 		ConnectMenu *connectMenu = (ConnectMenu*)sys->getController();
@@ -589,15 +674,18 @@ void ConnectMenu::readyToStart(int _localStart) {
 	}
 	pair <float,float> screenSize = view->getScreenSize();
 
-	Background *icon = new Background(mySysgame,"info_icon");
-	icon->configureImg("icon_info");
-	screenText *text = generateScreenText(msg,"roboto_v30","draw_result");
+	/*Background *icon = new Background(mySysgame,"info_icon");
+	icon->configureImg("icon_info");*/
+	/*screenText *text = generateScreenText(msg,"roboto_v30","draw_result");
 	setInfoObjects((Widget*)text,(Widget*)icon);
 	addWidget((Widget*)icon);
-	addWidget((Widget*)text);
+	addWidget((Widget*)text);*/
 
-	connectContent.push_back("info_icon");
-	connectContent.push_back("draw_result");
+	addInfoMessage(msg,"black");
+	addInfoIcon("icon_info");
+
+	//connectContent.push_back("info_icon");
+	//connectContent.push_back("draw_result");
 
 	//TextButton *buttonStartGame = new TextButton(mySysgame,"start_game_button");
 	//pair<float,float> buttonPos(screenSize.first/2,screenSize.second*7/8);
@@ -627,6 +715,52 @@ void ConnectMenu::readyToStart(int _localStart) {
 void ConnectMenu::goToGame() {
 	mySysgame->setNewController((Controller*)new gameArea(mySysgame,getName(),getOpponentName(),localStart,this->mode));
 }
+
+void ConnectMenu::addInfoMessage(string msg,string color) {
+	if (InfoMessageAdded) removeInfoMessage();
+
+	screenText *text = new screenText(mySysgame,"text_msg");
+	text->configure(
+		msg,"roboto_v30",view->getColor(color));
+	text->setPos(infoPositionA,1);
+	addWidget((Widget*)text);
+	InfoMessageAdded = 1;
+}
+void ConnectMenu::removeInfoMessage() {
+	if (!InfoMessageAdded) return;
+
+	eraseWidget("text_msg");
+	InfoMessageAdded = 0;
+}
+void ConnectMenu::addInfoIcon(string icon) {
+	if (InfoIconAdded) removeInfoThing();
+
+	Background *background = new Background(mySysgame,"info_icon");
+	background->configureImg(icon);
+	background->setPos(infoPositionB,1);
+	addWidget((Widget*)background);
+
+	InfoIconAdded = 1;
+}
+void ConnectMenu::addInfoAnim() {
+	if (InfoIconAdded) removeInfoThing();
+
+	Animation *animation = new Animation(mySysgame,"info_icon");
+	vector <string> data;
+	getLoadingAImgs(data);
+	animation->configure(data);
+	((Widget*)animation)->setPos(infoPositionB,1);
+	addWidget((Widget*)animation);
+
+	InfoIconAdded = 1;
+}
+
+void ConnectMenu::removeInfoThing() {
+	if (!InfoIconAdded) return;
+	eraseWidget("info_icon");
+}
+
+
 TextButton* ConnectMenu::addCancelButtonCenter() {
 	pair<float,float> screenSize = view->getScreenSize();
 	return addCancelButton(pair<int,int>(screenSize.first/2,screenSize.second*7/8));
@@ -636,6 +770,9 @@ TextButton* ConnectMenu::addCancelButtonLeft() {
 	return addCancelButton(pair<int,int>(screenSize.first/4,screenSize.second*7/8));
 }
 TextButton* ConnectMenu::addCancelButton(pair <int,int> posInt) {
+	if (cancelButtonAdded) {
+		removeCancelButton();
+	}
 	pair<float,float>pos = pair<float,float>(posInt.first,posInt.second);
 
 	TextButton *buttonCancel = new TextButton(mySysgame,"button_cancel");
@@ -647,10 +784,18 @@ TextButton* ConnectMenu::addCancelButton(pair <int,int> posInt) {
 		sys->getNetwork()->closeConnection();
 		sys->setNewController(new ConnectMenu(sys));
 	});
-	connectContent.push_back("button_cancel");
+	//connectContent.push_back("button_cancel");
+	cancelButtonAdded = 1;
+
 	return buttonCancel;
 }
+void ConnectMenu::removeCancelButton() {
+	if (!cancelButtonAdded) return;
 
+	eraseWidget("button_cancel");
+
+	cancelButtonAdded = 0;
+}
 ConnectMenu::~ConnectMenu(){
 
 }

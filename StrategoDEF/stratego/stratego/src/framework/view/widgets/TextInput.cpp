@@ -15,6 +15,7 @@ TextInput::TextInput(Sysgame *sys, string name) : Widget(sys,name){
 	smallFont = "roboto_small";
 	myDefaultFont = "roboto_v1";
 	_smallTextAdded = 0;
+	_enabled = 1; 
 }
 void TextInput::setText(string text) {
 	shownText = text;
@@ -53,36 +54,59 @@ void TextInput::handleEvent(ALLEGRO_EVENT *ev){
 		if (_showTile != lastShowTile) updateDrawing();
 	}
 }
+void TextInput::enable() {
+	_enabled = 1;
+	updateDrawing();
+}
+void TextInput::disable() {
+	_enabled = 0;
+	updateDrawing();
+}
 void TextInput::updateDrawing() {
+	//// We generate text input current bitmaps
+
+
 	ALLEGRO_BITMAP *myBitmap;
 	ALLEGRO_BITMAP *base;
 	ALLEGRO_FONT *myFont;
 	
 	myBitmap = view->getImg("text_input_" + code);
-	base = view->getImg("text_input_base_" + code);
+	base = view->getImg( "text_input_base_" + code);
 	myFont = view->getFont(myDefaultFont);
 	
+	if (!_enabled) {
+		al_set_target_bitmap(myBitmap);
+		al_draw_bitmap(view->getImg("text_input_disabled"),0,0,0);
+		al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
 
-	al_set_target_bitmap(myBitmap);
 
-	int height = al_get_bitmap_height(myBitmap);
-	
-	int bbx,bby,bbw,bbh;
+	} else {
+		al_set_target_bitmap(myBitmap);
 
-	al_get_text_dimensions(myFont,
-		shownText.c_str(),
-		&bbx,&bby,&bbw,&bbh);
-	int py = (height / 2 - (bby + bbh) / 2) - 3;
+		int height = al_get_bitmap_height(myBitmap);
 
-	al_draw_bitmap(base,0,0,0);
-	al_draw_text(view->getFont(myDefaultFont),
+		int bbx,bby,bbw,bbh;
+
+		al_get_text_dimensions(myFont,
+			shownText.c_str(),
+			&bbx,&bby,&bbw,&bbh);
+		int py = (height / 2 - (bby + bbh) / 2) - 3;
+
+
+		al_draw_bitmap(base,0,0,0);
+
+		
+		al_draw_text(view->getFont(myDefaultFont),
 		al_map_rgb(0,0,0),startPointX,py,ALLEGRO_ALIGN_LEFT,
 		shownText.c_str());
-	if (_showTile) {
-		int lastX = startPointX + bbx + bbw + 5;
-		al_draw_line(lastX,5,lastX,height-5,al_map_rgb(0,0,0),1);
+		
+		if (_showTile) {
+			int lastX = startPointX + bbx + bbw + 5;
+			al_draw_line(lastX,5,lastX,height - 5,al_map_rgb(0,0,0),1);
+		}
+		al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
 	}
-	al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
+	
 	//cout << "text:"<<shownText << '\n';
 
 }
@@ -92,8 +116,12 @@ void TextInput::startDrawing() {
 	
 }
 void TextInput::addIcon(string img) {
+	/// We generate static text input bitmaps
+
 	_iconShown = 1;
 	ALLEGRO_BITMAP *a = view->getImg("text_input");
+	//ALLEGRO_BITMAP *b = view->getImg("text_input_disabled");
+
 	ALLEGRO_BITMAP *icon = view->getImg(img);
 
 	ALLEGRO_BITMAP *nuevo = al_create_bitmap(al_get_bitmap_width(a), al_get_bitmap_height(a));
@@ -149,11 +177,16 @@ void TextInput::stopDrawing(){
 	view->stopShow("text_input_" + code);
 	if (_smallTextAdded) {
 		view->stopShow(smallTextName);
-		view->eraseLoaded(smallTextName);
+		
 	}
 }
 string TextInput::getText() {
 	return shownText;
 }
 TextInput::~TextInput(){
+	if (_smallTextAdded) {
+		view->eraseLoaded(smallTextName);
+	}
+	view->eraseLoaded("text_input_base_" + code);
+	view->eraseLoaded("text_input_" + code);
 }

@@ -31,6 +31,8 @@ class ConnectMenu : Controller{
 		string mode;
 
 		int localStart;		
+
+		bool InfoMessageAdded, InfoIconAdded , cancelButtonAdded;
 	public:
 		ConnectMenu(Sysgame *sys);
 		void onCreate();
@@ -73,6 +75,14 @@ class ConnectMenu : Controller{
 		TextButton* addCancelButtonCenter();
 		TextButton* addCancelButtonLeft();
 		TextButton* addCancelButton(pair <int,int> pos);
+		void removeCancelButton();
+
+		void addInfoMessage(string msg,string color);
+		void addInfoIcon(string icon);
+		void addInfoAnim();
+
+		void removeInfoMessage();
+		void removeInfoThing();
 		~ConnectMenu();
 };
 

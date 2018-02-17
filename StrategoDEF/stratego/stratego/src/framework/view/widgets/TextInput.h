@@ -2,6 +2,9 @@
 
 #include "widget.h"
 
+/// Nota, para correcto funcionamiento se debe llamar a configure y a AddIcon
+/// Aunque no tenga icono el text input
+
 class TextInput : public Widget{
 	private:
 		string code;
@@ -18,9 +21,13 @@ class TextInput : public Widget{
 		int _smallTextAdded;
 		string smallTextName;
 		int smallTextX,smallTextY;
+		bool _enabled;
 	public:
 		TextInput(Sysgame *sys, string name);
 		string getText();
+		void enable();
+		void disable();
+
 		void handleEvent(ALLEGRO_EVENT *ev);
 		void configure(pair<float, float> pos,bool centered);
 		void addIcon(string imgCode);

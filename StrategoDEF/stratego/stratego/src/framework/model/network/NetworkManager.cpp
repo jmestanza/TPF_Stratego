@@ -141,12 +141,12 @@ void NetworkManager::handleRecvTimeout(const boost::system::error_code& error) {
 }
 void NetworkManager::closeConnection() {
 	cout << "[Network Manager]Close connection\n";
-	if (connected) {
+	//if (connected) {
 
 		boost::system::error_code error;
-		mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
+		//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
 		cout << "cancel async! "<<'\n';
-		mySocket->cancel();
+		//mySocket->cancel();
 		mySocket->close();
 		//mySocket.reset(new boost::asio::ip::tcp::socket(*ioService));
 
@@ -156,10 +156,10 @@ void NetworkManager::closeConnection() {
 		if (acceptorOn) {
 			cout << "closing acceptor !";
 			acceptorOn = 0;
-			myAcceptor.cancel();
+			//myAcceptor.cancel();
 			myAcceptor.close();
 		}
-	}
+	//}
 }
 int NetworkManager::getConnected() {
 	return connected;

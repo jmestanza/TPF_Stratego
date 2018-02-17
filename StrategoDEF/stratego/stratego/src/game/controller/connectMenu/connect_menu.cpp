@@ -155,10 +155,9 @@ void ConnectMenu::createConnectButton() {
 		"CONECTAR",g_connectButton(),
 		pair<float,float>(screenSize.first / 4 * 3,screenSize.second / 2),1);
 	connectButton->onClick([](Sysgame *sys) {
+		((TextButton*)sys->getUI()->getWidget("connect_button"))->disable();
 		ConnectMenu* connectMenu = (ConnectMenu*)(sys->getController());
-		cout << ((Checkbox*)sys->getUI()->getWidget("checkbox"))->getStatus() << '\n';
 		if (((Checkbox*)sys->getUI()->getWidget("checkbox"))->getStatus()) {
-			((TextButton*)sys->getUI()->getWidget("connect_button"))->disable();
 			connectMenu->waitForConnection();
 			connectMenu->eraseWidget("checkbox");
 		} else {

@@ -57,17 +57,17 @@ void gameArea::onCreate() {
 
 	/**** TABLERO Y PIEZAS *******/
 
-	Table* tablero = new Table(mySysgame,"table","test_blue","test_red",pair<float,float>(60,60),1);
+	Table* tablero = new Table(mySysgame,"table","test_blue","test_red",pair<float,float>(60,60),localStart);
 	tablero->setPos(pair<float,float>(20 + tablero->getSize().first / 2,screenSize.second / 2),1);
-	tablero->setPlayersName(name,opponentName);
+	tablero->setPlayersName(opponentName,name);
 
 	addWidget((Widget*)tablero);
 
 	/*** CONTENEDOR DE PIEZAS ***/
 	TokenContainer *cont = new TokenContainer(mySysgame,"token_container");
 	halfPoint = (tablero->getPos().first + tablero->getSize().first + screenSize.first) / 2;
-	quarterPoint = (screenSize.first - (tablero->getPos().first + tablero->getSize().first))/4 + tablero->getPos().first + tablero->getSize().first;
-	threeQuartersPoint = (screenSize.first - (tablero->getPos().first + tablero->getSize().first)) / 4*3 + tablero->getPos().first + tablero->getSize().first;
+	quarterPoint = (screenSize.first - (tablero->getPos().first + tablero->getSize().first)) / 4 + tablero->getPos().first + tablero->getSize().first;
+	threeQuartersPoint = (screenSize.first - (tablero->getPos().first + tablero->getSize().first)) / 4 * 3 + tablero->getPos().first + tablero->getSize().first;
 	pair <float,float> posToken(halfPoint - cont->getSize().first / 2,screenSize.second - cont->getSize().second - 70);
 
 	cont->configure(posToken);
@@ -117,7 +117,7 @@ void gameArea::onCreate() {
 	});
 
 	tablero->onMouseRelease([](Sysgame *sys,Table *table,pair<int,int> pos) {
-		if (pos.second <= 5) return;
+		if (pos.first <= 5) return;
 		TokenContainer *tk = (TokenContainer*)sys->getUI()->getWidget("token_container");
 
 		gameArea *controller = (gameArea*)sys->getController();
@@ -182,6 +182,7 @@ void gameArea::addStartButton() {
 	startButtonPresent = 1;
 }
 void gameArea::tokenReady() {
+	((TokenContainer*)getWidget("token_container"))->onTokenSelect(nullptr);
 
 	removeStartButton();
 	removeOptionsButtons();
@@ -193,9 +194,17 @@ void gameArea::tokenReady() {
 	table->onMousePress(nullptr);
 	table->onMouseRelease(nullptr);
 
-	/*table->onAction([](Sysgame *sys,pair<int,int> source,pair<int,int> dst)) {
+	//// Add enemy token container 
 
-	}*/
+	pair<int,int> screenSize = view->getScreenSize();
+
+	TokenContainer *cont = new TokenContainer(mySysgame,"token_container_enemy");
+	pair <float,float> posToken(halfPoint - cont->getSize().first / 2, 90);
+	cont->configure(posToken);
+
+	addWidget((Widget*)cont);
+
+
 
 	if (this->mode == "server") {
 		
@@ -570,28 +579,48 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "( " << current_src.i << ',' << current_src.j << ") (" << current_dst.i << ',' << current_dst.j << ")\n";
 		cout << "token: " << stringToRank(piece) << '\n';
 
+
+		////// Actualizar motor de juego
+
+		string my_piece = rankToString(gameEngine->local_board.get_tile(current_src)->get_range());
+
 		int res = gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(ENEMY_MOVE);
 		
+
+
+		////// Actualizar interfaz grafica
 		removeWaitingMsg();
 		addAnimation();
 
 
 		addWaitingMsg("Esperando al rival");
 
-
 		Table *tbl = (Table*)getWidget("table");
 		tbl->takeOutToken(convertPosToGeneralType(pair<int, int>(current_src.i, current_src.j)));
 		tbl->takeOutToken(convertPosToGeneralType(pair<int, int>(current_dst.i, current_dst.j)));
 
-		if (res != NOBODY_WON) {
-			tbl->putToken(
-				rankToString(
-				gameEngine->local_board.get_tile(current_dst)->get_range())
-				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
+		string color = localStart ? "R" : "B";
+		string op_color = color == "R" ? "B" : "R";
+
+		if (res == WON) {
+			string won_place = rankToString(gameEngine->local_board.get_tile(current_dst)->get_range())+ color;
+			tbl->putToken( won_place,
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
+			//// actualizar contador de fichas
+			((TokenContainer*)getWidget("token_container_enemy"))->incContent(piece + op_color);
+		} else if (res == LOSE) {
+			((TokenContainer*)getWidget("token_container"))->incContent(my_piece +color);
+			tbl->putToken(
+				piece
+				+ color,
+				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
+			));
+			
 		}
+
+		
 
 		//if (gameEngine->get_game_state() == )
 	} else if (this->status == "waiting_for_attack_then_play" && package == "attack") {
@@ -603,6 +632,9 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		cout << "( " << current_src.i << ',' << current_src.j << ") (" << current_dst.i << ',' << current_dst.j << ")\n";
 		cout << "token: " << stringToRank(piece) << '\n';
 
+		string my_piece = rankToString(gameEngine->local_board.get_tile(current_dst)->get_range());
+
+
 		int res = gameEngine->process_attack(current_src,current_dst,stringToRank(piece));
 		gameEngine->set_game_state(LOCAL_MOVE);
 
@@ -611,13 +643,24 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		tbl->takeOutToken(convertPosToGeneralType(pair<int,int>(current_src.i,current_src.j )));
 		tbl->takeOutToken(convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j )));
 
-		if (res != NOBODY_WON) {
+		string color = localStart ? "R" : "B";
+		string op_color = color == "R" ? "B" : "R";
+
+		if (res == LOSE) {
 			tbl->putToken(
 				rankToString(
 				gameEngine->local_board.get_tile(current_dst)->get_range())
 				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
+			((TokenContainer*)getWidget("token_container"))->incContent( my_piece + color );
+		} else if (res == WON) {
+			tbl->putToken(
+				piece
+				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
+				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
+			));
+			((TokenContainer*)getWidget("token_container_enemy"))->incContent( piece + op_color );
 		}
 
 		removeWaitingMsg();

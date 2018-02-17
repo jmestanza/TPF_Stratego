@@ -250,6 +250,10 @@ void TokenContainer::removeContent(string tokenCode) {
 	generateTokenContentImage();
 }
 void TokenContainer::incContent(string tokenCode) {
+	if (content.find(tokenCode) == content.end()) {
+		contentOrder.push_back(tokenCode);
+		content[tokenCode] = Element(0,0,0);
+	}
 	content[tokenCode].cnt ++;
 	generateTokenContentImage();
 }

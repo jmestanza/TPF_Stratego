@@ -618,6 +618,9 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
 			
+		} else if (res == NOBODY_WON) {
+			((TokenContainer*)getWidget("token_container_enemy"))->incContent(piece + op_color);
+			((TokenContainer*)getWidget("token_container"))->incContent(my_piece + color);
 		}
 
 		
@@ -661,6 +664,9 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
 			((TokenContainer*)getWidget("token_container"))->incContent( my_piece + color );
+		} else if (res == NOBODY_WON) {
+			((TokenContainer*)getWidget("token_container_enemy"))->incContent(piece + op_color);
+			((TokenContainer*)getWidget("token_container"))->incContent(my_piece + color);
 		}
 
 		removeWaitingMsg();

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <tchar.h>
+#include "BombToken.h"
 #include "Player.h"
 #include <iostream>
 using namespace std;
@@ -154,6 +155,9 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 		break;
 	case SPY:
 		res = ((SpyToken*)token)->attack(attack_token_range);
+		break;
+	case BOMB:
+		res = ((BombToken*)token)->attack(attack_token_range);
 		break;
 	}
 	if (!tokenAttacks) {

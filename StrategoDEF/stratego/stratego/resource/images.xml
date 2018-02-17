@@ -28,8 +28,9 @@
   <image name="button_red_medium_b"   dir="buttons/naive_buttons/red_medium/red_b.png"></image>
   
   <!-- Text input  -->
-  <image name="text_input"     dir="textInput/textInput.png"></image>
-
+  <image name="text_input"          dir="textInput/textInput.png"></image>
+  <image name="text_input_disabled" dir="textInput/textInputDisabled.png"></image>
+  
   <!-- Icons  -->
   <image name="icon_worldwide"  dir="icons/worldwide.png"></image>
   <image name="icon_networking" dir="icons/networking.png"></image>
@@ -46,6 +47,8 @@
   <image name="icon_right_dir"  dir="icons/right_arrow.png"></image>
   <image name="icon_success_small"  dir="icons/checked_small.png"></image>
   <image name="icon_random"     dir="icons/shuffle.png"></image>
+  <image name="icon_check_box0" dir="icons/square.png"></image>
+  <image name="icon_check_box1" dir="icons/square_1.png"></image>
   
   <!-- animation  -->
   <image name="icon_loading_0" dir="icons\loading\loading\img0.png"></image>

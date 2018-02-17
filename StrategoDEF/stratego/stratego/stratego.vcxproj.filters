@@ -86,14 +86,11 @@
     <Filter Include="src\framework\view\widgets\showClocks">
       <UniqueIdentifier>{6e2ee14b-fb04-4771-8d8d-31d2f4fa38db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\framework\view\widgets\buttons">
-      <UniqueIdentifier>{2ed1a2d0-6cb6-49d4-ac9c-6a426eede625}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\framework\view\widgets\others">
-      <UniqueIdentifier>{08921220-a0b4-4fd8-89ed-ef49860ef8b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\view\widgets\tokenContainer">
       <UniqueIdentifier>{6462bb26-6b4e-4f3b-9915-af0fe93d1f25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\framework\view\widgets\checkbox">
+      <UniqueIdentifier>{3e6ffd49-a148-4892-a3c1-03ff3771c922}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +253,9 @@
     <ClCompile Include="src\game\model\stratego_engine\SpyToken.cpp">
       <Filter>src\game\model\stratego_engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\checkbox\checkbox.cpp">
+      <Filter>src\framework\view\widgets\checkbox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -413,6 +413,9 @@
     </ClInclude>
     <ClInclude Include="src\game\model\stratego_engine\SpyToken.h">
       <Filter>src\game\model\stratego_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\checkbox\checkbox.h">
+      <Filter>src\framework\view\widgets\checkbox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

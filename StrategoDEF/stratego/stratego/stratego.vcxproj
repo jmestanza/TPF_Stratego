@@ -164,6 +164,7 @@
     <ClCompile Include="src\framework\view\utils\good_buttons.cpp" />
     <ClCompile Include="src\framework\view\widgets\Animation.cpp" />
     <ClCompile Include="src\framework\view\widgets\background.cpp" />
+    <ClCompile Include="src\framework\view\widgets\checkbox\checkbox.cpp" />
     <ClCompile Include="src\framework\view\widgets\naive_button.cpp" />
     <ClCompile Include="src\framework\view\widgets\screen_text.cpp" />
     <ClCompile Include="src\framework\view\widgets\showClocks\showTime.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="src\framework\view\utils\good_buttons.h" />
     <ClInclude Include="src\framework\view\widgets\Animation.h" />
     <ClInclude Include="src\framework\view\widgets\background.h" />
+    <ClInclude Include="src\framework\view\widgets\checkbox\checkbox.h" />
     <ClInclude Include="src\framework\view\widgets\naive_button.h" />
     <ClInclude Include="src\framework\view\widgets\screen_text.h" />
     <ClInclude Include="src\framework\view\widgets\showClocks\showTime.h" />

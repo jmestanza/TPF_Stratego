@@ -614,7 +614,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			((TokenContainer*)getWidget("token_container"))->incContent(my_piece +color);
 			tbl->putToken(
 				piece
-				+ color,
+				+ op_color,
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
 			
@@ -653,14 +653,14 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
-			((TokenContainer*)getWidget("token_container"))->incContent( my_piece + color );
+			((TokenContainer*)getWidget("token_container_enemy"))->incContent( piece + op_color );
 		} else if (res == WON) {
 			tbl->putToken(
 				piece
 				+ (gameEngine->local_board.get_tile(current_dst)->get_player() == RED ? "R" : "B"),
 				convertPosToGeneralType(pair<int,int>(current_dst.i,current_dst.j)
 			));
-			((TokenContainer*)getWidget("token_container_enemy"))->incContent( piece + op_color );
+			((TokenContainer*)getWidget("token_container"))->incContent( my_piece + color );
 		}
 
 		removeWaitingMsg();

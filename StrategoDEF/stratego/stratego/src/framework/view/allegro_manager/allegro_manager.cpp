@@ -128,10 +128,8 @@ void Viewer::loadImgFile(string xmlFile) {
 	}
 }
 void Viewer::loadAudioFile(string xmlFile) {
-	cout << xmlFile << endl;
 	ptree pt;
 	getXMLFile(pt,xmlFile);
-	cout << pt.count("audios") << endl;
 	if (pt.count("audios") != 1) {
 		throw AllegroHandlerException("Error in xml file, wrong amount of audio tag in '" + xmlFile + "'");
 	}

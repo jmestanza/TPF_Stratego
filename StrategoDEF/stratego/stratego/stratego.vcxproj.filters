@@ -420,9 +420,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="src\game\model\stratego_engine\ClassDiagram.cd">
-      <Filter>src\game\model\stratego_engine</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Black.ttf">

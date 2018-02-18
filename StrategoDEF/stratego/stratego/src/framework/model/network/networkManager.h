@@ -38,7 +38,6 @@ class NetworkManager {
 
 	private:
 		boost::scoped_ptr<boost::asio::ip::tcp::socket> mySocket;
-		//boost::asio::ip::tcp::socket mySocket;
 		ip::tcp::acceptor myAcceptor;
 		io_service *ioService;
 		char readBuffer[bufferSize], writeBuffer[bufferSize];

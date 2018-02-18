@@ -36,7 +36,6 @@ class NetContInt : public NetworkProtocol { //network-controller interface
 	public:
 		NetContInt(io_service *service);
 		~NetContInt();
-		//void setController(Controller *controller);
 		void setSysgamePointer(Sysgame *_sysgame);
 
 		void onPackageRecv(string &PkgName, map<string, string> &content);

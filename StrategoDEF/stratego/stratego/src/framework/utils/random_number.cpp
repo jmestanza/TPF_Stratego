@@ -4,7 +4,6 @@
 mt19937 random_g1 = mt19937(std::chrono::system_clock::now().time_since_epoch().count());
 
 int randomNumber() {
-	//mt19937 random_g1 = mt19937(getMillisFromEpoch());
 	return random_g1();
 }
 int randrange(int a,int b) {

@@ -5,7 +5,6 @@ XMLException::XMLException(string _err) : err("XMLException: " + _err) {
 
 }
 const char * XMLException::what() const throw() {
-	//string ans =  + err;
 	return err.c_str();
 }
 

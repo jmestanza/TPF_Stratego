@@ -25,7 +25,6 @@ class UI {
 		vector <Widget*> addWidgets;
 	public:
 		UI();
-		void loadFromXML(string filename);
 		void eraseAll();
 		void refreshDead();
 		void AddWidget(Widget* widget);

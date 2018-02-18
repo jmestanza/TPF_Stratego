@@ -58,7 +58,6 @@ class ConnectMenu : Controller{
 		void setStatus(string status);
 		string getStatus();
 		pair<float,float> getInfoPositionA();
-		//void setMsgWithIcon(string msg,string color,string icon);
 		void setName(string name);
 		void setOpponentName(string name);
 		int hasName();

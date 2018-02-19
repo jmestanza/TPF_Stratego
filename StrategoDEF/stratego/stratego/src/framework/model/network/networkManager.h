@@ -57,7 +57,7 @@ class NetworkManager {
 		ip::tcp::acceptor myAcceptor;
 		io_service *ioService;
 		char readBuffer[bufferSize], writeBuffer[bufferSize];
-		bool connected;
+		bool connected , active;
 
 		boost::posix_time::ptime last_ping;
 		deadline_timer timer;

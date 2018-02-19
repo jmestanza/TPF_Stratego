@@ -18,7 +18,7 @@ int main() {
 
 	try {
 		Sysgame sys;
-		sys.setNewController((Controller*)(new ConnectMenu((Sysgame*)&sys)));
+		sys.setNewController((Controller*)(new MenuTest((Sysgame*)&sys)));
 
 		while (!sys.quit()) sys.update();
 

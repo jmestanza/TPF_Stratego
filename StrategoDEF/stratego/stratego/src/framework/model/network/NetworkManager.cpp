@@ -16,9 +16,10 @@ NetworkManager::NetworkManager(io_service *_service) : timer(*_service), myAccep
 	failure = 0;
 	timerOn = 0;
 	acceptorOn = 0;
+	active = 0;
 }
 void NetworkManager::tryConnection(string host, int port, int timeout) {
-
+	active = 1;
 	cout << "[Network Manager]Try conenction\n";
 	if (this->connected) {
 		throw NetworkManagerException("Network error trying connect when we are already connected \n");
@@ -35,10 +36,11 @@ void NetworkManager::tryConnection(string host, int port, int timeout) {
 		//timer.async_wait(boost::bind(&NetworkManager::handleTimeout,this));
 	}catch(boost::exception &e) {
 		throw NetworkManagerException("Boost error!");
+		active = 0;
 	}
 }
 void NetworkManager::waitForConnection(int port) {
-
+	active = 1;
 	cout << "[Network Manager]Wait for connection\n";
 	if (this->connected) {
 		throw NetworkManagerException("Network error trying to wait for connection when we are already connected \n");
@@ -72,11 +74,13 @@ void NetworkManager::handleConnect(const boost::system::error_code& error) {
 
 		failure = 1;
 		connected = 0;
+		
 		/*mySocket->cancel();
 		mySocket->close();
 		boost::system::error_code error;
 		timerOn = 0; timer.cancel();*/
 		onConnFailed(error.message());
+		
 		return;
 	}
 	cout << "[Network Manager]conexion establecida \n";
@@ -110,6 +114,7 @@ void NetworkManager::handleSent(const boost::system::error_code& error, size_t b
 	
 	if (error) { 
 		connected = 0;
+		closeConnection();
 		boost::system::error_code error;
 		//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both,error);
 		onLostConnection(error.message()); return; 
@@ -141,11 +146,11 @@ void NetworkManager::handleRecvTimeout(const boost::system::error_code& error) {
 }
 void NetworkManager::closeConnection() {
 	cout << "[Network Manager]Close connection\n";
-	//if (connected) {
-
+	if (active) {
+		active = 0;
 		boost::system::error_code error;
 		//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
-		cout << "cancel async! "<<'\n';
+		cout << "cancel async! " << '\n';
 		//mySocket->cancel();
 		mySocket->close();
 		//mySocket.reset(new boost::asio::ip::tcp::socket(*ioService));
@@ -159,7 +164,7 @@ void NetworkManager::closeConnection() {
 			//myAcceptor.cancel();
 			myAcceptor.close();
 		}
-	//}
+	}
 }
 int NetworkManager::getConnected() {
 	return connected;

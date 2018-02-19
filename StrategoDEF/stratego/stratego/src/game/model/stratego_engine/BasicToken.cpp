@@ -31,6 +31,7 @@ string rankToString(int rank) {
 	if (rank == SPY) return "S";
 	if (rank == BOMB) return "B";
 	if (rank == FLAG) return "F";
+	if(rank == WATER) return "W";
 }
 
 BasicToken::BasicToken(RangeType set_range, bool move_en, PlayerType player)

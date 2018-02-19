@@ -5,7 +5,7 @@
 using namespace std;
 
 enum Ranges {ENEMY = 0, MARSHAL, GENERAL, COLONEL, MAJOR, CAPTAIN, LIEUTENANT, SERGEANT, MINER, SCOUT, 
-			 SPY, BOMB, FLAG};
+			 SPY, BOMB, FLAG,WATER};
 #define INVALID_RANGE -1
 
 enum Players {RED=1, BLUE};

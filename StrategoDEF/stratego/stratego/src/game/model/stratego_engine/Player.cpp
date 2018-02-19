@@ -31,6 +31,18 @@ Player::Player(PlayerType color)
 		game_state = ENEMY_MOVE;
 		local_board.set_enemy_tokens(RED);
 	}
+
+	Water = new BasicToken(WATER,0,game_state == RED? BLUE:RED);
+
+	local_board.get_board()[4][2] = Water;
+	local_board.get_board()[4][3] = Water;
+	local_board.get_board()[5][2] = Water;
+	local_board.get_board()[5][3] = Water;
+	local_board.get_board()[4][6] = Water;
+	local_board.get_board()[4][7] = Water;
+	local_board.get_board()[5][6] = Water;
+	local_board.get_board()[5][7] = Water;
+
 }
 
 MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
@@ -41,17 +53,25 @@ MoveResult Player::move_local_token(PosType src_pos, PosType dst_pos)
 	if (token == nullptr) {
 		return MOVE_NOT_VALID; /// El casillero esta vacio!
 	}
-
+	
 	if (token->get_player() != player) {
 		return MOVE_NOT_VALID; /// No es una ficha propia
 	}
+
+	if (token->get_range() == WATER) {
+		return MOVE_NOT_VALID;
+	}
 	
 	// si pasa todo esto es porque es valido -> debe ser null el destiny
-	if(dst_tile != nullptr)
-	if (dst_tile->get_player() == player) {
-		return RESELECT; /// El tile de destino es otra ficha propia
+	if(dst_tile != nullptr){
+		if (dst_tile->get_player() == player) {
+			return RESELECT; /// El tile de destino es otra ficha propia
+		}
+		if(dst_tile->get_range() == WATER){
+			return MOVE_NOT_VALID;
+		}
 	}
-
+	
 	if (!(token->is_move_enabled())) {
 		return MOVE_NOT_VALID; /// No es una ficha movible
 	}
@@ -121,7 +141,7 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 		token = local_board.get_tile(src_pos);
 		tokenAttacks = 1;
 	} else {
-		cout << "super crazy my friend\n";
+		cout << "unexpected situation" << endl;
 	}
 	AttackResult res;
 
@@ -230,4 +250,6 @@ void Player::set_game_state(State st) {
 
 Player::~Player()
 {
+	if( Water!=nullptr )
+	delete Water;
 }

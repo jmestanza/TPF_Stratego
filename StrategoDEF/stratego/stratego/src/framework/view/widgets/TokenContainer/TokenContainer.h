@@ -94,7 +94,6 @@ class TokenContainer : public Widget{
 		void selectItem(string val);
 		void onTokenSelect(void (*func)(Sysgame*,string) );
 		void incContent(string tokenCode);
-		void setTableRef(Table *tbl);
 		void addAllBlueContent();
 		void addAllRedContent();
 		void clear();

@@ -59,5 +59,6 @@ private:
 	PlayerType player;
 	State game_state;
 	vector <RangeType> tokens_lost; /// Inicia vacio y almacena las fichas perdidas del jugador
+	BasicToken * Water;
 };
 

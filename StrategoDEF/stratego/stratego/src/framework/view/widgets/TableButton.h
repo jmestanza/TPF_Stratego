@@ -1,9 +1,10 @@
 #pragma once
 
+/// Clase auxiliar del tablero
+
 #include "Widget.h"
 
-class TableButton : public Widget
-{
+class TableButton : public Widget{
 public:
 	TableButton(string _def_img, pair<float, float> _pos, pair<float, float> _size, Sysgame * sys,string _name);
 	string default_img;

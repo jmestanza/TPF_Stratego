@@ -2,8 +2,16 @@
 
 #include "widget.h"
 
-/// Nota, para correcto funcionamiento se debe llamar a configure y a AddIcon
-/// Aunque no tenga icono el text input
+/*
+//Text input es una entidad que permita que se le escriba texto, el controller luego puede
+// acceder al contenido escrito
+*/
+
+
+/* Nota, para correcto funcionamiento se debe llamar a configure y a AddIcon
+ Aunque no tenga icono el text input
+
+Nota: Se deja como pendiente que el funcionamiento no sea de manera tan rebuscada*/
 
 class TextInput : public Widget{
 	private:
@@ -28,14 +36,14 @@ class TextInput : public Widget{
 		void enable();
 		void disable();
 
-		void handleEvent(ALLEGRO_EVENT *ev);
-		void configure(pair<float, float> pos,bool centered);
-		void addIcon(string imgCode);
-		void addSmallText(string msg);
+		void handleEvent(ALLEGRO_EVENT *ev); 
+		void configure(pair<float, float> pos,bool centered); 
+		void addIcon(string imgCode); // agregar icono del text input
+		void addSmallText(string msg); // agregar pequenio texto que se muestra en la esquina
 		void updateDrawing();
 		void startDrawing();
 		void stopDrawing();
-		void setText(string text);
+		void setText(string text); // configurar que texto muestra
 
 		~TextInput();
 };

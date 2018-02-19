@@ -4,6 +4,21 @@
 #include "boost/asio.hpp"
 #include "boost/scoped_ptr.hpp"
 
+/*
+NetworkManager:
+Esta clase, considerada formalmente parte del modelo interactua con boost de manera asincronica
+para poder 
+
+- Esperar que un cliente se conecte
+- Intentar conectarse a un servidor
+- Enviar packetes
+- LLamar a callbacks cuando llegan packetes (la idea es hacer otra clase que herede de netorkManager
+y que dicha clase sobre-escriba metodos virtuales de NetworkManager y coloque alli lo que 
+se quiera que suceda cuando un packete llega)
+- Llamar a callbacks si se pierde conexion o si no se puede conectar
+
+*/
+
 using namespace boost::asio;
 using namespace std;
 
@@ -30,13 +45,14 @@ class NetworkManager {
 		void closeConnection();
 		int getConnected();
 		/*** Override functions ***/
-		virtual void onConnect() = 0;
-		virtual void onConnFailed(string err) = 0;
-		virtual void onRecv(string &msg) = 0;
+		virtual void onConnect() = 0; // conexion establecida
+		virtual void onConnFailed(string err) = 0; // conexion fallada
+		virtual void onRecv(string &msg) = 0; // packete recibido
 		virtual void onSent() = 0;
-		virtual void onLostConnection(string err) = 0;
+		virtual void onLostConnection(string err) = 0; // conexion perdida
 
 	private:
+		//// Variables de boost 
 		boost::scoped_ptr<boost::asio::ip::tcp::socket> mySocket;
 		ip::tcp::acceptor myAcceptor;
 		io_service *ioService;
@@ -48,7 +64,7 @@ class NetworkManager {
 		int timeoutRecv, flagWaiting , failure;
 		int timerOn;
 		bool acceptorOn;
-		/*** Internal functions ***/
+		/*** Funciones internas: se le pasan a boost para que llamen a las funciones para sobre-escribir ***/
 		void handleConnect(const boost::system::error_code& error);
 		void handleRecv(const boost::system::error_code& error, size_t bytes);
 		void handleSent(const boost::system::error_code& error, size_t bytes);

@@ -2,6 +2,7 @@
 
 #include "widget.h"
 
+//ScreenText: Representa un texto mostrado en la pantalla, es un widget pasivo.
 
 class screenText : public Widget{
 	private:

@@ -1,5 +1,8 @@
 #pragma once
 
+/*
+Mouse follower: Widget que sigue la posicion del mouse con una imagen.
+*/
 #include <framework\view\widgets\widget.h>
 
 class MouseFollower : public Widget{

@@ -1,6 +1,6 @@
 #pragma once
 
-/* Aqui se estructura todo lo que tienen en comun los packetes de comunicacion */
+/* Package: Aqui se estructura todo lo que tienen en comun los packetes de comunicacion */
 /* El contenido de cada mensage*/
 #include <string>
 #include <vector>
@@ -9,6 +9,7 @@
 
 using namespace std;
 
+/// Esta excepcion se llama fundamentalmente cuando hay errores de parseo del paquete
 class PackageException : logic_error {
 	public:
 		PackageException(string err);
@@ -29,8 +30,11 @@ class Package {
 		unsigned char getHead();
 		string getName();
 
-		void encode(map <string, string> &input,string &ans);
-		void decode(string &value,map <string, string> &ans);
+		void encode(map <string, string> &input,string &ans); /// codificar un packquete a partir de un map
+		// map<string,string> => string para enviar
+
+		void decode(string &value,map <string, string> &ans); /// decodificar un paquete en un map
+		// string para enviar => map<string,string>
 	private:
 		string name;
 		unsigned char headCode;

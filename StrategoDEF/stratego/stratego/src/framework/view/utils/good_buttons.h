@@ -2,6 +2,9 @@
 
 #include <framework\view\widgets\text_button.h>
 
+/// Botones con diversas imagenes, que forman una buena combinacion de disenio
+// se fueron agregando al ver que combinaban bien
+
 imgGroup g_blue();
 imgGroup g_green();
 imgGroup g_red();

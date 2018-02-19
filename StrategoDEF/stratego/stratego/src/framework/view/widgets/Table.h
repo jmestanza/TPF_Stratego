@@ -1,5 +1,11 @@
 #pragma once
 
+// Table: representa el tablero del juego, 
+// Tiene callbacks que se llaman cuando se presionan sus casilleros, y funciones
+// para actualizar las fichas que muestra. No tiene gran inteligencia, es parte de la vista.
+// La idea es que el controller decida como actuar ante las acciones ejercidas sobre el tablero.
+
+
 #include <framework\view\allegro_manager\allegro_manager.h>
 #include <framework\sysgame\sysgame.h>
 #include <framework\view\widgets\TokenContainer\TokenContainer.h>
@@ -62,14 +68,14 @@ class Table : public Widget {
 		void stopDrawing();
 		void setPlayersName(string upPlayer,string downPlayer);
 
-		void takeOutToken(pair<int,int> position);
-		void putToken(string code,pair<int,int> position);
-		void eraseToken(pair<int,int> position);
-		void moveToken(pair<int,int> posA,pair<int,int> posB);
+		void takeOutToken(pair<int,int> position); // sacar ficha del tablero
+		void putToken(string code,pair<int,int> position); //agregar ficha
+		
+		void moveToken(pair<int,int> posA,pair<int,int> posB); // mover ficha 
 		string getPosCode(pair<int,int> pos);
 		void informSelected(string piece);
 		string getPiece(pair<int,int> pos);
-		void freePosition(pair<int,int> pos);
+		void freePosition(pair<int,int> pos); // sacar fich
 
 		TokenContainer * refContainer;
 		void setTokenContainer(TokenContainer *tok);
@@ -78,14 +84,15 @@ class Table : public Widget {
 		void setStatus(string _status);
 		void fillOpponentField(string color);
 
-		void onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>));
-		void onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>));
-		void onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>));
+		void onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>)); // cuando se suelta un casillero
+		void onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>)); // cuando se presiona un casillero
+		void onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>)); // cuando se presiona una secuencia de casilleros ( se hace un movimiento)
 
-		void clearToken();
+		void clearToken(); //borrar todas las fichas
 		vector <vector<string>>& getContent();
 
 	private:
+		/// funciones de los callback
 		void (*onMouseReleasedFunction)(Sysgame *,Table *,pair<int,int>);
 		void (*onMousePressFunction)(Sysgame *,Table *,pair<int,int>);
 		void (*onActionMoveFunction)(Sysgame*,Table*,pair<int,int>,pair<int,int>);

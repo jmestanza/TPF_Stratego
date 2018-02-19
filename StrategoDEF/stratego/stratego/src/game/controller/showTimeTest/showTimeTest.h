@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+Controller para hacer pruebas
+
+*/
 #include <framework\controller\controller.h>
 
 class showTimeTest : public Controller{

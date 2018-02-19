@@ -30,7 +30,12 @@ class AllegroHandlerException : public exception {
 
 /*
 Viewer: ultima interfaz que organiza los distintos graficos
-mostrados en pantalla en pantalla
+mostrados en pantalla en pantalla.
+La idea fundamental es organizar el orden en el que las cosas se pintan en la pantalla,
+cargar las imagenes, musica a la memoria, destruirlas y organizarlas en map<string,string>
+
+LEER ShowObject para ver como se estructuran las entidades que se muestran en la pantalla
+
 */
 class Viewer {
 	private:
@@ -57,6 +62,7 @@ class Viewer {
 		pair<float,float> getScreenSize();
 		void setScreenSize(pair<float,float> size);
 		void setDebugFlag();
+		/// cargar archivos de configuracion de todos los recursos graficos del juego
 		void loadConfFile(string xmlFile);
 		void loadImgFile(string xmlFile);
 		void loadAudioFile(string xmlFile);
@@ -64,14 +70,14 @@ class Viewer {
 		void loadColorsFile(string xmlFile);
 		void start();
 		void load(string dir, string name); // directorio: de donde cargo la imagen name: nombre asignado de acceso
-		void loadFromBitmap(ALLEGRO_BITMAP *b,string name);
-		void loadAudio(string dir,string name);
-		void loadFont(string dir,string name,int size);
-		void loadColor(string code, string name);
-		void eraseLoaded(string loadedName);
-		void showBitmaps();
+		void loadFromBitmap(ALLEGRO_BITMAP *b,string name); // cargar a la memoria una imagen desde un bitmap
+		void loadAudio(string dir,string name); // cargar un audio a la memoria
+		void loadFont(string dir,string name,int size); // etc
+		void loadColor(string code, string name); // ect
+		void eraseLoaded(string loadedName); // borrar de la memoria una imagen
+		void showBitmaps(); /// pitnar todos los bitmaps en el orden configurado
 
-		ALLEGRO_BITMAP *getImg(string imgName);
+		ALLEGRO_BITMAP *getImg(string imgName); /// conseguir imagenes, fonts, colores de la memoria
 		ALLEGRO_FONT* getFont(string name);
 		ALLEGRO_COLOR getColor(string color);
 
@@ -83,11 +89,11 @@ class Viewer {
 		void playonce(string song);
 		void stopShow(string showName); // borrar imagen de la pantalla
 		void draw();
-		void changeShowImg(string showName, string newImageName);
-		void changeShowImgPos(string showName,float x,float y,int centered);
+		void changeShowImg(string showName, string newImageName); /// cambiar una imagen mostrada en la pantalla
+		void changeShowImgPos(string showName,float x,float y,int centered); /// moverla..
 		void destroyAll(); // empty screen
-		bool getNextEvent(ALLEGRO_EVENT *ev);
-		bool hasLoadedImg(string name);
+		bool getNextEvent(ALLEGRO_EVENT *ev); // conseguir eventos de allegor
+		bool hasLoadedImg(string name); // checkear si una imagen esta cargada en la memoria
 
 		~Viewer();
 };

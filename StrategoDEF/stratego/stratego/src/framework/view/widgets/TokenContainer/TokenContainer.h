@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+TokenContainer: Entidad que muestra imagenes de las fichas de una manera comoda
+para el usuario, ademas tiene callbacks cuando se hace click sobre las fichas
+*/
 #include <framework\view\widgets\widget.h>
 #include <framework\view\widgets\naive_button.h>
 #include <framework\view\utils\good_buttons.h>

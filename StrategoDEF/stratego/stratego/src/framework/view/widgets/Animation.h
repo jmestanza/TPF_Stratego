@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+Animation: Representa una animacion de pantalla que tiene distinitos bitmaps que avanzan con el timepo
+
+*/
 #include <vector>
 #include "widget.h"
 using namespace std;

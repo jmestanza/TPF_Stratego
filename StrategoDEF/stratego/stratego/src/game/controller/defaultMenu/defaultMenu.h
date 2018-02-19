@@ -1,5 +1,8 @@
 #pragma once
 
+/*
+NO SE USA: para borrar
+*/
 #include <framework\sysgame\sysgame.h>
 #include <framework\controller\controller.h>
 

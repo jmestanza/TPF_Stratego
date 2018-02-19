@@ -2,6 +2,9 @@
 #ifndef NAIVEBUTTON_H
 #define NAIVEBUTTON_H
 
+// NaiveButton: Wiget basico de boton, cuando se presiona se llama un callback,
+// se peude configurar sus imagenes que cambian cuando se presiona.
+
 #include "Widget.h"
 #include <string>
 #include <allegro5/allegro_image.h>

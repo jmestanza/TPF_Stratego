@@ -2,6 +2,9 @@
 #include <framework\sysgame\sysgame.h>
 #include "widget.h"
 
+// Background: Representa una imagen que se muestra en la pantalla, es un widget pasivo al igual que animation,
+// (No tiene callbacks que se activan cuando suceden cosas)
+
 typedef unsigned char uc;
 
 class Background : public Widget{

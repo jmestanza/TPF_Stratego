@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+Este controller se muestra cuando se quieren ver los creditos del juego
+
+*/
 #include <framework\controller\controller.h>
 
 class AboutWindow : Controller{

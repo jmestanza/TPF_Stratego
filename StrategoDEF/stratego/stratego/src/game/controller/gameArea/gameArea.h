@@ -1,5 +1,13 @@
 #pragma once
 
+/*
+GameArea: aqui se desarrolla la partida cuando ya establecimos la conexion
+previamente
+Se administran, entre otras cosas, el tablero y los TokenContainer,
+su interaccion entre si, lo que sucede cuando llegan packetes, lo  que sucede cuando 
+se interactua con el TokenContainer y el tablero. Se consulta a el modelo (el game engine), 
+la validez de los movimientos, lo que sucede cuando hay ataques, etc
+*/
 #include <game\model\stratego_engine\BasicToken.h>
 #include <game\model\stratego_engine\Player.h>
 #include <framework\controller\controller.h>
@@ -29,42 +37,45 @@ class gameArea : Controller{
 
 		PosType current_src,current_dst;
 	public:
-		void setCurrentMov(PosType src,PosType dst);
-		PosType getCurrentSrc();
-		PosType getCurrentDst();
+		void setCurrentMov(PosType src, PosType dst);
 
-		gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart,string mode);
+		PosType getCurrentSrc();
+		PosType getCurrentDst(); // administrar variables de movimiento (cuando se llama la accion de mover una ficha)
+
+		gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart,string mode); /// configurar el gameArea: necesitamos
+		//saber si empezamos el nombre del jugador y su rival, el modo (cliente,servidor).
+
 		void onCreate();
 		void onNetPack(string &package,map<string,string> &data) ;  // handle NETWORK actions
 		void onNetEvent(NETWORK_EVENT *ev) ;
 
-		void setInfoAreaWidgets(Widget *a,Widget *b);
-		void eraseInfoAreaWidgets();
-		void setSelectedItem(string value);
-		void decTokens();
+		void setSelectedItem(string value); // configurar cual es la ficha que esta en el MouseFollower
+		void decTokens(); /// incrementar o decrementar fichas restantes (mostradas en el widget de fichas resantes)
 		void incTokens();
-		void updateTokenMsg();
-		void addStartButton();
+		void updateTokenMsg(); // actualizar graficamente el mensaje de fichas restantes
+
+
+		void addStartButton(); //agregar/sacar boton para empezar, botones de opciones (vaciar tablero, coloar fichas al azar)
 		void removeStartButton();
 		void addOptionsButtons();
 		void removeOptionsButtons();
 
-		void takeOffTokens();
-		void randomTokenPlace();
-		bool getIStart();
-		void setTokenLeft(int value);
-		void setRandomPieces();
-		void addAnimation();
-		void removeAnimation();
-		void setStatus(string status);
-		void addWaitingMsg(string msg);
-		void removeWaitingMsg();
-		void updateTurn(pair <int,int> mv , pair<int,int> dst); /// Update table about what happened in turn
-		void loadEngineContent(vector <vector <string>> &content);
+		bool getIStart(); // ver si comienzo yo
+		void setTokenLeft(int value); // setear fichas restantes
+		void setRandomPieces(); // colocar fichas al azar en el tablero
+		void addAnimation(); // mostrar animaxion de espera
+		void removeAnimation(); // sacarla
+		void setStatus(string status); // configurar el estado de la maquina de estado
+		void addWaitingMsg(string msg); // agregar mensaje de espera
+		void removeWaitingMsg(); // sacarlo
+
+		void loadEngineContent(vector <vector <string>> &content); // cargarle al motor del juego las fichas
+		// que estan colocadas en el tablero
 		Player *getGameEngine();
 		string getStatus();
 		void tokenReady();
-		pair<int,int> convertPosToGeneralType(pair<int,int> original);
+		pair<int,int> convertPosToGeneralType(pair<int,int> original); // funcion adaptadora ya que 
+		// ambos jugadores se ven del lado de abajo aunque para uno sea esto falso
 
 		string getSelectedItem();
 

@@ -53,6 +53,14 @@ void Table::setPlayersName(string _upPlayer,string _downPlayer) {
 	upPlayer = _upPlayer;
 	downPlayer = _downPlayer;
 }
+bool Table::isValidPos(pair<int,int> pos) {
+	if( ( 0 <= pos.first ) && ( pos.first <=9 ) ){
+		if( ( 0 <= pos.second ) && ( pos.second <= 9) ){
+			return true;
+		}
+	}
+	return false;
+}
 void Table::setStatus(string _status) {
 	gameStatus = _status;
 }
@@ -150,29 +158,23 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				
 			rx /= this->pieceSize.first;
 			ry /= this->pieceSize.second;
-				
-			if (onMouseReleasedFunction != nullptr) {
-				this->onMouseReleasedFunction(mySysgame, this, pair<int, int>(ry, rx));
-			}
-			if (!isSelected) {
-				selectedPosition = pair<int,int>(ry,rx);
-				isSelected = 1;
-				cout << "selected => ("<<selectedPosition.first<<","<<selectedPosition.second<<")\n"; 
-			} else {
-				cout << "action " << "("<<selectedPosition.first<<","<<selectedPosition.second<<") -> ("<<ry<<","<<rx<<")\n";
-				if (onActionMoveFunction != nullptr) {
-					onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(ry,rx));
+			if (isValidPos(pair<int,int>(ry,rx))){
+				if (onMouseReleasedFunction != nullptr) {
+					this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(ry,rx));
 				}
-				isSelected = 0;
-			}
-				/*if (ry >= 6) { /// only upside is allowed
-					if (this->selectedPiece != "") {
-						this->putToken(this->selectedPiece,pair<int,int>(rx,ry));
-
-						this->selectedPiece = "";
+				if (!isSelected) {
+					selectedPosition = pair<int,int>(ry,rx);
+					isSelected = 1;
+					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
+				} else {
+					cout << "action " << "(" << selectedPosition.first << "," << selectedPosition.second << ") -> (" << ry << "," << rx << ")\n";
+					if (onActionMoveFunction != nullptr) {
+						onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(ry,rx));
 					}
-				}*/
-			//}
+					isSelected = 0;
+				}
+			
+			}
 		}
 
 	} else if (ev->type == ALLEGRO_EVENT_MOUSE_AXES) {

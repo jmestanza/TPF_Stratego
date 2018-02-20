@@ -67,6 +67,7 @@ class Table : public Widget {
 		void startDrawing();
 		void stopDrawing();
 		void setPlayersName(string upPlayer,string downPlayer);
+		bool isValidPos(pair<int,int> pos) ;
 
 		void takeOutToken(pair<int,int> position); // sacar ficha del tablero
 		void putToken(string code,pair<int,int> position); //agregar ficha

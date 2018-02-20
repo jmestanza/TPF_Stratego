@@ -268,7 +268,7 @@ void gameArea::tokenReady() {
 		pair<int,int> source = myself->convertPosToGeneralType(org_src);
 		pair<int,int> dst = myself->convertPosToGeneralType(org_dst);
 
-		printTable(myself->getGameEngine()->local_board.get_board());
+		//printTable(myself->getGameEngine()->local_board.get_board());
 		
 		if (myself->getStatus() == "waiting_for_move") {
 			Player* engine = myself->getGameEngine();
@@ -303,11 +303,15 @@ void gameArea::tokenReady() {
 				myself->addAnimation();
 				myself->removeWaitingMsg();
 				myself->addWaitingMsg("Esperando al rival");
-			} else {
+			} else if(ans == MOVE_NOT_VALID) {
 				cout << "invalid move! \n";
+			} else if(ans == GAME_WON){
+				//sys->setNewController(finalMenu*);
+				cout << "I WON!!" << endl;
+
 			}
 		}
-		printTable(myself->getGameEngine()->local_board.get_board());
+		//printTable(myself->getGameEngine()->local_board.get_board());
 		
 	});
 
@@ -550,8 +554,8 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			dataAns["token_rank"] = rankToString(gameEngine->local_board.get_tile(dst)->get_range());
 			mySysgame->getNetwork()->sendPackage("attack",dataAns);
 			this->status = "waiting_for_attack_then_play";
-		} else if (ans != MOVE_VALID){
-			cout << "unexcepected situation! invalid move !!";
+		} else if (ans == GAME_WON){
+			cout << "I LOSE" << endl;
 		} else {
 			Table *tbl = (Table*)getWidget("table");
 			tbl->moveToken(

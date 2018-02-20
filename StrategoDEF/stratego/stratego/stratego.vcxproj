@@ -179,6 +179,7 @@
     <ClCompile Include="src\game\controller\connectionLostMenu\connectionLostMenu.cpp" />
     <ClCompile Include="src\game\controller\connectMenu\connect_menu.cpp" />
     <ClCompile Include="src\game\controller\defaultMenu\defaultMenu.cpp" />
+    <ClCompile Include="src\game\controller\finalMenu\finalMenu.cpp" />
     <ClCompile Include="src\game\controller\gameArea\gameArea.cpp" />
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp" />
     <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="src\game\controller\connectionLostMenu\connectionLostMenu.h" />
     <ClInclude Include="src\game\controller\connectMenu\connect_menu.h" />
     <ClInclude Include="src\game\controller\defaultMenu\defaultMenu.h" />
+    <ClInclude Include="src\game\controller\finalMenu\finalMenu.h" />
     <ClInclude Include="src\game\controller\gameArea\gameArea.h" />
     <ClInclude Include="src\game\controller\menu_test\menu_test.h" />
     <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h" />

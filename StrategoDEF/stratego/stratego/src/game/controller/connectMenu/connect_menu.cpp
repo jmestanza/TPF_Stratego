@@ -49,7 +49,7 @@ void ConnectMenu::onCreate() {
 	input->configure(pair<float, float>(screenSize.first / 8 * 3, screenSize.second / 2),1);
 	input->addIcon("icon_worldwide");
 	input->addSmallText("Direccion IP");
-	input->setText("192.168.86.75");
+	input->setText("192.168.0.172");
 	
 	pair<int,int> posBox(input->getPos().first+10,input->getPos().second+input->getSize().second+10);
 	Checkbox *box = new Checkbox(mySysgame,"checkbox");

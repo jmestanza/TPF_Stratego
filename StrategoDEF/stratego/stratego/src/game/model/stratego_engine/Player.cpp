@@ -179,6 +179,9 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 	case BOMB:
 		res = ((BombToken*)token)->attack(attack_token_range);
 		break;
+	case FLAG:
+		return GAME_WON;
+		break;
 	}
 	if (!tokenAttacks) {
 		if (res == WON) {

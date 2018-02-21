@@ -12,6 +12,7 @@
 
 #include "widget.h"
 #include "TableButton.h"
+#include "screen_text.h"
 #include <iostream>
 
 #define TABLE_SLOTS 10
@@ -36,6 +37,7 @@ class Table : public Widget {
 		Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,float>_pieceSize,int mode);
 		int mode;
 		int status;
+		int src_n_dst_ready;
 		int mx,my;
 		string upPlayer,downPlayer;
 
@@ -52,7 +54,10 @@ class Table : public Widget {
 		pair <int,int> pieceSize;
 		pair<int,int> selectedPosition;
 		int isSelected;
-		
+
+		screenText *SelectedPosText;
+		screenText *OnActionText;
+
 		int underAnimation;
 		string animatedBitmap;
 

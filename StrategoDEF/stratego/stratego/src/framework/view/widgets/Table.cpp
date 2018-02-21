@@ -21,6 +21,7 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 	
 	this->pieceSize = _pieceSize;
 
+	src_n_dst_ready = 0;
 
 	myCode = "table_" + to_string(randomNumber());
 
@@ -96,8 +97,6 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		int rx,ry;
 		rx = mx - this->pos.first;
 		ry = my - this->pos.second;
-		cout << "insideGameboard: " << (insideGameboard(rx,ry)) << endl;
-		// El problema era insideME
 		if (insideGameboard(rx,ry)) {
 
 			rx /= this->pieceSize.first;
@@ -116,6 +115,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		int rx,ry;
 		rx = mx - this->pos.first;
 		ry = my - this->pos.second;
+		pair<float,float> screenSize = view->getScreenSize();
 		//	
 		if (insideGameboard(rx,ry)) {
 				
@@ -125,12 +125,38 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				if (onMouseReleasedFunction != nullptr) {
 					this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(ry,rx));
 				}
+
+				//verificar que se pueden borrar
+				if(src_n_dst_ready == 2){
+					mySysgame->getController()->eraseWidget("selected_text");
+					mySysgame->getController()->eraseWidget("onaction_text");
+					src_n_dst_ready = 0;
+				}
+				
 				if (!isSelected) {
 					selectedPosition = pair<int,int>(ry,rx);
 					isSelected = 1;
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
+
+					string SelectedPosStr = "src:"+(to_string(selectedPosition.first)+ to_string(selectedPosition.second));
+					if(src_n_dst_ready<2){
+						SelectedPosText = new screenText(mySysgame,"selected_text");
+						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(900,screenSize.second / 2 + 50),1);
+						mySysgame->getController()->addWidget((Widget*)SelectedPosText);
+						src_n_dst_ready++;
+					}
+					
 				} else {
-				//	cout << "action " << "(" << selectedPosition.first << "," << selectedPosition.second << ") -> (" << ry << "," << rx << ")\n";
+					if(src_n_dst_ready < 2){
+						string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
+						OnActionText = new screenText(mySysgame,"onaction_text");
+						OnActionText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(900,screenSize.second / 2 + 100),1);
+						mySysgame->getController()->addWidget((Widget*)OnActionText);
+						src_n_dst_ready++;
+					}
+					
+					cout << "action " << "(" << selectedPosition.first << "," << selectedPosition.second << ") -> (" << ry << "," << rx << ")\n";
+					
 					if (onActionMoveFunction != nullptr) {
 						onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(ry,rx));
 					}
@@ -150,7 +176,6 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 
 }
 string Table::getPiece(pair<int,int> pos) {
-	// FALTA VALIDAR QUE TE PASEN UNA POS 
 	return shownTokens[pos.first][pos.second];
 }
 void Table::freePosition(pair<int,int> pos) {
@@ -211,7 +236,6 @@ void Table::onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>
 	onActionMoveFunction = func;
 }
 Table::~Table() {
-
 }
 void Table::setTokenContainer(TokenContainer *tok) {
 	refContainer = tok;

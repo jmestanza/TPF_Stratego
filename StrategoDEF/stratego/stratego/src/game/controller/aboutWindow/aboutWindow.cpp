@@ -14,6 +14,7 @@ void AboutWindow::onCreate() {
 	float width = size.first,height = size.second;
 
 
+	
 	screenText *title = new screenText(mySysgame,"title");
 	title->configure("Algoritmos y estructura de datos: TP final","roboto_v1",al_map_rgb(0,0,0),
 		pair<float,float>(width / 2,height / 8),

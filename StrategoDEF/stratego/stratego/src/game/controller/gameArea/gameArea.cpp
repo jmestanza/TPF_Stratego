@@ -153,7 +153,8 @@ void gameArea::onCreate() {
 			follow->setImg("token_" + table->getPiece(pos) + "_r");
 
 			controller->setSelectedItem(table->getPiece(pos));
-
+		
+			
 			table->freePosition(pos);
 		}
 	});

@@ -170,8 +170,6 @@ Sysgame::~Sysgame() {
 
 void Sysgame::setNewController(Controller *_contr) {
 	nextController = _contr;
-
-	
 }
 
 void Sysgame::update() {

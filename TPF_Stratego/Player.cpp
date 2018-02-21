@@ -139,7 +139,7 @@ void Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_t
 		res = ((SpyToken*)token)->attack(attack_token_range);
 		break;
 	}
-	if (!tokenAttacks) {
+	if (!tokenAttacks && (attack_token_range != MARSHAL &&token->get_range() != SPY ) ) {
 		if (res == WON) {
 			res = LOSE;
 		} else if (res == LOSE) {

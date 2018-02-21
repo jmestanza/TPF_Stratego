@@ -117,6 +117,7 @@ void gameArea::onCreate() {
 	});
 
 	tablero->onMouseRelease([](Sysgame *sys,Table *table,pair<int,int> pos) {
+		if(!sys->isValidPos(pos)) return ;
 		if (pos.first <= 5) return;
 		TokenContainer *tk = (TokenContainer*)sys->getUI()->getWidget("token_container");
 
@@ -140,6 +141,7 @@ void gameArea::onCreate() {
 	});
 
 	tablero->onMousePress([](Sysgame *sys,Table *table,pair<int,int> pos) {
+		if (!sys->isValidPos(pos)) return;
 		if (pos.first <= 5) return;
 		TokenContainer *tk = (TokenContainer*)sys->getUI()->getWidget("token_container");
 		gameArea *controller = (gameArea*)sys->getController();

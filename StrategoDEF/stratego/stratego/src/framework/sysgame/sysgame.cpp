@@ -147,6 +147,14 @@ void Sysgame::loadConfigurationData(string xmlFile) {
 void Sysgame::Quit() {
 	_quit = 1;
 }
+bool Sysgame::isValidPos(pair<int,int> pos) {
+	if ((0 <= pos.first) && (pos.first <= 9)) {
+		if ((0 <= pos.second) && (pos.second <= 9)) {
+			return true;
+		}
+	}
+	return false;
+}
 Controller *Sysgame::getController() {
 	return controller;
 }

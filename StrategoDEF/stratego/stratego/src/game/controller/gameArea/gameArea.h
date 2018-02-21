@@ -8,12 +8,12 @@ su interaccion entre si, lo que sucede cuando llegan packetes, lo  que sucede cu
 se interactua con el TokenContainer y el tablero. Se consulta a el modelo (el game engine), 
 la validez de los movimientos, lo que sucede cuando hay ataques, etc
 */
+
 #include <game\model\stratego_engine\BasicToken.h>
 #include <game\controller\finalMenu\finalMenu.h>
 #include <game\model\stratego_engine\Player.h>
 #include <framework\controller\controller.h>
 #include <framework\sysgame\sysgame.h>
-
 
 class gameArea : Controller{
 	private:

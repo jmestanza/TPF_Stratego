@@ -15,11 +15,6 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 	img_b = _img_b;
 
 	status = IDLE;
-	//screen_center = _screen_center;
-	size.first = _pieceSize.first;
-	size.second = _pieceSize.second;
-	fakesize.first = size.first + 2; // El +2 es para que se distingan los rectángulos
-	fakesize.second = size.second + 2;
 
 	mode = _mode;
 	this->size = pair<float,float>(_pieceSize.first * 10,_pieceSize.second * 10);
@@ -36,31 +31,11 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 	onActionMoveFunction = nullptr;
 }
 
-pair<int,char> Table::WhoIsInRange(pair<float,float> _mousepos) {
-	// este tiene que ser con el size ficticio
-	//first = X second =Y
-	int hor = int(_mousepos.first / fakesize.first);
-	char vert = 'A' + int(_mousepos.second / fakesize.second);
-
-	if (ind_table.find(pair<int,char>(hor,vert)) != ind_table.end()) {
-		return pair<int,char>(hor,vert);
-	} else {
-		return pair<int,char>(INT_OUT_OF_RANGE,CHAR_OUT_OF_RANGE); // no esta en el mapa
-	}
-
-}
 void Table::setPlayersName(string _upPlayer,string _downPlayer) {
 	upPlayer = _upPlayer;
 	downPlayer = _downPlayer;
 }
-bool Table::isValidPos(pair<int,int> pos) {
-	if( ( 0 <= pos.first ) && ( pos.first <=9 ) ){
-		if( ( 0 <= pos.second ) && ( pos.second <= 9) ){
-			return true;
-		}
-	}
-	return false;
-}
+
 void Table::setStatus(string _status) {
 	gameStatus = _status;
 }
@@ -99,24 +74,9 @@ void Table::startDrawing() {
 
 	view->show("table","table",this->pos.first,this->pos.second);
 
-	/*for (int i = 0; i < TABLE_SLOTS; i++) {
-	for (int j = 0; j < TABLE_SLOTS; j++) {
-	pair<float,float> aux_pos = pair<float,float>(i * fakesize.first,j * fakesize.second);
-	string aux_name = "button" + to_string(i) + char('A' + j);
-	t_table.push_back(TableButton(img_a,aux_pos,size,mySysgame,aux_name));
-	ind_table[pair<int,char>(i,'A' + j)] = t_table.size() - 1;*/
-
-
-	//view->show(img_a,aux_name,aux_pos.first,aux_pos.second);
-	/*	}
-	}*/
-
-	/*putToken("1B",pair<int,int>(4,4));
-	putToken("2B",pair<int,int>(4,5));
-	putToken("3B",pair<int,int>(4,6));*/
 }
 void Table::fillOpponentField(string color) {
-	for (int i = 0;i <= 3;i++) {
+	for (int i = 0;i < 4;i++) {
 		for (int j = 0;j < TABLE_SLOTS;j++) {
 			putToken("0"+color,pair<int,int>(i,j));
 		}
@@ -136,7 +96,9 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		int rx,ry;
 		rx = mx - this->pos.first;
 		ry = my - this->pos.second;
-		if (insideMe(rx,ry)) {
+		cout << "insideGameboard: " << (insideGameboard(rx,ry)) << endl;
+		// El problema era insideME
+		if (insideGameboard(rx,ry)) {
 
 			rx /= this->pieceSize.first;
 			ry /= this->pieceSize.second;
@@ -154,11 +116,12 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		int rx,ry;
 		rx = mx - this->pos.first;
 		ry = my - this->pos.second;
-		if (insideMe(rx,ry)) {
+		//	
+		if (insideGameboard(rx,ry)) {
 				
 			rx /= this->pieceSize.first;
 			ry /= this->pieceSize.second;
-			if (isValidPos(pair<int,int>(ry,rx))){
+			if (mySysgame->isValidPos(pair<int,int>(ry,rx))){
 				if (onMouseReleasedFunction != nullptr) {
 					this->onMouseReleasedFunction(mySysgame,this,pair<int,int>(ry,rx));
 				}
@@ -167,16 +130,16 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					isSelected = 1;
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
 				} else {
-					cout << "action " << "(" << selectedPosition.first << "," << selectedPosition.second << ") -> (" << ry << "," << rx << ")\n";
+				//	cout << "action " << "(" << selectedPosition.first << "," << selectedPosition.second << ") -> (" << ry << "," << rx << ")\n";
 					if (onActionMoveFunction != nullptr) {
 						onActionMoveFunction(mySysgame,this,selectedPosition,pair<int,int>(ry,rx));
 					}
 					isSelected = 0;
 				}
-			
+			}else{
+				cout << " NOT VALID POS " << endl;
 			}
 		}
-
 	} else if (ev->type == ALLEGRO_EVENT_MOUSE_AXES) {
 		mx = ev->mouse.x;
 		my = ev->mouse.y;
@@ -185,30 +148,9 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 	float pos_x = ev->mouse.x;
 	float pos_y = ev->mouse.y;
 
-
-	if (status == BUTTON_UP) {
-
-	} else if (status == BUTTON_DOWN) {
-		pair<int,char> TheChosenOne = WhoIsInRange(pair<float,float>(pos_x,pos_y));
-		string aux_Chosen = "button" + to_string(TheChosenOne.first) + TheChosenOne.second;
-
-		try {
-			if (TheChosenOne != pair<int,char>(INT_OUT_OF_RANGE,CHAR_OUT_OF_RANGE)) {
-
-			}
-			//view->changeShowImg(aux_Chosen, img_b);
-		} catch (exception &e) {
-			cout << e.what() << endl;
-		}
-
-		try {
-			//view->playonce("sonic");
-		} catch (exception &e) {
-			cout << e.what() << endl;
-		}
-	}
 }
 string Table::getPiece(pair<int,int> pos) {
+	// FALTA VALIDAR QUE TE PASEN UNA POS 
 	return shownTokens[pos.first][pos.second];
 }
 void Table::freePosition(pair<int,int> pos) {
@@ -232,6 +174,9 @@ void Table::putToken(string code,pair<int,int> position) {
 
 	view->show("token_" + code + "_r",getPosCode(position),realPosition.second,realPosition.first);
 
+}
+bool Table::insideGameboard(int x,int y) {
+	return ((x >= (pos.first - 20)) && (x <= (pos.first + size.first - 22)) && (y >= (pos.second - 50)) && (y <= (pos.second + size.second - 40)));
 }
 string Table::getPosCode(pair<int,int> position) {
 	return "piece_" + to_string(position.second) + "_" + to_string(position.first);

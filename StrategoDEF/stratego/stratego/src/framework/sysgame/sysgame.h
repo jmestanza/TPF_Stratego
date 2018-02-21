@@ -78,6 +78,7 @@ class Sysgame {
 		void setNewController(Controller *newController);
 		void loadConfigurationData(string xmlFile);
 		void Quit();
+		bool isValidPos(pair<int,int> pos);
 
 		UI *getUI();
 	

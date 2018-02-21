@@ -15,8 +15,6 @@
 #include <iostream>
 
 #define TABLE_SLOTS 10
-#define INT_OUT_OF_RANGE 10000
-#define CHAR_OUT_OF_RANGE 'Z'
 
 enum { IDLE,BUTTON_DOWN,BUTTON_UP };
 
@@ -35,7 +33,6 @@ class TokenContainer;
 
 class Table : public Widget {
 	public:
-		//Table(Viewer* _view, pair <float,float> screen_center, pair<float, float>_pieceSize);
 		Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,float>_pieceSize,int mode);
 		int mode;
 		int status;
@@ -49,12 +46,10 @@ class Table : public Widget {
 		string selectedPiece;
 
 		string gameStatus;
-		pair<float,float> fakesize;
 		pair<float,float> screen_center;
 		vector<TableButton> t_table;
 		map<pair<int,char>,int> ind_table;
 		pair <int,int> pieceSize;
-		pair<int,char> WhoIsInRange(pair<float,float> _mousepos);
 		pair<int,int> selectedPosition;
 		int isSelected;
 		
@@ -67,11 +62,13 @@ class Table : public Widget {
 		void startDrawing();
 		void stopDrawing();
 		void setPlayersName(string upPlayer,string downPlayer);
-		bool isValidPos(pair<int,int> pos) ;
+		
 
 		void takeOutToken(pair<int,int> position); // sacar ficha del tablero
 		void putToken(string code,pair<int,int> position); //agregar ficha
 		
+		bool insideGameboard(int x,int y);
+
 		void moveToken(pair<int,int> posA,pair<int,int> posB); // mover ficha 
 		string getPosCode(pair<int,int> pos);
 		void informSelected(string piece);

@@ -141,7 +141,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					string SelectedPosStr = "src:"+(to_string(selectedPosition.first)+ to_string(selectedPosition.second));
 					if(src_n_dst_ready<2){
 						SelectedPosText = new screenText(mySysgame,"selected_text");
-						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(900,screenSize.second / 2 + 50),1);
+						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(800,screenSize.second / 2 + 50),1);
 						mySysgame->getController()->addWidget((Widget*)SelectedPosText);
 						src_n_dst_ready++;
 					}
@@ -150,7 +150,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					if(src_n_dst_ready < 2){
 						string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
 						OnActionText = new screenText(mySysgame,"onaction_text");
-						OnActionText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(900,screenSize.second / 2 + 100),1);
+						OnActionText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(1000,screenSize.second / 2 + 50),1);
 						mySysgame->getController()->addWidget((Widget*)OnActionText);
 						src_n_dst_ready++;
 					}

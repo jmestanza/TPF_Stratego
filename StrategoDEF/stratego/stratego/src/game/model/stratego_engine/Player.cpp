@@ -9,10 +9,10 @@ void printTable(tablero_t& tablero) {
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		for (int j = 0; j < BOARD_SIZE; j++) {
 			if (tablero[i][j] == nullptr) {
-				cout << "N";
+				cout << "N" << " ";
 			}
 			else {
-				cout << tablero[i][j]->get_range();
+				cout << tablero[i][j]->get_range() << " ";
 				//cout << tablero[i][j]->get_player();
 			}
 		}	cout << endl;
@@ -183,13 +183,31 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 		return GAME_WON;
 		break;
 	}
-	if (!tokenAttacks && (attack_token_range != MARSHAL && token->get_range() != SPY)){
-		if (res == WON) {
-			res = LOSE;
-		} else if (res == LOSE) {
-			res = WON;
-		}
+
+
+	if (!tokenAttacks){
+			if (res == WON) {
+				res = LOSE;
+			} else if (res == LOSE) {
+				res = WON;
+			}
+			// los dos siguientes bloques son para border cases de marshal y spy
+			if (attack_token_range == SPY && token->get_range() == MARSHAL) {
+				if (res == WON) {
+					res = LOSE;
+				} else if (res == LOSE) {
+					res = WON;
+				}
+			}
+			if (attack_token_range == MARSHAL && token->get_range() == SPY) {
+				if (res == WON) {
+					res = LOSE;
+				} else if (res == LOSE) {
+					res = WON;
+				}
+			}
 	}
+
 	if (res == WON) {
 		local_board.move_token(src_pos,dst_pos);
 	} else if (res == NOBODY_WON) {
@@ -197,8 +215,14 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 		local_board.clear_tile(src_pos);
 		local_board.clear_tile(dst_pos);
 	} else if (res == LOSE) {
-		tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
-		local_board.clear_tile(src_pos);
+			tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
+			//if (attack_token_range == SPY && token->get_range() == MARSHAL) {
+			//	tokens_lost.push_back(attack_token_range);
+			//}
+			//if (attack_token_range == MARSHAL && token->get_range() == SPY) {
+
+			//}
+			local_board.clear_tile(src_pos);
 	}
 
 	if (game_state == LOCAL_MOVE) { /// Alternar turnos
@@ -207,6 +231,7 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 	if (game_state == ENEMY_MOVE) {
 		game_state = LOCAL_MOVE;
 	}
+	cout << "THE RESULT OF THE ATTACK IS " << res;
 	return res;
 }
 

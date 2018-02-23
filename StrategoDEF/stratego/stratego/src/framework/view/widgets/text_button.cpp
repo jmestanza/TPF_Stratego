@@ -74,9 +74,9 @@ void TextButton::generate(string msg, imgGroup img , pair<float,float> pos,int c
 	
 	//cout << n1 << ' ' << n2 << ' ' << n3 << '\n';
 
-	string a_code = "text_button_" + to_string(n1);
-	string b_code = "text_button_" + to_string(n2);
-	string c_code = "text_button_" + to_string(n3);
+    a_code = "text_button_" + to_string(n1);
+	b_code = "text_button_" + to_string(n2);
+	c_code = "text_button_" + to_string(n3);
 	
 
 	getViewer()->loadFromBitmap(a,a_code);
@@ -89,5 +89,7 @@ void TextButton::generate(string msg, imgGroup img , pair<float,float> pos,int c
 
 
 TextButton::~TextButton() {
-	
+	//getViewer()->eraseLoaded(a_code);
+	//getViewer()->eraseLoaded(b_code);
+	//getViewer()->eraseLoaded(c_code);
 }

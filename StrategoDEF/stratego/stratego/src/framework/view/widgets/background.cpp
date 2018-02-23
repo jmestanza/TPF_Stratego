@@ -7,12 +7,13 @@ Background::Background(Sysgame *sysgame,string name) : Widget(sysgame,name){
 	myImg = "background_" + code;
 }
 void Background::configure(string _color,pair<float,float> pos,pair<float,float> size,bool _centered) {
+	cout << "Configure " << '\n';
 	color = view->getColor(_color);
 	//cout << color.r << ' ' << color.g << ' ' << color.b << '\n';
 	ALLEGRO_BITMAP* surface = al_create_bitmap(size.first,size.second);
 	al_set_target_bitmap(surface);
 	al_draw_filled_rectangle(0,0,size.first,size.second,color);
-	view->loadFromBitmap(surface,"background_"+code);
+	view->loadFromBitmap(surface,myImg);
 	al_set_target_bitmap(al_get_backbuffer(view->getScreen()));
 
 	centered = _centered;
@@ -50,5 +51,4 @@ void Background::stopDrawing() {
 	mySysgame->getAllegroHandler()->stopShow(myImg);
 }
 Background::~Background() {
-	
 }

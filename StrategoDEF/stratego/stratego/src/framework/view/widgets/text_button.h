@@ -19,6 +19,7 @@ class imgGroup {
 class TextButton : public NaiveButton {
 	private:
 		int n1,n2,n3;
+		string a_code, b_code, c_code;
 	public:
 		TextButton(Sysgame* sys, string name); 
 		void generate(string msg,imgGroup img,pair<float,float> pos,int centered); /// el mensaje y la imagen de fondo son los paramentros necesarios

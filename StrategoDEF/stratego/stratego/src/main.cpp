@@ -15,9 +15,9 @@ using namespace std;
 int main() {
 
 	//cout << "hello world \n";
-
+	Sysgame sys;
 	try {
-		Sysgame sys;
+		
 		sys.setNewController((Controller*)(new MenuTest((Sysgame*)&sys)));
 
 		while (!sys.quit()) sys.update();

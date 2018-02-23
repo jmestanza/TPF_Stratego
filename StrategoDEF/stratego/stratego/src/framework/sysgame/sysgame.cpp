@@ -162,7 +162,7 @@ UI *Sysgame::getUI() {
 	return ui;
 }
 Sysgame::~Sysgame() {
-	//cout << "finish \n";
+
 	delete controller;
 	delete ui;
 	delete view;

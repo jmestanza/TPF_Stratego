@@ -22,12 +22,6 @@ void MenuTest::onCreate(){
 		"background1",
 		pair<float, float>(width/2,height/2),
 		1);
-	Background* background2 = new Background(mySysgame,"background2");
-	background2->configure(
-		"light_blue",
-		pair<float,float>(0,0),
-		pair<float,float>(width,height),
-		0);
 
 	//Table * tablero = new Table(mySysgame,"table", "test_blue","test_red",pair<float, float>(200.0, 200.0), pair<float, float>(56, 76));
 	
@@ -48,7 +42,6 @@ void MenuTest::onCreate(){
 		sys->setNewController((Controller*)new AboutWindow(sys));
 	});
 
-	mySysgame->getUI()->AddWidget((Widget*) background2);
 	mySysgame->getUI()->AddWidget( (Widget*) background );
 	mySysgame->getUI()->AddWidget( (Widget*) myButton);
 	mySysgame->getUI()->AddWidget( (Widget*) myButton2 );

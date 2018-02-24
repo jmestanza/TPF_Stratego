@@ -83,6 +83,7 @@ class Sysgame {
 		UI *getUI();
 	
 		bool quit();
+		bool reset;
 
 		map<string,string> &getConfigurationData();
 

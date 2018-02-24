@@ -109,6 +109,7 @@ void NaiveButton::addIcon(string img) {
 void NaiveButton::onClick(void(*func)(Sysgame *)) {
 	onClickFunction = func;
 }
+
 void NaiveButton::stopDrawing() {
 	view->stopShow(myViewName);
 }

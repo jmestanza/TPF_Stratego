@@ -683,43 +683,77 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		addWaitingMsg("Es tu turno");
 
 	}else if(this->status == "waiting_for_play_again" &&  package == "play_again"){
-	// reiniciamos el juego
-		cout << "PERDISTE, QUERES JUGAR DE NUEVO CONTRA EL OTRO?" << endl;
-		char c = getchar();
-		if(c == '\n'){
-			c = getchar();
-		}
-		cout << "RESPUESTA:" << c << endl;
-		if(c == 'Y'){ // mando r u ready
+
+		removeWaitingMsg();
+
+		TextButton* lose_txt = new TextButton(mySysgame,"lose_txt");
+		lose_txt->generate(
+			"LOSE,JUGAR DE NUEVO?",g_blue(),
+			pair<float,float>(800,300),1
+		);
+
+		lose_txt->onClick([](Sysgame *sys) {
 			map<string,string> sendreset;
-			mySysgame->getNetwork()->sendPackage("r_u_ready",sendreset);
-			mySysgame->setNewController(new gameArea(mySysgame,name,opponentName,localStart,mode));
-		}else if(c=='N'){ // no quiero jugar de nuevo -> game over
+			sys->getNetwork()->sendPackage("r_u_ready",sendreset);
+			sys->setNewController(new gameArea(sys,((gameArea*)(sys->getController()))->name,((gameArea*)(sys->getController()))->opponentName,((gameArea*)(sys->getController()))->localStart,((gameArea*)(sys->getController()))->mode));
+
+			
+		});
+			
+		TextButton* lose_game_over_txt = new TextButton(mySysgame,"lose_game_over_txt");
+		lose_game_over_txt->generate(
+			"FINALIZAR",g_blue(),
+			pair<float,float>(800,400),1
+		);
+
+		lose_game_over_txt->onClick([](Sysgame *sys) {
 			map<string,string> sendgameover;
-			mySysgame->getNetwork()->sendPackage("game_over",sendgameover);
-			mySysgame->setNewController(new MenuTest(mySysgame));
-		}
+			sys->getNetwork()->sendPackage("game_over",sendgameover);
+			sys->setNewController(new MenuTest(sys));
+		});
+
+		addWidget(lose_txt);
+		addWidget(lose_game_over_txt);
+
+	
 		
 	}else if(this->status == "waiting_for_play_again" && package == "game_over"){
 		// hacemos lo que hace el boton volver
 		mySysgame->getNetwork()->closeConnection();
 		mySysgame->setNewController(new MenuTest(mySysgame));
 	}else if(this->status == "waiting_for_you_won" && package == "you_won"){
-		cout << "GANASTE, QUERES JUGAR DE NUEVO CONTRA EL OTRO?" << endl;
-		char c = getchar();
-		if (c == '\n') {
-			c = getchar();
-		}
-		cout << "RESPUESTA:" << c << endl;
-		if (c == 'Y') { // mando r u ready
+	
+		removeWaitingMsg();
+
+		TextButton* win_txt = new TextButton(mySysgame,"win_txt");
+		win_txt->generate(
+			"WIN,JUGAR DE NUEVO?",g_blue(),
+			pair<float,float>(800,300),1
+		);
+
+		win_txt->onClick([](Sysgame *sys) {
 			map<string,string> datareset;
-			mySysgame->getNetwork()->sendPackage("play_again",datareset);
-			this->status= "waiting_for_play_again";
-		} else if (c == 'N') { // no quiero jugar de nuevo -> game over
+			sys->getNetwork()->sendPackage("play_again",datareset);
+			((gameArea*)(sys->getController()))->status = "waiting_for_play_again";
+
+		});
+
+		TextButton* game_over_txt = new TextButton(mySysgame,"game_over_txt");
+		game_over_txt->generate(
+			"FINALIZAR",g_blue(),
+			pair<float,float>(800,400),1
+		);
+
+		game_over_txt->onClick([](Sysgame *sys) {
 			map<string,string> data_gameover;
-			mySysgame->getNetwork()->sendPackage("game_over",data_gameover);
-			mySysgame->setNewController(new MenuTest(mySysgame));
-		}
+			sys->getNetwork()->sendPackage("game_over",data_gameover);
+			sys->setNewController(new MenuTest(sys));
+		});
+
+		addWidget(win_txt);
+		addWidget(game_over_txt);
+
+
 	}else if (this->status == "waiting_for_play_again" &&  package == "r_u_ready") {
 		this->status = "select_token"; 
 		mySysgame->setNewController(new gameArea(mySysgame,name,opponentName,localStart,mode));

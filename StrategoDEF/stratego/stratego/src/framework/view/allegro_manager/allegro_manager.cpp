@@ -216,7 +216,7 @@ void Viewer::load(string dir, string name) {
 }
 void Viewer::loadFromBitmap(ALLEGRO_BITMAP *b,string name) {
 
-	if (_debug) cout << "[AllegroHandler] loading " << name << "\n";
+	//if (_debug) cout << "[AllegroHandler] loading " << name << "\n";
 	if (loaded.find(name) != loaded.end()) {
 		throw AllegroHandlerException("tring to load image with repeated name! , '"+name+"'");
 	}
@@ -310,7 +310,7 @@ void Viewer::eraseLoaded(string loadedName) {
 	if (loaded.find(loadedName) == loaded.end()) {
 		return; // esta situacion puede suceder y es normal. A veces el recolector de basura elimina el objeto antes de tiempo
 	}
-	if (_debug) cout << "[AllegroHandler] erasing " << loadedName << "\n";
+	//if (_debug) cout << "[AllegroHandler] erasing " << loadedName << "\n";
 	al_destroy_bitmap( loaded[loadedName] );
 	loaded.erase(loadedName);
 }

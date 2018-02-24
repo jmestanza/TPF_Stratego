@@ -55,6 +55,7 @@ NetContInt::~NetContInt() {
 
 }
 Sysgame::Sysgame() : network(&service) {
+	reset = 0;
 	nextController = nullptr;
 	getKeyInit();
 	network.setSysgamePointer(this);

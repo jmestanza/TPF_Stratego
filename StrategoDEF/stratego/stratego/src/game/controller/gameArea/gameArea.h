@@ -71,7 +71,7 @@ class gameArea : Controller{
 		void setStatus(string status); // configurar el estado de la maquina de estado
 		void addWaitingMsg(string msg); // agregar mensaje de espera
 		void removeWaitingMsg(); // sacarlo
-
+		void endGame();
 		void loadEngineContent(vector <vector <string>> &content); // cargarle al motor del juego las fichas
 		// que estan colocadas en el tablero
 		Player *getGameEngine();

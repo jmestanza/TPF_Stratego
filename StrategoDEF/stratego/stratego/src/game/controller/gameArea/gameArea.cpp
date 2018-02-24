@@ -624,6 +624,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			((TokenContainer*)getWidget("token_container"))->incContent(my_piece + color);
 		}else if(res == GAME_WON){
 		// Yo gano
+			((Table*)getWidget("table"))->onActionMove(nullptr);  // evitamos que el usuario vuelva a presionar el tablero
 			this->status = "waiting_for_you_won";
 		}
 
@@ -676,6 +677,9 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			this->status = "waiting_for_play_again"; // si perdimos mandamos el paquete you_won
 			//mientras tanto esperamos a que el otro decida si quiere jugar de nuevo
 			//mostramos un menu
+
+			((Table*)getWidget("table"))->onActionMove(nullptr); // evitamos que el usuario vuelva a presionar el tablero
+
 		}
 
 		removeWaitingMsg();
@@ -689,21 +693,22 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		TextButton* lose_txt = new TextButton(mySysgame,"lose_txt");
 		lose_txt->generate(
 			"LOSE,JUGAR DE NUEVO?",g_blue(),
-			pair<float,float>(800,300),1
+			pair<float,float>(halfPoint,300),1
 		);
 
 		lose_txt->onClick([](Sysgame *sys) {
 			map<string,string> sendreset;
 			sys->getNetwork()->sendPackage("r_u_ready",sendreset);
 			sys->setNewController(new gameArea(sys,((gameArea*)(sys->getController()))->name,((gameArea*)(sys->getController()))->opponentName,((gameArea*)(sys->getController()))->localStart,((gameArea*)(sys->getController()))->mode));
-
+			sys->getUI()->RemoveWidget("win_txt");
+			sys->getUI()->RemoveWidget("game_over_txt");
 			
 		});
 			
 		TextButton* lose_game_over_txt = new TextButton(mySysgame,"lose_game_over_txt");
 		lose_game_over_txt->generate(
 			"FINALIZAR",g_blue(),
-			pair<float,float>(800,400),1
+			pair<float,float>(halfPoint,400),1
 		);
 
 		lose_game_over_txt->onClick([](Sysgame *sys) {
@@ -722,37 +727,8 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		mySysgame->getNetwork()->closeConnection();
 		mySysgame->setNewController(new MenuTest(mySysgame));
 	}else if(this->status == "waiting_for_you_won" && package == "you_won"){
-	
-		removeWaitingMsg();
 
-		TextButton* win_txt = new TextButton(mySysgame,"win_txt");
-		win_txt->generate(
-			"WIN,JUGAR DE NUEVO?",g_blue(),
-			pair<float,float>(800,300),1
-		);
-
-		win_txt->onClick([](Sysgame *sys) {
-			map<string,string> datareset;
-			sys->getNetwork()->sendPackage("play_again",datareset);
-			((gameArea*)(sys->getController()))->status = "waiting_for_play_again";
-
-		});
-
-		TextButton* game_over_txt = new TextButton(mySysgame,"game_over_txt");
-		game_over_txt->generate(
-			"FINALIZAR",g_blue(),
-			pair<float,float>(800,400),1
-		);
-
-		game_over_txt->onClick([](Sysgame *sys) {
-			map<string,string> data_gameover;
-			sys->getNetwork()->sendPackage("game_over",data_gameover);
-			sys->setNewController(new MenuTest(sys));
-		});
-
-		addWidget(win_txt);
-		addWidget(game_over_txt);
-
+		endGame();
 
 	}else if (this->status == "waiting_for_play_again" &&  package == "r_u_ready") {
 		this->status = "select_token"; 
@@ -767,7 +743,41 @@ void gameArea::onNetEvent(NETWORK_EVENT *ev) {
 		mySysgame->setNewController(new connectionLostMenu(mySysgame));
 	}
 }
+void gameArea::endGame() {
+	TextButton* win_txt = new TextButton(mySysgame, "win_txt");
+	win_txt->generate(
+		"WIN,JUGAR DE NUEVO?", g_blue(),
+		pair<float, float>(halfPoint, 300), 1
+	);
 
+	win_txt->onClick([](Sysgame *sys) {
+		map<string, string> datareset;
+		sys->getNetwork()->sendPackage("play_again", datareset);
+		((gameArea*)(sys->getController()))->status = "waiting_for_play_again";
+		((gameArea*)(sys->getController()))->addWaitingMsg("Esperando al oponente");
+		((gameArea*)(sys->getController()))->addAnimation();
+		sys->getUI()->RemoveWidget("win_txt");
+		sys->getUI()->RemoveWidget("game_over_txt");
+	});
+
+	TextButton* game_over_txt = new TextButton(mySysgame, "game_over_txt");
+	game_over_txt->generate(
+		"FINALIZAR", g_blue(),
+		pair<float, float>(halfPoint, 400), 1
+	);
+
+	game_over_txt->onClick([](Sysgame *sys) {
+		map<string, string> data_gameover;
+		sys->getNetwork()->sendPackage("game_over", data_gameover);
+		sys->setNewController(new MenuTest(sys));
+
+	});
+
+	addWidget(win_txt);
+	addWidget(game_over_txt);
+	removeWaitingMsg();
+	removeAnimation();
+}
 
 gameArea::~gameArea() {
 	delete gameEngine;

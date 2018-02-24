@@ -8,10 +8,8 @@
 #include <framework\view\widgets\TokenContainer\TokenContainer.h>
 #include <framework\view\widgets\TokenContainer\MouseFollower.h>
 #include <framework\view\widgets\Animation.h>
-
 #include <game\controller\menu_test\menu_test.h>
 #include <game\controller\connectionLostMenu\connectionLostMenu.h>
-
 using namespace std;
 
 gameArea::gameArea(Sysgame *sys,string _name,string _opponentName,int _localStart,string _mode) : Controller(sys) {
@@ -271,7 +269,7 @@ void gameArea::tokenReady() {
 		pair<int,int> source = myself->convertPosToGeneralType(org_src);
 		pair<int,int> dst = myself->convertPosToGeneralType(org_dst);
 
-		printTable(myself->getGameEngine()->local_board.get_board());
+		//printTable(myself->getGameEngine()->local_board.get_board());
 		
 		if (myself->getStatus() == "waiting_for_move") {
 			Player* engine = myself->getGameEngine();
@@ -308,10 +306,6 @@ void gameArea::tokenReady() {
 				myself->addWaitingMsg("Esperando al rival");
 			} else if(ans == MOVE_NOT_VALID) {
 				cout << "invalid move! \n";
-			} else if(ans == GAME_WON){
-				//sys->setNewController(finalMenu*);
-				cout << "I WON!!" << endl;
-
 			}
 		}
 		//printTable(myself->getGameEngine()->local_board.get_board());
@@ -557,8 +551,8 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			dataAns["token_rank"] = rankToString(gameEngine->local_board.get_tile(dst)->get_range());
 			mySysgame->getNetwork()->sendPackage("attack",dataAns);
 			this->status = "waiting_for_attack_then_play";
-		} else if (ans == GAME_WON){
-			cout << "I LOSE" << endl;
+		} else if (ans != MOVE_VALID){
+			cout << "NOT VALID MOVE" << endl;
 		} else {
 			Table *tbl = (Table*)getWidget("table");
 			tbl->moveToken(
@@ -628,9 +622,10 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		} else if (res == NOBODY_WON) {
 			((TokenContainer*)getWidget("token_container_enemy"))->incContent(piece + op_color);
 			((TokenContainer*)getWidget("token_container"))->incContent(my_piece + color);
+		}else if(res == GAME_WON){
+		// Yo gano
+			this->status = "waiting_for_you_won";
 		}
-
-		
 
 		//if (gameEngine->get_game_state() == )
 	} else if (this->status == "waiting_for_attack_then_play" && package == "attack") {
@@ -655,7 +650,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 
 		string color = localStart ? "R" : "B";
 		string op_color = color == "R" ? "B" : "R";
-
+		// lo siguiente procesa lo que el oponente hizo en el turno pasado
 		if (res == LOSE) {
 			tbl->putToken(
 				rankToString(
@@ -674,14 +669,63 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		} else if (res == NOBODY_WON) {
 			((TokenContainer*)getWidget("token_container_enemy"))->incContent(piece + op_color);
 			((TokenContainer*)getWidget("token_container"))->incContent(my_piece + color);
+		} else if(res== GAME_WON){
+			map<string,string> datawon;
+			mySysgame->getNetwork()->sendPackage("you_won",datawon);
+			cout << "Envio paquete you_won " << endl;
+			this->status = "waiting_for_play_again"; // si perdimos mandamos el paquete you_won
+			//mientras tanto esperamos a que el otro decida si quiere jugar de nuevo
+			//mostramos un menu
 		}
 
 		removeWaitingMsg();
 		removeAnimation();
 		addWaitingMsg("Es tu turno");
 
-	} else {
+	}else if(this->status == "waiting_for_play_again" &&  package == "play_again"){
+	// reiniciamos el juego
+		cout << "PERDISTE, QUERES JUGAR DE NUEVO CONTRA EL OTRO?" << endl;
+		char c = getchar();
+		if(c == '\n'){
+			c = getchar();
+		}
+		cout << "RESPUESTA:" << c << endl;
+		if(c == 'Y'){ // mando r u ready
+			map<string,string> sendreset;
+			mySysgame->getNetwork()->sendPackage("r_u_ready",sendreset);
+			mySysgame->setNewController(new gameArea(mySysgame,name,opponentName,localStart,mode));
+		}else if(c=='N'){ // no quiero jugar de nuevo -> game over
+			map<string,string> sendgameover;
+			mySysgame->getNetwork()->sendPackage("game_over",sendgameover);
+			mySysgame->setNewController(new MenuTest(mySysgame));
+		}
+		
+	}else if(this->status == "waiting_for_play_again" && package == "game_over"){
+		// hacemos lo que hace el boton volver
+		mySysgame->getNetwork()->closeConnection();
+		mySysgame->setNewController(new MenuTest(mySysgame));
+	}else if(this->status == "waiting_for_you_won" && package == "you_won"){
+		cout << "GANASTE, QUERES JUGAR DE NUEVO CONTRA EL OTRO?" << endl;
+		char c = getchar();
+		if (c == '\n') {
+			c = getchar();
+		}
+		cout << "RESPUESTA:" << c << endl;
+		if (c == 'Y') { // mando r u ready
+			map<string,string> datareset;
+			mySysgame->getNetwork()->sendPackage("play_again",datareset);
+			this->status= "waiting_for_play_again";
+		} else if (c == 'N') { // no quiero jugar de nuevo -> game over
+			map<string,string> data_gameover;
+			mySysgame->getNetwork()->sendPackage("game_over",data_gameover);
+			mySysgame->setNewController(new MenuTest(mySysgame));
+		}
+	}else if (this->status == "waiting_for_play_again" &&  package == "r_u_ready") {
+		this->status = "select_token"; 
+		mySysgame->setNewController(new gameArea(mySysgame,name,opponentName,localStart,mode));
+	}else {
 		cout << "unexpected package! \n";
+		// no cambie el status asi que si no funciona quiza es por eso o por el r u ready
 	}
 } // handle NETWORK actions
 void gameArea::onNetEvent(NETWORK_EVENT *ev) {
@@ -689,6 +733,7 @@ void gameArea::onNetEvent(NETWORK_EVENT *ev) {
 		mySysgame->setNewController(new connectionLostMenu(mySysgame));
 	}
 }
+
 
 gameArea::~gameArea() {
 	delete gameEngine;

@@ -11,7 +11,7 @@ Este controller (ConnectMenu) administra la interfaz grafica, el modelo (network
 #include <framework\view\widgets\screen_text.h>
 #include <framework\sysgame\sysgame.h>
 
-class ConnectMenu : Controller{
+class ConnectMenu : public Controller{
 	private:
 		int _startedToConnect;
 		TextButton *connectButton;

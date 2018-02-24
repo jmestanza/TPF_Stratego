@@ -21,7 +21,8 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 	
 	this->pieceSize = _pieceSize;
 
-	src_n_dst_ready = 0;
+	src_txt_ready = 0;
+	dst_txt_ready = 0;
 
 	myCode = "table_" + to_string(randomNumber());
 
@@ -127,10 +128,11 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				}
 
 				//verificar que se pueden borrar
-				if(src_n_dst_ready == 2){
+				if(src_txt_ready && dst_txt_ready){
 					mySysgame->getController()->eraseWidget("selected_text");
 					mySysgame->getController()->eraseWidget("onaction_text");
-					src_n_dst_ready = 0;
+					src_txt_ready = 0;
+					dst_txt_ready = 0;
 				}
 				
 				if (!isSelected) {
@@ -139,20 +141,20 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
 
 					string SelectedPosStr = "src:"+(to_string(selectedPosition.first)+ to_string(selectedPosition.second));
-					if(src_n_dst_ready<2){
+					if(!src_txt_ready){
 						SelectedPosText = new screenText(mySysgame,"selected_text");
 						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(800,screenSize.second / 2 + 50),1);
 						mySysgame->getController()->addWidget((Widget*)SelectedPosText);
-						src_n_dst_ready++;
+						src_txt_ready=1;
 					}
 					
 				} else {
-					if(src_n_dst_ready < 2){
+					if(!dst_txt_ready){
 						string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
 						OnActionText = new screenText(mySysgame,"onaction_text");
 						OnActionText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(1000,screenSize.second / 2 + 50),1);
 						mySysgame->getController()->addWidget((Widget*)OnActionText);
-						src_n_dst_ready++;
+						dst_txt_ready=1;
 					}
 					
 					cout << "action " << "(" << selectedPosition.first << "," << selectedPosition.second << ") -> (" << ry << "," << rx << ")\n";

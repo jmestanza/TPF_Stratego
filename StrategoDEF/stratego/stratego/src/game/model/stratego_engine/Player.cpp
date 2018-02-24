@@ -180,8 +180,7 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 		res = ((BombToken*)token)->attack(attack_token_range);
 		break;
 	case FLAG:
-		return GAME_WON;
-		break;
+		res = GAME_WON;
 	}
 
 
@@ -216,12 +215,6 @@ int Player::process_attack(PosType src_pos, PosType dst_pos, RangeType attack_to
 		local_board.clear_tile(dst_pos);
 	} else if (res == LOSE) {
 			tokens_lost.push_back(token->get_range()); /// Añade a fichas perdidas
-			//if (attack_token_range == SPY && token->get_range() == MARSHAL) {
-			//	tokens_lost.push_back(attack_token_range);
-			//}
-			//if (attack_token_range == MARSHAL && token->get_range() == SPY) {
-
-			//}
 			local_board.clear_tile(src_pos);
 	}
 

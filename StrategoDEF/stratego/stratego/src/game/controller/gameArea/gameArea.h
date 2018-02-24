@@ -14,6 +14,7 @@ la validez de los movimientos, lo que sucede cuando hay ataques, etc
 #include <game\model\stratego_engine\Player.h>
 #include <framework\controller\controller.h>
 #include <framework\sysgame\sysgame.h>
+#include <game\controller\connectMenu\connect_menu.h>
 
 class gameArea : Controller{
 	private:

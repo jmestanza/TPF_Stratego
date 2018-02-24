@@ -37,7 +37,8 @@ class Table : public Widget {
 		Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,float>_pieceSize,int mode);
 		int mode;
 		int status;
-		int src_n_dst_ready;
+		bool src_txt_ready;
+		bool dst_txt_ready;
 		int mx,my;
 		string upPlayer,downPlayer;
 

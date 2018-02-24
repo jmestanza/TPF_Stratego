@@ -92,9 +92,6 @@
     <Filter Include="src\framework\view\widgets\checkbox">
       <UniqueIdentifier>{3e6ffd49-a148-4892-a3c1-03ff3771c922}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\controller\finalMenu">
-      <UniqueIdentifier>{bc0d1fca-0f9f-4283-ac78-f2cd326efe3b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -259,9 +256,6 @@
     <ClCompile Include="src\framework\view\widgets\checkbox\checkbox.cpp">
       <Filter>src\framework\view\widgets\checkbox</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\controller\finalMenu\finalMenu.cpp">
-      <Filter>src\game\controller\finalMenu</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -422,9 +416,6 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\checkbox\checkbox.h">
       <Filter>src\framework\view\widgets\checkbox</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\controller\finalMenu\finalMenu.h">
-      <Filter>src\game\controller\finalMenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

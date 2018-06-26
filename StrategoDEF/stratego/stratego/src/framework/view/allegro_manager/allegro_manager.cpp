@@ -20,7 +20,6 @@ AllegroHandlerException::AllegroHandlerException(string _err) : err("AllegroHand
 
 }
 const char * AllegroHandlerException::what() const throw() {
-	//string ans =  + err;
 	return err.c_str();
 }
 
@@ -53,10 +52,7 @@ void Viewer::setScreenSize(pair<float,float> _size) {
 	screenSize = _size;
 }
 void Viewer::start(){
-	// enable anti alias
-	//al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
-	//al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
-
+	
 	allegro_init();
 	
 	q = al_create_event_queue();
@@ -216,13 +212,10 @@ void Viewer::load(string dir, string name) {
 }
 void Viewer::loadFromBitmap(ALLEGRO_BITMAP *b,string name) {
 
-	//if (_debug) cout << "[AllegroHandler] loading " << name << "\n";
 	if (loaded.find(name) != loaded.end()) {
 		throw AllegroHandlerException("tring to load image with repeated name! , '"+name+"'");
 	}
-	/*if (loaded.find(name) != loaded.end()) {
-		al_destroy_bitmap(loaded[name]);
-	}*/
+
 	loaded[name] = b;
 }
 void Viewer::loadFont(string dir, string name,int size) {
@@ -279,8 +272,6 @@ void Viewer::loadColor(string code,string name) {
 		}
 		color = al_map_rgb(ans[0], ans[1], ans[2]);
 	}
-	/// now add to list
-	//cout << "colors[" << name << "] = " << color.r << ',' << color.g << ',' << color.b << 
 	;
 	colors[name] = color;
 }
@@ -291,9 +282,6 @@ ALLEGRO_COLOR Viewer::getColor(string code) {
 	return colors[code];
 }
 ALLEGRO_FONT* Viewer::getFont(string name) {
-	/*for (auto it = fonts.begin();it != fonts.end();it++) {
-		cout << "font = " << it->first << '\n';
-	}*/
 	if (fonts.find(name) == fonts.end()) {
 		throw AllegroHandlerException("font name '"+name+"' not found'");
 	}

@@ -19,9 +19,6 @@
     <Filter Include="src\framework\controller">
       <UniqueIdentifier>{56b13182-fa92-44e0-9b67-a8d28fec1adc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\controller">
-      <UniqueIdentifier>{860fa988-d58e-4505-8b8f-ebbdb4586d38}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\view">
       <UniqueIdentifier>{eeb0bc56-0a29-41e8-a521-ca3873474f9a}</UniqueIdentifier>
     </Filter>
@@ -50,32 +47,11 @@
     <Filter Include="resource\fonts">
       <UniqueIdentifier>{2bc66cce-762d-465b-a7de-358c7ee49def}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\controller\about">
-      <UniqueIdentifier>{89c1fa7d-9a33-4f41-ba75-93f6cff36d2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\controller\defaultMenu">
-      <UniqueIdentifier>{6b6d900d-ec65-46b3-98b4-63cccc34bda2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\controller\connectMenu">
-      <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\controller\menuTest">
-      <UniqueIdentifier>{eab09361-5716-4a0e-b660-e4a1e8a97c7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\model">
       <UniqueIdentifier>{7fac55b7-e61c-44c8-acb4-7f79e6fa5589}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\framework\model\network">
       <UniqueIdentifier>{095fb05f-eb62-4df1-b1de-15c47340183a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\controller\showTimeTest">
-      <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\controller\connectionLostMenu">
-      <UniqueIdentifier>{e343f5f6-c84e-46f4-84d7-fedd3bd351db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\controller\gameArea">
-      <UniqueIdentifier>{ce09cc5a-5ed3-4a18-9f40-4e9babb59083}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\game\utils">
       <UniqueIdentifier>{726e46ac-9340-4cc4-9237-8f2300040f3f}</UniqueIdentifier>
@@ -91,6 +67,30 @@
     </Filter>
     <Filter Include="src\framework\view\widgets\checkbox">
       <UniqueIdentifier>{3e6ffd49-a148-4892-a3c1-03ff3771c922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller">
+      <UniqueIdentifier>{860fa988-d58e-4505-8b8f-ebbdb4586d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\about">
+      <UniqueIdentifier>{89c1fa7d-9a33-4f41-ba75-93f6cff36d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\defaultMenu">
+      <UniqueIdentifier>{6b6d900d-ec65-46b3-98b4-63cccc34bda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\connectMenu">
+      <UniqueIdentifier>{e1bd3953-c7c0-448f-8ae5-73695e5e3467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\menuTest">
+      <UniqueIdentifier>{eab09361-5716-4a0e-b660-e4a1e8a97c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\showTimeTest">
+      <UniqueIdentifier>{cc58ea48-46c1-4f29-bf31-e406dc199cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\connectionLostMenu">
+      <UniqueIdentifier>{e343f5f6-c84e-46f4-84d7-fedd3bd351db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\model\controller\gameArea">
+      <UniqueIdentifier>{ce09cc5a-5ed3-4a18-9f40-4e9babb59083}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -152,16 +152,16 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\aboutWindow\aboutWindow.cpp">
-      <Filter>src\game\controller\about</Filter>
+      <Filter>src\game\model\controller\about</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\defaultMenu\defaultMenu.cpp">
-      <Filter>src\game\controller\defaultMenu</Filter>
+      <Filter>src\game\model\controller\defaultMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\utils\good_buttons.cpp">
       <Filter>src\framework\view\utils</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\connectMenu\connect_menu.cpp">
-      <Filter>src\game\controller\connectMenu</Filter>
+      <Filter>src\game\model\controller\connectMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\widgets\TextInput.cpp">
       <Filter>src\framework\view\widgets</Filter>
@@ -176,7 +176,7 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\menu_test\menu_test.cpp">
-      <Filter>src\game\controller\menuTest</Filter>
+      <Filter>src\game\model\controller\menuTest</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\utils\getXMLFile.cpp">
       <Filter>src\framework\utils</Filter>
@@ -188,13 +188,13 @@
       <Filter>src\framework\utils</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\showTimeTest\showTimeTest.cpp">
-      <Filter>src\game\controller\showTimeTest</Filter>
+      <Filter>src\game\model\controller\showTimeTest</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\connectionLostMenu\connectionLostMenu.cpp">
-      <Filter>src\game\controller\connectionLostMenu</Filter>
+      <Filter>src\game\model\controller\connectionLostMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\game\controller\gameArea\gameArea.cpp">
-      <Filter>src\game\controller\gameArea</Filter>
+      <Filter>src\game\model\controller\gameArea</Filter>
     </ClCompile>
     <ClCompile Include="src\game\utils\genTokenImages.cpp">
       <Filter>src\game\utils</Filter>
@@ -313,16 +313,16 @@
       <Filter>src\framework\utils</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\aboutWindow\aboutWindow.h">
-      <Filter>src\game\controller\about</Filter>
+      <Filter>src\game\model\controller\about</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\defaultMenu\defaultMenu.h">
-      <Filter>src\game\controller\defaultMenu</Filter>
+      <Filter>src\game\model\controller\defaultMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\utils\good_buttons.h">
       <Filter>src\framework\view\utils</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\connectMenu\connect_menu.h">
-      <Filter>src\game\controller\connectMenu</Filter>
+      <Filter>src\game\model\controller\connectMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\TextInput.h">
       <Filter>src\framework\view\widgets</Filter>
@@ -337,7 +337,7 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\menu_test\menu_test.h">
-      <Filter>src\game\controller\menuTest</Filter>
+      <Filter>src\game\model\controller\menuTest</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\utils\getXMLFile.h">
       <Filter>src\framework\utils</Filter>
@@ -349,13 +349,13 @@
       <Filter>src\framework\utils</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\showTimeTest\showTimeTest.h">
-      <Filter>src\game\controller\showTimeTest</Filter>
+      <Filter>src\game\model\controller\showTimeTest</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\connectionLostMenu\connectionLostMenu.h">
-      <Filter>src\game\controller\connectionLostMenu</Filter>
+      <Filter>src\game\model\controller\connectionLostMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\game\controller\gameArea\gameArea.h">
-      <Filter>src\game\controller\gameArea</Filter>
+      <Filter>src\game\model\controller\gameArea</Filter>
     </ClInclude>
     <ClInclude Include="src\game\utils\genTokenImages.h">
       <Filter>src\game\utils</Filter>

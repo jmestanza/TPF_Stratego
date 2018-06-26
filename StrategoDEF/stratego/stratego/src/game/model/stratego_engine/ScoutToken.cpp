@@ -54,7 +54,6 @@ bool ScoutToken::validate_movement(PosType src_pos,PosType dst_pos, tablero_t& b
 	else {
 		return false; /// Movimiento invalido
 	}
-
 	return true;
 }
 

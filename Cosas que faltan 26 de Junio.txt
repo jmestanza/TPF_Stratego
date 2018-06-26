@@ -1,4 +1,3 @@
--Movimiento Scout (no puede atacar y mover en el mismo tiempo)
 -Corregir Bug de seleccionar fichas
 -Estética:
 *cambiar src y dst como ficha seleccionada etc...

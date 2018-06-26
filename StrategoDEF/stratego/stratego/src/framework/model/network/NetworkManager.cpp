@@ -29,11 +29,8 @@ void NetworkManager::tryConnection(string host, int port, int timeout) {
 		failure = 0;
 		ip::tcp::endpoint myEndPoint(ip::address::from_string(host),port);
 		mySocket->async_connect(myEndPoint,boost::bind(&NetworkManager::handleConnect,this,_1));
-		//mt19937 g1(std::chrono::system_clock::now().time_since_epoch().count());
-		//timer.cancel();
 		timerOn = 1;
-		//timer.expires_from_now(boost::posix_time::millisec(timeout));
-		//timer.async_wait(boost::bind(&NetworkManager::handleTimeout,this));
+		
 	}catch(boost::exception &e) {
 		throw NetworkManagerException("Boost error!");
 		active = 0;
@@ -60,10 +57,6 @@ void NetworkManager::setRecvTimeout(int timeout) {
 	if (flagWaiting) {
 		throw NetworkManagerException("network error: recv timeout already started\n");
 	}
-	//flagWaiting = 1;
-//	timerOn = 1;
-	//timer.expires_from_now(boost::posix_time::millisec(timeout));
-	//timer.async_wait(boost::bind(&NetworkManager::handleRecvTimeout, this, _1));
 }
 void NetworkManager::handleConnect(const boost::system::error_code& error) {
 	cout << "[Network Manager]Call handle connect \n";
@@ -75,10 +68,6 @@ void NetworkManager::handleConnect(const boost::system::error_code& error) {
 		failure = 1;
 		connected = 0;
 		
-		/*mySocket->cancel();
-		mySocket->close();
-		boost::system::error_code error;
-		timerOn = 0; timer.cancel();*/
 		onConnFailed(error.message());
 		
 		return;
@@ -95,13 +84,6 @@ void NetworkManager::handleRecv(const boost::system::error_code& error, size_t b
 		cout << "[Network Manager]lost conenction \n";
 		closeConnection();
 		connected = 0;
-		/*mySocket->cancel();
-		mySocket->close(); 
-		mySocket.reset(new boost::asio::ip::tcp::socket(*ioService));
-		boost::system::error_code error;*/
-		
-		//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
-
 		onLostConnection(error.message()); return; 
 	}
 	flagWaiting = 0;
@@ -116,7 +98,6 @@ void NetworkManager::handleSent(const boost::system::error_code& error, size_t b
 		connected = 0;
 		closeConnection();
 		boost::system::error_code error;
-		//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both,error);
 		onLostConnection(error.message()); return; 
 	}
 	onSent();
@@ -138,7 +119,6 @@ void NetworkManager::handleRecvTimeout(const boost::system::error_code& error) {
 	mySocket->close();
 
 	boost::system::error_code error2;
-	//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both,error2);
 	flagWaiting = 0;
 	connected = 0;
 	onLostConnection("timout waiting for answer");
@@ -149,11 +129,8 @@ void NetworkManager::closeConnection() {
 	if (active) {
 		active = 0;
 		boost::system::error_code error;
-		//mySocket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
 		cout << "cancel async! " << '\n';
-		//mySocket->cancel();
 		mySocket->close();
-		//mySocket.reset(new boost::asio::ip::tcp::socket(*ioService));
 
 		timerOn = 0;
 		flagWaiting = 0;
@@ -161,7 +138,6 @@ void NetworkManager::closeConnection() {
 		if (acceptorOn) {
 			cout << "closing acceptor !";
 			acceptorOn = 0;
-			//myAcceptor.cancel();
 			myAcceptor.close();
 		}
 	}

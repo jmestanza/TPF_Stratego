@@ -136,10 +136,10 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				}
 				
 				if (!isSelected) {
+					mySysgame->getAllegroHandler()->playonce("piece_up");
 					selectedPosition = pair<int,int>(ry,rx);
 					isSelected = 1;
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
-
 					string SelectedPosStr = "src:"+(to_string(selectedPosition.first)+ to_string(selectedPosition.second));
 					if(!src_txt_ready){
 						SelectedPosText = new screenText(mySysgame,"selected_text");
@@ -149,6 +149,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					}
 					
 				} else {
+					mySysgame->getAllegroHandler()->playonce("piece_down");
 					if(!dst_txt_ready){
 						string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
 						OnActionText = new screenText(mySysgame,"onaction_text");

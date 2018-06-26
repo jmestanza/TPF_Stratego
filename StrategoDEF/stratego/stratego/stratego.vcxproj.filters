@@ -38,9 +38,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="src\framework\view\allegro_manager\show_objects">
-      <UniqueIdentifier>{6160d20c-bb6e-47e8-bd4d-3bc79296913c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\framework\view\utils">
       <UniqueIdentifier>{b272ff3b-05a7-4913-af36-462903ffcd6e}</UniqueIdentifier>
     </Filter>
@@ -92,6 +89,9 @@
     <Filter Include="src\game\model\controller\gameArea">
       <UniqueIdentifier>{ce09cc5a-5ed3-4a18-9f40-4e9babb59083}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\framework\view\show_objects">
+      <UniqueIdentifier>{6160d20c-bb6e-47e8-bd4d-3bc79296913c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -125,10 +125,10 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showImage.cpp">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+      <Filter>src\framework\view\show_objects</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\ShowObject.cpp">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+      <Filter>src\framework\view\show_objects</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\widgets\background.cpp">
       <Filter>src\framework\view\widgets</Filter>
@@ -140,7 +140,7 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\allegro_manager\show_objects\showRectangle.cpp">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+      <Filter>src\framework\view\show_objects</Filter>
     </ClCompile>
     <ClCompile Include="src\framework\view\widgets\screen_text.cpp">
       <Filter>src\framework\view\widgets</Filter>
@@ -286,10 +286,10 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showImage.h">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+      <Filter>src\framework\view\show_objects</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\ShowObject.h">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+      <Filter>src\framework\view\show_objects</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\background.h">
       <Filter>src\framework\view\widgets</Filter>
@@ -304,7 +304,7 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\allegro_manager\show_objects\showRectangle.h">
-      <Filter>src\framework\view\allegro_manager\show_objects</Filter>
+      <Filter>src\framework\view\show_objects</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\screen_text.h">
       <Filter>src\framework\view\widgets</Filter>
@@ -436,22 +436,22 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Debug\resource\audios.xml">
+    <Xml Include="resource\audios.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="..\Debug\resource\colors.xml">
+    <Xml Include="resource\colors.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="..\Debug\resource\fonts.xml">
+    <Xml Include="resource\fonts.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="..\Debug\resource\game_config.xml">
+    <Xml Include="resource\game_config.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="..\Debug\resource\images.xml">
+    <Xml Include="resource\images.xml">
       <Filter>resource</Filter>
     </Xml>
-    <Xml Include="..\Debug\resource\protocol.xml">
+    <Xml Include="resource\protocol.xml">
       <Filter>resource</Filter>
     </Xml>
   </ItemGroup>

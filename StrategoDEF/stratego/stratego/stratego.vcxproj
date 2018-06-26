@@ -280,12 +280,12 @@
     <Font Include="resource\fonts\roboto\robotottf\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Debug\resource\audios.xml" />
-    <Xml Include="..\Debug\resource\colors.xml" />
-    <Xml Include="..\Debug\resource\fonts.xml" />
-    <Xml Include="..\Debug\resource\game_config.xml" />
-    <Xml Include="..\Debug\resource\images.xml" />
-    <Xml Include="..\Debug\resource\protocol.xml" />
+    <Xml Include="resource\audios.xml" />
+    <Xml Include="resource\colors.xml" />
+    <Xml Include="resource\fonts.xml" />
+    <Xml Include="resource\game_config.xml" />
+    <Xml Include="resource\images.xml" />
+    <Xml Include="resource\protocol.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

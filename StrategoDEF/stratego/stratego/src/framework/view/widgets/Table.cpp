@@ -110,11 +110,11 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 			loopsound->onClick([](Sysgame *sys) {
 				cout << "se llamo al on click" << endl;
 				if (sys->getAllegroHandler()->get_is_looping()) {
-					//sys->getAllegroHandler()->changeShowImg("sound_on","sound_off");
+					sys->getAllegroHandler()->changeShowImg("trigger_sound","sound_off");
 					sys->getAllegroHandler()->stopsample("one_piece_tvvs");
 					sys->getAllegroHandler()->set_is_looping(false);
 				} else {
-					//sys->getAllegroHandler()->changeShowImg("sound_off","sound_on");
+					sys->getAllegroHandler()->changeShowImg("trigger_sound","sound_on");
 					sys->getAllegroHandler()->playloop("one_piece_tvvs");
 					sys->getAllegroHandler()->set_is_looping(true);
 				}

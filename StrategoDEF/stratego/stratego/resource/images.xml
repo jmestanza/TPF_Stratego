@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <images>
   <image name="background1"      dir="background/6057b6656dca8b2.png"></image>
-
+  <image name="sound_on"      dir="sound/sound_on.png"></image>
+  <image name="sound_off"      dir="sound/sound_off.png"></image>
   <!-- Buttons  -->
   <image name="test_blue"           dir="buttons/table_test/test.jpg"></image>
   <image name="test_red"            dir="buttons/table_test/test2.jpg"></image>

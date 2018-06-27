@@ -36,6 +36,7 @@ void allegro_init(void) {
 	if (!al_init_ttf_addon()) throw AllegroHandlerException("could not start ttf addon");
 }
 Viewer::Viewer() {
+	is_looping=true;
 	_debug = 0;
 	TimerFreq = 40;
 	 // defaults
@@ -358,6 +359,12 @@ void Viewer::playonce(string song) {
 }
 
 
+void Viewer::stopsample(string song) {
+	if ((AudioInstances.find(song) == AudioInstances.end())) throw AllegroHandlerException("Trying to stop something that is not in memory");
+	al_stop_sample_instance(AudioInstances[song]);
+}
+
+
 void Viewer::changeShowImg(string showName, string newImageName) {
 	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 1)");
 	if (frontShow.find(showName) == frontShow.end()) {
@@ -419,4 +426,12 @@ void Viewer::showBitmaps() {
 	for (auto it = frontShow.begin(); it != frontShow.end();it++) {
 		cout << "[" << it->first << ","<< it->second <<"]\n";
 	}
+}
+
+void Viewer::set_is_looping(bool in) {
+	is_looping = in;
+}
+
+bool Viewer::get_is_looping() {
+	return this->is_looping;
 }

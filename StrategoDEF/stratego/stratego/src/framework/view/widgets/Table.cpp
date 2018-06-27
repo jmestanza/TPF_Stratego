@@ -135,6 +135,26 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					dst_txt_ready = 0;
 				}
 				
+				//no olvidar borrar esto de la memoria
+				// Estoy trabajando en esto por favor NO BORRAR 
+				/*
+				music_button *loopsound = new music_button(mySysgame,pair<float,float>(screenSize.first - 500,screenSize.second / 16),"trigger_sound","sound_on");
+				loopsound->startDrawing();
+				mySysgame->getAllegroHandler()->playloop("one_piece_tvvs");
+				mySysgame->getAllegroHandler()->set_is_looping(true);
+
+				loopsound->onClick([](Sysgame *sys) {
+					cout << "se llamo al on click" << endl;
+					if(sys->getAllegroHandler()->get_is_looping()){
+						sys->getAllegroHandler()->changeShowImg("sound_on","sound_off");
+						sys->getAllegroHandler()->stopsample("one_piece_tvvs");
+					}else{
+						sys->getAllegroHandler()->changeShowImg("sound_off","sound_on");
+						sys->getAllegroHandler()->playloop("one_piece_tvvs");
+					}
+				});
+				*/
+
 				if (!isSelected) {
 					mySysgame->getAllegroHandler()->playonce("piece_up");
 					selectedPosition = pair<int,int>(ry,rx);

@@ -35,7 +35,6 @@ void MenuTest::onCreate(){
 	gameTitle->configure("STRATEGO","Fredoka",al_map_rgb(0,0,0),pair<float,float>(width/2,height/4),1);
 
 	myButton->onClick([](Sysgame *sys) {
-		//sys->getAllegroHandler()->playonce("sonic");
 		sys->setNewController((Controller*)new ConnectMenu(sys));
 	});
 	myButton2->onClick([](Sysgame *sys) {

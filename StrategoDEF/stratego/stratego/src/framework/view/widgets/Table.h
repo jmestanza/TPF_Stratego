@@ -13,6 +13,7 @@
 #include "widget.h"
 #include "TableButton.h"
 #include "screen_text.h"
+#include "music_button.h"
 #include <iostream>
 
 #define TABLE_SLOTS 10

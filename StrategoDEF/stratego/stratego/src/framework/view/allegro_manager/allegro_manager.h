@@ -51,10 +51,12 @@ class Viewer {
 
 		vector <string> drawOrder; // orden de muestra en pantalla
 		bool _exit;
+		bool is_looping;
 		ALLEGRO_DISPLAY * display;
 		ALLEGRO_EVENT_QUEUE *q;
 		ALLEGRO_TIMER *timer;
 		int TimerFreq;
+		
 
 		bool _debug;
 	public:
@@ -76,6 +78,8 @@ class Viewer {
 		void loadColor(string code, string name); // ect
 		void eraseLoaded(string loadedName); // borrar de la memoria una imagen
 		void showBitmaps(); /// pitnar todos los bitmaps en el orden configurado
+		void set_is_looping(bool);
+		bool get_is_looping();
 
 		ALLEGRO_BITMAP *getImg(string imgName); /// conseguir imagenes, fonts, colores de la memoria
 		ALLEGRO_FONT* getFont(string name);
@@ -87,6 +91,7 @@ class Viewer {
 		void showRectangle(string showName,unsigned char r,unsigned char g,unsigned char b,pair<float,float> pos,pair<float,float> size,bool centered);
 		void playloop(string song);
 		void playonce(string song);
+		void stopsample(string song);
 		void stopShow(string showName); // borrar imagen de la pantalla
 		void draw();
 		void changeShowImg(string showName, string newImageName); /// cambiar una imagen mostrada en la pantalla

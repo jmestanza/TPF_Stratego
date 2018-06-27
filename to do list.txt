@@ -1,0 +1,23 @@
+-Corregir Bug de seleccionar fichas
+-Que se pueda escribir en mayuscula el nombre en el juego
+-Poner contador que me saque después de 2 min AFK
+
+-Estética:
+*cambiar src y dst como ficha seleccionada etc...
+*sección de créditos ponerla al final
+*agregar música[la inicializacion está hecha faltaria poner canales para que suene bien] (Working on it)
+*animaciones (cosito que titila)
+*darle estilo al fin de juego
+
+-Presentación en un PPT
+Con: en qué cosas nos basamos (por lo de MVC), por qué boost asincrónico, ejemplo de uso de widgets
+
+Según ari del pasado:
+Agregar limite de tiempo en la llegada de paquetes (¿¿¿???)
+Mejorar interfaz grafica en el fin del juego (esta demasiado rudimentaria), sacar memory leaks 
+(que todavia podria haber alguno) 
+Y lo de siempre, mas documentacion, ordenar, agregar mas validaciones por supuesto. 
+Hay algunas partes del proyecto que son mas validadas que otro (la parte de network por ejemplo)
+
+Bugs random:
+A veces ejecutás el juego y se tilda (solo podes tocar minimizar y cerrar)

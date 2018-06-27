@@ -256,6 +256,9 @@
     <ClCompile Include="src\framework\view\widgets\checkbox\checkbox.cpp">
       <Filter>src\framework\view\widgets\checkbox</Filter>
     </ClCompile>
+    <ClCompile Include="src\framework\view\widgets\music_button.cpp">
+      <Filter>src\framework\view\widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -416,6 +419,9 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\checkbox\checkbox.h">
       <Filter>src\framework\view\widgets\checkbox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framework\view\widgets\music_button.h">
+      <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

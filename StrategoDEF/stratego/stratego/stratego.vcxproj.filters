@@ -133,9 +133,6 @@
     <ClCompile Include="src\framework\view\widgets\background.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\framework\view\widgets\TableButton.cpp">
-      <Filter>src\framework\view\widgets</Filter>
-    </ClCompile>
     <ClCompile Include="src\framework\view\widgets\Table.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
@@ -298,9 +295,6 @@
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\text_button.h">
-      <Filter>src\framework\view\widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="src\framework\view\widgets\TableButton.h">
       <Filter>src\framework\view\widgets</Filter>
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\Table.h">

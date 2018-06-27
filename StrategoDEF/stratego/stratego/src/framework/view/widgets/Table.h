@@ -39,6 +39,7 @@ class Table : public Widget {
 		int status;
 		bool src_txt_ready;
 		bool dst_txt_ready;
+		bool lps_created;
 		int mx,my;
 		string upPlayer,downPlayer;
 
@@ -57,6 +58,8 @@ class Table : public Widget {
 
 		screenText *SelectedPosText;
 		screenText *OnActionText;
+	
+		music_button *loopsound;
 
 		int underAnimation;
 		string animatedBitmap;

@@ -31,6 +31,8 @@ Table::Table(Sysgame*Sys,string _name,string _img_a,string _img_b,pair<float,flo
 	onMouseReleasedFunction = nullptr;
 	onMousePressFunction = nullptr;
 	onActionMoveFunction = nullptr;
+	lps_created = false;
+	loopsound=nullptr;
 }
 
 void Table::setPlayersName(string _upPlayer,string _downPlayer) {
@@ -98,6 +100,34 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		int rx,ry;
 		rx = mx - this->pos.first;
 		ry = my - this->pos.second;
+		pair<float,float> screenSize = view->getScreenSize();
+		if (!lps_created) {
+			lps_created = true;
+			loopsound = new music_button(mySysgame,pair<float,float>(screenSize.first - 500,screenSize.second / 16),"trigger_sound","sound_on");
+			loopsound->startDrawing();
+			mySysgame->getAllegroHandler()->playloop("one_piece_tvvs");
+			mySysgame->getAllegroHandler()->set_is_looping(true);
+			loopsound->onClick([](Sysgame *sys) {
+				cout << "se llamo al on click" << endl;
+				if (sys->getAllegroHandler()->get_is_looping()) {
+					sys->getAllegroHandler()->changeShowImg("sound_on","sound_off");
+					sys->getAllegroHandler()->stopsample("one_piece_tvvs");
+					sys->getAllegroHandler()->set_is_looping(false);
+				} else {
+					//sys->getAllegroHandler()->changeShowImg("sound_off","sound_on");
+					sys->getAllegroHandler()->playloop("one_piece_tvvs");
+					sys->getAllegroHandler()->set_is_looping(true);
+				}
+			});
+		}
+		if (lps_created && loopsound != nullptr) {
+			cout << "HOLASASDASDASDSASFDF" << endl;
+			if (loopsound->insideIconRange(rx,ry)) {
+				cout << "esta en rango deberia funcionar!" << endl;
+				loopsound->onClickFunction(this->mySysgame);
+			}
+		}
+
 		if (insideGameboard(rx,ry)) {
 
 			rx /= this->pieceSize.first;
@@ -137,23 +167,8 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				
 				//no olvidar borrar esto de la memoria
 				// Estoy trabajando en esto por favor NO BORRAR 
-				/*
-				music_button *loopsound = new music_button(mySysgame,pair<float,float>(screenSize.first - 500,screenSize.second / 16),"trigger_sound","sound_on");
-				loopsound->startDrawing();
-				mySysgame->getAllegroHandler()->playloop("one_piece_tvvs");
-				mySysgame->getAllegroHandler()->set_is_looping(true);
-
-				loopsound->onClick([](Sysgame *sys) {
-					cout << "se llamo al on click" << endl;
-					if(sys->getAllegroHandler()->get_is_looping()){
-						sys->getAllegroHandler()->changeShowImg("sound_on","sound_off");
-						sys->getAllegroHandler()->stopsample("one_piece_tvvs");
-					}else{
-						sys->getAllegroHandler()->changeShowImg("sound_off","sound_on");
-						sys->getAllegroHandler()->playloop("one_piece_tvvs");
-					}
-				});
-				*/
+				
+				
 
 				if (!isSelected) {
 					mySysgame->getAllegroHandler()->playonce("piece_up");

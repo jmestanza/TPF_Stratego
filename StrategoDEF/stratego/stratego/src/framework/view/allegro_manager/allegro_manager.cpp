@@ -366,9 +366,9 @@ void Viewer::stopsample(string song) {
 
 
 void Viewer::changeShowImg(string showName, string newImageName) {
-	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 1)");
+	if (loaded.find(newImageName) == loaded.end()) throw AllegroHandlerException("invalid usage of Viewer::ChangeShowImg() (err 1)");
 	if (frontShow.find(showName) == frontShow.end()) {
-		throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (err 2: changing image that don't exist)");
+		throw AllegroHandlerException("invalid usage of Viewer::ChangeShowImg() (err 2: changing image that doesn't exist)");
 	}else{
 		try {
 			ShowImage *img = dynamic_cast<ShowImage*>(frontShow[showName]);

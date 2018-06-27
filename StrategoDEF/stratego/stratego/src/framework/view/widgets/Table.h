@@ -11,7 +11,6 @@
 #include <framework\view\widgets\TokenContainer\TokenContainer.h>
 
 #include "widget.h"
-#include "TableButton.h"
 #include "screen_text.h"
 #include "music_button.h"
 #include <iostream>
@@ -51,7 +50,6 @@ class Table : public Widget {
 
 		string gameStatus;
 		pair<float,float> screen_center;
-		vector<TableButton> t_table;
 		map<pair<int,char>,int> ind_table;
 		pair <int,int> pieceSize;
 		pair<int,int> selectedPosition;

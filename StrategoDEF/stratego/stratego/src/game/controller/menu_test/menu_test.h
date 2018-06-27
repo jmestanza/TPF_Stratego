@@ -9,7 +9,6 @@ Originalmente era un test, ahora ya no. Deberia llamarse InitialMenu
 #include <framework\controller\controller.h>
 #include <framework\view\widgets\background.h>
 #include <framework\view\widgets\Table.h>
-#include <framework\view\widgets\TableButton.h>
 
 
 

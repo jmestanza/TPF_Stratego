@@ -1,4 +1,4 @@
-#include "connectionLostMenu.h"
+﻿#include "connectionLostMenu.h"
 
 #include <framework\view\widgets\background.h>
 #include <framework\view\widgets\screen_text.h>
@@ -19,9 +19,13 @@ void connectionLostMenu::onCreate() {
 
 	addWidget((Widget*)background2);
 
-	pair<float,float> textPos(screenSize.first/2,screenSize.second/4);
+	Background* front1 = new Background(mySysgame, "front1");
+	front1->configureImg("sadFace", pair<float, float>(screenSize.first / 2, screenSize.second / 2), 1);
+	addWidget((Widget*)front1);
+
+	pair<float,float> conectionLostText(screenSize.first/2,screenSize.second/4);
 	screenText *text = new screenText(mySysgame,"title_error");
-	text->configure("CONEXION PERDIDA","Fredoka_small",view->getColor("black"),textPos,1);
+	text->configure("CONEXION PERDIDA","Fredoka_small",view->getColor("black"),conectionLostText,1);
 	addWidget((Widget*)text);
 
 	pair<float,float> buttonPos(screenSize.first/2,screenSize.second/4*3);

@@ -77,6 +77,7 @@ class gameArea : Controller{
 		Player *getGameEngine();
 		string getStatus();
 		void tokenReady();
+		string makeTextAns(MoveResult ans);
 		pair<int,int> convertPosToGeneralType(pair<int,int> original); // funcion adaptadora ya que 
 		// ambos jugadores se ven del lado de abajo aunque para uno sea esto falso
 

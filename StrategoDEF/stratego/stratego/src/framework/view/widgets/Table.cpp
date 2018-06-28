@@ -175,7 +175,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					selectedPosition = pair<int,int>(ry,rx);
 					isSelected = 1;
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
-					string SelectedPosStr = getPieceName(this->getPiece(selectedPosition));
+					string SelectedPosStr = MakeSelectionText(this->getPiece(selectedPosition));
 					if(!src_txt_ready){
 						SelectedPosText = new screenText(mySysgame,"selected_text");
 						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(700,screenSize.second / 2 + 50),0);
@@ -186,10 +186,11 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				} else {
 					mySysgame->getAllegroHandler()->playonce("piece_down");
 					if(!dst_txt_ready){
-						/*string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
-						OnActionText = new screenText(mySysgame,"onaction_text");
-						OnActionText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(1000,screenSize.second / 2 + 50),1);
-						mySysgame->getController()->addWidget((Widget*)OnActionText);*/
+						//string SelectedMoveStr = this->move_action;
+						////string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
+						//OnActionText = new screenText(mySysgame,"onaction_text");
+						//OnActionText->configure(SelectedMoveStr,"roboto_v30",view->getColor("black"),pair<float,float>(700,screenSize.second / 2 + 100),0);
+						//mySysgame->getController()->addWidget((Widget*)OnActionText);
 						dst_txt_ready=1;
 					}
 					
@@ -216,7 +217,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 string Table::getPiece(pair<int,int> pos) {
 	return shownTokens[pos.first][pos.second];
 }
-string Table::getPieceName(string piece_code)
+string Table::MakeSelectionText(string piece_code)
 {
 	string choosed_txt;
 	if (strcmp(piece_code.c_str(), "1R") == 0) choosed_txt = "Rojo: 1 - Marshal";
@@ -243,6 +244,7 @@ string Table::getPieceName(string piece_code)
 
 	return choosed_txt;
 }
+
 void Table::freePosition(pair<int,int> pos) {
 	if (shownTokens[pos.first][pos.second] != "empty") {
 		view->stopShow(getPosCode(pos));
@@ -270,6 +272,17 @@ bool Table::insideGameboard(int x,int y) {
 }
 string Table::getPosCode(pair<int,int> position) {
 	return "piece_" + to_string(position.second) + "_" + to_string(position.first);
+}
+void Table::informMoveResult(string move_data)
+{
+	pair<float, float> screenSize = view->getScreenSize();
+	string SelectedMoveStr;
+	if (strcmp(move_data.c_str(), "move_valid") == 0) SelectedMoveStr = "Accion: Movimiento valido";
+	if (strcmp(move_data.c_str(), "move_not_valid") == 0) SelectedMoveStr = "Accion: Movimiento no valido";
+	if (strcmp(move_data.c_str(), "attack_try") == 0) SelectedMoveStr = "Accion: Ataque al oponente";
+	OnActionText = new screenText(mySysgame,"onaction_text");
+	OnActionText->configure(SelectedMoveStr,"roboto_v30",view->getColor("black"),pair<float,float>(700,screenSize.second / 2 + 100),0);
+	mySysgame->getController()->addWidget((Widget*)OnActionText);
 }
 void Table::takeOutToken(pair<int,int> position) {
 	if (shownTokens[position.first][position.second] != "empty") {

@@ -274,7 +274,8 @@ void gameArea::tokenReady() {
 		if (myself->getStatus() == "waiting_for_move") {
 			Player* engine = myself->getGameEngine();
 			int ans = engine->move_local_token(PosType(source),PosType(dst));
-
+			string textAns = myself->makeTextAns(ans);
+			table->informMoveResult(textAns);
 
 			cout << "sending move " << source.first << "," << source.second << " => " << dst.first << "," << dst.second << '\n';
 			if (ans == MOVE_VALID || ans == ATTACK_TRY) {
@@ -313,8 +314,20 @@ void gameArea::tokenReady() {
 	});
 
 }
+
 Player *gameArea::getGameEngine() {
 	return gameEngine;
+}
+string gameArea::makeTextAns(MoveResult ans)
+{
+	string auxTxt;
+	//enum MoveTypes {MOVE_VALID = 1, MOVE_NOT_VALID, RESELECT, ATTACK_TRY, ERRORV};
+	if (ans == MOVE_VALID) auxTxt = "move_valid";
+	if (ans == MOVE_NOT_VALID) auxTxt = "move_not_valid";
+	if (ans == RESELECT) auxTxt = "reselect";
+	if (ans == ATTACK_TRY) auxTxt = "attack_try";
+
+	return auxTxt;
 }
 void gameArea::setCurrentMov(PosType src,PosType dst) {
 	current_src = src;

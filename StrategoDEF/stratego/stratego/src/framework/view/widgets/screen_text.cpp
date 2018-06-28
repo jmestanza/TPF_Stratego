@@ -21,6 +21,9 @@ void screenText::configure(string msg, string font, ALLEGRO_COLOR color,pair<flo
 		pos.first -= size.first/2;
 		pos.second -= size.second/2;
 	}
+	else {
+		pos.second -= size.second / 2;
+	}
 	
 	created = 1;
 }

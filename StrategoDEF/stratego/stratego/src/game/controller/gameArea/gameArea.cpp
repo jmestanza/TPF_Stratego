@@ -692,7 +692,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 
 		TextButton* lose_txt = new TextButton(mySysgame,"lose_txt");
 		lose_txt->generate(
-			"PERDISTE, ¿QUERÉS JUGAR DE NUEVO?",g_blue(),
+			"PERDISTE - JUGAR DENUEVO",g_blue(),
 			pair<float,float>(halfPoint,300),1
 		);
 
@@ -746,7 +746,7 @@ void gameArea::onNetEvent(NETWORK_EVENT *ev) {
 void gameArea::endGame() {
 	TextButton* win_txt = new TextButton(mySysgame, "win_txt");
 	win_txt->generate(
-		"GANASTE!, ¿QUERÉS JUGAR DE NUEVO?", g_blue(),
+		"HAS GANADO - INICIAR NUEVO JUEGO", g_connectButtonLong(),
 		pair<float, float>(halfPoint, 300), 1
 	);
 

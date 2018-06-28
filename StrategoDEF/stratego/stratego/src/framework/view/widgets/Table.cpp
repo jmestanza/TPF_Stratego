@@ -175,10 +175,10 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					selectedPosition = pair<int,int>(ry,rx);
 					isSelected = 1;
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
-					string SelectedPosStr = "src:"+(to_string(selectedPosition.first)+ to_string(selectedPosition.second));
+					string SelectedPosStr = getPieceName(this->getPiece(selectedPosition));
 					if(!src_txt_ready){
 						SelectedPosText = new screenText(mySysgame,"selected_text");
-						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(800,screenSize.second / 2 + 50),1);
+						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(700,screenSize.second / 2 + 50),0);
 						mySysgame->getController()->addWidget((Widget*)SelectedPosText);
 						src_txt_ready=1;
 					}
@@ -186,10 +186,10 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				} else {
 					mySysgame->getAllegroHandler()->playonce("piece_down");
 					if(!dst_txt_ready){
-						string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
+						/*string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
 						OnActionText = new screenText(mySysgame,"onaction_text");
 						OnActionText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(1000,screenSize.second / 2 + 50),1);
-						mySysgame->getController()->addWidget((Widget*)OnActionText);
+						mySysgame->getController()->addWidget((Widget*)OnActionText);*/
 						dst_txt_ready=1;
 					}
 					
@@ -215,6 +215,33 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 }
 string Table::getPiece(pair<int,int> pos) {
 	return shownTokens[pos.first][pos.second];
+}
+string Table::getPieceName(string piece_code)
+{
+	string choosed_txt;
+	if (strcmp(piece_code.c_str(), "1R") == 0) choosed_txt = "Rojo: 1 - Marshal";
+	if (strcmp(piece_code.c_str(), "2R") == 0) choosed_txt = "Rojo: 2 - General";
+	if (strcmp(piece_code.c_str(), "3R") == 0) choosed_txt = "Rojo: 3 - Colonel";
+	if (strcmp(piece_code.c_str(), "4R") == 0) choosed_txt = "Rojo: 4 - Major";
+	if (strcmp(piece_code.c_str(), "5R") == 0) choosed_txt = "Rojo: 5 - Captain";
+	if (strcmp(piece_code.c_str(), "6R") == 0) choosed_txt = "Rojo: 6 - Lieutenant";
+	if (strcmp(piece_code.c_str(), "7R") == 0) choosed_txt = "Rojo: 7 - Sergeant";
+	if (strcmp(piece_code.c_str(), "8R") == 0) choosed_txt = "Rojo: 8 - Miner";
+	if (strcmp(piece_code.c_str(), "9R") == 0) choosed_txt = "Rojo: 9 - Scout";
+	if (strcmp(piece_code.c_str(), "SR") == 0) choosed_txt = "Rojo: S - Spy";
+
+	if (strcmp(piece_code.c_str(), "1B") == 0) choosed_txt = "Azul: 1 - Marshal";
+	if (strcmp(piece_code.c_str(), "2B") == 0) choosed_txt = "Azul: 2 - General";
+	if (strcmp(piece_code.c_str(), "3B") == 0) choosed_txt = "Azul: 3 - Colonel";
+	if (strcmp(piece_code.c_str(), "4B") == 0) choosed_txt = "Azul: 4 - Major";
+	if (strcmp(piece_code.c_str(), "5B") == 0) choosed_txt = "Azul: 5 - Captain";
+	if (strcmp(piece_code.c_str(), "6B") == 0) choosed_txt = "Azul: 6 - Lieutenant";
+	if (strcmp(piece_code.c_str(), "7B") == 0) choosed_txt = "Azul: 7 - Sergeant";
+	if (strcmp(piece_code.c_str(), "8B") == 0) choosed_txt = "Azul: 8 - Miner";
+	if (strcmp(piece_code.c_str(), "9B") == 0) choosed_txt = "Azul: 9 - Scout";
+	if (strcmp(piece_code.c_str(), "SB") == 0) choosed_txt = "Azul: S - Spy";
+
+	return choosed_txt;
 }
 void Table::freePosition(pair<int,int> pos) {
 	if (shownTokens[pos.first][pos.second] != "empty") {

@@ -81,7 +81,8 @@ class Table : public Widget {
 		string getPosCode(pair<int,int> pos);
 		void informSelected(string piece);
 		string getPiece(pair<int,int> pos);
-		void freePosition(pair<int,int> pos); // sacar fich
+		string getPieceName(string piece_code); // devuelve textito tipo "Rojo: 1 - Marshal"
+		void freePosition(pair<int,int> pos); // sacar ficha
 
 		TokenContainer * refContainer;
 		void setTokenContainer(TokenContainer *tok);

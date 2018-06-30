@@ -69,6 +69,7 @@ void Table::startDrawing() {
 	fieldACode = "up_field_" + myCode;
 	fieldBCode = "down_field_" + myCode;
 
+	
 	view->loadFromBitmap(upField,fieldACode);
 	view->loadFromBitmap(downField,fieldBCode);
 	view->show(fieldACode,fieldACode,xUp,yUp);
@@ -177,6 +178,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 					cout << "selected => (" << selectedPosition.first << "," << selectedPosition.second << ")\n";
 					string SelectedPosStr = MakeSelectionText(this->getPiece(selectedPosition));
 					if(!src_txt_ready){
+						view->show("TokenSel", "TokenSel", 20+(rx*60), 50+(ry*60));
 						SelectedPosText = new screenText(mySysgame,"selected_text");
 						SelectedPosText->configure(SelectedPosStr,"roboto_v30",view->getColor("black"),pair<float,float>(700,screenSize.second / 2 + 50),0);
 						mySysgame->getController()->addWidget((Widget*)SelectedPosText);
@@ -186,6 +188,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 				} else {
 					mySysgame->getAllegroHandler()->playonce("piece_down");
 					if(!dst_txt_ready){
+						view->stopShow("TokenSel");
 						//string SelectedMoveStr = this->move_action;
 						////string SelectedPosStr = "dst:" + (to_string(ry) + to_string(rx));
 						//OnActionText = new screenText(mySysgame,"onaction_text");

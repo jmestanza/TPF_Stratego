@@ -2,6 +2,7 @@
 <images>
   <image name="background1"      dir="background/6057b6656dca8b2.png"></image>
   <image name="sadFace"       dir="background/sadFace.png"></image>
+  <image name="TokenSel"      dir="Token_IMG/TokenSelectedSquare.png"></image>
   <image name="sound_on"      dir="sound/sound_on.png"></image>
   <image name="sound_off"      dir="sound/sound_off.png"></image>
   <!-- Buttons  -->

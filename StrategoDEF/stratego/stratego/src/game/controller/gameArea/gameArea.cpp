@@ -321,10 +321,8 @@ Player *gameArea::getGameEngine() {
 string gameArea::makeTextAns(MoveResult ans)
 {
 	string auxTxt;
-	//enum MoveTypes {MOVE_VALID = 1, MOVE_NOT_VALID, RESELECT, ATTACK_TRY, ERRORV};
 	if (ans == MOVE_VALID) auxTxt = "move_valid";
-	if (ans == MOVE_NOT_VALID) auxTxt = "move_not_valid";
-	if (ans == RESELECT) auxTxt = "reselect";
+	if ((ans == MOVE_NOT_VALID)||(ans == RESELECT)) auxTxt = "move_not_valid";
 	if (ans == ATTACK_TRY) auxTxt = "attack_try";
 
 	return auxTxt;

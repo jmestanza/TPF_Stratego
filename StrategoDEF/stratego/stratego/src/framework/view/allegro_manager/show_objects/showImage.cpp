@@ -1,7 +1,5 @@
 #include "showImage.h"
 
-
-
 ShowImage::ShowImage(Viewer *_view) : ShowObject(_view) {}
 
 void ShowImage::setImage(ALLEGRO_BITMAP *img) {

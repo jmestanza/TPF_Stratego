@@ -39,7 +39,7 @@ Viewer::Viewer() {
 	is_looping=true;
 	_debug = 0;
 	TimerFreq = 40;
-	 // defaults
+	 // Defaults
 	screenSize.first = 800;
 	screenSize.second = 600;
 }
@@ -297,7 +297,7 @@ ALLEGRO_BITMAP * Viewer::getImg(string loadedName) {
 void Viewer::eraseLoaded(string loadedName) {
 
 	if (loaded.find(loadedName) == loaded.end()) {
-		return; // esta situacion puede suceder y es normal. A veces el recolector de basura elimina el objeto antes de tiempo
+		return; // Esta situacion puede suceder y es normal. A veces el recolector de basura elimina el objeto antes de tiempo
 	}
 	//if (_debug) cout << "[AllegroHandler] erasing " << loadedName << "\n";
 	al_destroy_bitmap( loaded[loadedName] );
@@ -313,7 +313,7 @@ void Viewer::draw() {
 
 	vector <int> eraseList;
 	for (int i = 0; i < drawOrder.size(); i++) {
-		// si se da esta condiccion la imagen fue eliminada, lo agregamos a la lista para la eliminacion definitiva
+		// Si se da esta condicion la imagen fue eliminada, lo agregamos a la lista para la eliminacion definitiva
 		if (frontShow.find(drawOrder[i]) == frontShow.end()) {
 			eraseList.push_back(i);
 		}else {
@@ -377,8 +377,8 @@ void Viewer::changeShowImg(string showName, string newImageName) {
 			throw AllegroHandlerException("invalid usage of Viwer::ChangeShowImg() (bad cast)");
 		}
 	}
-	//float x = frontShow[showName].pos.first, y = frontShow[showName].pos.second;
-	//frontShow[showName] = ShowObject(loaded[newImageName], x, y);
+	// float x = frontShow[showName].pos.first, y = frontShow[showName].pos.second;
+	// frontShow[showName] = ShowObject(loaded[newImageName], x, y);
 }
 void Viewer::changeShowImgPos(string showName,float x,float y,int centered) {
 	if (frontShow.find(showName) == frontShow.end()) {

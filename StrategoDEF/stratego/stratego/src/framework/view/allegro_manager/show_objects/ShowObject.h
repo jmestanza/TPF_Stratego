@@ -12,7 +12,6 @@ por una razon de compatibilidad no se realizo aun la modificacion, pero es una t
 El proyecto en prinicpio utiliza solamente showImages, ya que se considera demasiado rebuscado
 hacer demasiados tipos de entidades de elementos graficos mostrados en la pantalla, con solo bitmaps
 es suficiente.
-
 */
 
 #include <vector>

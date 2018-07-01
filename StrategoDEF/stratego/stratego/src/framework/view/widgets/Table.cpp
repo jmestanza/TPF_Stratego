@@ -122,7 +122,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 			});
 		}
 		if (lps_created && loopsound != nullptr) {
-			cout << "HOLASASDASDASDSASFDF" << endl;
+			
 			if (loopsound->insideIconRange(rx,ry)) {
 				cout << "esta en rango deberia funcionar!" << endl;
 				loopsound->onClickFunction(this->mySysgame);

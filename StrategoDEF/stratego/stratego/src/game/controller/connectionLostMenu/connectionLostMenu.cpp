@@ -42,7 +42,7 @@ void connectionLostMenu::onCreate() {
 	});
 }
 void connectionLostMenu::onNetPack(string &package,map<string,string> &data) {
-}// handle NETWORK actions
+}// Handle NETWORK actions
 void connectionLostMenu::onNetEvent(NETWORK_EVENT *ev) {
 
 }

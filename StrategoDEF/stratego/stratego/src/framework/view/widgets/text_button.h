@@ -22,7 +22,7 @@ class TextButton : public NaiveButton {
 		string a_code, b_code, c_code;
 	public:
 		TextButton(Sysgame* sys, string name); 
-		void generate(string msg,imgGroup img,pair<float,float> pos,int centered); /// el mensaje y la imagen de fondo son los paramentros necesarios
+		void generate(string msg,imgGroup img,pair<float,float> pos,int centered); /// El mensaje y la imagen de fondo son los paramentros necesarios
 		virtual ~TextButton();
 };
 

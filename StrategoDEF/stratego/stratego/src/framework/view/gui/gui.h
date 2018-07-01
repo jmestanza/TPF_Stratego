@@ -1,10 +1,11 @@
 #pragma once
 
 /*
-Gui: se encarga de administrar los distintos atributos graficos que se muestran en la pantalla que interactuan
+GUI
+Se encarga de administrar los distintos atributos graficos que se muestran en la pantalla que interactuan
 con las acciones del usuario. Es Parte de la vista del juego. Los distintos Widgets que el GUI contiene
 llaman a callbacks del controller, que administra que modificar del modelo o de la interfaza grafica
-ante las acciones
+ante las acciones.
 */
 #include <map>
 #include <framework\view\widgets\widget.h>

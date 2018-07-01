@@ -16,7 +16,7 @@ void Controller::eraseWidget(string name) {
 void Controller::callIn(int miliseconds,void(*func)(Sysgame *)) {
 
 	if (flagTimer) {
-		cout << "warning, controller only supports one timer at the same time \n";
+		cout << "-> Warning: controller only supports one timer at the same time \n";
 		return;
 	}
 	pair <float,float> screenSize = view->getScreenSize();

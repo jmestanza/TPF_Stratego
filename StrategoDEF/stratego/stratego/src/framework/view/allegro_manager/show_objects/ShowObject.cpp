@@ -1,6 +1,5 @@
 #include "ShowObject.h"
 
-
 ShowObject::ShowObject(Viewer *_view) : view(_view){
 	sizeSet = 0;
 }

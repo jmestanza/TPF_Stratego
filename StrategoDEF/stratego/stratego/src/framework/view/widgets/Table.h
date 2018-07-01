@@ -1,10 +1,10 @@
 #pragma once
 
-// Table: representa el tablero del juego, 
-// Tiene callbacks que se llaman cuando se presionan sus casilleros, y funciones
-// para actualizar las fichas que muestra. No tiene gran inteligencia, es parte de la vista.
-// La idea es que el controller decida como actuar ante las acciones ejercidas sobre el tablero.
-
+/*
+Table: representa el tablero del juego, tiene callbacks que se llaman cuando se presionan sus casilleros, 
+y funciones para actualizar las fichas que muestra. No tiene gran inteligencia, es parte de la vista.
+La idea es que el controller decida como actuar ante las acciones ejercidas sobre el tablero.
+*/
 
 #include <framework\view\allegro_manager\allegro_manager.h>
 #include <framework\sysgame\sysgame.h>
@@ -64,7 +64,7 @@ class Table : public Widget {
 		int underAnimation;
 		string animatedBitmap;
 
-		vector < vector <string> > shownTokens; /// shown tokens per position
+		vector < vector <string> > shownTokens; /// Shown tokens per position
 		//vector < vector <string> > allowedModify;
 		void handleEvent(ALLEGRO_EVENT *ev);
 		void startDrawing();
@@ -72,18 +72,18 @@ class Table : public Widget {
 		void setPlayersName(string upPlayer,string downPlayer);
 		
 
-		void takeOutToken(pair<int,int> position); // sacar ficha del tablero
-		void putToken(string code,pair<int,int> position); //agregar ficha
+		void takeOutToken(pair<int,int> position); // Sacar ficha del tablero
+		void putToken(string code,pair<int,int> position); // Agregar ficha
 		
 		bool insideGameboard(int x,int y);
 
-		void moveToken(pair<int,int> posA,pair<int,int> posB); // mover ficha 
+		void moveToken(pair<int,int> posA,pair<int,int> posB); // Mover ficha 
 		string getPosCode(pair<int,int> pos);
 		void informMoveResult(string move_data);
 		void informSelected(string piece);
 		string getPiece(pair<int,int> pos);
-		string MakeSelectionText(string piece_code); // devuelve textito tipo "Rojo: 1 - Marshal"
-		void freePosition(pair<int,int> pos); // sacar ficha
+		string MakeSelectionText(string piece_code); // Devuelve texto tipo "Rojo: 1 - Marshal"
+		void freePosition(pair<int,int> pos); // Sacar ficha
 
 		TokenContainer * refContainer;
 		void setTokenContainer(TokenContainer *tok);
@@ -92,15 +92,15 @@ class Table : public Widget {
 		void setStatus(string _status);
 		void fillOpponentField(string color);
 
-		void onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>)); // cuando se suelta un casillero
-		void onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>)); // cuando se presiona un casillero
-		void onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>)); // cuando se presiona una secuencia de casilleros ( se hace un movimiento)
+		void onMouseRelease(void (*func)(Sysgame*,Table*,pair<int,int>)); // Cuando se suelta un casillero
+		void onMousePress(void(*func)(Sysgame*,Table*,pair<int,int>)); // Cuando se presiona un casillero
+		void onActionMove(void(*func)(Sysgame*,Table*,pair<int,int>,pair<int,int>)); // Cuando se presiona una secuencia de casilleros ( se hace un movimiento)
 
-		void clearToken(); //borrar todas las fichas
+		void clearToken(); // Borrar todas las fichas
 		vector <vector<string>>& getContent();
 
 	private:
-		/// funciones de los callback
+		/// Funciones de los callback
 		void (*onMouseReleasedFunction)(Sysgame *,Table *,pair<int,int>);
 		void (*onMousePressFunction)(Sysgame *,Table *,pair<int,int>);
 		void (*onActionMoveFunction)(Sysgame*,Table*,pair<int,int>,pair<int,int>);

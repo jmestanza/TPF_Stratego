@@ -93,7 +93,7 @@ void NetworkProtocol::sendPackage(string pkgName, map <string, string> &content)
 		throw NetworkProtocolException("Fatal error: trying to send invalid package, invalid head '"+pkgName+"'");
 	}
 	Package *package = pkgByName[pkgName];
-	/// check each pacakge field is present
+	/// Check each pacakge field is present
 	string val;
 	try {
 		package->encode(content, val);

@@ -1,6 +1,6 @@
 #pragma once
 
-//Caja que se activa o desactiva haciedole click.
+// Caja que se activa o desactiva haciedole click.
 #include <framework\view\widgets\widget.h>
 
 class Checkbox : public Widget{

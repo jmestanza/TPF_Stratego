@@ -22,8 +22,7 @@ void ShowTime::configure(string font,string color,pair<float,float> _pos,int cen
 
 	pair <int,int> _size = pair<int,int>(0,0);
 	int max_width = 0;
-	for (int i = 0;i < 10;i++) { /// generate numbers
-		// = al_create_bitmap(;
+	for (int i = 0;i < 10;i++) { /// Generate numbers
 		int bbx,bby,bbw,bbh;
 		al_get_text_dimensions(currentFont,to_string(i).c_str(),&bbx,&bby,&bbw,&bbh);
 		
@@ -66,7 +65,6 @@ void ShowTime::addCharData(string val,int width,int height,ALLEGRO_FONT* font,AL
 }
 void ShowTime::setTarget(int miliseconds) {
 	targetTime = getMillisFromEpoch() + miliseconds;
-	//targetTime = 
 }
 void ShowTime::handleEvent(ALLEGRO_EVENT *ev) {
 	if (ev->type == ALLEGRO_EVENT_TIMER) {

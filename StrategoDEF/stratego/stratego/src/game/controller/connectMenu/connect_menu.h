@@ -2,8 +2,8 @@
 
 /*
 Este controller (ConnectMenu) administra la interfaz grafica, el modelo (network) para conectarse con otro jugador
-
 */
+
 #include <framework\controller\controller.h>
 #include <framework\view\widgets\text_button.h>
 #include <framework\view\widgets\TextInput.h>

@@ -2,7 +2,6 @@
 
 /*
 Controller para hacer pruebas
-
 */
 #include <framework\controller\controller.h>
 

@@ -5,18 +5,17 @@
 #include "boost/scoped_ptr.hpp"
 
 /*
-NetworkManager:
+NETWORK MANAGER
 Esta clase, considerada formalmente parte del modelo interactua con boost de manera asincronica
-para poder 
+para poder:
 
 - Esperar que un cliente se conecte
 - Intentar conectarse a un servidor
-- Enviar packetes
-- LLamar a callbacks cuando llegan packetes (la idea es hacer otra clase que herede de netorkManager
+- Enviar paquetes
+- LLamar a callbacks cuando llegan paquetes (la idea es hacer otra clase que herede de NetorkManager
 y que dicha clase sobre-escriba metodos virtuales de NetworkManager y coloque alli lo que 
-se quiera que suceda cuando un packete llega)
+se quiera que suceda cuando un paquete llega)
 - Llamar a callbacks si se pierde conexion o si no se puede conectar
-
 */
 
 using namespace boost::asio;
@@ -38,18 +37,18 @@ class NetworkManager {
 		~NetworkManager();
 
 		/*** External use ***/
-		void tryConnection(string host, int port, int timeout); // tomamos la iniciativa buscando una conexion
-		void waitForConnection(int port); // esperamos una conexion. (asincronicamente)
+		void tryConnection(string host, int port, int timeout); /// Tomamos la iniciativa buscando una conexion
+		void waitForConnection(int port); /// Esperamos una conexion (asincronicamente)
 		void send(string msg);
-		void setRecvTimeout(int timeout); // max time to wait for message
+		void setRecvTimeout(int timeout); /// Max time to wait for message
 		void closeConnection();
 		int getConnected();
 		/*** Override functions ***/
-		virtual void onConnect() = 0; // conexion establecida
-		virtual void onConnFailed(string err) = 0; // conexion fallada
-		virtual void onRecv(string &msg) = 0; // packete recibido
+		virtual void onConnect() = 0; /// Conexion establecida
+		virtual void onConnFailed(string err) = 0; /// Conexion fallada
+		virtual void onRecv(string &msg) = 0; /// Paquete recibido
 		virtual void onSent() = 0;
-		virtual void onLostConnection(string err) = 0; // conexion perdida
+		virtual void onLostConnection(string err) = 0; /// Conexion perdida
 
 	private:
 		//// Variables de boost 

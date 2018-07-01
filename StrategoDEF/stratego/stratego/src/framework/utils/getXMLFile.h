@@ -6,7 +6,9 @@
 using namespace std;
 using boost::property_tree::ptree;
 
-/// Convertir un archivo XML en un ptree de boost
+/*
+Convertir un archivo XML en un ptree de boost
+*/
 
 class XMLException : public exception {
 	private:

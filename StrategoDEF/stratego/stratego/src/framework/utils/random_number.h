@@ -3,7 +3,10 @@
 #include <random>
 using namespace std;
 
-/// generar un numero al azar usando funcioens de c++ especializadas en generar
-/// numeros al azar bien generados (con un buen algoritmo)
+/* 
+Generar un numero al azar usando funcioens de c++ especializadas en generar
+numeros al azar bien generados (con un buen algoritmo)
+*/
+
 int randomNumber();
 int randrange(int a,int b);

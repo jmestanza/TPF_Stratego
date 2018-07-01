@@ -34,7 +34,7 @@ void UI::RemoveWidget(string name) {
 void UI::refreshDead() {
 	
 	for (int i = 0;i < deadWidgets.size();i++) {
-		if (widgets.find(deadWidgets[i]) == widgets.end()) continue; // can happen because syncronization
+		if (widgets.find(deadWidgets[i]) == widgets.end()) continue; // Can happen because syncronization
 		widgets[deadWidgets[i]]->callStopDrawing();
 		delete widgets[deadWidgets[i]];
 		widgets.erase(deadWidgets[i]);

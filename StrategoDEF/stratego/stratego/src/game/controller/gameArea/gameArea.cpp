@@ -53,7 +53,7 @@ void gameArea::onCreate() {
 	});
 	addWidget((Widget*)button);
 
-	/**** TABLERO Y PIEZAS *******/
+	/*** TABLERO Y PIEZAS ***/
 
 	Table* tablero = new Table(mySysgame,"table","test_blue","test_red",pair<float,float>(60,60),localStart);
 	tablero->setPos(pair<float,float>(20 + tablero->getSize().first / 2,screenSize.second / 2),1);
@@ -101,7 +101,7 @@ void gameArea::onCreate() {
 
 
 
-	/**** ACCIONES CONJUNTAS DEL TABLERO Y EL CONTENEDOR DE PIEZAS ***/
+	/*** ACCIONES CONJUNTAS DEL TABLERO Y EL CONTENEDOR DE PIEZAS ***/
 
 	cont->onTokenSelect([](Sysgame *sys,string selected) {
 		gameArea* myself = (gameArea*)sys->getController();

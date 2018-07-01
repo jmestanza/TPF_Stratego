@@ -1,10 +1,10 @@
 #include "connect_menu.h"
 
-/****
+/*
 Este es el controlador del menu de conectar.
 Aqui se programa como es la interaccion del usuario cuando esta intentando conectarse 
 tanto como cliente (buscando el servidor), como servidor (esperando un cliente)
--****/
+*/
 
 
 #include <framework\view\widgets\widget.h>

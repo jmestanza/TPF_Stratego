@@ -23,7 +23,6 @@ necesario para informarle al controller que algo sucedio con respecto al network
 conexion establecida, etc). No se usa network event para la llegada de packetes.
 Se usa un map que permite mayor libertad para estructurar la informacion de los paquetes.
 
-
 - Sysgame: Es la clase principal que corre el juego. Todas las entidades del juego tienen
 alguna entidad en el sysgame.
 
@@ -32,8 +31,8 @@ El controller, que es el controlador actual de un momento preciso del juego, la 
 que es la encargada de controlar los widgets, es decir todos los objetos graficos del juego, 
 
 El loop principal del juego corre en sysgame.
+***/
 
-**/
 class SysgameException : public exception {
 	private:
 		string err;
@@ -51,18 +50,18 @@ struct NETWORK_EVENT {
 	NETWORK_EVENT(string msg);
 };
 
-class NetContInt : public NetworkProtocol { //network-controller interface
+class NetContInt : public NetworkProtocol { /// Network-controller interface
 	public:
 		NetContInt(io_service *service);
 		~NetContInt();
 		void setSysgamePointer(Sysgame *_sysgame);
 
-		void onPackageRecv(string &PkgName, map<string, string> &content); // callback de paquete recibido
+		void onPackageRecv(string &PkgName, map<string, string> &content); /// Callback de paquete recibido
 		
 		void onConnect();
-		void onConnFailed(string err); // si falla la conexion (no se pudo establecer)
-		void onSent(); // cuando se pudo enviar un mensaje se llama este callback
-		void onLostConnection(string err); // si se perdio la conexion (ya se habia establecido)
+		void onConnFailed(string err); /// Si falla la conexion (no se pudo establecer)
+		void onSent(); /// Cuando se pudo enviar un mensaje se llama este callback
+		void onLostConnection(string err); /// Si se perdio la conexion (ya se habia establecido)
 
 	private:
 		Sysgame *mySygame;
@@ -74,7 +73,7 @@ class Sysgame {
 		Sysgame();
 
 		Viewer *getAllegroHandler();
-		void update(); // handle all neccesary updates
+		void update(); /// Handle all neccesary updates
 		void setNewController(Controller *newController);
 		void loadConfigurationData(string xmlFile);
 		void Quit();
@@ -91,12 +90,12 @@ class Sysgame {
 		NetContInt *getNetwork();
 		~Sysgame();
 	private:
-		map<string,string> configurationData; // la configuracion cargada del archivo xml
+		map<string,string> configurationData; /// La configuracion cargada del archivo xml
 		io_service service;
 		Controller *controller;
 		Controller *nextController;
 		UI *ui;
-		Viewer *view; // El view, es la clase que administra la interfaz grafica de alllegro
+		Viewer *view; /// El view, es la clase que administra la interfaz grafica de allegro
 		NetContInt network;
 		bool _quit;
 

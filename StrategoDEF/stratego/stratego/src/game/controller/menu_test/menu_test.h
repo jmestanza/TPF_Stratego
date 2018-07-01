@@ -3,7 +3,6 @@
 /*
 A pesar de su mal nombre, MenuTest es el menu inicial del juego, el controller inicialmente cargado
 Originalmente era un test, ahora ya no. Deberia llamarse InitialMenu
-
 */
 #include <framework\sysgame\sysgame.h>
 #include <framework\controller\controller.h>
@@ -17,7 +16,7 @@ class MenuTest : public Controller{
 		int value;
 		MenuTest(Sysgame *sys);
 		void onCreate();
-		void onNetPack(string &package, map<string, string> &data);  // handle NETWORK actions
+		void onNetPack(string &package, map<string, string> &data);  // Handle NETWORK actions
 		void onNetEvent(NETWORK_EVENT *ev);
 
 		~MenuTest();

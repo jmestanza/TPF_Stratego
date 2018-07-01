@@ -92,6 +92,9 @@
     <Filter Include="src\framework\view\show_objects">
       <UniqueIdentifier>{6160d20c-bb6e-47e8-bd4d-3bc79296913c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\model\controller\about2">
+      <UniqueIdentifier>{553fecda-1899-4856-b9e6-6f17f99336a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\framework\sysgame\sysgame.cpp">
@@ -256,6 +259,9 @@
     <ClCompile Include="src\framework\view\widgets\music_button.cpp">
       <Filter>src\framework\view\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\controller\aboutWindow2\AboutWindow2.cpp">
+      <Filter>src\game\model\controller\about2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\framework\sysgame\sysgame.h">
@@ -416,6 +422,9 @@
     </ClInclude>
     <ClInclude Include="src\framework\view\widgets\music_button.h">
       <Filter>src\framework\view\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\aboutWindow2\AboutWindow2.h">
+      <Filter>src\game\model\controller\about2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -189,6 +189,7 @@
     <ClCompile Include="src\framework\view\widgets\TokenContainer\MouseFollower.cpp" />
     <ClCompile Include="src\framework\view\widgets\TokenContainer\TokenContainer.cpp" />
     <ClCompile Include="src\framework\view\widgets\widget.cpp" />
+    <ClCompile Include="src\game\controller\aboutWindow2\AboutWindow2.cpp" />
     <ClCompile Include="src\game\controller\aboutWindow\aboutWindow.cpp" />
     <ClCompile Include="src\game\controller\connectionLostMenu\connectionLostMenu.cpp" />
     <ClCompile Include="src\game\controller\connectMenu\connect_menu.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="src\framework\view\widgets\TokenContainer\MouseFollower.h" />
     <ClInclude Include="src\framework\view\widgets\TokenContainer\TokenContainer.h" />
     <ClInclude Include="src\framework\view\widgets\widget.h" />
+    <ClInclude Include="src\game\controller\aboutWindow2\AboutWindow2.h" />
     <ClInclude Include="src\game\controller\aboutWindow\aboutWindow.h" />
     <ClInclude Include="src\game\controller\connectionLostMenu\connectionLostMenu.h" />
     <ClInclude Include="src\game\controller\connectMenu\connect_menu.h" />

@@ -1,18 +1,35 @@
-https://akrzemi1.wordpress.com/2011/07/13/parsing-xml-with-boost/
-https://www.quora.com/How-does-one-write-a-custom-exception-class-in-C++
+ - NO SEEEEE
 https://www.youtube.com/watch?v=pCvZtjoRq1I
 https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-both-locally-and-remotely
-https://www.freepik.com/free-icons
 https://dribbble.com/shots/2013500-Breakfast-Pattern-Freebie
-https://creativebooster.net/products/fredoka-free-rounded-bold-font
-http://www.fontfabric.com/akrobat/
-https://fonts.google.com/specimen/Roboto
+
+ - Parseo de XML con Boost
+Andrzej's C++ blog - Parsing xml with Boost (Julio 13, 2011)
+https://akrzemi1.wordpress.com/2011/07/13/parsing-xml-with-boost/
+
+ - Excepciones en C++
+Quora - How does one write a custom exception class in C++?
+https://www.quora.com/How-does-one-write-a-custom-exception-class-in-C++
+
+ - Iconos
+freepik - Free icons, +99,400 files in PNG, EPS, SVG format
+https://www.freepik.com/free-icons
+Noun Project - IP (Icon)
 https://thenounproject.com/search/?q=ip%20address&i=996049
+
+ - Fuentes de texto
+CreativeBooster - Fredoka - Free Rounded and Bold Font
+https://creativebooster.net/products/fredoka-free-rounded-bold-font
+Fontfabric - Akrobat
+http://www.fontfabric.com/akrobat/
+Google Fonts - Roboto
+https://fonts.google.com/specimen/Roboto
+
+
 <div>Icons made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/swifticons" title="Swifticons">Swifticons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/swifticons" title="Swifticons">Swifticons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup">Pixelmeetup</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

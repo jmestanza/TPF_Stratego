@@ -104,7 +104,7 @@ void Table::handleEvent(ALLEGRO_EVENT *ev) {
 		pair<float,float> screenSize = view->getScreenSize();
 		if (!lps_created) {
 			lps_created = true;
-			loopsound = new music_button(mySysgame,pair<float,float>(screenSize.first - 500,screenSize.second / 16),"trigger_sound","sound_on");
+			loopsound = new music_button(mySysgame,pair<float,float>(screenSize.first - 500,screenSize.second / 16 - (51/2)),"trigger_sound","sound_on");
 			loopsound->startDrawing();
 			mySysgame->getAllegroHandler()->playloop("one_piece_tvvs");
 			mySysgame->getAllegroHandler()->set_is_looping(true);

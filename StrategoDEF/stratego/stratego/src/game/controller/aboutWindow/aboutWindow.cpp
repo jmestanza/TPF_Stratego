@@ -52,7 +52,7 @@ void AboutWindow::onCreate() {
 	credit1.push_back("Quora - How does one write a custom exception class in C++?");
 	credit1.push_back("");
 	credit1.push_back("MUSICA");
-	credit1.push_back("YoutTube - Celtic Medieval Music - Kingdom of bards");
+	credit1.push_back("YoutTube - One Piece Soundtrack - The Very, Very, Very Strongest");
 	credit1.push_back("ICONOS");
 	credit1.push_back("freepik - Free icons, +99,400 files in PNG, EPS, SVG format");
 	credit1.push_back("Noun Project - ip");
@@ -81,12 +81,16 @@ void AboutWindow::onCreate() {
 	TextButton *button = new TextButton(mySysgame,"return_button");
 	button->generate("VOLVER",g_blue(),pair<float,float>(width / 4,height * 7 / 8),1);
 
+	button->addIcon("icon_left");
+
 	button->onClick([](Sysgame *sys){
 		sys->setNewController(new MenuTest(sys));
 	});
 
 	TextButton *button2 = new TextButton(mySysgame,"next_page");
-	button2->generate("SIGUIENTE >", g_blue(), pair<float, float>(width / 4 * 3, height * 7 / 8), 1);
+	button2->generate("SIGUIENTE", g_blue(), pair<float, float>(width / 4 * 3, height * 7 / 8), 1);
+
+	button2->addIcon("icon_right");
 
 	button2->onClick([](Sysgame *sys) {
 		sys->setNewController((Controller*)new AboutWindow2(sys));

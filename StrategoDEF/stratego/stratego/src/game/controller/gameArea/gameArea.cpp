@@ -100,7 +100,7 @@ void gameArea::onCreate() {
 	}
 
 	ShowTime *TimeLeft = new ShowTime(mySysgame, "time_left");
-	TimeLeft->configure("roboto_v30", "black", pair<float, float>(screenSize.first * 3 / 4, screenSize.second / 2 - 100), 0);
+	TimeLeft->configure("roboto_v30", "black", pair<float, float>(screenSize.first * 3 / 4, screenSize.second / 2 - 100), 1);
 	addWidget((Widget*)TimeLeft);
 
 

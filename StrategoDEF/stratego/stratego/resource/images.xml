@@ -39,6 +39,7 @@
   <image name="icon_networking" dir="icons/networking.png"></image>
   <image name="icon_play"       dir="icons/player.png"></image>
   <image name="icon_left"       dir="icons/left-arrow.png"></image>
+  <image name="icon_right"      dir="icons/right-arrow2.png"></image>
   <image name="icon_cancel"     dir="icons/cancel.png"></image>
   <image name="icon_warning"    dir="icons/warning.png"></image>
   <image name="icon_success"    dir="icons/checked.png"></image>

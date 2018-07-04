@@ -41,7 +41,9 @@ void AboutWindow2::onCreate()
 	}
 
 	TextButton *button = new TextButton(mySysgame, "prev_page");
-	button->generate("< ANTERIOR", g_blue(), pair<float, float>(width / 4, height * 7 / 8), 1);
+	button->generate("ANTERIOR", g_blue(), pair<float, float>(width / 4, height * 7 / 8), 1);
+
+	button->addIcon("icon_left");
 
 	button->onClick([](Sysgame *sys) {
 		sys->setNewController((Controller*)new AboutWindow(sys));

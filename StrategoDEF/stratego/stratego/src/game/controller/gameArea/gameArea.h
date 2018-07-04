@@ -36,6 +36,8 @@ class gameArea : Controller{
 		int waitingMsgAdded;
 		int hasOk;
 
+		
+
 		Player *gameEngine;
 
 		PosType current_src,current_dst;

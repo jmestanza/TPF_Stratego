@@ -14,6 +14,7 @@ ShowTime::ShowTime(Sysgame *sys,string name) : Widget(sys,name) {
 	_showMiliSeconds = 0;
 	_zeroComplete = 1;
 	onTimeFunction = nullptr;
+	_isBeingDrawn = 0;
 }
 
 void ShowTime::configure(string font,string color,pair<float,float> _pos,int centered) {
@@ -95,6 +96,8 @@ int ShowTime::timeDone() {
 	return (long long)(targetTime - getMillisFromEpoch()) <= 0;
 }
 void ShowTime::startDrawing() {
+	if (_isBeingDrawn) stopDrawing();
+	_isBeingDrawn = 1;
 	//cout << "Start to draw \n";
 	/// show seconds
 	int pos_x = this->pos.first;
@@ -141,6 +144,7 @@ string ShowTime::getStr(int val) {
 	return add + to_string(val);
 }
 void ShowTime::stopDrawing() {
+
 	for (int i = 0;i < currentlyShowing.size();i++) view->stopShow(currentlyShowing[i]);
 	currentlyShowing.clear();
 }

@@ -6,6 +6,7 @@
 #include <framework\view\widgets\text_button.h>
 #include <framework\view\utils\good_buttons.h>
 #include <framework\view\widgets\TokenContainer\TokenContainer.h>
+#include <framework\view\widgets\showClocks\showTime.h>
 #include <framework\view\widgets\TokenContainer\MouseFollower.h>
 #include <framework\view\widgets\Animation.h>
 #include <game\controller\menu_test\menu_test.h>
@@ -98,7 +99,9 @@ void gameArea::onCreate() {
 		cont->addAllBlueContent();
 	}
 
-
+	ShowTime *TimeLeft = new ShowTime(mySysgame, "time_left");
+	TimeLeft->configure("roboto_v30", "black", pair<float, float>(screenSize.first * 3 / 4, screenSize.second / 2 - 100), 0);
+	addWidget((Widget*)TimeLeft);
 
 
 	/*** ACCIONES CONJUNTAS DEL TABLERO Y EL CONTENEDOR DE PIEZAS ***/
@@ -205,8 +208,6 @@ void gameArea::tokenReady() {
 
 	addWidget((Widget*)cont);
 
-
-
 	if (this->mode == "server") {
 		
 		cout << "coloacmos las fichas, somos servidor \n";
@@ -237,6 +238,10 @@ void gameArea::tokenReady() {
 				addWaitingMsg("Es tu turno");
 				cout << "ya recibimos el r_u_ready, y empezamos nosotros, \n";
 				cout << "status = " << this->status << '\n';
+				((ShowTime*)getWidget("time_left"))->setTarget(120000);
+				((ShowTime*)getWidget("time_left"))->showMinutes();
+				((ShowTime*)getWidget("time_left"))->showMillis();
+				((ShowTime*)getWidget("time_left"))->startDrawing();
 			} else {
 				this->status = "waiting_for_opp_move";
 				map<string,string> data;
@@ -522,6 +527,10 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			addWaitingMsg("Es tu turno");
 			cout << "Como el turno inicial es mio, yo saco \n";
 			cout << "status = " << this->status << '\n';
+			((ShowTime*)getWidget("time_left"))->setTarget(120000);
+			((ShowTime*)getWidget("time_left"))->showMillis();
+			((ShowTime*)getWidget("time_left"))->showMinutes();
+			((ShowTime*)getWidget("time_left"))->startDrawing();
 		} else {
 			this->status = "waiting_for_opp_move";
 			map<string,string> data;
@@ -540,6 +549,10 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		addWaitingMsg("Es tu turno");
 		cout << "Somos servidores y recibimos el i_am_ready, y estabamos esperandolo, por lo tanto \n";
 		cout << "status = " << this->status << '\n';
+		((ShowTime*)getWidget("time_left"))->setTarget(120000);
+		((ShowTime*)getWidget("time_left"))->showMillis();
+		((ShowTime*)getWidget("time_left"))->showMinutes();
+		((ShowTime*)getWidget("time_left"))->startDrawing();
 	}else if (this->status == "waiting_for_opp_move" && package == "move") {
 		cout << "opponent move! \n";
 		//cout << (int)(data["original_row"][0]-'a') << ' ' << (int)data["original_col"][0] << '\n';
@@ -574,6 +587,10 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 			removeAnimation();
 			removeWaitingMsg();
 			addWaitingMsg("Es tu turno");
+			((ShowTime*)getWidget("time_left"))->setTarget(120000);
+			((ShowTime*)getWidget("time_left"))->showMillis();
+			((ShowTime*)getWidget("time_left"))->showMinutes();
+			((ShowTime*)getWidget("time_left"))->startDrawing();
 		}
 	} else if (this->status == "waiting_for_attack" && package == "attack") {
 		this->status = "waiting_for_opp_move";
@@ -607,6 +624,7 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 
 
 		addWaitingMsg("Esperando al rival");
+
 
 		Table *tbl = (Table*)getWidget("table");
 		tbl->takeOutToken(convertPosToGeneralType(pair<int, int>(current_src.i, current_src.j)));
@@ -696,6 +714,10 @@ void gameArea::onNetPack(string &package,map<string,string> &data) {
 		removeWaitingMsg();
 		removeAnimation();
 		addWaitingMsg("Es tu turno");
+		((ShowTime*)getWidget("time_left"))->setTarget(120000);
+		((ShowTime*)getWidget("time_left"))->showMinutes();
+		((ShowTime*)getWidget("time_left"))->showMillis();
+		((ShowTime*)getWidget("time_left"))->startDrawing();
 
 	}else if(this->status == "waiting_for_play_again" &&  package == "play_again"){
 

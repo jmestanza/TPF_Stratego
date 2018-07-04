@@ -33,6 +33,7 @@ class ShowTime : public Widget{
 		int _zeroComplete;
 		string getStr(int val);
 		void(*onTimeFunction)(Sysgame *);
+		bool _isBeingDrawn;
 
 		string myCode;
 		map<string,string> letterCodes;
